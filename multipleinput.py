@@ -42,8 +42,9 @@ while True:
         continue
     
     if len(inp) > 1:
-        print "multiple points were found with that name...need more programming"
+        print "Multiple points were found with that name...need more programming.  Hard-coded to use first item."
         #do something for multiple hits here
+        print inp
         inp = inp[0]
     else:
         inp = inp[0]
