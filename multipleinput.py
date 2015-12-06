@@ -28,30 +28,41 @@ while True:
     inp = raw_input("Enter waypoint: ")
     if inp == "done":
         break
+    
+    originalinput = inp
+    
     if inp in airportsreader.airportdict:
         inp = airportsreader.airportdict[inp]
+        typeelement = "airport"
     elif inp in pointsinspacedict:
         inp = pointsinspacedict[inp]
+        typeelement = "point in space"
     else:
         print "waypoint not found"
         continue
     
     if len(inp) > 1:
         print "multiple points were found with that name...need more programming"
-        #do something here
+        #do something for multiple hits here
         inp = inp[0]
     else:
         inp = inp[0]
-    print inp #for debug reasons
-    inputwaypoints.append(inp)
 
-#takes inputted waypoints and turns them into a list of waypoint pairs
+    combinerlist = []
+        
+    combinerlist.append((originalinput, typeelement, inp))
+    
+    inputwaypoints.append(combinerlist[0])
+
+print inputwaypoints #for debug
+    
+    #takes inputted waypoints and turns them into a list of waypoint pairs
 
 waypointpairs = pairmaker.pairmaker(inputwaypoints)
 
 #takes waypoint pairs and uses vincenty() to find the total distance
 
-sumdistance = 0.00
+sumdistance = 0.00 #establish sumdistance and put zero in it
     
 for pairs in waypointpairs: #find distance of each waypointpair and sum together
     pairdistance = vincenty.vincenty(*pairs)

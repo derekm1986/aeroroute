@@ -5,20 +5,47 @@
 
 text_file = open("ATS.txt")
 
-airwayinput = raw_input("Enter identifier for airway: ")
+#airwayresult = []
 
-airwayresult = []
+thewholefile = text_file.read()
 
-for line in text_file:
-    if line.startswith(airwayinput + "|"):
-        line = line.rstrip()
-        line = line.split("|")
-        #navaidlat = line[6]
-        #navaidlong = line[7]
-        #navaidlatwithdecimal = navaidlat[:len(navaidlat)-6] + "." + navaidlat[len(navaidlat)-6:] #6 decimal places
-        #navaidlongwithdecimal = navaidlong[:len(navaidlong)-6] + "." + navaidlong[len(navaidlong)-6:] #6 decimal places
-        #navaidresult.append(navaidlatwithdecimal + " " + navaidlongwithdecimal)
+thewholefile = thewholefile.split("\n\n") #this only works with Windows-formatted text files, splits data between two blank lines
+
+airwaydict = {}
+
+for airwaystring in thewholefile:
+    tempitem = airwaystring.split()
+    try:
+        firstline = tempitem[0] #this blows up when you reach the end of the file, hence the need for try/except
+    except:
+        break
+    restofstring = tempitem[1:]
     
-print airwayresult
+    firstline = firstline.split("|")
+    airwayid = firstline[1]
+    airwaydict.setdefault(airwayid, []).append((restofstring)) #want to put rest of airwaystring here
+
+#airway dictionary is established, 
+    
+print airwaydict["J174"]    
+    
+#    if not line.strip():
+#        continue
+#    else:
+#        airwayresult.append(line)
+
+
+
+#for line in text_file:
+#    if line.startswith(airwayinput + "|"):
+#        line = line.rstrip()
+#        line = line.split("|")
+#       #navaidlat = line[6]
+#       #navaidlong = line[7]
+#       #navaidlatwithdecimal = navaidlat[:len(navaidlat)-6] + "." + navaidlat[len(navaidlat)-6:] #6 decimal places
+#       #navaidlongwithdecimal = navaidlong[:len(navaidlong)-6] + "." + navaidlong[len(navaidlong)-6:] #6 decimal places
+#       #navaidresult.append(navaidlatwithdecimal + " " + navaidlongwithdecimal)
+    
+#print airwayresult
 
 text_file.close()
