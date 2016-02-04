@@ -1,14 +1,14 @@
 import math
 
-def vincenty(lat1, lon1, lat2, lon2):
+def vincenty(latlong1, latlong2):
     
-    lat1 = float(lat1)
-    lon1 = float(lon1)
-    lat2 = float(lat2)
-    lon2 = float(lon2)
+    lat1 = float(latlong1[0])
+    lon1 = float(latlong1[1])
+    lat2 = float(latlong2[0])
+    lon2 = float(latlong2[1])
     
     if lat1 == lat2 and lon1 == lon2:
-        return 0
+        return 0.0
     
     a = 6378137.0
     b = 6356752.314245

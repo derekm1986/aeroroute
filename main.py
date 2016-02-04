@@ -45,26 +45,23 @@ for item in inputstring:
     else:
         print item, "not found"
         exit()
-
     combinerlist = []
     combinerlist.append([item, typeelement, inp])
     inputwaypoints.append(combinerlist[0])
 
-print inputwaypoints #for debug
-    
 #detection of multiples happens here
 for waypoints in inputwaypoints:
     if len(waypoints[2]) == 1: #only one lat/long was found
         waypoints[2] = waypoints[2][0]
     else:
-        print "Multiple items were found with name", item, "...need more programming.  Without further programming, first lat/long will be used."
+        print "Multiple items were found with name", waypoints[0], "...need more programming.  Without further programming, first lat/long will be used."
         
         #put logic here
         
         waypoints[2] = waypoints[2][0] #remove this when you make logic to do something with multiple lat/longs
         
 #takes inputted waypoints and turns them into a list of waypoint pairs
-waypointpairs = pairmaker.pairmaker(inputwaypoints) 
+waypointpairs = pairmaker.pairmaker(inputwaypoints)
 
 #takes waypoint pairs and uses vincenty() to find the total distance
 sumdistance = 0.00 #establish sumdistance and put zero in it
