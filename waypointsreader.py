@@ -17,7 +17,7 @@ def waypointdictmaker():
             waypointlatisnegative = True
             waypointlat = waypointlat[1:]
             
-        if len(waypointlat) < 6:
+        if len(waypointlat) < 7:
             waypointlat = "0" * (7 - len(waypointlat)) + waypointlat
             
         waypointlatwithdecimal = waypointlat[:len(waypointlat)-6] + "." + waypointlat[len(waypointlat)-6:] #6 decimal places
@@ -34,7 +34,7 @@ def waypointdictmaker():
             waypointlongisnegative = True
             waypointlong = waypointlong[1:]
 
-        if len(waypointlong) < 6:
+        if len(waypointlong) < 7:
             waypointlong = "0" * (7 - len(waypointlong)) + waypointlong
                 
         waypointlongwithdecimal = waypointlong[:len(waypointlong)-6] + "." + waypointlong[len(waypointlong)-6:] #6 decimal places

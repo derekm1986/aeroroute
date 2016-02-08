@@ -17,7 +17,7 @@ def navaiddictmaker():
             navaidlatisnegative = True
             navaidlat = navaidlat[1:]
           
-        if len(navaidlat) < 6:
+        if len(navaidlat) < 7:
             navaidlat = "0" * (7 - len(navaidlat)) + navaidlat
            
         navaidlatwithdecimal = navaidlat[:len(navaidlat)-6] + "." + navaidlat[len(navaidlat)-6:] #6 decimal places
@@ -34,7 +34,7 @@ def navaiddictmaker():
             navaidlongisnegative = True
             navaidlong = navaidlong[1:]
 
-        if len(navaidlong) < 6:
+        if len(navaidlong) < 7:
             navaidlong = "0" * (7 - len(navaidlong)) + navaidlong
                 
         navaidlongwithdecimal = navaidlong[:len(navaidlong)-6] + "." + navaidlong[len(navaidlong)-6:] #6 decimal places

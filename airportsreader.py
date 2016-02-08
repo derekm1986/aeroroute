@@ -21,7 +21,7 @@ def airportdictmaker():
                 airportlatisnegative = True
                 airportlat = airportlat[1:]
             
-            if len(airportlat) < 6:
+            if len(airportlat) < 7:
                 airportlat = "0" * (7 - len(airportlat)) + airportlat
             
             airportlatwithdecimal = airportlat[:len(airportlat)-6] + "." + airportlat[len(airportlat)-6:] #6 decimal places
@@ -38,7 +38,7 @@ def airportdictmaker():
                 airportlongisnegative = True
                 airportlong = airportlong[1:]
 
-            if len(airportlong) < 6:
+            if len(airportlong) < 7:
                 airportlong = "0" * (7 - len(airportlong)) + airportlong
                 
             airportlongwithdecimal = airportlong[:len(airportlong)-6] + "." + airportlong[len(airportlong)-6:] #6 decimal places
