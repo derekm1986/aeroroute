@@ -48,7 +48,7 @@ for item in inputstring:
     combinerlist = []
     combinerlist.append([item, typeelement, inp])
     inputwaypoints.append(combinerlist[0])
-
+    
 #detection of multiples happens here
 for waypoints in inputwaypoints:
     if len(waypoints[2]) == 1: #only one lat/long was found

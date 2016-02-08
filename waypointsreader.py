@@ -11,8 +11,39 @@ def waypointdictmaker():
 
     for line in waypoint_file:
         waypointid, waypointlat, waypointlong, waypointregion = line.rstrip().split("|")
+        waypointlatisnegative = False #establish variable
+            
+        if waypointlat.startswith("-"):
+            waypointlatisnegative = True
+            waypointlat = waypointlat[1:]
+            
+        if len(waypointlat) < 6:
+            waypointlat = "0" * (7 - len(waypointlat)) + waypointlat
+            
         waypointlatwithdecimal = waypointlat[:len(waypointlat)-6] + "." + waypointlat[len(waypointlat)-6:] #6 decimal places
+            
+        if waypointlatisnegative == True:
+            waypointlatwithdecimal = "-" + waypointlatwithdecimal
+            
+        waypointlatwithdecimal = float(waypointlatwithdecimal)
+            
+            
+        waypointlongisnegative = False #establish variable
+            
+        if waypointlong.startswith("-"):
+            waypointlongisnegative = True
+            waypointlong = waypointlong[1:]
+
+        if len(waypointlong) < 6:
+            waypointlong = "0" * (7 - len(waypointlong)) + waypointlong
+                
         waypointlongwithdecimal = waypointlong[:len(waypointlong)-6] + "." + waypointlong[len(waypointlong)-6:] #6 decimal places
+            
+        if waypointlongisnegative == True:
+            waypointlongwithdecimal = "-" + waypointlongwithdecimal
+
+        waypointlongwithdecimal = float(waypointlongwithdecimal)
+        
         waypointdict.setdefault(waypointid, []).append((waypointlatwithdecimal, waypointlongwithdecimal))
 
     waypoint_file.close()
