@@ -25,8 +25,6 @@ def waypointdictmaker():
         if waypointlatisnegative == True:
             waypointlatwithdecimal = "-" + waypointlatwithdecimal
             
-        waypointlatwithdecimal = float(waypointlatwithdecimal)
-            
             
         waypointlongisnegative = False #establish variable
             
@@ -42,7 +40,6 @@ def waypointdictmaker():
         if waypointlongisnegative == True:
             waypointlongwithdecimal = "-" + waypointlongwithdecimal
 
-        waypointlongwithdecimal = float(waypointlongwithdecimal)
         
         waypointdict.setdefault(waypointid, []).append((waypointlatwithdecimal, waypointlongwithdecimal))
 

@@ -29,7 +29,7 @@ def airportdictmaker():
             if airportlatisnegative == True:
                 airportlatwithdecimal = "-" + airportlatwithdecimal
             
-            airportlatwithdecimal = float(airportlatwithdecimal)
+
             
             
             airportlongisnegative = False #establish variable
@@ -46,7 +46,7 @@ def airportdictmaker():
             if airportlongisnegative == True:
                 airportlongwithdecimal = "-" + airportlongwithdecimal
 
-            airportlongwithdecimal = float(airportlongwithdecimal)
+
             
             
             airportdict.setdefault(airportid, []).append((airportlatwithdecimal, airportlongwithdecimal))

@@ -56,6 +56,8 @@ for waypoints in inputwaypoints:
     else:
         print "Multiple items were found with name", waypoints[0], "...need more programming.  Without further programming, first lat/long will be used."
         
+        #create a separate file?
+        #create a matrix and find least distance
         #put logic here
         
         waypoints[2] = waypoints[2][0] #remove this when you make logic to do something with multiple lat/longs

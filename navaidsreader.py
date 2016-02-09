@@ -25,7 +25,6 @@ def navaiddictmaker():
         if navaidlatisnegative == True:
             navaidlatwithdecimal = "-" + navaidlatwithdecimal
             
-        navaidlatwithdecimal = float(navaidlatwithdecimal)
             
             
         navaidlongisnegative = False #establish variable
@@ -42,7 +41,7 @@ def navaiddictmaker():
         if navaidlongisnegative == True:
             navaidlongwithdecimal = "-" + navaidlongwithdecimal
 
-        navaidlongwithdecimal = float(navaidlongwithdecimal)
+
         navaiddict.setdefault(navaidid, []).append((navaidlatwithdecimal, navaidlongwithdecimal))
 
     navaid_file.close()
