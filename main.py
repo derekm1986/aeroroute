@@ -3,6 +3,7 @@ import airportsreader
 import waypointsreader
 import navaidsreader
 import pairmaker
+import tiebreaker
 
 airportsreader.airportdictmaker()
 navaidsreader.navaiddictmaker()
@@ -48,20 +49,19 @@ for item in inputstring:
     combinerlist = []
     combinerlist.append([item, typeelement, inp])
     inputwaypoints.append(combinerlist[0])
+
+multiplefound = False #create tiefound and fill it with False to start
     
 #detection of multiples happens here
 for waypoints in inputwaypoints:
     if len(waypoints[2]) == 1: #only one lat/long was found
-        waypoints[2] = waypoints[2][0]
+        waypoints[2] = waypoints[2][0] #turn list of one lat/long into tuple
     else:
-        print "Multiple items were found with name", waypoints[0], "...need more programming.  Without further programming, first lat/long will be used."
-        
-        #create a separate file?
-        #create a matrix and find least distance
-        #put logic here
-        
-        waypoints[2] = waypoints[2][0] #remove this when you make logic to do something with multiple lat/longs
-        
+        multiplefound = True
+
+if multiplefound == True:
+    inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker
+    
 #takes inputted waypoints and turns them into a list of waypoint pairs
 waypointpairs = pairmaker.pairmaker(inputwaypoints)
 
