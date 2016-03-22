@@ -3,15 +3,14 @@
 def tiebreaker(inputwaypoints):
 
     shortestdistance = 999999.0 #establish worst case scenario so anything would be better
-    #shortestdistanceset = #combination of waypoints with shortest distance
-    numberofmultiples = 0
+    #shortestdistanceset = #combination of waypoints with shortest distance 
     
-    print inputwaypoints
+    foundmultiples = [i for i,x in enumerate(inputwaypoints) if type(x[2]) is list]
+    
+    print foundmultiples
     
     for waypoints in inputwaypoints:
         if type(waypoints[2]) is list: #multiple lat/long tuples were found in a list
-    
-            numberofmultiples = numberofmultiples + 1
 
     ###################################        
             print "Multiple items were found with name", waypoints[0], "...need more programming.  Without further programming, first lat/long will be used."
@@ -19,7 +18,7 @@ def tiebreaker(inputwaypoints):
     ###################################
     
     #how many waypoints with multiples?
-    print numberofmultiples
+    print len(foundmultiples)
     
     #are these waypoints congruous or are there multiple sets?
 
