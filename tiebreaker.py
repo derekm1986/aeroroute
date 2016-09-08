@@ -1,8 +1,10 @@
 #this file is for when a route item is returned with multiple lat/longs
 
+import math
+
 def tiebreaker(inputwaypoints):
 
-    shortestdistance = 1000000000.0 #establish worst case scenario so anything would be better
+    shortestdistance = float("inf") #establish worst case scenario so anything would be better
     #shortestdistanceset = #combination of waypoints with shortest distance 
     
     foundmultiples = [i for i,x in enumerate(inputwaypoints) if type(x[2]) is list]
@@ -21,8 +23,7 @@ def tiebreaker(inputwaypoints):
     
     for waypoints in inputwaypoints:
         if type(waypoints[2]) is list: #multiple lat/long tuples were found in a list
-
-    ###################################        
+     
             print "Multiple items were found with name", waypoints[0], "...need more programming."  
             print "Number of", waypoints[0], "lat/long possibilties:", len(waypoints[2])
             
@@ -35,10 +36,19 @@ def tiebreaker(inputwaypoints):
             
         else:
             position = position + 1
-    ###################################
-    
+            
+    numberofpossibilities = 1        
+            
+    if len(possibilitymatrix) == 0:
+        pass
+    elif len(possibilitymatrix) == 1:
+        numberofpossibilities = len(possibilitymatrix[0][1])
+    else:
+        for waypoints in possibilitymatrix:
+            numberofpossibilities = numberofpossibilities * len(waypoints[1])
 
     print possibilitymatrix
+    print "Number of possibilities:", numberofpossibilities
 
 
     return inputwaypoints
