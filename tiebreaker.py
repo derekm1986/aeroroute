@@ -10,9 +10,9 @@ def tiebreaker(inputwaypoints):
     foundmultiples = [i for i,x in enumerate(inputwaypoints) if type(x[2]) is list]
     
     #how many waypoints with multiples?
-    print "Number of total waypoints with multiples:",len(foundmultiples)
+    print("Number of total waypoints with multiples:",len(foundmultiples))
     
-    print "Found multiples at position(s):",foundmultiples
+    print("Found multiples at position(s):",foundmultiples)
     
     possibilitymatrix = []  #fill with possiblities to try in waypointnumber, latlongnumber format
     
@@ -24,13 +24,13 @@ def tiebreaker(inputwaypoints):
     for waypoints in inputwaypoints:
         if type(waypoints[2]) is list: #multiple lat/long tuples were found in a list
      
-            print "Multiple items were found with name", waypoints[0], "...need more programming."  
-            print "Number of", waypoints[0], "lat/long possibilties:", len(waypoints[2])
+            print("Multiple items were found with name", waypoints[0], "...need more programming.")
+            print("Number of", waypoints[0], "lat/long possibilties:", len(waypoints[2]))
             
             possibilitymatrix.append((position,(range(len(waypoints[2])))))
             
             waypoints[2] = waypoints[2][0] #remove these when you make logic to do something with multiple lat/longs
-            print "Without further programming, first lat/long will be used." #remove these when you make logic to do something with multiple lat/longs
+            print("Without further programming, first lat/long will be used.") #remove these when you make logic to do something with multiple lat/longs
             
             position = position + 1
             
@@ -47,8 +47,8 @@ def tiebreaker(inputwaypoints):
         for waypoints in possibilitymatrix:
             numberofpossibilities = numberofpossibilities * len(waypoints[1])
 
-    print possibilitymatrix
-    print "Number of possibilities:", numberofpossibilities
+    print(possibilitymatrix)
+    print("Number of possibilities:", numberofpossibilities)
 
 
     return inputwaypoints

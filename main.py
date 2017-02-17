@@ -18,12 +18,12 @@ for key, val in waypointsreader.waypointdict.items():
     else:
         pointsinspacedict[key] = val
 
-print "NAVAID and waypoints dictionaries combined"
+print("NAVAID and waypoints dictionaries combined")
   
 inputwaypoints = []
 
 #allows user to input waypoints to list
-inputstring = raw_input("Enter input string: ")
+inputstring = input("Enter input string: ")
 inputstring = inputstring.upper().split()
 
 for item in inputstring:
@@ -44,7 +44,7 @@ for item in inputstring:
         typeelement = "point in space"
     
     else:
-        print item, "not found"
+        print(item, "not found")
         exit()
     combinerlist = []
     combinerlist.append([item, typeelement, inp])
@@ -72,4 +72,4 @@ for pairs in waypointpairs: #find distance of each waypointpair and sum together
     pairdistance = vincenty.vincenty(*pairs)
     sumdistance = sumdistance + pairdistance
 
-print sumdistance
+print(sumdistance)

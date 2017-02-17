@@ -46,4 +46,4 @@ def navaiddictmaker():
 
     navaid_file.close()
     
-    print "NAVAIDs loaded into memory"
+    print("NAVAIDs loaded into memory")

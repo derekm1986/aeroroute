@@ -45,4 +45,4 @@ def waypointdictmaker():
 
     waypoint_file.close()
     
-    print "Waypoints loaded into memory"
+    print("Waypoints loaded into memory")

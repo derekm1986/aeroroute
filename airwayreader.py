@@ -30,7 +30,7 @@ for airwaystring in thewholefile:
 for airwaysegment in airwaydict["Q822"][0]:
     airwaysegment = airwaysegment.split("|")
     del airwaysegment[0] #deletes S at beginning of every line
-    print airwaysegment    
+    print(airwaysegment)    
     
 #    if not line.strip():
 #        continue

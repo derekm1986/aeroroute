@@ -53,4 +53,4 @@ def airportdictmaker():
 
     airport_file.close()
         
-    print "Airports loaded into memory"
+    print("Airports loaded into memory")
