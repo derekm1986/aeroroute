@@ -52,7 +52,7 @@ for item in inputstring:
     
 #detection of multiples happens here
 for waypoints in inputwaypoints:
-    if len(waypoints[2]) == 1: #only one lat/long was found
+    if len(waypoints[2]) == 1: #only one lat/long possibility was found
         waypoints[2] = waypoints[2][0] #turn list of one lat/long into tuple
     else:
         inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because a multiple was found    
@@ -62,7 +62,7 @@ waypointpairs = pairmaker.pairmaker(inputwaypoints)
 
 #takes waypoint pairs and uses vincenty() to find the total distance
 sumdistance = 0.00 #establish sumdistance and put zero in it
-    
+ 
 for pairs in waypointpairs: #find distance of each waypointpair and sum together
     pairdistance = vincenty.vincenty(*pairs)
     sumdistance = sumdistance + pairdistance
