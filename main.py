@@ -19,12 +19,12 @@ for key, val in waypointsreader.waypointdict.items():
         pointsinspacedict[key] = val
 
 print("NAVAID and waypoints dictionaries combined")
-  
-inputwaypoints = []
 
 #allows user to input waypoints to list
 inputstring = input("Enter input string: ")
 inputstring = inputstring.upper().split()
+
+inputwaypoints = []
 
 for item in inputstring:
     
@@ -50,7 +50,7 @@ for item in inputstring:
     combinerlist.append([item, typeelement, inp])
     inputwaypoints.append(combinerlist[0])
 
-multiplefound = False #create tiefound and fill it with False to start
+multiplefound = False #create multiplefound and fill it with False to start
     
 #detection of multiples happens here
 for waypoints in inputwaypoints:
