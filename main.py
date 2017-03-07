@@ -51,16 +51,12 @@ for item in inputstring:
     inputwaypoints.append(combinerlist[0])
     
 #detection of multiples happens here
-multiplefound = False
+for waypoints in inputwaypoints:
+    if len(waypoints[2]) > 1: #only one lat/long possibility was found
+        inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because a multiple was found    
 
 for waypoints in inputwaypoints:
-    if len(waypoints[2]) == 1: #only one lat/long possibility was found
-        waypoints[2] = waypoints[2][0] #turn list of one lat/long into tuple
-    else:
-        multiplefound = True
-        
-if multiplefound == True:
-    inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because a multiple was found    
+    waypoints[2] = waypoints[2][0] #turn list of one lat/long into tuple
     
 #takes inputted waypoints and turns them into a list of waypoint pairs
 waypointpairs = pairmaker.pairmaker(inputwaypoints)
