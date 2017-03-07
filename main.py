@@ -21,7 +21,7 @@ for key, val in waypointsreader.waypointdict.items():
 print("NAVAID and waypoints dictionaries combined")
 
 #allows user to input waypoints to list
-inputstring = input("Enter input string: ")
+inputstring = input("Enter route: ")
 inputstring = inputstring.upper().split()
 
 inputwaypoints = []
@@ -49,6 +49,10 @@ for item in inputstring:
     combinerlist = []
     combinerlist.append([item, typeelement, inp])
     inputwaypoints.append(combinerlist[0])
+
+if len(inputwaypoints) <= 1:
+    print('At least two waypoints are required for computation')
+    exit()
     
 #detection of multiples happens here
 for waypoints in inputwaypoints:
@@ -68,4 +72,4 @@ for pairs in waypointpairs: #find distance of each waypointpair and sum together
     pairdistance = vincenty.vincenty(*pairs)
     sumdistance = sumdistance + pairdistance
 
-print(sumdistance)
+print('Distance in nm:',sumdistance)
