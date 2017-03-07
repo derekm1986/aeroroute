@@ -5,72 +5,95 @@ import navaidsreader
 import pairmaker
 import tiebreaker
 
+print('\n***Program starting***')
+
+print('Loading airports into memory...', end="")
 airportsreader.airportdictmaker()
+print('OK') #loading airports was successful
+
+print('Loading NAVAIDs into memory...', end="")
 navaidsreader.navaiddictmaker()
+print('OK') #loading NAVAIDs was successful
+
+print('Loading waypoints into memory...', end="")
 waypointsreader.waypointdictmaker()
+print('OK') #loading waypoints was successful
 
 #combining navaiddict and waypointdict dictionaries into one
 pointsinspacedict = navaidsreader.navaiddict.copy()
+
+print('Combining NAVAID and waypoints dictionaries...', end="")
 
 for key, val in waypointsreader.waypointdict.items():
     if key in pointsinspacedict:
         pointsinspacedict[key] += val
     else:
         pointsinspacedict[key] = val
+print("OK") #dictionary combination was successful
 
-print("NAVAID and waypoints dictionaries combined")
+print('\n')
 
-#allows user to input waypoints to list
-inputstring = input("Enter route: ")
-inputstring = inputstring.upper().split()
+while True:
 
-inputwaypoints = []
+    #allows user to input waypoints to list
+    inputstring = input("Enter input string: ")
+    inputstring = inputstring.upper().split()
 
-for item in inputstring:
-    
-    inp = item
-    
-    if inp in airportsreader.airportdict:
-        inp = airportsreader.airportdict[inp]
-        typeelement = "airport"
-    
-    #elif put something here to read airways
-        #typeelement = "airway"
+    if len(inputstring) == 0:
+        print("No input detected")
+        continue
         
-    #elif put something here to read SIDs/STARs
+    if "EXIT" in inputstring or "QUIT" in inputstring:
+        print('Exiting program')
+        break
+    
+    inputwaypoints = []
+
+    for item in inputstring:
+    
+        inp = item
+    
+        if inp in airportsreader.airportdict:
+            inp = airportsreader.airportdict[inp]
+            typeelement = "airport"
+    
+        #elif put something here to read airways
+            #typeelement = "airway"
         
-    elif inp in pointsinspacedict:
-        inp = pointsinspacedict[inp]
-        typeelement = "point in space"
+        #elif put something here to read SIDs/STARs
+        
+        elif inp in pointsinspacedict:
+            inp = pointsinspacedict[inp]
+            typeelement = "point in space"
     
-    else:
-        print(item, "not found")
-        exit()
-    combinerlist = []
-    combinerlist.append([item, typeelement, inp])
-    inputwaypoints.append(combinerlist[0])
+        else:
+            print(item, "not found")
+            break
+        
+        combinerlist = []
+        combinerlist.append([item, typeelement, inp])
+        inputwaypoints.append(combinerlist[0])
 
-if len(inputwaypoints) == 1:
-    print('One item detected, printing list',inputwaypoints)
-    exit()
+    if len(inputwaypoints) == 1:
+        print('One item detected, printing item:',inputwaypoints[0],'\n')
+        continue
     
-    
-#detection of multiples happens here
-for waypoints in inputwaypoints:
-    if len(waypoints[2]) > 1: #only one lat/long possibility was found
-        inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because a multiple was found    
+    #detection of multiples happens here
+    for waypoints in inputwaypoints:
+        if len(waypoints[2]) > 1: #only one lat/long possibility was found
+            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because a multiple was found    
 
-for waypoints in inputwaypoints:
-    waypoints[2] = waypoints[2][0] #turn list of one lat/long into tuple
+    for waypoints in inputwaypoints:
+        waypoints[2] = waypoints[2][0] #turn list of one lat/long into tuple
     
-#takes inputted waypoints and turns them into a list of waypoint pairs
-waypointpairs = pairmaker.pairmaker(inputwaypoints)
+    #takes inputted waypoints and turns them into a list of waypoint pairs
+    waypointpairs = pairmaker.pairmaker(inputwaypoints)
 
-#takes waypoint pairs and uses vincenty() to find the total distance
-sumdistance = 0.00 #establish sumdistance and put zero in it
+    #takes waypoint pairs and uses vincenty() to find the total distance
+    sumdistance = 0.00 #establish sumdistance and put zero in it
  
-for pairs in waypointpairs: #find distance of each waypointpair and sum together
-    pairdistance = vincenty.vincenty(*pairs)
-    sumdistance = sumdistance + pairdistance
+    for pairs in waypointpairs: #find distance of each waypointpair and sum together
+        pairdistance = vincenty.vincenty(*pairs)
+        sumdistance = sumdistance + pairdistance
 
-print('Distance in nm:',sumdistance)
+    print('Distance in nm:',sumdistance,'\n')

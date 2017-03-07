@@ -44,5 +44,3 @@ def waypointdictmaker():
         waypointdict.setdefault(waypointid, []).append((waypointlatwithdecimal, waypointlongwithdecimal))
 
     waypoint_file.close()
-    
-    print("Waypoints loaded into memory")

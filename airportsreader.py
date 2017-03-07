@@ -52,5 +52,3 @@ def airportdictmaker():
             airportdict.setdefault(airportid, []).append((airportlatwithdecimal, airportlongwithdecimal))
 
     airport_file.close()
-        
-    print("Airports loaded into memory")

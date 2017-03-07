@@ -45,5 +45,3 @@ def navaiddictmaker():
         navaiddict.setdefault(navaidid, []).append((navaidlatwithdecimal, navaidlongwithdecimal))
 
     navaid_file.close()
-    
-    print("NAVAIDs loaded into memory")
