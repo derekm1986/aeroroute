@@ -5,24 +5,27 @@ import navaidsreader
 import pairmaker
 import tiebreaker
 
-print('\n***Program starting***')
+print('\n***Program starting***','\n')
 
-print('Loading airports into memory...', end="")
+print('Reading AIRAC data...')
+
+print('   Loading airports into memory...', end="")
 airportsreader.airportdictmaker()
 print('OK') #loading airports was successful
 
-print('Loading NAVAIDs into memory...', end="")
+print('   Loading NAVAIDs into memory...', end="")
 navaidsreader.navaiddictmaker()
 print('OK') #loading NAVAIDs was successful
 
-print('Loading waypoints into memory...', end="")
+print('   Loading waypoints into memory...', end="")
 waypointsreader.waypointdictmaker()
 print('OK') #loading waypoints was successful
 
 #combining navaiddict and waypointdict dictionaries into one
-pointsinspacedict = navaidsreader.navaiddict.copy()
 
-print('Combining NAVAID and waypoints dictionaries...', end="")
+print('   Combining NAVAID and waypoints dictionaries...', end="")
+
+pointsinspacedict = navaidsreader.navaiddict.copy()
 
 for key, val in waypointsreader.waypointdict.items():
     if key in pointsinspacedict:
@@ -31,11 +34,12 @@ for key, val in waypointsreader.waypointdict.items():
         pointsinspacedict[key] = val
 print("OK") #dictionary combination was successful
 
-print('\n')
-
 while True:
 
-    #allows user to input waypoints to list
+    print('\n')
+    
+    #allows user to input waypoint(s)/exit instructions to list
+    print('Type "quit" to exit program')
     inputstring = input("Enter input string: ")
     inputstring = inputstring.upper().split()
 
@@ -43,8 +47,8 @@ while True:
         print("No input detected")
         continue
         
-    if "EXIT" in inputstring or "QUIT" in inputstring:
-        print('Exiting program')
+    if "QUIT" in inputstring:
+        print('***Program exiting***')
         break
     
     inputwaypoints = []
@@ -52,10 +56,12 @@ while True:
     for item in inputstring:
     
         inp = item
-    
+        elementfound = False
+        
         if inp in airportsreader.airportdict:
             inp = airportsreader.airportdict[inp]
             typeelement = "airport"
+            elementfound = True
     
         #elif put something here to read airways
             #typeelement = "airway"
@@ -65,17 +71,21 @@ while True:
         elif inp in pointsinspacedict:
             inp = pointsinspacedict[inp]
             typeelement = "point in space"
+            elementfound = True
     
-        else:
+        else:                                
             print(item, "not found")
-            break
         
-        combinerlist = []
-        combinerlist.append([item, typeelement, inp])
-        inputwaypoints.append(combinerlist[0])
+        if elementfound == True:
+            combinerlist = []
+            combinerlist.append([item, typeelement, inp])
+            inputwaypoints.append(combinerlist[0])
 
+    if elementfound == False:
+        continue
+            
     if len(inputwaypoints) == 1:
-        print('One item detected, printing item:',inputwaypoints[0],'\n')
+        print('Single item detected, printing entry:',inputwaypoints[0])
         continue
     
     #detection of multiples happens here
@@ -96,4 +106,4 @@ while True:
         pairdistance = vincenty.vincenty(*pairs)
         sumdistance = sumdistance + pairdistance
 
-    print('Distance in nm:',sumdistance,'\n')
+    print('Distance in nm:',sumdistance)
