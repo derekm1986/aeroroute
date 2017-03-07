@@ -50,9 +50,10 @@ for item in inputstring:
     combinerlist.append([item, typeelement, inp])
     inputwaypoints.append(combinerlist[0])
 
-if len(inputwaypoints) <= 1:
-    print('At least two waypoints are required for computation')
+if len(inputwaypoints) == 1:
+    print('One item detected, printing list',inputwaypoints)
     exit()
+    
     
 #detection of multiples happens here
 for waypoints in inputwaypoints:
