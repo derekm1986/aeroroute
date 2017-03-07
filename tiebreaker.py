@@ -7,6 +7,8 @@ def tiebreaker(inputwaypoints):
     shortestdistance = float("inf") #establish worst case scenario so anything would be better
     #shortestdistanceset = #combination of waypoints with shortest distance 
     
+    print(inputwaypoints)
+    
     foundmultiples = [i for i,x in enumerate(inputwaypoints) if type(x[2]) is list]
     
     #how many waypoints with multiples?
@@ -27,7 +29,7 @@ def tiebreaker(inputwaypoints):
             print("Multiple items were found with name", waypoints[0], "...need more programming.")
             print("Number of", waypoints[0], "lat/long possibilties:", len(waypoints[2]))
             
-            possibilitymatrix.append((position,(range(len(waypoints[2])))))
+            possibilitymatrix.append((position,(range(len(waypoints[2]))))) #this doesn't work well
             
             waypoints[2] = waypoints[2][0] #remove these when you make logic to do something with multiple lat/longs
             print("Without further programming, first lat/long will be used.") #remove these when you make logic to do something with multiple lat/longs
