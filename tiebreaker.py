@@ -33,7 +33,7 @@ def tiebreaker(inputwaypoints):
                 print(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility], possibility)
                 possibility = possibility + 1
         else:
-            print('Single multiple found in the middle...need more code!')
+            print('Single multiple found in the middle of the route...need more code!')
     
     if len(foundmultiples) == len(inputwaypoints):
         print('all waypoints are multiples, good luck')
