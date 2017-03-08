@@ -1,6 +1,8 @@
 #this file is for when a route item is returned with multiple lat/longs
 
 import math
+import vincenty
+import pairmaker
 
 def tiebreaker(inputwaypoints):
 
@@ -24,12 +26,14 @@ def tiebreaker(inputwaypoints):
             for iter in inputwaypoints[0][2]:
                 print(inputwaypoints[0][2][possibility], inputwaypoints[1][2][0], possibility)
                 possibility = possibility + 1
-        if foundmultiples[0] == len(inputwaypoints) - 1:
+        elif foundmultiples[0] == len(inputwaypoints) - 1:
             print('One multiple was found at the end!')
             possibility = 0
             for iter in inputwaypoints[foundmultiples[0]][2]:
                 print(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility], possibility)
                 possibility = possibility + 1
+        else:
+            print('Single multiple found in the middle...need more code!')
     
     if len(foundmultiples) == len(inputwaypoints):
         print('all waypoints are multiples, good luck')
