@@ -6,12 +6,12 @@ import pairmaker
 
 def tiebreaker(inputwaypoints):
 
-    shortestdistance = float("inf") #establish worst case scenario so anything would be better
+    
     #shortestdistanceset = #combination of waypoints with shortest distance 
     
-    print(inputwaypoints)
+    #print(inputwaypoints)
     
-    foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1]
+    foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1] #finding positions of multiples
     
     print('Found multiples at position(s):',foundmultiples)
     
@@ -22,21 +22,44 @@ def tiebreaker(inputwaypoints):
         print('Only one multiple found, using adjacent waypoint(s)')
         if foundmultiples[0] == 0:
             print('One multiple was found at the beginning!')
+            shortestdistance = float("inf") #establish worst case scenario so anything would be better
             possibility = 0
             for iter in inputwaypoints[0][2]:
-                print(inputwaypoints[0][2][possibility], inputwaypoints[1][2][0], possibility)
+                trypair = [[inputwaypoints[0][2][possibility], inputwaypoints[1][2][0]]]
+                #print(inputwaypoints[0][2][possibility], inputwaypoints[1][2][0], possibility)
+                #print(trypair)
+                trydistance = vincenty.vincenty(inputwaypoints[0][2][possibility], inputwaypoints[1][2][0])
+                if trydistance < shortestdistance:
+                    shortestdistance = trydistance
+                    shortestpossibility = possibility
+                    shortestpair = trypair                    
                 possibility = possibility + 1
+                #put lat/long back where it belongs, hard coded for first case only
+            inputwaypoints[0][2] = [inputwaypoints[0][2][shortestpossibility]]
         elif foundmultiples[0] == len(inputwaypoints) - 1:
             print('One multiple was found at the end!')
+            shortestdistance = float("inf") #establish worst case scenario so anything would be better
             possibility = 0
             for iter in inputwaypoints[foundmultiples[0]][2]:
-                print(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility], possibility)
+                trypair = [[inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility]]]
+                #print(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility], possibility)
+                #print(trypair)
+                trydistance = vincenty.vincenty(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility])
+                if trydistance < shortestdistance:
+                    shortestdistance = trydistance
+                    shortestpossibility = possibility
+                    shortestpair = trypair
                 possibility = possibility + 1
+                #put lat/long back where it belongs, hard coded for last case only
+            inputwaypoints[foundmultiples[0]][2] = [inputwaypoints[foundmultiples[0]][2][shortestpossibility]]
         else:
             print('Single multiple found in the middle of the route...need more code!')
     
     if len(foundmultiples) == len(inputwaypoints):
         print('all waypoints are multiples, good luck')
+    
+    print(inputwaypoints)
+
     
 #    possibilitymatrix = []  #fill with possiblities to try in waypointnumber, latlongnumber format
     
