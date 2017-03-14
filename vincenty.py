@@ -23,7 +23,7 @@ def vincenty(latlong1, latlong2):
 
     lmbda = L #"lambda" is a reserved word in Python
     iterLimit = 100
-    lmbdaP = 1.0 #jury-rig filling lmbdaP with something first
+    lmbdaP = 0.0 #jury-rig filling lmbdaP with something first
 
     while (abs(lmbda-lmbdaP) > 1e-12 and iterLimit > 0):
         
@@ -34,9 +34,9 @@ def vincenty(latlong1, latlong2):
         sigma = math.atan2(sinSigma,cosSigma)
         sinAlpha = (cosU1*cosU2*sinlmbda)/sinSigma
         cosSqAlpha = 1 - (sinAlpha**2) #this will equal zero if two points are along the equator
-       
+        
         if cosSqAlpha == 0: 
-            cos2SigmaM = 0 #to protect from division error due to cosSqAlpha=0
+            cos2SigmaM = 0 #to protect from division error due to cosSqAlpha=0, also C will equal zero below
         else:            
             cos2SigmaM = cosSigma - ((2*sinU1*sinU2)/cosSqAlpha)
         
@@ -44,9 +44,9 @@ def vincenty(latlong1, latlong2):
         lmbdaP = lmbda
         lmbda = L + (1-C) * f * sinAlpha * (sigma + C * sinSigma*(cos2SigmaM+C*cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)))
         
-        iterLimit = iterLimit - 1
+        iterLimit -= 1
         
-        if iterLimit==0:
+        if iterLimit == 0:
             return float("NaN")  #formula failed to converge
 
     uSq = cosSqAlpha * (a**2 - b**2) / (b**2)
@@ -57,7 +57,7 @@ def vincenty(latlong1, latlong2):
 
     #s = round(s,3) #round to 1mm precision - Vincenty's formulae are only accurate to within .5mm
 
-    #        // note: to return initial/final bearings in addition to distance, use something like:
+    #        to return initial/final bearings in addition to distance, use something like:
     #        fwdAz = math.atan2(cosU2*sinlmbda,  cosU1*sinU2-sinU1*cosU2*coslmbda);
     #        revAz = math.atan2(cosU1*sinlmbda, -sinU1*cosU2+cosU1*sinU2*coslmbda);
 

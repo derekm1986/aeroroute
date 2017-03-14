@@ -63,7 +63,7 @@ while True:
             itemname = 'WAYPOINT'+str(manualwaypointnumber)
             coordinates = [tuple(item.split('/'))]
             typeelement = "manual waypoint"
-            manualwaypointnumber = manualwaypointnumber + 1
+            manualwaypointnumber += 1
         
         elif item in airportsreader.airportdict:
             itemname = item
