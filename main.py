@@ -65,7 +65,7 @@ while True:
             typeelement = "manual waypoint"
             manualwaypointnumber = manualwaypointnumber + 1
         
-        if item in airportsreader.airportdict:
+        elif item in airportsreader.airportdict:
             itemname = item
             coordinates = airportsreader.airportdict[item]
             typeelement = "airport"
@@ -81,9 +81,8 @@ while True:
             typeelement = "point in space"
     
         else:                                
-            if typeelement != "manual waypoint":
-                print(item, "not found")
-                notfoundflag = True
+            print(item, "not found")
+            notfoundflag = True
       
         if notfoundflag == False:
             combinerlist = []
