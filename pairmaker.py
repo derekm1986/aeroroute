@@ -13,6 +13,6 @@ def pairmaker(inputwaypoints):
         temporarylist.append(waypoint1)
         temporarylist.append(waypoint2)
         waypointpairs.append (temporarylist)
-        i = i + 1
+        i += 1
     
     return waypointpairs
