@@ -5,7 +5,7 @@ import navaidsreader
 import pairmaker
 import tiebreaker
 
-print('\n***Program starting***','\n')
+print('\n***Program loading***','\n')
 
 print('Reading AIRAC data...')
 
@@ -39,7 +39,7 @@ while True:
     print('\n')
     
     #allows user to input waypoint(s)/exit instructions to list
-    print('Type "quit" to exit program')
+    print('Type "quit" to exit program, enter (20.000000/-123.000000) format for manual LAT/LONG')
     inputstring = input("Enter input string: ")
     inputstring = inputstring.upper().split()
 
@@ -53,35 +53,45 @@ while True:
     
     inputwaypoints = []
 
-    for item in inputstring:
+    manualwaypointnumber = 1
     
-        inp = item
-        elementfound = False
+    notfoundflag = False
+    
+    for item in inputstring:
         
-        if inp in airportsreader.airportdict:
-            inp = airportsreader.airportdict[inp]
+        if item.startswith("("): #manual input
+            print('manual input detected')
+            coordinates = item
+            item = 'WAYPOINT'+str(manualwaypointnumber)
+            coordinates = [(str(0.0), str(0.0))] #read real lat/long here
+            typeelement = "manual waypoint"
+            manualwaypointnumber = manualwaypointnumber + 1
+        
+        if item in airportsreader.airportdict:
+            coordinates = airportsreader.airportdict[item]
             typeelement = "airport"
-            elementfound = True
+            print(coordinates)
     
         #elif put something here to read airways
             #typeelement = "airway"
         
         #elif put something here to read SIDs/STARs
         
-        elif inp in pointsinspacedict:
-            inp = pointsinspacedict[inp]
+        elif item in pointsinspacedict:
+            coordinates = pointsinspacedict[item]
             typeelement = "point in space"
-            elementfound = True
     
         else:                                
-            print(item, "not found")
-        
-        if elementfound == True:
+            if typeelement != "manual waypoint":
+                print(item, "not found")
+                notfoundflag = True
+      
+        if notfoundflag == False:
             combinerlist = []
-            combinerlist.append([item, typeelement, inp])
+            combinerlist.append([item, typeelement, coordinates])
             inputwaypoints.append(combinerlist[0])
 
-    if elementfound == False:
+    if notfoundflag == True:
         continue
             
     if len(inputwaypoints) == 1:
