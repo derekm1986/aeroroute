@@ -39,7 +39,7 @@ while True:
     print('\n')
     
     #allows user to input waypoint(s)/exit instructions to list
-    print('Type "quit" to exit program, enter (20.000000/-123.000000) format for manual LAT/LONG')
+    print('Type "quit" to exit program, enter 20.000000/-123.000000 format for manual LAT/LONG')
     inputstring = input("Enter input string: ")
     inputstring = inputstring.upper().split()
 
@@ -59,18 +59,16 @@ while True:
     
     for item in inputstring:
         
-        if item.startswith("("): #manual input
-            print('manual input detected')
-            coordinates = item
-            item = 'WAYPOINT'+str(manualwaypointnumber)
-            coordinates = [(str(0.0), str(0.0))] #read real lat/long here
+        if "/" in item: #manual input detected
+            itemname = 'WAYPOINT'+str(manualwaypointnumber)
+            coordinates = [tuple(item.split('/'))]
             typeelement = "manual waypoint"
             manualwaypointnumber = manualwaypointnumber + 1
         
         if item in airportsreader.airportdict:
+            itemname = item
             coordinates = airportsreader.airportdict[item]
             typeelement = "airport"
-            print(coordinates)
     
         #elif put something here to read airways
             #typeelement = "airway"
@@ -78,6 +76,7 @@ while True:
         #elif put something here to read SIDs/STARs
         
         elif item in pointsinspacedict:
+            itemname = item
             coordinates = pointsinspacedict[item]
             typeelement = "point in space"
     
@@ -88,7 +87,7 @@ while True:
       
         if notfoundflag == False:
             combinerlist = []
-            combinerlist.append([item, typeelement, coordinates])
+            combinerlist.append([itemname, typeelement, coordinates])
             inputwaypoints.append(combinerlist[0])
 
     if notfoundflag == True:
@@ -111,8 +110,6 @@ while True:
 
     #takes waypoint pairs and uses vincenty() to find the total distance
     sumdistance = 0.00 #establish sumdistance and put zero in it
-    
-    print(waypointpairs)
     
     for pairs in waypointpairs: #find distance of each waypointpair and sum together
         pairdistance = vincenty.vincenty(*pairs)
