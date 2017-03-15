@@ -30,7 +30,7 @@ def tiebreaker(inputwaypoints):
                 if trydistance < shortestdistance:
                     shortestdistance = trydistance
                     shortestpossibility = possibility
-                    shortestpair = tryset                    
+                    shortestset = tryset                    
                 possibility += 1
                 #put lat/long back where it belongs, hard coded for first case only
             inputwaypoints[0][2] = [inputwaypoints[0][2][shortestpossibility]]
@@ -44,27 +44,27 @@ def tiebreaker(inputwaypoints):
                 if trydistance < shortestdistance:
                     shortestdistance = trydistance
                     shortestpossibility = possibility
-                    shortestpair = tryset
+                    shortestset = tryset
                 possibility += 1
                 #put lat/long back where it belongs, hard coded for last case only
             inputwaypoints[foundmultiples[0]][2] = [inputwaypoints[foundmultiples[0]][2][shortestpossibility]]
         else:
             shortestdistance = float("inf") #establish worst case scenario so anything would be better
             possibility = 0
+            print('Single multiple found in middle of route')
             for iter in inputwaypoints[foundmultiples[0]][2]:
-            #update this    tryset = [[inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility]]]
-                #print(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility], possibility)
-                #print(tryset)
-            #    trydistance = vincenty.vincenty(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility])
-            #    if trydistance < shortestdistance:
-            #        shortestdistance = trydistance
-            #        shortestpossibility = possibility
-            #        shortestpair = tryset
+                tryset = [[inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility], inputwaypoints[foundmultiples[0]+1][2][0]]]
+                print(tryset)
+                #trydistance = vincenty.vincenty(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility])
+                #if trydistance < shortestdistance:
+                    #shortestdistance = trydistance
+                    #shortestpossibility = possibility
+                    #shortestset = tryset
                 possibility += 1
                 #put lat/long back where it belongs, hard coded for last case only
             #inputwaypoints[foundmultiples[0]][2] = [inputwaypoints[foundmultiples[0]][2][shortestpossibility]]
-            print('Single multiple found in the middle of the route...need more code!')
-    
+            
+            
     if len(foundmultiples) == len(inputwaypoints):
         print('all waypoints are multiples, good luck')
     
