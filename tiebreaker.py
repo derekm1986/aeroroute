@@ -59,17 +59,14 @@ def tiebreaker(inputwaypoints):
             print('Single multiple found in middle of route')
             for iter in inputwaypoints[foundmultiples[0]][2]:
                 tryset = [[inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility], inputwaypoints[foundmultiples[0]+1][2][0]]]
-                print(tryset)
-                #need pairmaker to work differently
-                #trydistance = vincenty.vincenty(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility])
-                #minipairmaker.minipairmaker()
-                #if trydistance < shortestdistance:
-                    #shortestdistance = trydistance
-                    #shortestpossibility = possibility
-                    #shortestset = tryset
+                trydistance = vincenty.vincenty(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility]) + vincenty.vincenty(inputwaypoints[foundmultiples[0]][2][possibility], inputwaypoints[foundmultiples[0]+1][2][0])
+                if trydistance < shortestdistance:
+                    shortestdistance = trydistance
+                    shortestpossibility = possibility
+                    shortestset = tryset
                 possibility += 1
-                #put lat/long back where it belongs, hard coded for last case only
-            #inputwaypoints[foundmultiples[0]][2] = [inputwaypoints[foundmultiples[0]][2][shortestpossibility]]
+                #put lat/long back where it belongs
+            inputwaypoints[foundmultiples[0]][2] = [inputwaypoints[foundmultiples[0]][2][shortestpossibility]]
             
     elif len(foundmultiples) > 1 and len(foundmultiples) < len(inputwaypoints): #some waypoints are multiples
         print('some waypoints are multiples')
