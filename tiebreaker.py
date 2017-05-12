@@ -13,12 +13,17 @@ def tiebreaker(inputwaypoints):
     
     foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1] #finding positions of multiples
     
+    #newfoundmultiples = #make better foundmultiples here, list of lists of adjacent multiples
+    #for waypoint in inputwaypoints:
+        #if len(waypoint[2]) > 1:
+            #print('Found a multiple at position')
+    
     print('Found multiples at position(s):',foundmultiples)
     
     #how many waypoints with multiples?
     print("Number of total waypoints with multiples:",len(foundmultiples))
     
-    if len(foundmultiples) == 1:
+    if len(foundmultiples) == 1: #this will only work if one multiple is found
         print('Only one multiple found, using adjacent waypoint(s)')
         if foundmultiples[0] == 0:
             print('One multiple was found at the beginning!')
@@ -55,7 +60,9 @@ def tiebreaker(inputwaypoints):
             for iter in inputwaypoints[foundmultiples[0]][2]:
                 tryset = [[inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility], inputwaypoints[foundmultiples[0]+1][2][0]]]
                 print(tryset)
+                #need pairmaker to work differently
                 #trydistance = vincenty.vincenty(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility])
+                #minipairmaker.minipairmaker()
                 #if trydistance < shortestdistance:
                     #shortestdistance = trydistance
                     #shortestpossibility = possibility
@@ -64,8 +71,10 @@ def tiebreaker(inputwaypoints):
                 #put lat/long back where it belongs, hard coded for last case only
             #inputwaypoints[foundmultiples[0]][2] = [inputwaypoints[foundmultiples[0]][2][shortestpossibility]]
             
-            
-    if len(foundmultiples) == len(inputwaypoints):
+    elif len(foundmultiples) > 1 and len(foundmultiples) < len(inputwaypoints): #some waypoints are multiples
+        print('some waypoints are multiples')
+    
+    elif len(foundmultiples) == len(inputwaypoints): #all waypoints have multiples
         print('all waypoints are multiples, good luck')
     
     print(inputwaypoints)
