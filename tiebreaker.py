@@ -51,7 +51,7 @@ def tiebreaker(inputwaypoints):
                     shortestpossibility = possibility
                     shortestset = tryset
                 possibility += 1
-                #put lat/long back where it belongs, hard coded for last case only
+                #put lat/long back where it belongs
             inputwaypoints[foundmultiples[0]][2] = [inputwaypoints[foundmultiples[0]][2][shortestpossibility]]
         else:
             shortestdistance = float("inf") #establish worst case scenario so anything would be better
