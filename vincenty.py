@@ -12,7 +12,7 @@ def vincenty(latlong1, latlong2):
     
     a = 6378137.0
     b = 6356752.314245
-    f = 1/298.257223563 #WGS-84 ellipsoid parameters for output in meters
+    f = 1/298.257223563 #official WGS-84 ellipsoid parameters for output in meters
     L = math.radians(lon2-lon1)
     U1 = math.atan((1-f)*math.tan(math.radians(lat1)))
     U2 = math.atan((1-f)*math.tan(math.radians(lat2)))

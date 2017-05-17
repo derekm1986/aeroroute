@@ -70,9 +70,12 @@ def tiebreaker(inputwaypoints):
             
     elif len(foundmultiples) > 1 and len(foundmultiples) < len(inputwaypoints): #some waypoints are multiples
         print('some waypoints are multiples')
+        #are they consecutive?
+        #is it only one group?
     
     elif len(foundmultiples) == len(inputwaypoints): #all waypoints have multiples
         print('all waypoints are multiples, good luck')
+        #make some kind of matrix
     
     print(inputwaypoints)
 

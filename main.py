@@ -57,6 +57,10 @@ while True:
     
     notfoundflag = False
     
+    previousitemname = None #this is used below to detect a double input
+    
+    doubleinputflag = False
+    
     for item in inputstring:
         
         if "/" in item: #manual input detected
@@ -84,12 +88,21 @@ while True:
             print(item, "not found")
             notfoundflag = True
       
+        if previousitemname == itemname and notfoundflag == False: #double input detection
+            print('Double input found with name', itemname, '- unable to compute.')
+            doubleinputflag = True
+            
         if notfoundflag == False:
             combinerlist = []
             combinerlist.append([itemname, typeelement, coordinates])
             inputwaypoints.append(combinerlist[0])
-
+        
+        previousitemname = itemname #for double input detection
+            
     if notfoundflag == True:
+        continue
+        
+    if doubleinputflag == True:
         continue
             
     if len(inputwaypoints) == 1:
@@ -98,7 +111,7 @@ while True:
     
     #detection of multiples happens here
     for waypoints in inputwaypoints:
-        if len(waypoints[2]) > 1: #only one lat/long possibility was found
+        if len(waypoints[2]) > 1: #more than one lat/long possibility was found
             inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because a multiple was found    
 
     for waypoints in inputwaypoints:
