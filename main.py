@@ -89,7 +89,7 @@ while True:
             notfoundflag = True
       
         if previousitemname == itemname and notfoundflag == False: #double input detection
-            print('Double input found with name', itemname, '- unable to compute.')
+            print('Multiple adjacent input found with name', itemname, '- unable to compute.')
             doubleinputflag = True
             
         if notfoundflag == False:

@@ -20,6 +20,47 @@ def tiebreaker(inputwaypoints):
     
     print('Found multiples at position(s):',foundmultiples)
     
+
+############################################################################
+
+    multiplesmatrix = []
+    
+    lastwaypoint = -9999 #have to fill it with something
+     
+    #this groups multiples together if they are sequential
+    for waypoint in foundmultiples:
+        #detect if waypoints are next to each other
+        
+        if waypoint == lastwaypoint + 1:
+            #waypoint is sequential to waypoint before it         
+            
+            #add to previous list item
+#           combinerlist = []
+#           combinerlist.append([waypoint, typeelement, coordinates])
+            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint) #this needs to be changed to group with previous
+        
+        else:
+            #waypoint stands alone
+            multiplesmatrix.append([waypoint])
+        
+        lastwaypoint = waypoint
+        
+        
+#        if waypoint == 0:
+#            print('waypoint was at the beginning')
+#            matrixflag = 'beginning'
+#            #do something to show it was at the beginning
+#            
+#       if waypoint == len(inputwaypoints) - 1:
+#            print('waypoint was at the end')
+#            matrixflag = 'end'
+#            #do something to show it was at the end
+
+    print('multiplesmatrix contents', multiplesmatrix) #for debug
+            
+        
+    #######################################################################################
+    
     #how many waypoints with multiples?
     print("Number of total waypoints with multiples:",len(foundmultiples))
     
