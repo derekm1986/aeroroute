@@ -13,15 +13,10 @@ def tiebreaker(inputwaypoints):
     
     foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1] #finding positions of multiples
     
-    #newfoundmultiples = #make better foundmultiples here, list of lists of adjacent multiples
-    #for waypoint in inputwaypoints:
-        #if len(waypoint[2]) > 1:
-            #print('Found a multiple at position')
-    
-    print('Found multiples at position(s):',foundmultiples)
+#    print('Found multiples at position(s):',foundmultiples)
     
         #how many waypoints with multiples?
-    print("Number of total waypoints with multiples:",len(foundmultiples))
+#    print("Number of total waypoints with multiples:",len(foundmultiples))
 
 ############################################################################
 
@@ -62,61 +57,65 @@ def tiebreaker(inputwaypoints):
             
         
     #######################################################################################
-
     
-    if len(foundmultiples) == 1: #this will only work if one multiple is found
-        print('Only one multiple found, using adjacent waypoint(s)')
-        if foundmultiples[0] == 0:
-            print('One multiple was found at the beginning!')
-            shortestdistance = float("inf") #establish worst case scenario so anything would be better
-            possibility = 0
-            for iter in inputwaypoints[0][2]:
-                tryset = [[inputwaypoints[0][2][possibility], inputwaypoints[1][2][0]]]
-                trydistance = vincenty.vincenty(inputwaypoints[0][2][possibility], inputwaypoints[1][2][0])
-                if trydistance < shortestdistance:
-                    shortestdistance = trydistance
-                    shortestpossibility = possibility
-                    shortestset = tryset                    
-                possibility += 1
-                #put lat/long back where it belongs, hard coded for first case only
-            inputwaypoints[0][2] = [inputwaypoints[0][2][shortestpossibility]]
-        elif foundmultiples[0] == len(inputwaypoints) - 1:
-            print('One multiple was found at the end!')
-            shortestdistance = float("inf") #establish worst case scenario so anything would be better
-            possibility = 0
-            for iter in inputwaypoints[foundmultiples[0]][2]:
-                tryset = [[inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility]]]
-                trydistance = vincenty.vincenty(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility])
-                if trydistance < shortestdistance:
-                    shortestdistance = trydistance
-                    shortestpossibility = possibility
-                    shortestset = tryset
-                possibility += 1
-                #put lat/long back where it belongs
-            inputwaypoints[foundmultiples[0]][2] = [inputwaypoints[foundmultiples[0]][2][shortestpossibility]]
-        else:
-            shortestdistance = float("inf") #establish worst case scenario so anything would be better
-            possibility = 0
-            print('Single multiple found in middle of route')
-            for iter in inputwaypoints[foundmultiples[0]][2]:
-                tryset = [[inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility], inputwaypoints[foundmultiples[0]+1][2][0]]]
-                trydistance = vincenty.vincenty(inputwaypoints[foundmultiples[0]-1][2][0], inputwaypoints[foundmultiples[0]][2][possibility]) + vincenty.vincenty(inputwaypoints[foundmultiples[0]][2][possibility], inputwaypoints[foundmultiples[0]+1][2][0])
-                if trydistance < shortestdistance:
-                    shortestdistance = trydistance
-                    shortestpossibility = possibility
-                    shortestset = tryset
-                possibility += 1
-                #put lat/long back where it belongs
-            inputwaypoints[foundmultiples[0]][2] = [inputwaypoints[foundmultiples[0]][2][shortestpossibility]]
+    for multipleset in multiplesmatrix:
+        print(multipleset)
+    
+    #########################################################################################
+    
+        if len(multipleset) == 1: #this will only work if one multiple is found
+            print('Only one multiple found, using adjacent waypoint(s)')
+            if multipleset[0] == 0:
+                print('Single multiple was found at the beginning!')
+                shortestdistance = float("inf") #establish worst case scenario so anything would be better
+                possibility = 0
+                for iter in inputwaypoints[0][2]:
+                    tryset = [[inputwaypoints[0][2][possibility], inputwaypoints[1][2][0]]]
+                    trydistance = vincenty.vincenty(inputwaypoints[0][2][possibility], inputwaypoints[1][2][0])
+                    if trydistance < shortestdistance:
+                        shortestdistance = trydistance
+                        shortestpossibility = possibility
+                        shortestset = tryset                    
+                    possibility += 1
+                    #put lat/long back where it belongs, hard coded for first case only
+                inputwaypoints[0][2] = [inputwaypoints[0][2][shortestpossibility]]
+            elif multipleset[0] == len(inputwaypoints) - 1:
+                print('Single multiple was found at the end!')
+                shortestdistance = float("inf") #establish worst case scenario so anything would be better
+                possibility = 0
+                for iter in inputwaypoints[multipleset[0]][2]:
+                    tryset = [[inputwaypoints[multipleset[0]-1][2][0], inputwaypoints[multipleset[0]][2][possibility]]]
+                    trydistance = vincenty.vincenty(inputwaypoints[multipleset[0]-1][2][0], inputwaypoints[multipleset[0]][2][possibility])
+                    if trydistance < shortestdistance:
+                        shortestdistance = trydistance
+                        shortestpossibility = possibility
+                        shortestset = tryset
+                    possibility += 1
+                    #put lat/long back where it belongs
+                inputwaypoints[multipleset[0]][2] = [inputwaypoints[multipleset[0]][2][shortestpossibility]]
+            else:
+                print('Single multiple found in middle of route')
+                shortestdistance = float("inf") #establish worst case scenario so anything would be better
+                possibility = 0
+                for iter in inputwaypoints[multipleset[0]][2]:
+                    tryset = [[inputwaypoints[multipleset[0]-1][2][0], inputwaypoints[multipleset[0]][2][possibility], inputwaypoints[multipleset[0]+1][2][0]]]
+                    trydistance = vincenty.vincenty(inputwaypoints[multipleset[0]-1][2][0], inputwaypoints[multipleset[0]][2][possibility]) + vincenty.vincenty(inputwaypoints[multipleset[0]][2][possibility], inputwaypoints[multipleset[0]+1][2][0])
+                    if trydistance < shortestdistance:
+                        shortestdistance = trydistance
+                        shortestpossibility = possibility
+                        shortestset = tryset
+                    possibility += 1
+                    #put lat/long back where it belongs
+                inputwaypoints[multipleset[0]][2] = [inputwaypoints[multipleset[0]][2][shortestpossibility]]
             
-    elif len(foundmultiples) > 1 and len(foundmultiples) < len(inputwaypoints): #some waypoints are multiples
-        print('some waypoints are multiples')
-        #are they consecutive?
-        #is it only one group?
+#    elif len(foundmultiples) > 1 and len(foundmultiples) < len(inputwaypoints): #some waypoints are multiples
+#        print('some waypoints are multiples')
+#        #are they consecutive?
+#        #is it only one group?
     
-    elif len(foundmultiples) == len(inputwaypoints): #all waypoints have multiples
-        print('all waypoints are multiples, good luck')
-        #make some kind of matrix
+#    elif len(foundmultiples) == len(inputwaypoints): #all waypoints have multiples
+#        print('all waypoints are multiples, good luck')
+#        #make some kind of matrix
     
     print(inputwaypoints)
 
