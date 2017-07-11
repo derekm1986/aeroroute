@@ -117,7 +117,7 @@ def tiebreaker(inputwaypoints):
 #        print('all waypoints are multiples, good luck')
 #        #make some kind of matrix
     
-    print(inputwaypoints)
+#    print(inputwaypoints)
 
     
 #    possibilitymatrix = []  #fill with possiblities to try in waypointnumber, latlongnumber format

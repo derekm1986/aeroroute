@@ -112,7 +112,8 @@ while True:
     #detection of multiples happens here
     for waypoints in inputwaypoints:
         if len(waypoints[2]) > 1: #more than one lat/long possibility was found
-            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because a multiple was found    
+            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because a multiple was found
+            break #otherwise this could trigger multiple times    
 
     for waypoints in inputwaypoints:
         waypoints[2] = waypoints[2][0] #turn list of one lat/long into tuple
