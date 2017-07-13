@@ -6,67 +6,40 @@ import pairmaker
 
 def tiebreaker(inputwaypoints):
 
-    
-    #shortestdistanceset = #combination of waypoints with shortest distance 
-    
     #print(inputwaypoints)
     
     foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1] #finding positions of multiples
     
-#    print('Found multiples at position(s):',foundmultiples)
-    
-        #how many waypoints with multiples?
-#    print("Number of total waypoints with multiples:",len(foundmultiples))
-
-############################################################################
-
     multiplesmatrix = []
     
     lastwaypoint = -9999 #have to fill it with something
      
     #this groups multiples together if they are sequential
-    for waypoint in foundmultiples:
-        #detect if waypoints are next to each other
-        
-        if waypoint == lastwaypoint + 1:
-            #waypoint is sequential to waypoint before it         
-            
-            #add to previous list item
-#           combinerlist = []
-#           combinerlist.append([waypoint, typeelement, coordinates])
+    for waypoint in foundmultiples: #detect if waypoints are next to each other
+        if waypoint == lastwaypoint + 1: #waypoint is sequential to waypoint before it         
             multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint) #group with previous
-        
-        else:
-            #waypoint stands alone
+        else: #waypoint stands alone
             multiplesmatrix.append([waypoint])
-        
         lastwaypoint = waypoint
         
-        
-#        if waypoint == 0:
+#       if waypoint == 0:
 #            print('waypoint was at the beginning')
 #            matrixflag = 'beginning'
 #            #do something to show it was at the beginning
-#            
+            
 #       if waypoint == len(inputwaypoints) - 1:
 #            print('waypoint was at the end')
 #            matrixflag = 'end'
 #            #do something to show it was at the end
 
     print('multiplesmatrix contents:', multiplesmatrix) #for debug
-            
-        
-    #######################################################################################
-    
+               
     for multipleset in multiplesmatrix:
-        print(multipleset)
-    
-    #########################################################################################
-    
-        if len(multipleset) == 1: #this will only work if one multiple is found
+        #print(multipleset) #for debug
+        if len(multipleset) == 1: #one multiple is found standing by itself
             print('Only one multiple found, using adjacent waypoint(s)')
             if multipleset[0] == 0:
-                print('Single multiple was found at the beginning!')
+                print('Single multiple was found at the beginning')
                 shortestdistance = float("inf") #establish worst case scenario so anything would be better
                 possibility = 0
                 for iter in inputwaypoints[0][2]:
@@ -77,10 +50,10 @@ def tiebreaker(inputwaypoints):
                         shortestpossibility = possibility
                         shortestset = tryset                    
                     possibility += 1
-                    #put lat/long back where it belongs, hard coded for first case only
+                    #put lat/long back where it belongs
                 inputwaypoints[0][2] = [inputwaypoints[0][2][shortestpossibility]]
             elif multipleset[0] == len(inputwaypoints) - 1:
-                print('Single multiple was found at the end!')
+                print('Single multiple was found at the end')
                 shortestdistance = float("inf") #establish worst case scenario so anything would be better
                 possibility = 0
                 for iter in inputwaypoints[multipleset[0]][2]:
@@ -107,6 +80,16 @@ def tiebreaker(inputwaypoints):
                     possibility += 1
                     #put lat/long back where it belongs
                 inputwaypoints[multipleset[0]][2] = [inputwaypoints[multipleset[0]][2][shortestpossibility]]
+        elif len(multipleset) > 1: #more than one multiple is inside multipleset
+            print('multiple set with more than one multiple found, no functionality yet')
+            for waypoint in multipleset:
+                print('multipleset contains',waypoint, 'length', len(inputwaypoints[waypoint][2]))
+                for possibility in inputwaypoints[waypoint][2]:
+                    print(possibility)
+            #if contains 0 and len -1, it's the whole thing
+            #elif contains 0, beginning of route so do this
+            #elif contains len - 1, end of route so do this
+            #else its the middle of the route, so do this
             
 #    elif len(foundmultiples) > 1 and len(foundmultiples) < len(inputwaypoints): #some waypoints are multiples
 #        print('some waypoints are multiples')
@@ -115,34 +98,7 @@ def tiebreaker(inputwaypoints):
     
 #    elif len(foundmultiples) == len(inputwaypoints): #all waypoints have multiples
 #        print('all waypoints are multiples, good luck')
-#        #make some kind of matrix
     
-#    print(inputwaypoints)
-
-    
-#    possibilitymatrix = []  #fill with possiblities to try in waypointnumber, latlongnumber format
-    
-    #create consecutive group(s)    
-    #how to figure out how many "groups" of multiples there are - are items in foundmultiples consecutive?
-    #are these waypoints congruous or are there multiple sets?
-    
-#    position = 0
-    
-#    for waypoints in inputwaypoints:
-#        if len(waypoints[2]) > 1: #multiple lat/long tuples were found in the list
-     
-#            print("Multiple items were found with name", waypoints[0], "...need more programming.")
-#            print("Number of", waypoints[0], "lat/long possibilties:", len(waypoints[2]))
-            
-#            possibilitymatrix.append((position,(range(len(waypoints[2]))))) #this doesn't work well
-            
-#            print("Without further programming, first lat/long will be used.") #remove these when you make logic to do something with multiple lat/longs
-            
-#            position = position + 1
-            
-#        else:
-#            position = position + 1
-            
 #    numberofpossibilities = 1        
             
 #    if len(possibilitymatrix) == 0:
@@ -156,7 +112,4 @@ def tiebreaker(inputwaypoints):
 #    print(possibilitymatrix)
 #    print("Number of possibilities:", numberofpossibilities)
 
-
     return inputwaypoints
-
-
