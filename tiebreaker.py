@@ -38,7 +38,7 @@ def tiebreaker(inputwaypoints):
         #print(multipleset) #for debug
         if len(multipleset) == 1: #one multiple is found standing by itself
             print('Only one multiple found, using adjacent waypoint(s)')
-            if multipleset[0] == 0:
+            if 0 in multipleset:
                 print('Single multiple was found at the beginning')
                 shortestdistance = float("inf") #establish worst case scenario so anything would be better
                 possibility = 0
@@ -52,7 +52,7 @@ def tiebreaker(inputwaypoints):
                     possibility += 1
                     #put lat/long back where it belongs
                 inputwaypoints[0][2] = [inputwaypoints[0][2][shortestpossibility]]
-            elif multipleset[0] == len(inputwaypoints) - 1:
+            elif len(inputwaypoints) - 1 in multipleset:
                 print('Single multiple was found at the end')
                 shortestdistance = float("inf") #establish worst case scenario so anything would be better
                 possibility = 0
@@ -81,6 +81,14 @@ def tiebreaker(inputwaypoints):
                     #put lat/long back where it belongs
                 inputwaypoints[multipleset[0]][2] = [inputwaypoints[multipleset[0]][2][shortestpossibility]]
         elif len(multipleset) > 1: #more than one multiple is inside multipleset
+            if 0 in multipleset and len(inputwaypoints) - 1 in multipleset: #all are multiples
+                print('all are multiples')
+            elif 0 in multipleset: #starts at beginning
+                print('starts at beginning')
+            elif len(inputwaypoints) - 1 in multipleset: #ends at end
+                print('ends at end')
+            else: #in middle
+                print('in middle')
             print('multiple set with more than one multiple found, no functionality yet')
             for waypoint in multipleset:
                 print('multipleset contains',waypoint, 'length', len(inputwaypoints[waypoint][2]))
