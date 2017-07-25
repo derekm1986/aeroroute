@@ -109,10 +109,10 @@ while True:
         print('Single item detected, printing entry:',inputwaypoints[0])
         continue
     
-    #detection of multiples happens here
+    #detection of ambiguous elements happens here
     for waypoints in inputwaypoints:
         if len(waypoints[2]) > 1: #more than one lat/long possibility was found
-            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because a multiple was found
+            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because an ambiguous element was found
             break #otherwise this could trigger multiple times    
 
     for waypoints in inputwaypoints:

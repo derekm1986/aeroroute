@@ -8,13 +8,13 @@ def tiebreaker(inputwaypoints):
 
     #print(inputwaypoints)
     
-    foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1] #finding positions of multiples
+    foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1] #finding positions of ambiguous waypoints
     
     multiplesmatrix = []
     
     lastwaypoint = -9999 #have to fill it with something
      
-    #this groups multiples together if they are sequential
+    #this groups ambiguous waypoints together if they are sequential
     for waypoint in foundmultiples: #detect if waypoints are next to each other
         if waypoint == lastwaypoint + 1: #waypoint is sequential to waypoint before it         
             multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint) #group with previous
@@ -81,6 +81,7 @@ def tiebreaker(inputwaypoints):
                     #put lat/long back where it belongs
                 inputwaypoints[multipleset[0]][2] = [inputwaypoints[multipleset[0]][2][shortestpossibility]]
         elif len(multipleset) > 1: #more than one multiple is inside multipleset
+            print('multiple set with more than one multiple found, no functionality yet')
             if 0 in multipleset and len(inputwaypoints) - 1 in multipleset: #all are multiples
                 print('all are multiples')
             elif 0 in multipleset: #starts at beginning
@@ -89,11 +90,12 @@ def tiebreaker(inputwaypoints):
                 print('ends at end')
             else: #in middle
                 print('in middle')
-            print('multiple set with more than one multiple found, no functionality yet')
+
             for waypoint in multipleset:
                 print('multipleset contains',waypoint, 'length', len(inputwaypoints[waypoint][2]))
                 for possibility in inputwaypoints[waypoint][2]:
                     print(possibility)
+                    
             #if contains 0 and len -1, it's the whole thing
             #elif contains 0, beginning of route so do this
             #elif contains len - 1, end of route so do this
