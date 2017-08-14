@@ -66,6 +66,7 @@ while True:
         if "/" in item: #manual input detected
             itemname = 'WAYPOINT'+str(manualwaypointnumber)
             coordinates = [tuple(item.split('/'))]
+            #assert that it's valid
             typeelement = "manual waypoint"
             manualwaypointnumber += 1
         
@@ -126,6 +127,6 @@ while True:
     
     for pairs in waypointpairs: #find distance of each waypointpair and sum together
         pairdistance = vincenty.vincenty(*pairs)
-        sumdistance = sumdistance + pairdistance
+        sumdistance += pairdistance
 
     print('Distance in nm:',sumdistance)
