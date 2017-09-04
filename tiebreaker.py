@@ -96,18 +96,9 @@ def tiebreaker(inputwaypoints):
                 for possibility in inputwaypoints[waypoint][2]:
                     print(possibility)
                     
-            #if contains 0 and len -1, it's the whole thing
-            #elif contains 0, beginning of route so do this
-            #elif contains len - 1, end of route so do this
-            #else its the middle of the route, so do this
+
             
-#    elif len(foundmultiples) > 1 and len(foundmultiples) < len(inputwaypoints): #some waypoints are multiples
-#        print('some waypoints are multiples')
-#        #are they consecutive?
-#        #is it only one group?
-    
-#    elif len(foundmultiples) == len(inputwaypoints): #all waypoints have multiples
-#        print('all waypoints are multiples, good luck')
+
     
 #    numberofpossibilities = 1        
             
