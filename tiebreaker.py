@@ -74,12 +74,20 @@ def tiebreaker(inputwaypoints):
             print('multiple set with more than one multiple found, no functionality yet')
             if 0 in multipleset and len(inputwaypoints) - 1 in multipleset: #all are multiples
                 print('all are multiples')
-            elif 0 in multipleset: #starts at beginning
+                #for possibility in multipleset:
+            elif 0 in multipleset: #starts at beginning of route
                 print('starts at beginning')
-            elif len(inputwaypoints) - 1 in multipleset: #ends at end
+                #for possibility in multipleset:
+                #use end + 1 append to all
+            elif len(inputwaypoints) - 1 in multipleset: #ends at end of route
                 print('ends at end')
-            else: #in middle
+                #use beginning - 1
+                #for possibility in multipleset:
+            else: #in middle of route
                 print('in middle')
+                #use beginning - 1
+                #for possibility in mutlipleset:
+                #use end + 1 append to all
 
             for waypoint in multipleset:
                 print('multipleset contains',waypoint, 'length', len(inputwaypoints[waypoint][2]))
