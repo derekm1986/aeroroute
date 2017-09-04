@@ -22,16 +22,6 @@ def tiebreaker(inputwaypoints):
             multiplesmatrix.append([waypoint])
         lastwaypoint = waypoint
         
-#       if waypoint == 0:
-#            print('waypoint was at the beginning')
-#            matrixflag = 'beginning'
-#            #do something to show it was at the beginning
-            
-#       if waypoint == len(inputwaypoints) - 1:
-#            print('waypoint was at the end')
-#            matrixflag = 'end'
-#            #do something to show it was at the end
-
     print('multiplesmatrix contents:', multiplesmatrix) #for debug
                
     for multipleset in multiplesmatrix:
