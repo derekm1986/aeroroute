@@ -83,9 +83,28 @@ def tiebreaker(inputwaypoints):
                 #use end + 1 append to all
             elif len(inputwaypoints) - 1 in multipleset: #ends at end of route
                 print('ends at end')
-                possibilitytree = []
                 #use beginning - 1
+                possibilitytree = [inputwaypoints[multipleset[0]-1][2][0]]
+                
+                iterator = 0
+
+                for possibility in multipleset:
+                    
+                    position = 0
+
+                    possibilitytree.append(possibilitytree[0])
+
+                    for latlong in inputwaypoints[possibility][2]:
+
+                        possibilitytree.append(inputwaypoints[possibility][2][position])
+                    
+                        position += 1
+
+                    iterator += 1
+
                 #for possibility in multipleset:
+                    #copy and extend/append to possibilitytree
+                print(possibilitytree)            
             else: #in middle of route
                 print('in middle')
                 possibilitytree = []
