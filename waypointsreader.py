@@ -7,11 +7,11 @@ def waypointdictmaker():
 
     global waypointdict
 
-    waypointdict = {} # make an empty dictionary
+    waypointdict = {}  # make an empty dictionary
 
     for line in waypoint_file:
         waypointid, waypointlat, waypointlong, waypointregion = line.rstrip().split("|")
-        waypointlatisnegative = False #establish variable
+        waypointlatisnegative = False  # establish variable
             
         if waypointlat.startswith("-"):
             waypointlatisnegative = True
@@ -20,13 +20,13 @@ def waypointdictmaker():
         if len(waypointlat) < 7:
             waypointlat = "0" * (7 - len(waypointlat)) + waypointlat
             
-        waypointlatwithdecimal = waypointlat[:len(waypointlat)-6] + "." + waypointlat[len(waypointlat)-6:] #6 decimal places
+        waypointlatwithdecimal = waypointlat[:len(waypointlat)-6] + "." + waypointlat[len(waypointlat)-6:]  # 6 decimal places
             
-        if waypointlatisnegative == True:
+        if waypointlatisnegative is True:
             waypointlatwithdecimal = "-" + waypointlatwithdecimal
             
             
-        waypointlongisnegative = False #establish variable
+        waypointlongisnegative = False  # establish variable
             
         if waypointlong.startswith("-"):
             waypointlongisnegative = True
@@ -35,9 +35,9 @@ def waypointdictmaker():
         if len(waypointlong) < 7:
             waypointlong = "0" * (7 - len(waypointlong)) + waypointlong
                 
-        waypointlongwithdecimal = waypointlong[:len(waypointlong)-6] + "." + waypointlong[len(waypointlong)-6:] #6 decimal places
+        waypointlongwithdecimal = waypointlong[:len(waypointlong)-6] + "." + waypointlong[len(waypointlong)-6:]  # 6 decimal places
             
-        if waypointlongisnegative == True:
+        if waypointlongisnegative is True:
             waypointlongwithdecimal = "-" + waypointlongwithdecimal
 
         

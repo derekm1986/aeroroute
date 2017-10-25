@@ -1,4 +1,4 @@
-#this file is for when a route item is returned with multiple lat/longs
+# this file is for when a route item is returned with multiple lat/longs
 
 import math
 import vincenty
@@ -8,29 +8,29 @@ def tiebreaker(inputwaypoints):
 
     #print(inputwaypoints)
     
-    foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1] #finding positions of ambiguous waypoints
+    foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1]  # finding positions of ambiguous waypoints
     
     multiplesmatrix = []
     
-    lastwaypoint = -9999 #have to fill it with something
+    lastwaypoint = -9999  # have to fill it with something
      
     #this groups ambiguous waypoints together if they are sequential
-    for waypoint in foundmultiples: #detect if waypoints are next to each other
-        if waypoint == lastwaypoint + 1: #waypoint is sequential to waypoint before it         
-            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint) #group with previous
-        else: #waypoint stands alone
+    for waypoint in foundmultiples:  # detect if waypoints are next to each other
+        if waypoint == lastwaypoint + 1:  # waypoint is sequential to waypoint before it
+            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint)  # group with previous
+        else:  # waypoint stands alone
             multiplesmatrix.append([waypoint])
         lastwaypoint = waypoint
         
-    print('multiplesmatrix contents:', multiplesmatrix) #for debug
+    print('multiplesmatrix contents:', multiplesmatrix)  # for debug
                
     for multipleset in multiplesmatrix:
-        #print(multipleset) #for debug
-        if len(multipleset) == 1: #one multiple is found standing by itself
+        # print(multipleset) #for debug
+        if len(multipleset) == 1:  # one multiple is found standing by itself
             print('Only one multiple found, using adjacent waypoint(s)')
             if 0 in multipleset:
                 print('Single multiple was found at the beginning')
-                shortestdistance = float("inf") #establish worst case scenario so anything would be better
+                shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
                 for iter in inputwaypoints[0][2]:
                     tryset = [[inputwaypoints[0][2][possibility], inputwaypoints[1][2][0]]]
@@ -40,11 +40,11 @@ def tiebreaker(inputwaypoints):
                         shortestpossibility = possibility
                         shortestset = tryset                    
                     possibility += 1
-                    #put lat/long back where it belongs
+                    # put lat/long back where it belongs
                 inputwaypoints[0][2] = [inputwaypoints[0][2][shortestpossibility]]
             elif len(inputwaypoints) - 1 in multipleset:
                 print('Single multiple was found at the end')
-                shortestdistance = float("inf") #establish worst case scenario so anything would be better
+                shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
                 for iter in inputwaypoints[multipleset[0]][2]:
                     tryset = [[inputwaypoints[multipleset[0]-1][2][0], inputwaypoints[multipleset[0]][2][possibility]]]
@@ -54,11 +54,11 @@ def tiebreaker(inputwaypoints):
                         shortestpossibility = possibility
                         shortestset = tryset
                     possibility += 1
-                    #put lat/long back where it belongs
+                    # put lat/long back where it belongs
                 inputwaypoints[multipleset[0]][2] = [inputwaypoints[multipleset[0]][2][shortestpossibility]]
             else:
                 print('Single multiple found in middle of route')
-                shortestdistance = float("inf") #establish worst case scenario so anything would be better
+                shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
                 for iter in inputwaypoints[multipleset[0]][2]:
                     tryset = [[inputwaypoints[multipleset[0]-1][2][0], inputwaypoints[multipleset[0]][2][possibility], inputwaypoints[multipleset[0]+1][2][0]]]
@@ -68,22 +68,22 @@ def tiebreaker(inputwaypoints):
                         shortestpossibility = possibility
                         shortestset = tryset
                     possibility += 1
-                    #put lat/long back where it belongs
+                    # put lat/long back where it belongs
                 inputwaypoints[multipleset[0]][2] = [inputwaypoints[multipleset[0]][2][shortestpossibility]]
-        elif len(multipleset) > 1: #more than one multiple is inside multipleset
+        elif len(multipleset) > 1:  # more than one multiple is inside multipleset
             print('multiple set with more than one multiple found, no functionality yet')
-            if 0 in multipleset and len(inputwaypoints) - 1 in multipleset: #all are multiples
+            if 0 in multipleset and len(inputwaypoints) - 1 in multipleset:  # all are multiples
                 print('all are multiples')
                 possibilitytree = []
-                #for possibility in multipleset:
-            elif 0 in multipleset: #starts at beginning of route
+                # for possibility in multipleset:
+            elif 0 in multipleset:  # starts at beginning of route
                 print('starts at beginning')
                 possibilitytree = []
-                #for possibility in multipleset:
-                #use end + 1 append to all
-            elif len(inputwaypoints) - 1 in multipleset: #ends at end of route
+                # for possibility in multipleset:
+                # use end + 1 append to all
+            elif len(inputwaypoints) - 1 in multipleset:  # ends at end of route
                 print('ends at end')
-                #use beginning - 1
+                # use beginning - 1
                 possibilitytree = [inputwaypoints[multipleset[0]-1][2][0]]
                 
                 iterator = 0
@@ -102,15 +102,15 @@ def tiebreaker(inputwaypoints):
 
                     iterator += 1
 
-                #for possibility in multipleset:
-                    #copy and extend/append to possibilitytree
+                # for possibility in multipleset:
+                    # copy and extend/append to possibilitytree
                 print(possibilitytree)            
-            else: #in middle of route
+            else: # in middle of route
                 print('in middle')
                 possibilitytree = []
-                #use beginning - 1
-                #for possibility in mutlipleset:
-                #use end + 1 append to all
+                # use beginning - 1
+                # for possibility in mutlipleset:
+                # use end + 1 append to all
 
             for waypoint in multipleset:
                 print('multipleset contains',waypoint, 'length', len(inputwaypoints[waypoint][2]))

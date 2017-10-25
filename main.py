@@ -5,23 +5,38 @@ import navaidsreader
 import pairmaker
 import tiebreaker
 
-print('\n***Program loading***','\n')
+
+# class for testing
+
+class Pointinspace(object):
+
+    def __init__(self, identifier, coordinates):
+        self.coordinates = coordinates
+        self.identifiier = identifier
+
+    def getidentifier(self):
+        return self.identifiier
+
+    def getcoordinates(self):
+        return self.coordinates 
+
+print('\n***Program loading***', '\n')
 
 print('Reading AIRAC data...')
 
 print('   Loading airports into memory...', end="")
 airportsreader.airportdictmaker()
-print('OK') #loading airports was successful
+print('OK')  # loading airports was successful
 
 print('   Loading NAVAIDs into memory...', end="")
 navaidsreader.navaiddictmaker()
-print('OK') #loading NAVAIDs was successful
+print('OK')  # loading NAVAIDs was successful
 
 print('   Loading waypoints into memory...', end="")
 waypointsreader.waypointdictmaker()
-print('OK') #loading waypoints was successful
+print('OK')  # loading waypoints was successful
 
-#combining navaiddict and waypointdict dictionaries into one
+# combining navaiddict and waypointdict dictionaries into one
 
 print('   Combining NAVAID and waypoints dictionaries...', end="")
 
@@ -32,13 +47,13 @@ for key, val in waypointsreader.waypointdict.items():
         pointsinspacedict[key] += val
     else:
         pointsinspacedict[key] = val
-print("OK") #dictionary combination was successful
+print("OK")  # dictionary combination was successful
 
 while True:
 
     print('\n')
     
-    #allows user to input waypoint(s)/exit instructions to list
+    # allows user to input waypoint(s)/exit instructions to list
     print('Type "quit" to exit program, enter 20.000000/-123.000000 format for manual LAT/LONG')
     inputstring = input("Enter input string: ")
     inputstring = inputstring.upper().split()
@@ -57,16 +72,16 @@ while True:
     
     notfoundflag = False
     
-    previousitemname = None #this is used below to detect a double input
+    previousitemname = None  # this is used below to detect a double input
     
     doubleinputflag = False
     
     for item in inputstring:
         
-        if "/" in item: #manual input detected
+        if "/" in item:  # manual input detected
             itemname = 'WAYPOINT'+str(manualwaypointnumber)
             coordinates = [tuple(item.split('/'))]
-            #assert that it's valid
+            # assert that it's valid
             typeelement = "manual waypoint"
             manualwaypointnumber += 1
         
@@ -75,10 +90,10 @@ while True:
             coordinates = airportsreader.airportdict[item]
             typeelement = "airport"
     
-        #elif put something here to read airways
-            #typeelement = "airway"
+        # elif put something here to read airways
+            # typeelement = "airway"
         
-        #elif put something here to read SIDs/STARs
+        # elif put something here to read SIDs/STARs
         
         elif item in pointsinspacedict:
             itemname = item
@@ -89,44 +104,45 @@ while True:
             print(item, "not found")
             notfoundflag = True
       
-        if previousitemname == itemname and notfoundflag == False: #double input detection
+        if previousitemname == itemname and notfoundflag is False:  # double input detection
             print('Multiple adjacent input found with name', itemname, '- unable to compute.')
             doubleinputflag = True
             
-        if notfoundflag == False:
+        if notfoundflag is False:
             combinerlist = []
             combinerlist.append([itemname, typeelement, coordinates])
             inputwaypoints.append(combinerlist[0])
         
-        previousitemname = itemname #for double input detection
+        previousitemname = itemname  # for double input detection
             
-    if notfoundflag == True:
+    if notfoundflag is True:
         continue
         
-    if doubleinputflag == True:
+    if doubleinputflag is True:
         continue
             
     if len(inputwaypoints) == 1:
-        print('Single item detected, printing entry:',inputwaypoints[0])
+        print('Single item detected, printing entry:', inputwaypoints[0])
         continue
     
-    #detection of ambiguous elements happens here
+    # detection of ambiguous elements happens here
     for waypoints in inputwaypoints:
-        if len(waypoints[2]) > 1: #more than one lat/long possibility was found
-            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints) #pass inputwaypoints to tiebreaker because an ambiguous element was found
-            break #otherwise this could trigger multiple times    
+        if len(waypoints[2]) > 1:  # more than one lat/long possibility was found
+            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints)  # pass inputwaypoints to tiebreaker because...
+            #  an ambiguous element was found
+            break  # otherwise this could trigger multiple times
 
     for waypoints in inputwaypoints:
-        waypoints[2] = waypoints[2][0] #turn list of one lat/long into tuple
+        waypoints[2] = waypoints[2][0]  # turn list of one lat/long into tuple
     
-    #takes inputted waypoints and turns them into a list of waypoint pairs
+    # takes inputted waypoints and turns them into a list of waypoint pairs
     waypointpairs = pairmaker.pairmaker(inputwaypoints)
 
-    #takes waypoint pairs and uses vincenty() to find the total distance
-    sumdistance = 0.00 #establish sumdistance and put zero in it
+    # takes waypoint pairs and uses vincenty() to find the total distance
+    sumdistance = 0.00  # establish sumdistance and put zero in it
     
-    for pairs in waypointpairs: #find distance of each waypointpair and sum together
+    for pairs in waypointpairs:  # find distance of each waypointpair and sum together
         pairdistance = vincenty.vincenty(*pairs)
         sumdistance += pairdistance
 
-    print('Distance in nm:',sumdistance)
+    print('Distance in nm:', sumdistance)

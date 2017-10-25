@@ -12,7 +12,7 @@ def vincenty(latlong1, latlong2):
     
     a = 6378137.0
     b = 6356752.314245
-    f = 1/298.257223563 #official WGS-84 ellipsoid parameters for output in meters
+    f = 1/298.257223563  # official WGS-84 ellipsoid parameters for output in meters
     L = math.radians(lon2-lon1)
     U1 = math.atan((1-f)*math.tan(math.radians(lat1)))
     U2 = math.atan((1-f)*math.tan(math.radians(lat2)))
@@ -21,9 +21,9 @@ def vincenty(latlong1, latlong2):
     sinU2 = math.sin(U2)
     cosU2 = math.cos(U2)
 
-    lmbda = L #"lambda" is a reserved word in Python
+    lmbda = L  # "lambda" is a reserved word in Python
     iterLimit = 100
-    lmbdaP = 0.0 #jury-rig filling lmbdaP with something first
+    lmbdaP = 0.0  # jury-rig filling lmbdaP with something first
 
     while (abs(lmbda-lmbdaP) > 1e-12 and iterLimit > 0):
         
@@ -33,10 +33,10 @@ def vincenty(latlong1, latlong2):
         cosSigma = (sinU1*sinU2)+(cosU1*cosU2*coslmbda)
         sigma = math.atan2(sinSigma,cosSigma)
         sinAlpha = (cosU1*cosU2*sinlmbda)/sinSigma
-        cosSqAlpha = 1 - (sinAlpha**2) #this will equal zero if two points are along the equator
+        cosSqAlpha = 1 - (sinAlpha**2)  # this will equal zero if two points are along the equator
         
         if cosSqAlpha == 0: 
-            cos2SigmaM = 0 #to protect from division error due to cosSqAlpha=0, also C will equal zero below
+            cos2SigmaM = 0  # to protect from division error due to cosSqAlpha=0, also C will equal zero below
         else:            
             cos2SigmaM = cosSigma - ((2*sinU1*sinU2)/cosSqAlpha)
         
@@ -47,7 +47,7 @@ def vincenty(latlong1, latlong2):
         iterLimit -= 1
         
         if iterLimit == 0:
-            return float("NaN")  #formula failed to converge
+            return float("NaN")  # formula failed to converge
 
     uSq = cosSqAlpha * (a**2 - b**2) / (b**2)
     A = 1 + uSq/16384*(4096+uSq*(-768+uSq*(320-175*uSq)))
@@ -55,17 +55,17 @@ def vincenty(latlong1, latlong2):
     deltaSigma = B*sinSigma*(cos2SigmaM+B/4*(cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)-B/6*cos2SigmaM*(-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)))
     s = b*A*(sigma-deltaSigma)
 
-    #s = round(s,3) #round to 1mm precision - Vincenty's formulae are only accurate to within .5mm
+    # s = round(s,3) #round to 1mm precision - Vincenty's formulae are only accurate to within .5mm
 
     #        to return initial/final bearings in addition to distance, use something like:
     #        fwdAz = math.atan2(cosU2*sinlmbda,  cosU1*sinU2-sinU1*cosU2*coslmbda);
     #        revAz = math.atan2(cosU1*sinlmbda, -sinU1*cosU2+cosU1*sinU2*coslmbda);
 
-    #return { distance:
+    # return { distance:
     #         s, initialBearing:
     #       fwdAz.toDeg(), finalBearing:
     #                 revAz.toDeg()
     #               };
     
-    distanceinNM = s/1852.0 #s is output in meters, converting to nautical miles -> 1852 meters in a nautical mile (official and exact)
+    distanceinNM = s/1852.0  # s is output in meters, converting to nautical miles -> 1852 meters in a nautical mile (official and exact)
     return distanceinNM
