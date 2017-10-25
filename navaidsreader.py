@@ -1,6 +1,7 @@
 # This file parses the vasFMC format Navaids.txt file
 # Navaids.txt file must be in same directory
 
+
 def navaiddictmaker():
 
     navaid_file = open("Navaids.txt")

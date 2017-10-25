@@ -1,5 +1,6 @@
 # takes inputted waypoints and turns them into a list of waypoint pairs
 
+
 def pairmaker(inputwaypoints):
 
     waypointpairs = []

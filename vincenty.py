@@ -1,7 +1,8 @@
 import math
 
+
 def vincenty(latlong1, latlong2):
-    
+
     lat1 = float(latlong1[0])
     lon1 = float(latlong1[1])
     lat2 = float(latlong2[0])
@@ -31,7 +32,7 @@ def vincenty(latlong1, latlong2):
         coslmbda = math.cos(lmbda)
         sinSigma = math.sqrt(((cosU2*sinlmbda)**2)+(((cosU1*sinU2)-(sinU1*cosU2*coslmbda))**2))
         cosSigma = (sinU1*sinU2)+(cosU1*cosU2*coslmbda)
-        sigma = math.atan2(sinSigma,cosSigma)
+        sigma = math.atan2(sinSigma, cosSigma)
         sinAlpha = (cosU1*cosU2*sinlmbda)/sinSigma
         cosSqAlpha = 1 - (sinAlpha**2)  # this will equal zero if two points are along the equator
         

@@ -3,6 +3,7 @@
 
 # This file does not attempt to read runway data
 
+
 def airportdictmaker():
 
     airport_file = open("Airports.txt")

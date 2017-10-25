@@ -4,6 +4,7 @@ import math
 import vincenty
 import pairmaker
 
+
 def tiebreaker(inputwaypoints):
 
     #print(inputwaypoints)

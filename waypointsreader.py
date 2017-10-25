@@ -1,6 +1,7 @@
 # This file parses the vasFMC format Waypoints.txt file
 # Waypoints.txt file must be in same directory
 
+
 def waypointdictmaker():
 
     waypoint_file = open("Waypoints.txt")
