@@ -20,6 +20,9 @@ class Pointinspace(object):
     def getcoordinates(self):
         return self.coordinates 
 
+
+# make __iter__ for ambiguouselement class
+
 print('\n***Program loading***', '\n')
 
 print('Reading AIRAC data...')
