@@ -1,14 +1,20 @@
 # This file parses the vasFMC format Navaids.txt file
 # Navaids.txt file must be in same directory
 
+from objects import Pointinspace
+
 
 def navaiddictmaker():
+
+#    from main import Pointinspace   this causes main loop to run twice
 
     navaid_file = open("Navaids.txt")
 
     global navaiddict
+    global navaiddictobj  #for testing
 
     navaiddict = {}  # make an empty dictionary
+    navaiddictobj = {}  #for testing
 
     for line in navaid_file:
         navaidid, navaidname, navaidfrequency, navaidunknown1, navaidunknown2, navaidunknown3, navaidlat, navaidlong, navaidelevation, navaidregion = line.rstrip().split("|")
@@ -43,6 +49,15 @@ def navaiddictmaker():
             navaidlongwithdecimal = "-" + navaidlongwithdecimal
 
 
-        navaiddict.setdefault(navaidid, []).append((navaidlatwithdecimal, navaidlongwithdecimal))
+        navaiddict.setdefault(navaidid,[]).append((navaidlatwithdecimal, navaidlongwithdecimal))
+
+        if navaidid not in navaiddictobj:
+            navaiddictobj[navaidid] = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))
+        else:
+            continue #make an ambiguous element
+
+#        navaiddictobj.setdefault(navaidid, [Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))])
+
+#        navaiddictobj.setdefault(navaidid,[]).append(Pointinspace(navaidid,(navaidlatwithdecimal, navaidlongwithdecimal)))  #for testing
 
     navaid_file.close()

@@ -5,22 +5,6 @@ import navaidsreader
 import pairmaker
 import tiebreaker
 
-
-# class for testing
-
-class Pointinspace(object):
-
-    def __init__(self, identifier, coordinates):
-        self.coordinates = coordinates
-        self.identifiier = identifier
-
-    def getidentifier(self):
-        return self.identifiier
-
-    def getcoordinates(self):
-        return self.coordinates 
-
-
 # make __iter__ for ambiguouselement class
 
 print('\n***Program loading***', '\n')
@@ -51,6 +35,20 @@ for key, val in waypointsreader.waypointdict.items():
     else:
         pointsinspacedict[key] = val
 print("OK")  # dictionary combination was successful
+
+#######for testing below
+
+#print(navaidsreader.navaiddictobj)
+
+testobj = navaidsreader.navaiddictobj['CAM']
+#print(type(testobj))
+#print(dir(testobj))
+
+testobjcoord = testobj.getcoordinates()
+print(testobjcoord)
+
+###########################
+
 
 while True:
 
@@ -105,6 +103,7 @@ while True:
     
         else:                                
             print(item, "not found")
+            itemname = item # needed for double input detection later
             notfoundflag = True
       
         if previousitemname == itemname and notfoundflag is False:  # double input detection
