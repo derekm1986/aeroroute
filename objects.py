@@ -1,5 +1,3 @@
-print('this should not execute')
-
 class Pointinspace(object):
 
     def __init__(self, identifier, coordinates):
@@ -12,8 +10,6 @@ class Pointinspace(object):
     def getcoordinates(self):
         return self.coordinates
 
-
-print('this should not execute either')  #for testing
 
 class Ambiguouselement(object):
 
