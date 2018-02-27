@@ -13,9 +13,7 @@ class Pointinspace(object):
 
 class Ambiguouselement(object):
 
-    def __init__(self, identifier, possibilities=None):
-        if possibilities is None:
-            possibilities = []
+    def __init__(self, identifier, possibilities=[]):
         self.identifier = identifier
         self.possibilities = possibilities
 

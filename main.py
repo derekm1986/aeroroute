@@ -40,12 +40,22 @@ print("OK")  # dictionary combination was successful
 
 #print(navaidsreader.navaiddictobj)
 
-testobj = navaidsreader.navaiddictobj['BOS']
-#print(type(testobj))
-#print(dir(testobj))
+testobj = navaidsreader.navaiddictobj['CAM']
+print(type(testobj))
 
-testobjcoord = testobj.getcoordinates()
-print(testobjcoord)
+posstest = testobj.getpossibilities()
+
+for element in posstest:
+        print(element.getidentifier(), element.getcoordinates())
+
+
+#print(type(testobjcoord))
+#print(len(testobjcoord))
+#for possibility in testobjcoord:
+#        print(possibility.getcoordinates())
+#print(testobjcoord)
+
+#print(navaidsreader.navaiddict['CAM'])
 
 ###########################
 

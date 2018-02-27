@@ -56,13 +56,16 @@ def navaiddictmaker():
 
         if navaidid not in navaiddictobj:
             navaiddictobj[navaidid] = navaidobj
-        elif type(navaiddictobj[navaidid]) is not Ambiguouselement:
-            navaiddictobj[navaidid] = Ambiguouselement(navaiddictobj[navaidid])#make an ambiguous element
-            navaiddictobj[navaidid].addpossibility(navaidobj)
-        else:
-            #just add to an ambiguouselement that's already there
-            #navaiddictobj[navaidid].addpossibility(navaidobj)
-            continue
+        else: # it's already here
+            if type(navaiddictobj[navaidid]) is not Ambiguouselement:
+                #print('theres one thing already here', navaidid)
+                navaiddictobj[navaidid] = Ambiguouselement(navaiddictobj[navaidid])  # make an ambiguous element
+                navaiddictobj[navaidid].addpossibility(navaidobj)  # add the next possibility
+            else:
+                # just add to an ambiguouselement that's already there
+                #print('ambiguouselement already here', navaidid)
+                navaiddictobj[navaidid].addpossibility(navaidobj)
+
 
 
 #        navaiddictobj.setdefault(navaidid, [Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))])
