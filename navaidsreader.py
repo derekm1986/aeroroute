@@ -2,6 +2,7 @@
 # Navaids.txt file must be in same directory
 
 from objects import Pointinspace
+from objects import Ambiguouselement
 
 
 def navaiddictmaker():
@@ -51,10 +52,18 @@ def navaiddictmaker():
 
         navaiddict.setdefault(navaidid,[]).append((navaidlatwithdecimal, navaidlongwithdecimal))
 
+        navaidobj = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))
+
         if navaidid not in navaiddictobj:
-            navaiddictobj[navaidid] = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))
+            navaiddictobj[navaidid] = navaidobj
+        elif type(navaiddictobj[navaidid]) is not Ambiguouselement:
+            navaiddictobj[navaidid] = Ambiguouselement(navaiddictobj[navaidid])#make an ambiguous element
+            navaiddictobj[navaidid].addpossibility(navaidobj)
         else:
-            continue #make an ambiguous element
+            #just add to an ambiguouselement that's already there
+            #navaiddictobj[navaidid].addpossibility(navaidobj)
+            continue
+
 
 #        navaiddictobj.setdefault(navaidid, [Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))])
 

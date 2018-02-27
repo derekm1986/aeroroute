@@ -40,7 +40,7 @@ print("OK")  # dictionary combination was successful
 
 #print(navaidsreader.navaiddictobj)
 
-testobj = navaidsreader.navaiddictobj['CAM']
+testobj = navaidsreader.navaiddictobj['BOS']
 #print(type(testobj))
 #print(dir(testobj))
 
