@@ -55,41 +55,15 @@ def navaiddictmaker():
 
         navaidobj = Navaid(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))
 
-        if navaidid in navaiddictobj: #just the keys and exact?
-  #cam
-  #           print(navaidid,'already in dictionary')
+        if navaidid in navaiddictobj:
             if type(navaiddictobj[navaidid]) is Ambiguouselement:
                 navaiddictobj[navaidid].addpossibility(navaidobj)
- #               print('Ambiguouselement found',navaidid)
-#                print(navaiddictobj[navaidid].getpossibilities())
             else:
-                #############
-                navaiddictobj[navaidid] = Ambiguouselement(navaidid, navaiddictobj[navaidid])  # make an ambiguous element
-                navaiddictobj[navaidid].addpossibility(navaidobj)  # add the next possibility
-
-                #print('Navaid found',navaidid)
+                navaiddictobj[navaidid] = Ambiguouselement(navaidid, navaiddictobj[navaidid])
+                navaiddictobj[navaidid].addpossibility(navaidobj)
         else:
             navaiddictobj[navaidid] = navaidobj
-            #print(navaidid,'not already in dictionary')
 
 
-
-        #if navaidid not in navaiddictobj:
-        #    navaiddictobj[navaidid] = navaidobj
-        #else: # it's already here
-        #    if type(navaiddictobj[navaidid]) is not Ambiguouselement:
-        #        #print('theres one thing already here', navaidid)
-        #        navaiddictobj[navaidid] = Ambiguouselement(navaiddictobj[navaidid])  # make an ambiguous element
-        #        navaiddictobj[navaidid].addpossibility(navaidobj)  # add the next possibility
-        #    else:
-        #       # just add to an ambiguouselement that's already there
-        #        #print('ambiguouselement already here', navaidid)
-        #        navaiddictobj[navaidid].addpossibility(navaidobj)
-
-
-
-#        navaiddictobj.setdefault(navaidid, [Navaid(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))])
-
-#        navaiddictobj.setdefault(navaidid,[]).append(Navaid(navaidid,(navaidlatwithdecimal, navaidlongwithdecimal)))  #for testing
 
     navaid_file.close()
