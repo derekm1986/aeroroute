@@ -54,17 +54,40 @@ def navaiddictmaker():
 
         navaidobj = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))
 
-        if navaidid not in navaiddictobj:
-            navaiddictobj[navaidid] = navaidobj
-        else: # it's already here
-            if type(navaiddictobj[navaidid]) is not Ambiguouselement:
-                #print('theres one thing already here', navaidid)
-                navaiddictobj[navaidid] = Ambiguouselement(navaiddictobj[navaidid])  # make an ambiguous element
+        if navaidid in navaiddictobj: #just the keys and exact?
+  #cam
+  #           print(navaidid,'already in dictionary')
+            if type(navaiddictobj[navaidid]) is Ambiguouselement:
+                navaiddictobj[navaidid].addpossibility(navaidobj)
+ #               print('Ambiguouselement found',navaidid)
+#                print(navaiddictobj[navaidid].getpossibilities())
+            elif type(navaiddictobj[navaidid]) is Pointinspace:
+                #############
+                navaiddictobj[navaidid] = Ambiguouselement(navaidid, navaiddictobj[navaidid])  # make an ambiguous element
                 navaiddictobj[navaidid].addpossibility(navaidobj)  # add the next possibility
+
+                #print('Pointinspace found',navaidid)
             else:
+                print('something strange happened in this loop')
                 # just add to an ambiguouselement that's already there
                 #print('ambiguouselement already here', navaidid)
-                navaiddictobj[navaidid].addpossibility(navaidobj)
+        else:
+            navaiddictobj[navaidid] = navaidobj
+            #print(navaidid,'not already in dictionary')
+
+
+
+        #if navaidid not in navaiddictobj:
+        #    navaiddictobj[navaidid] = navaidobj
+        #else: # it's already here
+        #    if type(navaiddictobj[navaidid]) is not Ambiguouselement:
+        #        #print('theres one thing already here', navaidid)
+        #        navaiddictobj[navaidid] = Ambiguouselement(navaiddictobj[navaidid])  # make an ambiguous element
+        #        navaiddictobj[navaidid].addpossibility(navaidobj)  # add the next possibility
+        #    else:
+        #       # just add to an ambiguouselement that's already there
+        #        #print('ambiguouselement already here', navaidid)
+        #        navaiddictobj[navaidid].addpossibility(navaidobj)
 
 
 

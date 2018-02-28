@@ -10,12 +10,20 @@ class Pointinspace(object):
     def getcoordinates(self):
         return self.coordinates
 
+class Navaid(Pointinspace):
+
+    def __init__(self):
+        self.typeelement = navaid
+
+    def gettypeelement(self):
+        return self.typeelement
+
 
 class Ambiguouselement(object):
 
-    def __init__(self, identifier, possibilities=[]):
+    def __init__(self, identifier, initialpossibility):
         self.identifier = identifier
-        self.possibilities = possibilities
+        self.possibilities = [initialpossibility]
 
     def addpossibility(self, possibility):
         self.possibilities.append(possibility)
