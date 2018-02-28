@@ -12,8 +12,17 @@ class Pointinspace(object):
 
 class Navaid(Pointinspace):
 
-    def __init__(self):
-        self.typeelement = navaid
+    def __init__(self, identifier, coordinates):
+        Pointinspace.__init__(self, identifier, coordinates)
+        self.typeelement = 'NAVAID'
+        self.identifier = identifier
+        self.coordinates = coordinates
+
+    def getidentifier(self):
+        return self.identifier
+
+    def getcoordinates(self):
+        return self.coordinates
 
     def gettypeelement(self):
         return self.typeelement

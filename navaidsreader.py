@@ -1,13 +1,14 @@
 # This file parses the vasFMC format Navaids.txt file
 # Navaids.txt file must be in same directory
 
-from objects import Pointinspace
+from objects import Navaid
 from objects import Ambiguouselement
+
 
 
 def navaiddictmaker():
 
-#    from main import Pointinspace   this causes main loop to run twice
+#    from main import Navaid   this causes main loop to run twice
 
     navaid_file = open("Navaids.txt")
 
@@ -52,7 +53,7 @@ def navaiddictmaker():
 
         navaiddict.setdefault(navaidid,[]).append((navaidlatwithdecimal, navaidlongwithdecimal))
 
-        navaidobj = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))
+        navaidobj = Navaid(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))
 
         if navaidid in navaiddictobj: #just the keys and exact?
   #cam
@@ -61,16 +62,12 @@ def navaiddictmaker():
                 navaiddictobj[navaidid].addpossibility(navaidobj)
  #               print('Ambiguouselement found',navaidid)
 #                print(navaiddictobj[navaidid].getpossibilities())
-            elif type(navaiddictobj[navaidid]) is Pointinspace:
+            else:
                 #############
                 navaiddictobj[navaidid] = Ambiguouselement(navaidid, navaiddictobj[navaidid])  # make an ambiguous element
                 navaiddictobj[navaidid].addpossibility(navaidobj)  # add the next possibility
 
-                #print('Pointinspace found',navaidid)
-            else:
-                print('something strange happened in this loop')
-                # just add to an ambiguouselement that's already there
-                #print('ambiguouselement already here', navaidid)
+                #print('Navaid found',navaidid)
         else:
             navaiddictobj[navaidid] = navaidobj
             #print(navaidid,'not already in dictionary')
@@ -91,8 +88,8 @@ def navaiddictmaker():
 
 
 
-#        navaiddictobj.setdefault(navaidid, [Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))])
+#        navaiddictobj.setdefault(navaidid, [Navaid(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))])
 
-#        navaiddictobj.setdefault(navaidid,[]).append(Pointinspace(navaidid,(navaidlatwithdecimal, navaidlongwithdecimal)))  #for testing
+#        navaiddictobj.setdefault(navaidid,[]).append(Navaid(navaidid,(navaidlatwithdecimal, navaidlongwithdecimal)))  #for testing
 
     navaid_file.close()

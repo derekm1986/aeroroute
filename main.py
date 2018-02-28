@@ -42,7 +42,7 @@ print("OK")  # dictionary combination was successful
 
 testobj = navaidsreader.navaiddictobj['CAM']
 for item in (testobj.getpossibilities()):
-    print(item.getidentifier(),item.getcoordinates())
+    print(item.getidentifier(),item.getcoordinates(),item.gettypeelement())
 
 #posstest = testobj.getpossibilities()
 
