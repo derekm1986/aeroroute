@@ -1,22 +1,10 @@
 class Pointinspace(object):
 
-    def __init__(self, identifier, coordinates):
+    def __init__(self, identifier, coordinates, typeelement, elementname=None):
         self.identifier = identifier
         self.coordinates = coordinates
-
-    def getidentifier(self):
-        return self.identifier
-
-    def getcoordinates(self):
-        return self.coordinates
-
-class Navaid(Pointinspace):
-
-    def __init__(self, identifier, coordinates):
-        Pointinspace.__init__(self, identifier, coordinates)
-        self.typeelement = 'NAVAID'
-        self.identifier = identifier
-        self.coordinates = coordinates
+        self.typeelement = typeelement
+        self.elementname = elementname
 
     def getidentifier(self):
         return self.identifier
@@ -26,6 +14,9 @@ class Navaid(Pointinspace):
 
     def gettypeelement(self):
         return self.typeelement
+
+    def getelementname(self):
+        return self.elementname
 
 
 class Ambiguouselement(object):

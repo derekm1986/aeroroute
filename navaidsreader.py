@@ -1,9 +1,8 @@
 # This file parses the vasFMC format Navaids.txt file
 # Navaids.txt file must be in same directory
 
-from objects import Navaid
+from objects import Pointinspace
 from objects import Ambiguouselement
-
 
 
 def navaiddictmaker():
@@ -53,7 +52,7 @@ def navaiddictmaker():
 
         navaiddict.setdefault(navaidid,[]).append((navaidlatwithdecimal, navaidlongwithdecimal))
 
-        navaidobj = Navaid(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal))
+        navaidobj = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
 
         if navaidid in navaiddictobj:
             if type(navaiddictobj[navaidid]) is Ambiguouselement:
