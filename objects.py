@@ -16,7 +16,10 @@ class Pointinspace(object):
         return self.typeelement
 
     def getelementname(self):
-        return self.elementname
+        if self.elementname is not None:
+            return self.elementname
+        else:
+            pass
 
 
 class Ambiguouselement(object):

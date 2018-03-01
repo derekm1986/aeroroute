@@ -1,14 +1,18 @@
 # This file parses the vasFMC format Waypoints.txt file
 # Waypoints.txt file must be in same directory
 
+from objects import Pointinspace
+from objects import Ambiguouselement
 
 def waypointdictmaker():
 
     waypoint_file = open("Waypoints.txt")
 
     global waypointdict
+    global waypointdictobj
 
     waypointdict = {}  # make an empty dictionary
+    waypointdictobj = {}
 
     for line in waypoint_file:
         waypointid, waypointlat, waypointlong, waypointregion = line.rstrip().split("|")
@@ -43,5 +47,16 @@ def waypointdictmaker():
 
         
         waypointdict.setdefault(waypointid, []).append((waypointlatwithdecimal, waypointlongwithdecimal))
+
+        waypointobj = Pointinspace(waypointid, (waypointlatwithdecimal, waypointlongwithdecimal), 'waypoint')
+
+        if waypointid in waypointdictobj:
+            if type(waypointdictobj[waypointid]) is Ambiguouselement:
+                waypointdictobj[waypointid].addpossibility(waypointobj)
+            else:
+                waypointdictobj[waypointid] = Ambiguouselement(waypointid, waypointdictobj[waypointid])
+                waypointdictobj[waypointid].addpossibility(waypointobj)
+        else:
+            waypointdictobj[waypointid] = waypointobj
 
     waypoint_file.close()
