@@ -36,11 +36,13 @@ for key, val in waypointsreader.waypointdict.items():
         pointsinspacedict[key] = val
 print("OK")  # dictionary combination was successful
 
+######
+
 #######for testing below
 
 #print(navaidsreader.navaiddictobj)
 
-item = waypointsreader.waypointdictobj['GLYDE']
+item = airportsreader.airportdictobj['KBOS']
 print(item.getidentifier(),item.getcoordinates(),item.gettypeelement(), item.getelementname())
 
 #posstest = testobj.getpossibilities()

@@ -3,14 +3,17 @@
 
 # This file does not attempt to read runway data
 
+from objects import Airport
 
 def airportdictmaker():
 
     airport_file = open("Airports.txt")
 
     global airportdict
+    global airportdictobj
 
-    airportdict = {}  # make an empty dictionary
+    airportdict = {} # make an empty dictionary
+    airportdictobj = {}
 
     for line in airport_file:
         if line.startswith("A"):
@@ -51,5 +54,9 @@ def airportdictmaker():
 
 
             airportdict.setdefault(airportid, []).append((airportlatwithdecimal, airportlongwithdecimal))
+
+            airportobj = Airport(airportid, (airportlatwithdecimal, airportlongwithdecimal), airportname)
+
+            airportdictobj[airportid] = airportobj
 
     airport_file.close()

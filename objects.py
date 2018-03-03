@@ -21,6 +21,29 @@ class Pointinspace(object):
         else:
             pass
 
+class Airport(object):
+
+        def __init__(self, identifier, coordinates, elementname=None):
+            self.identifier = identifier
+            self.coordinates = coordinates
+            self.typeelement = 'airport'
+            self.elementname = elementname
+
+        def getidentifier(self):
+            return self.identifier
+
+        def getcoordinates(self):
+            return self.coordinates
+
+        def gettypeelement(self):
+            return self.typeelement
+
+        def getelementname(self):
+            if self.elementname is not None:
+                return self.elementname
+            else:
+                pass
+
 
 class Ambiguouselement(object):
 
@@ -36,5 +59,3 @@ class Ambiguouselement(object):
 
     def getpossibilities(self):
         return self.possibilities
-
-#class Navaid(Pointinspace):
