@@ -4,6 +4,7 @@ import waypointsreader
 import navaidsreader
 import pairmaker
 import tiebreaker
+from objects import Ambiguouselement
 
 # make __iter__ for ambiguouselement class
 
@@ -36,7 +37,23 @@ for key, val in waypointsreader.waypointdict.items():
         pointsinspacedict[key] = val
 print("OK")  # dictionary combination was successful
 
-######
+######for object testing below
+
+pointsinspacedictobj = navaidsreader.navaiddictobj.copy()
+
+for key, val in waypointsreader.waypointdictobj.items():
+    if key in pointsinspacedictobj:
+        if type(val) is Ambiguouselement:
+            print('ambiguouselement detected in', val)
+            #pointsinspacedictobj[key].addpossibility(val)
+            #what if you add ambiguous to ambiguous???
+        else:
+            print('ambiguouselement NOT detected in',val)
+            #turn into ambiguouselement
+        #pointsinspacedictobj[key] += val
+    ####change to use append/ambiguouselement
+    else:
+        pointsinspacedictobj[key] = val
 
 #######for testing below
 
