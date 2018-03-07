@@ -43,16 +43,28 @@ pointsinspacedictobj = navaidsreader.navaiddictobj.copy()
 
 for key, val in waypointsreader.waypointdictobj.items():
     if key in pointsinspacedictobj:
-        if type(val) is Ambiguouselement:
-            print('ambiguouselement detected in', val)
-            #pointsinspacedictobj[key].addpossibility(val)
-            #what if you add ambiguous to ambiguous???
+        #the entry is already in pointsinspacedictobj
+        if type(pointsinspacedictobj[key]) is Ambiguouselement:
+            #pointsinspacedictobj already has Ambiguouselement
+            if type(val) is Ambiguouselement:
+                #must add Ambiguouselement to Ambiguouselement
+                pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key].getpossibilities)
+            else:
+                #must add Pointinspace to Ambiguouselement
+                pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key])
         else:
-            print('ambiguouselement NOT detected in',val)
-            #turn into ambiguouselement
-        #pointsinspacedictobj[key] += val
-    ####change to use append/ambiguouselement
+            #pointsinspacedictobj contains a Pointinspace
+            if type(val) is Ambiguouselement:
+                #Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
+                originalpointinspace = pointsinspacedictobj[key]
+                pointsinspacedictobj[key] = val
+                pointsinspacedictobj[key].addpossibility(originalpointinspace)
+            else:
+                #Adding Pointinspace to a Pointinspace
+                pointsinspacedictobj[key] = Ambiguouselement(key, pointsinspacedictobj[key])
+                pointsinspacedictobj[key].addpossibility(val)
     else:
+        #the entry is not yet in pointsinspacedictobj, so just add it
         pointsinspacedictobj[key] = val
 
 #######for testing below

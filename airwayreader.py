@@ -3,7 +3,7 @@
 
 # need to finish
 
-text_file = open("ATS.txt")
+text_file = open("AIRAC/ATS.txt")
 
 #airwayresult = []
 

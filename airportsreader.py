@@ -7,7 +7,7 @@ from objects import Airport
 
 def airportdictmaker():
 
-    airport_file = open("Airports.txt")
+    airport_file = open("AIRAC/Airports.txt")
 
     global airportdict
     global airportdictobj

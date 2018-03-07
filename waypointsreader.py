@@ -6,7 +6,7 @@ from objects import Ambiguouselement
 
 def waypointdictmaker():
 
-    waypoint_file = open("Waypoints.txt")
+    waypoint_file = open("AIRAC/Waypoints.txt")
 
     global waypointdict
     global waypointdictobj

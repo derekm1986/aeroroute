@@ -9,7 +9,7 @@ def navaiddictmaker():
 
 #    from main import Navaid   this causes main loop to run twice
 
-    navaid_file = open("Navaids.txt")
+    navaid_file = open("AIRAC/Navaids.txt")
 
     global navaiddict
     global navaiddictobj  #for testing
