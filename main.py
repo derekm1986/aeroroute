@@ -35,7 +35,7 @@ for key, val in waypointsreader.waypointdict.items():
         pointsinspacedict[key] += val
     else:
         pointsinspacedict[key] = val
-print("OK")  # dictionary combination was successful
+
 
 ######for object testing below
 
@@ -67,26 +67,11 @@ for key, val in waypointsreader.waypointdictobj.items():
         #the entry is not yet in pointsinspacedictobj, so just add it
         pointsinspacedictobj[key] = val
 
+print("OK")  # dictionary combination was successful
+
 #######for testing below
 
-#print(navaidsreader.navaiddictobj)
-
-item = airportsreader.airportdictobj['KBOS']
-print(item.getidentifier(),item.getcoordinates(),item.gettypeelement(), item.getelementname())
-
-#posstest = testobj.getpossibilities()
-
-#for element in posstest:
-#        print(element.getidentifier(), element.getcoordinates())
-
-
-#print(type(testobjcoord))
-#print(len(testobjcoord))
-#for possibility in testobjcoord:
-#        print(possibility.getcoordinates())
-#print(testobjcoord)
-
-#print(navaidsreader.navaiddict['CAM'])
+#print(pointsinspacedictobj['BOS'])
 
 ###########################
 
@@ -108,78 +93,166 @@ while True:
         print('***Program exiting***')
         break
     
-    inputwaypoints = []
+#    inputwaypoints = []
+
+#    manualwaypointnumber = 1
+    
+#    notfoundflag = False
+    
+#    previousitemname = None  # this is used below to detect a double input
+    
+#    doubleinputflag = False
+    
+#    for item in inputstring:
+        
+#        if "/" in item:  # manual input detected
+#            itemname = 'WAYPOINT'+str(manualwaypointnumber)
+#            coordinates = [tuple(item.split('/'))]
+#            # assert that it's valid
+#            typeelement = "manual waypoint"
+#            manualwaypointnumber += 1
+        
+#        elif item in airportsreader.airportdict:
+#            itemname = item
+#            coordinates = airportsreader.airportdict[item]
+#            typeelement = "airport"
+    
+#        # elif put something here to read airways
+#            # typeelement = "airway"
+        
+#        # elif put something here to read SIDs/STARs
+        
+#        elif item in pointsinspacedict:
+#            itemname = item
+#            coordinates = pointsinspacedict[item]
+#            typeelement = "point in space"
+    
+#        else:
+#            print(item, "not found")
+#            itemname = item # needed for double input detection later
+#            notfoundflag = True
+      
+#        if previousitemname == itemname and notfoundflag is False:  # double input detection
+#            print('Multiple adjacent input found with name', itemname, '- unable to compute.')
+#            doubleinputflag = True
+            
+#        if notfoundflag is False:
+#            combinerlist = []
+#            combinerlist.append([itemname, typeelement, coordinates])
+#            inputwaypoints.append(combinerlist[0])
+        
+#        previousitemname = itemname  # for double input detection
+            
+#    if notfoundflag is True:
+#        continue
+        
+#    if doubleinputflag is True:
+#        continue
+            
+#    if len(inputwaypoints) == 1:
+#        print('Single item detected, printing entry:', inputwaypoints[0])
+#        continue
+
+
+
+####################for testing below
+
+    inputwaypointsobj = []
 
     manualwaypointnumber = 1
-    
+
     notfoundflag = False
-    
+
     previousitemname = None  # this is used below to detect a double input
-    
+
     doubleinputflag = False
-    
+
     for item in inputstring:
-        
+
         if "/" in item:  # manual input detected
-            itemname = 'WAYPOINT'+str(manualwaypointnumber)
+            itemname = 'WAYPOINT' + str(manualwaypointnumber)
             coordinates = [tuple(item.split('/'))]
             # assert that it's valid
-            typeelement = "manual waypoint"
+            founditem = Pointinspace(itemname, coordinates, 'manual waypoint')
             manualwaypointnumber += 1
-        
-        elif item in airportsreader.airportdict:
+
+        elif item in airportsreader.airportdictobj:
             itemname = item
-            coordinates = airportsreader.airportdict[item]
-            typeelement = "airport"
-    
+            founditem = airportsreader.airportdictobj[item]
+
         # elif put something here to read airways
-            # typeelement = "airway"
-        
+
         # elif put something here to read SIDs/STARs
-        
-        elif item in pointsinspacedict:
+
+        elif item in pointsinspacedictobj:
             itemname = item
-            coordinates = pointsinspacedict[item]
-            typeelement = "point in space"
-    
-        else:                                
+            founditem = pointsinspacedictobj[item]
+
+        else:
             print(item, "not found")
-            itemname = item # needed for double input detection later
+            itemname = item  # needed for double input detection later
             notfoundflag = True
-      
+
         if previousitemname == itemname and notfoundflag is False:  # double input detection
             print('Multiple adjacent input found with name', itemname, '- unable to compute.')
             doubleinputflag = True
-            
+
         if notfoundflag is False:
-            combinerlist = []
-            combinerlist.append([itemname, typeelement, coordinates])
-            inputwaypoints.append(combinerlist[0])
-        
+            inputwaypointsobj.append(founditem)
+
         previousitemname = itemname  # for double input detection
-            
+
     if notfoundflag is True:
         continue
-        
+
     if doubleinputflag is True:
         continue
-            
-    if len(inputwaypoints) == 1:
-        print('Single item detected, printing entry:', inputwaypoints[0])
+
+    if len(inputwaypointsobj) == 1:
+        print('Single item detected, printing entry:', inputwaypointsobj[0])
         continue
-    
+
+    ###################
+
+    print(inputwaypointsobj)
+
+#    # detection of ambiguous elements happens here
+#    for waypoints in inputwaypoints:
+#        if len(waypoints[2]) > 1:  # more than one lat/long possibility was found
+#            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints)  # pass inputwaypoints to tiebreaker because...
+#            #  an ambiguous element was found
+#            break  # otherwise this could trigger multiple times
+
     # detection of ambiguous elements happens here
-    for waypoints in inputwaypoints:
-        if len(waypoints[2]) > 1:  # more than one lat/long possibility was found
-            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints)  # pass inputwaypoints to tiebreaker because...
+    for element in inputwaypointsobj:
+        if type(element) is Ambiguouselement:  # more than one lat/long possibility was found
+#            inputwaypointsobj = tiebreaker.tiebreaker(inputwaypoints)  # pass inputwaypoints to tiebreaker because...
+            print('an ambiguouselement was found')
             #  an ambiguous element was found
             break  # otherwise this could trigger multiple times
 
-    for waypoints in inputwaypoints:
-        waypoints[2] = waypoints[2][0]  # turn list of one lat/long into tuple
-    
+
+
+
+#    for waypoints in inputwaypoints:
+#        waypoints[2] = waypoints[2][0]  # turn list of one lat/long into tuple
+    testwaypointsobj = []
+
+    for element in inputwaypointsobj:
+        if type(element) is Ambiguouselement:
+            testwaypointsobj.append(element.getpossibilities()[0].getcoordinates())
+            print(element)
+        else:
+            testwaypointsobj.append(element.getcoordinates())
+
+    print(testwaypointsobj)
+
+#    # takes inputted waypoints and turns them into a list of waypoint pairs
+#    waypointpairs = pairmaker.pairmaker(inputwaypoints)
+
     # takes inputted waypoints and turns them into a list of waypoint pairs
-    waypointpairs = pairmaker.pairmaker(inputwaypoints)
+    waypointpairs = pairmaker.pairmaker(testwaypointsobj)
+
 
     # takes waypoint pairs and uses vincenty() to find the total distance
     sumdistance = 0.00  # establish sumdistance and put zero in it
