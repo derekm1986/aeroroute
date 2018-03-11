@@ -143,23 +143,23 @@ while True:
 
     for element in inputwaypointsobj:
         if type(element) is Ambiguouselement:  # more than one lat/long possibility was found
-#            inputwaypointsobj = tiebreaker.tiebreaker(inputwaypoints)  # pass inputwaypoints to tiebreaker because...
+            inputwaypointsobj = tiebreaker.tiebreaker(inputwaypointsobj)  # pass inputwaypoints to tiebreaker because...
             print('an ambiguouselement was found')
             #  an ambiguous element was found
             break  # otherwise this could trigger multiple times
 
-    testwaypointsobj = []
+    elementplace = 0
 
     for element in inputwaypointsobj:
         if type(element) is Ambiguouselement:
-            testwaypointsobj.append(element.getpossibilities()[0].getcoordinates())
-            print(element)
+            inputwaypointsobj[elementplace] = element.getpossibilities()[0]
+            elementplace += 1
         else:
-            testwaypointsobj.append(element.getcoordinates())
+            elementplace += 1
 
-    print(testwaypointsobj)
+    print(inputwaypointsobj)
 
-    waypointpairs = pairmaker.pairmaker(testwaypointsobj)
+    waypointpairs = pairmaker.pairmaker(inputwaypointsobj)
 
 
     # takes waypoint pairs and uses vincenty() to find the total distance

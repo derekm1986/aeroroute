@@ -3,13 +3,14 @@
 import math
 import vincenty
 import pairmaker
+from objects import Ambiguouselement
 
 
 def tiebreaker(inputwaypoints):
 
     #print(inputwaypoints)
     
-    foundmultiples = [i for i,x in enumerate(inputwaypoints) if len(x[2]) > 1]  # finding positions of ambiguous waypoints
+    foundmultiples = [i for i,x in enumerate(inputwaypoints) if type(x) is Ambiguouselement]  # finding positions of ambiguous waypoints
     
     multiplesmatrix = []
     

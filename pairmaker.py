@@ -8,8 +8,8 @@ def pairmaker(inputwaypoints):
     i = 0
 
     while i <= (len(inputwaypoints) - 2):  # make pairs of each waypoint and the waypoint after it
-        waypoint1 = inputwaypoints[i]
-        waypoint2 = inputwaypoints[i + 1]
+        waypoint1 = inputwaypoints[i].getcoordinates()
+        waypoint2 = inputwaypoints[i + 1].getcoordinates()
         temporarylist = []
         temporarylist.append(waypoint1)
         temporarylist.append(waypoint2)
