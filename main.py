@@ -37,7 +37,7 @@ for key, val in waypointsreader.waypointdictobj.items():
             #pointsinspacedictobj already has Ambiguouselement
             if type(val) is Ambiguouselement:
                 #must add Ambiguouselement to Ambiguouselement
-                pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key].getpossibilities)
+                pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key].getpossibilities())
             else:
                 #must add Pointinspace to Ambiguouselement
                 pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key])
