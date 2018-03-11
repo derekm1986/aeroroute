@@ -58,13 +58,6 @@ for key, val in waypointsreader.waypointdictobj.items():
 
 print("OK")  # dictionary combination was successful
 
-#######for testing below
-
-#print(pointsinspacedictobj['BOS'])
-
-###########################
-
-
 while True:
 
     print('\n')
@@ -137,8 +130,6 @@ while True:
         print('Single item detected, printing entry:', inputwaypointsobj[0])
         continue
 
-    ###################
-
     print(inputwaypointsobj)
 
     for element in inputwaypointsobj:
@@ -160,7 +151,6 @@ while True:
     print(inputwaypointsobj)
 
     waypointpairs = pairmaker.pairmaker(inputwaypointsobj)
-
 
     # takes waypoint pairs and uses vincenty() to find the total distance
     sumdistance = 0.00  # establish sumdistance and put zero in it
