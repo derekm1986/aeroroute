@@ -6,7 +6,7 @@ import pairmaker
 import tiebreaker
 from objects import Ambiguouselement
 
-# make __iter__ for ambiguouselement class
+
 
 print('\n***Program loading***', '\n')
 
@@ -27,17 +27,6 @@ print('OK')  # loading waypoints was successful
 # combining navaiddict and waypointdict dictionaries into one
 
 print('   Combining NAVAID and waypoints dictionaries...', end="")
-
-pointsinspacedict = navaidsreader.navaiddict.copy()
-
-for key, val in waypointsreader.waypointdict.items():
-    if key in pointsinspacedict:
-        pointsinspacedict[key] += val
-    else:
-        pointsinspacedict[key] = val
-
-
-######for object testing below
 
 pointsinspacedictobj = navaidsreader.navaiddictobj.copy()
 
@@ -92,70 +81,6 @@ while True:
     if "QUIT" in inputstring:
         print('***Program exiting***')
         break
-    
-#    inputwaypoints = []
-
-#    manualwaypointnumber = 1
-    
-#    notfoundflag = False
-    
-#    previousitemname = None  # this is used below to detect a double input
-    
-#    doubleinputflag = False
-    
-#    for item in inputstring:
-        
-#        if "/" in item:  # manual input detected
-#            itemname = 'WAYPOINT'+str(manualwaypointnumber)
-#            coordinates = [tuple(item.split('/'))]
-#            # assert that it's valid
-#            typeelement = "manual waypoint"
-#            manualwaypointnumber += 1
-        
-#        elif item in airportsreader.airportdict:
-#            itemname = item
-#            coordinates = airportsreader.airportdict[item]
-#            typeelement = "airport"
-    
-#        # elif put something here to read airways
-#            # typeelement = "airway"
-        
-#        # elif put something here to read SIDs/STARs
-        
-#        elif item in pointsinspacedict:
-#            itemname = item
-#            coordinates = pointsinspacedict[item]
-#            typeelement = "point in space"
-    
-#        else:
-#            print(item, "not found")
-#            itemname = item # needed for double input detection later
-#            notfoundflag = True
-      
-#        if previousitemname == itemname and notfoundflag is False:  # double input detection
-#            print('Multiple adjacent input found with name', itemname, '- unable to compute.')
-#            doubleinputflag = True
-            
-#        if notfoundflag is False:
-#            combinerlist = []
-#            combinerlist.append([itemname, typeelement, coordinates])
-#            inputwaypoints.append(combinerlist[0])
-        
-#        previousitemname = itemname  # for double input detection
-            
-#    if notfoundflag is True:
-#        continue
-        
-#    if doubleinputflag is True:
-#        continue
-            
-#    if len(inputwaypoints) == 1:
-#        print('Single item detected, printing entry:', inputwaypoints[0])
-#        continue
-
-
-
-####################for testing below
 
     inputwaypointsobj = []
 
@@ -216,14 +141,6 @@ while True:
 
     print(inputwaypointsobj)
 
-#    # detection of ambiguous elements happens here
-#    for waypoints in inputwaypoints:
-#        if len(waypoints[2]) > 1:  # more than one lat/long possibility was found
-#            inputwaypoints = tiebreaker.tiebreaker(inputwaypoints)  # pass inputwaypoints to tiebreaker because...
-#            #  an ambiguous element was found
-#            break  # otherwise this could trigger multiple times
-
-    # detection of ambiguous elements happens here
     for element in inputwaypointsobj:
         if type(element) is Ambiguouselement:  # more than one lat/long possibility was found
 #            inputwaypointsobj = tiebreaker.tiebreaker(inputwaypoints)  # pass inputwaypoints to tiebreaker because...
@@ -231,11 +148,6 @@ while True:
             #  an ambiguous element was found
             break  # otherwise this could trigger multiple times
 
-
-
-
-#    for waypoints in inputwaypoints:
-#        waypoints[2] = waypoints[2][0]  # turn list of one lat/long into tuple
     testwaypointsobj = []
 
     for element in inputwaypointsobj:
@@ -247,10 +159,6 @@ while True:
 
     print(testwaypointsobj)
 
-#    # takes inputted waypoints and turns them into a list of waypoint pairs
-#    waypointpairs = pairmaker.pairmaker(inputwaypoints)
-
-    # takes inputted waypoints and turns them into a list of waypoint pairs
     waypointpairs = pairmaker.pairmaker(testwaypointsobj)
 
 

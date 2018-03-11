@@ -45,6 +45,8 @@ class Airport(object):
                 pass
 
 
+# make __iter__ for ambiguouselement class
+
 class Ambiguouselement(object):
 
     def __init__(self, identifier, initialpossibility):
