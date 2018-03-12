@@ -70,7 +70,7 @@ def tiebreaker(inputwaypoints):
                         inputwaypoints[multipleset[0]].getpossibilities()[possibility],
                         inputwaypoints[multipleset[0]+1].getcoordinates()]
                     trydistance = vincenty.vincenty(inputwaypoints[multipleset[0]-1].getcoordinates(), 
-                        inputwaypoints[multipleset[0]].getpossibilities()[possibility].getcoordinates()) + 
+                        inputwaypoints[multipleset[0]].getpossibilities()[possibility].getcoordinates()) + \
                         vincenty.vincenty(inputwaypoints[multipleset[0]].getpossibilities()[possibility].getcoordinates(),
                         inputwaypoints[multipleset[0]+1].getcoordinates())
                     if trydistance < shortestdistance:
