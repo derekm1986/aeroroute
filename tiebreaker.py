@@ -63,8 +63,12 @@ def tiebreaker(inputwaypoints):
                 shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
                 for iter in inputwaypoints[multipleset[0]].getpossibilities():
-                    tryset = [inputwaypoints[multipleset[0]-1].getcoordinates(), inputwaypoints[multipleset[0]].getpossibilities()[possibility], inputwaypoints[multipleset[0]+1].getcoordinates]
-                    trydistance = vincenty.vincenty(inputwaypoints[multipleset[0]-1].getcoordinates(), inputwaypoints[multipleset[0]].getpossibilities()[possibility].getcoordinates()) + vincenty.vincenty(inputwaypoints[multipleset[0]].getpossibilities()[possibility].getcoordinates())
+                    tryset = [inputwaypoints[multipleset[0]-1].getcoordinates(), inputwaypoints[multipleset[0]].getpossibilities()[possibility], inputwaypoints[multipleset[0]+1].getcoordinates()]
+                    trydistance = vincenty.vincenty(inputwaypoints[multipleset[0]-1].getcoordinates(), inputwaypoints[multipleset[0]].getpossibilities()[possibility].getcoordinates()) + vincenty.vincenty(inputwaypoints[multipleset[0]].getpossibilities()[possibility].getcoordinates(), inputwaypoints[multipleset[0]+1].getcoordinates())
+                    if trydistance < shortestdistance:
+                        shortestdistance = trydistance
+                        shortestpossibility = possibility
+                        shortestset = tryset
                     possibility += 1
                     # put lat/long back where it belongs
                 inputwaypoints[multipleset[0]] = inputwaypoints[multipleset[0]].getpossibilities()[shortestpossibility]
