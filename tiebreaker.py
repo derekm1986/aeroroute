@@ -1,6 +1,5 @@
 # this file is for when a route item is returned with multiple lat/longs
 
-import math
 import vincenty
 import pairmaker
 from objects import Ambiguouselement
