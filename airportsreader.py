@@ -5,6 +5,7 @@
 
 from objects import Airport
 
+
 def airportdictmaker():
 
     airport_file = open("AIRAC/Airports.txt")
@@ -31,9 +32,6 @@ def airportdictmaker():
             if airportlatisnegative is True:
                 airportlatwithdecimal = "-" + airportlatwithdecimal
 
-
-
-
             airportlongisnegative = False  # establish variable
 
             if airportlong.startswith("-"):
@@ -47,10 +45,6 @@ def airportdictmaker():
 
             if airportlongisnegative is True:
                 airportlongwithdecimal = "-" + airportlongwithdecimal
-
-
-
-
 
             airportobj = Airport(airportid, (airportlatwithdecimal, airportlongwithdecimal), airportname)
 

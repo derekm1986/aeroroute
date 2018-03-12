@@ -4,8 +4,7 @@ import waypointsreader
 import navaidsreader
 import pairmaker
 import tiebreaker
-from objects import Ambiguouselement
-
+from objects import Ambiguouselement, Pointinspace
 
 
 print('\n***Program loading***', '\n')
@@ -32,28 +31,28 @@ pointsinspacedictobj = navaidsreader.navaiddictobj.copy()
 
 for key, val in waypointsreader.waypointdictobj.items():
     if key in pointsinspacedictobj:
-        #the entry is already in pointsinspacedictobj
+        # the entry is already in pointsinspacedictobj
         if type(pointsinspacedictobj[key]) is Ambiguouselement:
-            #pointsinspacedictobj already has Ambiguouselement
+            # pointsinspacedictobj already has Ambiguouselement
             if type(val) is Ambiguouselement:
-                #must add Ambiguouselement to Ambiguouselement
+                # must add Ambiguouselement to Ambiguouselement
                 pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key].getpossibilities())
             else:
-                #must add Pointinspace to Ambiguouselement
+                # must add Pointinspace to Ambiguouselement
                 pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key])
         else:
-            #pointsinspacedictobj contains a Pointinspace
+            # pointsinspacedictobj contains a Pointinspace
             if type(val) is Ambiguouselement:
-                #Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
+                # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
                 originalpointinspace = pointsinspacedictobj[key]
                 pointsinspacedictobj[key] = val
                 pointsinspacedictobj[key].addpossibility(originalpointinspace)
             else:
-                #Adding Pointinspace to a Pointinspace
+                # Adding Pointinspace to a Pointinspace
                 pointsinspacedictobj[key] = Ambiguouselement(key, pointsinspacedictobj[key])
                 pointsinspacedictobj[key].addpossibility(val)
     else:
-        #the entry is not yet in pointsinspacedictobj, so just add it
+        # the entry is not yet in pointsinspacedictobj, so just add it
         pointsinspacedictobj[key] = val
 
 print("OK")  # dictionary combination was successful

@@ -7,13 +7,11 @@ from objects import Ambiguouselement
 
 def navaiddictmaker():
 
-#    from main import Navaid   this causes main loop to run twice
-
     navaid_file = open("AIRAC/Navaids.txt")
 
-    global navaiddictobj  #for testing
+    global navaiddictobj
 
-    navaiddictobj = {}  #for testing
+    navaiddictobj = {}
 
     for line in navaid_file:
         navaidid, navaidname, navaidfrequency, navaidunknown1, navaidunknown2, navaidunknown3, navaidlat, navaidlong, navaidelevation, navaidregion = line.rstrip().split("|")
@@ -31,8 +29,6 @@ def navaiddictmaker():
         if navaidlatisnegative is True:
             navaidlatwithdecimal = "-" + navaidlatwithdecimal
             
-            
-            
         navaidlongisnegative = False  # establish variable
             
         if navaidlong.startswith("-"):
@@ -47,8 +43,6 @@ def navaiddictmaker():
         if navaidlongisnegative is True:
             navaidlongwithdecimal = "-" + navaidlongwithdecimal
 
-
-
         navaidobj = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
 
         if navaidid in navaiddictobj:
@@ -59,7 +53,5 @@ def navaiddictmaker():
                 navaiddictobj[navaidid].addpossibility(navaidobj)
         else:
             navaiddictobj[navaidid] = navaidobj
-
-
 
     navaid_file.close()
