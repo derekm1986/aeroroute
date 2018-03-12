@@ -11,10 +11,8 @@ def navaiddictmaker():
 
     navaid_file = open("AIRAC/Navaids.txt")
 
-    global navaiddict
     global navaiddictobj  #for testing
 
-    navaiddict = {}  # make an empty dictionary
     navaiddictobj = {}  #for testing
 
     for line in navaid_file:
@@ -50,7 +48,6 @@ def navaiddictmaker():
             navaidlongwithdecimal = "-" + navaidlongwithdecimal
 
 
-        navaiddict.setdefault(navaidid,[]).append((navaidlatwithdecimal, navaidlongwithdecimal))
 
         navaidobj = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
 

@@ -8,10 +8,8 @@ def waypointdictmaker():
 
     waypoint_file = open("AIRAC/Waypoints.txt")
 
-    global waypointdict
     global waypointdictobj
 
-    waypointdict = {}  # make an empty dictionary
     waypointdictobj = {}
 
     for line in waypoint_file:
@@ -45,8 +43,6 @@ def waypointdictmaker():
         if waypointlongisnegative is True:
             waypointlongwithdecimal = "-" + waypointlongwithdecimal
 
-        
-        waypointdict.setdefault(waypointid, []).append((waypointlatwithdecimal, waypointlongwithdecimal))
 
         waypointobj = Pointinspace(waypointid, (waypointlatwithdecimal, waypointlongwithdecimal), 'waypoint')
 

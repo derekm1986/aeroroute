@@ -9,10 +9,8 @@ def airportdictmaker():
 
     airport_file = open("AIRAC/Airports.txt")
 
-    global airportdict
     global airportdictobj
 
-    airportdict = {} # make an empty dictionary
     airportdictobj = {}
 
     for line in airport_file:
@@ -53,7 +51,6 @@ def airportdictmaker():
 
 
 
-            airportdict.setdefault(airportid, []).append((airportlatwithdecimal, airportlongwithdecimal))
 
             airportobj = Airport(airportid, (airportlatwithdecimal, airportlongwithdecimal), airportname)
 
