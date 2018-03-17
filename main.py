@@ -151,6 +151,8 @@ while True:
 
     waypointpairs = pairmaker.pairmaker(inputwaypointsobj)
 
+    print(waypointpairs)
+
     # takes waypoint pairs and uses vincenty() to find the total distance
     sumdistance = 0.00  # establish sumdistance and put zero in it
     
