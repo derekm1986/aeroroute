@@ -149,9 +149,15 @@ while True:
 
     print(inputwaypointsobj)
 
-    waypointpairs = pairmaker.pairmaker(inputwaypointsobj)
+    waypointgen = pairmaker.pairmaker(inputwaypointsobj)
 
-    print(waypointpairs)
+    print(waypointgen)
+
+    waypointpairs = []
+
+    for pair in waypointgen:
+        waypointpairs.append(pair)
+        print(pair)
 
     # takes waypoint pairs and uses vincenty() to find the total distance
     sumdistance = 0.00  # establish sumdistance and put zero in it
