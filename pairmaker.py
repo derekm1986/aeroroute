@@ -27,9 +27,10 @@ def pairmaker(inputwaypoints):
     while i <= (len(inputwaypoints) - 2):  # make pairs of each waypoint and the waypoint after it
         waypoint1 = inputwaypoints[i].getcoordinates()
         waypoint2 = inputwaypoints[i + 1].getcoordinates()
-        temporarylist = []
-        temporarylist.append(waypoint1)
-        temporarylist.append(waypoint2)
+        pair = [waypoint1, waypoint2]
+        #pair.append(waypoint1)
+        #pair.append(waypoint2)
+        print('pairmaker pair is ',pair)
         i += 1
 
-    yield temporarylist
+        yield pair
