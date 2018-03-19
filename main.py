@@ -133,12 +133,10 @@ while True:
 
     for element in inputwaypointsobj:
         if type(element) is Ambiguouselement:  # more than one lat/long possibility was found
-            inputwaypointsobj = tiebreaker.tiebreaker(inputwaypointsobj)  # pass inputwaypoints to tiebreaker because...
-            print('an ambiguouselement was found')
-            #  an ambiguous element was found
+            inputwaypointsobj = tiebreaker.tiebreaker(inputwaypointsobj)  #  an ambiguous element was found
             break  # otherwise this could trigger multiple times
 
-    # an ambiguouselement made it too far, this code forces it to the first possibility
+    # an ambiguouselement made it too far, code below forces it to the first possibility
 
     elementplace = 0
 

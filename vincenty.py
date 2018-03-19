@@ -50,12 +50,14 @@ def vincenty(position1, position2):
         iterLimit -= 1
         
         if iterLimit == 0:
-            return float("NaN")  # formula failed to converge
+            print('formula failed to converge')
+            return float("NaN")
 
     uSq = cosSqAlpha * (a**2 - b**2) / (b**2)
     A = 1 + uSq/16384*(4096+uSq*(-768+uSq*(320-175*uSq)))
     B = uSq/1024 * (256+uSq*(-128+uSq*(74-47*uSq)))
-    deltaSigma = B*sinSigma*(cos2SigmaM+B/4*(cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)-B/6*cos2SigmaM*(-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)))
+    deltaSigma = B*sinSigma*(cos2SigmaM+B/4*(cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)-B/6*cos2SigmaM*
+        (-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)))
     s = b*A*(sigma-deltaSigma)
 
     # s = round(s,3) #round to 1mm precision - Vincenty's formulae are only accurate to within .5mm
