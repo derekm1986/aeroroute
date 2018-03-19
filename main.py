@@ -138,9 +138,9 @@ while True:
             #  an ambiguous element was found
             break  # otherwise this could trigger multiple times
 
-    elementplace = 0
-
     # an ambiguouselement made it too far, this code forces it to the first possibility
+
+    elementplace = 0
 
     for element in inputwaypointsobj:
         if type(element) is Ambiguouselement:

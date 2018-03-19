@@ -5,8 +5,6 @@ from objects import Ambiguouselement
 
 
 def tiebreaker(inputwaypoints):
-
-    #print(inputwaypoints)
     
     foundmultiples = [i for i,x in enumerate(inputwaypoints) if type(x) is Ambiguouselement]  # finding ambiguous waypoint positions
     
