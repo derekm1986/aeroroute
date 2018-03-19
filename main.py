@@ -140,6 +140,8 @@ while True:
 
     elementplace = 0
 
+    # an ambiguouselement made it too far, this code forces it to the first possibility
+
     for element in inputwaypointsobj:
         if type(element) is Ambiguouselement:
             inputwaypointsobj[elementplace] = element.getpossibilities()[0]
@@ -147,19 +149,13 @@ while True:
         else:
             elementplace += 1
 
-    print(inputwaypointsobj)
-
-    #waypointgen = pairmaker.pairmaker(inputwaypointsobj)
+    ###########################################
 
     waypointpairs = []
 
     for pair in pairmaker.pairmaker(inputwaypointsobj):
         waypointpairs.append(pair)
-        print(pair)
 
-    print('waypointpairs is ',waypointpairs)
-
-    # takes waypoint pairs and uses vincenty() to find the total distance
     sumdistance = 0.00  # establish sumdistance and put zero in it
     
     for pairs in waypointpairs:  # find distance of each waypointpair and sum together

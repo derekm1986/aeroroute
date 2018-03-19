@@ -1,12 +1,14 @@
+#  Requires an object with the attribute .getcoordinates() which returns a tuple of type (-lat.00, long.00)
+
 import math
 
 
-def vincenty(latlong1, latlong2):
+def vincenty(position1, position2):
 
-    lat1 = float(latlong1[0])
-    lon1 = float(latlong1[1])
-    lat2 = float(latlong2[0])
-    lon2 = float(latlong2[1])
+    lat1 = float(position1.getcoordinates()[0])
+    lon1 = float(position1.getcoordinates()[1])
+    lat2 = float(position2.getcoordinates()[0])
+    lon2 = float(position2.getcoordinates()[1])
     
     if lat1 == lat2 and lon1 == lon2:
         return 0.0
