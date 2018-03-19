@@ -4,6 +4,7 @@ import waypointsreader
 import navaidsreader
 import pairmaker
 import tiebreaker
+import functions
 from objects import Ambiguouselement, Pointinspace
 
 
