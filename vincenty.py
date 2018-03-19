@@ -1,4 +1,4 @@
-#  Requires an object with the attribute .getcoordinates() which returns a tuple of type (-lat.00, long.00)
+#  Requires an object with the attribute .getcoordinates() which returns a tuple of type (-lat.00, lon.00)
 
 import math
 
