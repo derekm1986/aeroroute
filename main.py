@@ -148,17 +148,6 @@ while True:
             elementplace += 1
 
     ###########################################
-
-#    waypointpairs = []
-
-#    for pair in pairmaker.pairmaker(inputwaypointsobj):
-#        waypointpairs.append(pair)
-
-#    sumdistance = 0.00  # establish sumdistance and put zero in it
-    
-#    for pairs in waypointpairs:  # find distance of each waypointpair and sum together
-#        pairdistance = vincenty.vincenty(*pairs)
-#        sumdistance += pairdistance
     
     sumdistance = functions.distancefinder(inputwaypointsobj)
 
