@@ -1,4 +1,4 @@
-#  Requires an object with the attribute .getcoordinates() which returns a tuple of type (-lat.00, lon.00)
+#  Requires a list of two objects with the attribute .getcoordinates() which returns a tuple of type (-lat.00, lon.00)
 
 import math
 
@@ -72,5 +72,6 @@ def vincenty(position1, position2):
     #                 revAz.toDeg()
     #               };
     
-    distanceinNM = s/1852.0  # s is output in meters, converting to nautical miles -> 1852 meters in a nautical mile (official and exact)
+    distanceinNM = s/1852.0  # s is output in meters, converting to nautical miles ->
+                                # 1852 meters in a nautical mile (official and exact)
     return distanceinNM
