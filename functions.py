@@ -1,5 +1,4 @@
 import vincenty
-import pairmaker
 
 
 def pairmaker(inputwaypoints):
