@@ -74,60 +74,63 @@ while True:
         print('***Program exiting***')
         break
 
-    inputwaypointsobj = []
+    inputwaypointsobj = stringreader(inputstring)
 
-    manualwaypointnumber = 1
+#    inputwaypointsobj = []
 
-    notfoundflag = False
+#    manualwaypointnumber = 1
 
-    previousitemname = None  # this is used below to detect a double input
+#    notfoundflag = False
 
-    doubleinputflag = False
+#    previousitemname = None  # this is used below to detect a double input
 
-    for item in inputstring:
+#    doubleinputflag = False
 
-        if "/" in item:  # manual input detected
-            itemname = 'WAYPOINT' + str(manualwaypointnumber)
-            coordinates = [tuple(item.split('/'))]
-            # assert that it's valid
-            founditem = Pointinspace(itemname, coordinates, 'manual waypoint')
-            manualwaypointnumber += 1
+#    for item in inputstring:
 
-        elif item in airportsreader.airportdictobj:
-            itemname = item
-            founditem = airportsreader.airportdictobj[item]
+#        if "/" in item:  # manual input detected
+#            itemname = 'WAYPOINT' + str(manualwaypointnumber)
+#            coordinates = [tuple(item.split('/'))]
+#            # assert that it's valid
+#            founditem = Pointinspace(itemname, coordinates, 'manual waypoint')
+#            manualwaypointnumber += 1
 
-        # elif put something here to read airways
+#        elif item in airportsreader.airportdictobj:
+#            itemname = item
+#            founditem = airportsreader.airportdictobj[item]
 
-        # elif put something here to read SIDs/STARs
+#        # elif put something here to read airways
 
-        elif item in pointsinspacedictobj:
-            itemname = item
-            founditem = pointsinspacedictobj[item]
+#        # elif put something here to read SIDs/STARs
 
-        else:
-            print(item, "not found")
-            itemname = item  # needed for double input detection later
-            notfoundflag = True
+#        elif item in pointsinspacedictobj:
+#            itemname = item
+#            founditem = pointsinspacedictobj[item]
 
-        if previousitemname == itemname and notfoundflag is False:  # double input detection
-            print('Multiple adjacent input found with name', itemname, '- unable to compute.')
-            doubleinputflag = True
+#        else:
+#            print(item, "not found")
+#            itemname = item  # needed for double input detection later
+#            notfoundflag = True
 
-        if notfoundflag is False:
-            inputwaypointsobj.append(founditem)
+#        if previousitemname == itemname and notfoundflag is False:  # double input detection
+#            print('Multiple adjacent input found with name', itemname, '- unable to compute.')
+#            doubleinputflag = True
 
-        previousitemname = itemname  # for double input detection
+#        if notfoundflag is False:
+#            inputwaypointsobj.append(founditem)
 
-    if notfoundflag is True:
-        continue
+#        previousitemname = itemname  # for double input detection
 
-    if doubleinputflag is True:
-        continue
+#    if notfoundflag is True:
+#        continue
+
+#    if doubleinputflag is True:
+#        continue
 
     if len(inputwaypointsobj) == 1:
         print('Single item detected, printing entry:', inputwaypointsobj[0])
         continue
+
 
     print(inputwaypointsobj)
 
