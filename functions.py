@@ -1,5 +1,41 @@
 import vincenty
 import airportsreader
+import navaidsreader
+import waypointsreader
+from objects import *
+
+
+def pointsinspacedictcombiner():
+
+    global pointsinspacedictobj
+
+    pointsinspacedictobj = navaidsreader.navaiddictobj.copy()
+
+    for key, val in waypointsreader.waypointdictobj.items():
+        if key in pointsinspacedictobj:
+            # the entry is already in pointsinspacedictobj
+            if type(pointsinspacedictobj[key]) is Ambiguouselement:
+                # pointsinspacedictobj already has Ambiguouselement
+                if type(val) is Ambiguouselement:
+                    # must add Ambiguouselement to Ambiguouselement
+                    pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key].getpossibilities())
+                else:
+                    # must add Pointinspace to Ambiguouselement
+                    pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key])
+            else:
+                # pointsinspacedictobj contains a Pointinspace
+                if type(val) is Ambiguouselement:
+                    # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
+                    originalpointinspace = pointsinspacedictobj[key]
+                    pointsinspacedictobj[key] = val
+                    pointsinspacedictobj[key].addpossibility(originalpointinspace)
+                else:
+                    # Adding Pointinspace to a Pointinspace
+                    pointsinspacedictobj[key] = Ambiguouselement(key, pointsinspacedictobj[key])
+                    pointsinspacedictobj[key].addpossibility(val)
+        else:
+            # the entry is not yet in pointsinspacedictobj, so just add it
+            pointsinspacedictobj[key] = val
 
 
 def pairmaker(inputwaypoints):
@@ -71,9 +107,10 @@ def stringreader(inputstring):
         previousitemname = itemname  # for double input detection
 
     if notfoundflag is True:
-        output = ('NaN')
+        output = 'invalidinput'
 
     if doubleinputflag is True:
-        output = ('NaN')
+        output = 'invalidinput'
 
     return output
+

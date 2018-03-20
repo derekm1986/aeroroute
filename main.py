@@ -1,11 +1,9 @@
-import vincenty
 import airportsreader
 import waypointsreader
 import navaidsreader
 import tiebreaker
 import functions
 from objects import Ambiguouselement, Pointinspace
-
 
 print('\n***Program loading***', '\n')
 
@@ -27,33 +25,7 @@ print('OK')  # loading waypoints was successful
 
 print('   Combining NAVAID and waypoints dictionaries...', end="")
 
-pointsinspacedictobj = navaidsreader.navaiddictobj.copy()
-
-for key, val in waypointsreader.waypointdictobj.items():
-    if key in pointsinspacedictobj:
-        # the entry is already in pointsinspacedictobj
-        if type(pointsinspacedictobj[key]) is Ambiguouselement:
-            # pointsinspacedictobj already has Ambiguouselement
-            if type(val) is Ambiguouselement:
-                # must add Ambiguouselement to Ambiguouselement
-                pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key].getpossibilities())
-            else:
-                # must add Pointinspace to Ambiguouselement
-                pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key])
-        else:
-            # pointsinspacedictobj contains a Pointinspace
-            if type(val) is Ambiguouselement:
-                # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
-                originalpointinspace = pointsinspacedictobj[key]
-                pointsinspacedictobj[key] = val
-                pointsinspacedictobj[key].addpossibility(originalpointinspace)
-            else:
-                # Adding Pointinspace to a Pointinspace
-                pointsinspacedictobj[key] = Ambiguouselement(key, pointsinspacedictobj[key])
-                pointsinspacedictobj[key].addpossibility(val)
-    else:
-        # the entry is not yet in pointsinspacedictobj, so just add it
-        pointsinspacedictobj[key] = val
+functions.pointsinspacedictcombiner()
 
 print("OK")  # dictionary combination was successful
 
@@ -74,63 +46,14 @@ while True:
         print('***Program exiting***')
         break
 
-    inputwaypointsobj = stringreader(inputstring)
+    inputwaypointsobj = functions.stringreader(inputstring)
 
-#    inputwaypointsobj = []
-
-#    manualwaypointnumber = 1
-
-#    notfoundflag = False
-
-#    previousitemname = None  # this is used below to detect a double input
-
-#    doubleinputflag = False
-
-#    for item in inputstring:
-
-#        if "/" in item:  # manual input detected
-#            itemname = 'WAYPOINT' + str(manualwaypointnumber)
-#            coordinates = [tuple(item.split('/'))]
-#            # assert that it's valid
-#            founditem = Pointinspace(itemname, coordinates, 'manual waypoint')
-#            manualwaypointnumber += 1
-
-#        elif item in airportsreader.airportdictobj:
-#            itemname = item
-#            founditem = airportsreader.airportdictobj[item]
-
-#        # elif put something here to read airways
-
-#        # elif put something here to read SIDs/STARs
-
-#        elif item in pointsinspacedictobj:
-#            itemname = item
-#            founditem = pointsinspacedictobj[item]
-
-#        else:
-#            print(item, "not found")
-#            itemname = item  # needed for double input detection later
-#            notfoundflag = True
-
-#        if previousitemname == itemname and notfoundflag is False:  # double input detection
-#            print('Multiple adjacent input found with name', itemname, '- unable to compute.')
-#            doubleinputflag = True
-
-#        if notfoundflag is False:
-#            inputwaypointsobj.append(founditem)
-
-#        previousitemname = itemname  # for double input detection
-
-#    if notfoundflag is True:
-#        continue
-
-#    if doubleinputflag is True:
-#        continue
+    if inputwaypointsobj == "invalidinput":  # something bad came back from stringreader
+        continue
 
     if len(inputwaypointsobj) == 1:
         print('Single item detected, printing entry:', inputwaypointsobj[0])
         continue
-
 
     print(inputwaypointsobj)
 
@@ -139,7 +62,7 @@ while True:
             inputwaypointsobj = tiebreaker.tiebreaker(inputwaypointsobj)  #  an ambiguous element was found
             break  # otherwise this could trigger multiple times
 
-    # an ambiguouselement made it too far, code below forces it to the first possibility
+    # an ambiguouselement made it too far, code below forces it to the first possibility ######################
 
     elementplace = 0
 
@@ -150,7 +73,7 @@ while True:
         else:
             elementplace += 1
 
-    ###########################################
+    ###########################################################################################################
     
     sumdistance = functions.distancefinder(inputwaypointsobj)
 
