@@ -25,7 +25,7 @@ def distancefinder(input):
 
 def stringreader(inputstring):
 
-    inputwaypointsobj = []
+    output = []
 
     manualwaypointnumber = 1
 
@@ -66,14 +66,14 @@ def stringreader(inputstring):
             doubleinputflag = True
 
         if notfoundflag is False:
-            inputwaypointsobj.append(founditem)
+            output.append(founditem)
 
         previousitemname = itemname  # for double input detection
 
     if notfoundflag is True:
-        continue
+        output = ('NaN')
 
     if doubleinputflag is True:
-        continue
+        output = ('NaN')
 
-    return inputwaypointsobj
+    return output
