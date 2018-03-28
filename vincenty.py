@@ -3,7 +3,7 @@
 import math
 
 
-def vincenty(position1, position2):
+def vincenty(position1, position2, heading=False):
 
     lat1 = float(position1.getcoordinates()[0])
     lon1 = float(position1.getcoordinates()[1])
@@ -60,14 +60,21 @@ def vincenty(position1, position2):
         (-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)))
     s = b*A*(sigma-deltaSigma)
 
-    s = round(s,3) #round to 1mm precision - Vincenty's formulae are only accurate to within .5mm
+
 
     # to return initial/final azimuths in addition to distance
     fwdAz = math.degrees(math.atan2(cosU2*sinlmbda,  cosU1*sinU2-sinU1*cosU2*coslmbda))
     revAz = math.degrees(math.atan2(cosU1*sinlmbda, -sinU1*cosU2+cosU1*sinU2*coslmbda))
 
-    print('forwardazimuth: '+ str(fwdAz) + ',  ' + 'reverseazimuth: '+ str(revAz))
+    #print('forwardazimuth: '+ str(fwdAz) + ',  ' + 'reverseazimuth: '+ str(revAz))
     
     distanceinNM = s/1852.0  # s is output in meters, converting to nautical miles ->
                                 # 1852 meters in a nautical mile (official and exact)
-    return distanceinNM
+
+    distanceinNM = round(distanceinNM, 6)  # round to 1mm precision - Vincenty's formulae are only accurate to within .5mm, which is
+                        # 0.000000269 nm
+
+    if heading is True:
+            return(distanceinNM, fwdAz, revAz)
+    else:
+            return distanceinNM
