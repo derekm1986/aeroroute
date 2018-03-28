@@ -3,9 +3,7 @@
 import vincenty
 
 
-def tiebreaker(inputwaypoints, foundmultiples):
-
-    multiplesmatrix = foundmultiples
+def tiebreaker(inputwaypoints, multiplesmatrix):
         
     print('multiplesmatrix contents:', multiplesmatrix)  # for debug
                

@@ -3,7 +3,7 @@ import waypointsreader
 import navaidsreader
 import tiebreaker
 import functions
-from objects import Ambiguouselement, Pointinspace
+from objects import Ambiguouselement
 
 print('\n***Program loading***', '\n')
 
