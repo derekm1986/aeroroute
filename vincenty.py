@@ -60,19 +60,13 @@ def vincenty(position1, position2):
         (-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)))
     s = b*A*(sigma-deltaSigma)
 
-    # s = round(s,3) #round to 1mm precision - Vincenty's formulae are only accurate to within .5mm
+    s = round(s,3) #round to 1mm precision - Vincenty's formulae are only accurate to within .5mm
 
-    #        to return initial/final bearings in addition to distance, use something like:
-    fwdAz = math.atan2(cosU2*sinlmbda,  cosU1*sinU2-sinU1*cosU2*coslmbda)
-    revAz = math.atan2(cosU1*sinlmbda, -sinU1*cosU2+cosU1*sinU2*coslmbda)
+    # to return initial/final azimuths in addition to distance
+    fwdAz = math.degrees(math.atan2(cosU2*sinlmbda,  cosU1*sinU2-sinU1*cosU2*coslmbda))
+    revAz = math.degrees(math.atan2(cosU1*sinlmbda, -sinU1*cosU2+cosU1*sinU2*coslmbda))
 
-    print('firstazimuth: '+fwdAz+'secondazimuth: '+revAz)
-    
-    # return { distance:
-    #         s, initialBearing:
-    #       fwdAz.toDeg(), finalBearing:
-    #                 revAz.toDeg()
-    #               };
+    print('forwardazimuth: '+ str(fwdAz) + ',  ' + 'reverseazimuth: '+ str(revAz))
     
     distanceinNM = s/1852.0  # s is output in meters, converting to nautical miles ->
                                 # 1852 meters in a nautical mile (official and exact)
