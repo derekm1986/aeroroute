@@ -63,9 +63,11 @@ def vincenty(position1, position2):
     # s = round(s,3) #round to 1mm precision - Vincenty's formulae are only accurate to within .5mm
 
     #        to return initial/final bearings in addition to distance, use something like:
-    #        fwdAz = math.atan2(cosU2*sinlmbda,  cosU1*sinU2-sinU1*cosU2*coslmbda);
-    #        revAz = math.atan2(cosU1*sinlmbda, -sinU1*cosU2+cosU1*sinU2*coslmbda);
+    fwdAz = math.atan2(cosU2*sinlmbda,  cosU1*sinU2-sinU1*cosU2*coslmbda)
+    revAz = math.atan2(cosU1*sinlmbda, -sinU1*cosU2+cosU1*sinU2*coslmbda)
 
+    print('firstazimuth: '+fwdAz+'secondazimuth: '+revAz)
+    
     # return { distance:
     #         s, initialBearing:
     #       fwdAz.toDeg(), finalBearing:
