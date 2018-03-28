@@ -1,24 +1,11 @@
-# this file is for when a route item is returned with multiple lat/longs
+# this file is for when a route item is returned with multiple lat/longs, keeping separate for testing
 
 import vincenty
-from objects import Ambiguouselement
 
 
-def tiebreaker(inputwaypoints):
-    
-    foundmultiples = [i for i,x in enumerate(inputwaypoints) if type(x) is Ambiguouselement]  # finding ambiguous waypoint positions
-    
-    multiplesmatrix = []
-    
-    lastwaypoint = -9999  # have to fill it with something
-     
-    # this groups ambiguous waypoints together if they are sequential
-    for waypoint in foundmultiples:  # detect if waypoints are next to each other
-        if waypoint == lastwaypoint + 1:  # waypoint is sequential to waypoint before it
-            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint)  # group with previous
-        else:  # waypoint stands alone
-            multiplesmatrix.append([waypoint])
-        lastwaypoint = waypoint
+def tiebreaker(inputwaypoints, foundmultiples):
+
+    multiplesmatrix = foundmultiples
         
     print('multiplesmatrix contents:', multiplesmatrix)  # for debug
                

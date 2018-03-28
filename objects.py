@@ -53,6 +53,10 @@ class Ambiguouselement(object):
         self.identifier = identifier
         self.possibilities = [initialpossibility]
 
+    def __iter__(self):
+        for possibility in self.possibilities:
+            yield possibility
+
     def addpossibility(self, possibility):
         self.possibilities.append(possibility)
 

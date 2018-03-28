@@ -114,3 +114,26 @@ def stringreader(inputstring):
 
     return output
 
+def multiplefinder(inputwaypoints):
+
+    # finding ambiguous waypoint positions
+
+    foundmultiples = [i for i, x in enumerate(inputwaypoints) if type(x) is Ambiguouselement]
+
+    multiplesmatrix = []
+
+    lastwaypoint = -9  # have to fill it with something
+
+    # this groups ambiguous waypoints together if they are sequential
+    for waypoint in foundmultiples:  # detect if waypoints are next to each other
+        if waypoint == lastwaypoint + 1:  # waypoint is sequential to waypoint before it
+            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint)  # group with previous
+        else:  # waypoint stands alone
+            multiplesmatrix.append([waypoint])
+        lastwaypoint = waypoint
+
+    return multiplesmatrix
+
+#def testtiebreaker(inputroute):
+
+
