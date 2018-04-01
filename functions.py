@@ -53,7 +53,7 @@ def distancefinder(input):
     sumdistance = 0.00  # establish sumdistance and put zero in it
   
     for pair in pairmaker(input):
-        pairdistance = vincenty(*pair)
+        pairdistance = vincenty(pair)
         sumdistance += pairdistance
 
     return sumdistance
@@ -135,14 +135,15 @@ def multiplefinder(inputwaypoints):
     return multiplesmatrix
 
 
-def vincenty(position1, position2, heading=False):
-    #  Requires a list of two objects with the attribute .getcoordinates() which returns a
+def vincenty(pair, heading=False):
+
+    #  Requires a tuple of two objects with the attribute .getcoordinates() which returns a
     #  tuple of type (-lat.00, lon.00)
 
-    lat1 = float(position1.getcoordinates()[0])
-    lon1 = float(position1.getcoordinates()[1])
-    lat2 = float(position2.getcoordinates()[0])
-    lon2 = float(position2.getcoordinates()[1])
+    lat1 = float(pair[0].getcoordinates()[0])
+    lon1 = float(pair[0].getcoordinates()[1])
+    lat2 = float(pair[1].getcoordinates()[0])
+    lon2 = float(pair[1].getcoordinates()[1])
 
     if lat1 == lat2 and lon1 == lon2:
         return 0.0
