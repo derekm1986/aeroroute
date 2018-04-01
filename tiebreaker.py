@@ -126,3 +126,85 @@ def tiebreaker(inputwaypoints, multiplesmatrix):
 #    print("Number of possibilities:", numberofpossibilities)
 
     return inputwaypoints
+
+
+def testtiebreaker(inputwaypoints, multiplesmatrix):
+
+
+    for multipleset in multiplesmatrix:
+
+        possibilitieslist = []
+
+        allareambiguous = False
+        firstisambiguous = False
+        lastisambiguous = False
+
+        if len(multipleset) == len(inputwaypoints):
+            allareambiguous = True
+
+        elif 0 in multipleset:
+            firstisambiguous = True
+
+        elif len(inputwaypoints) - 1 in multipleset:
+            lastisambiguous = True
+
+        if allareambiguous == True or firstisambiguous == True:
+            # start with first possibility
+            for element in multipleset[0]:
+                possibilitieslist.append(element)
+
+
+# -------------------------------------old is below----------------------------------------------
+
+        if len(multipleset) == 1:  # one multiple is found standing by itself
+            print('Only one multiple found, using adjacent waypoint(s)')
+            if 0 in multipleset:
+                print('Single multiple was found at the beginning')
+                shortestdistance = float("inf")  # establish worst case scenario so anything would be better
+                possibility = 0
+                for iter in inputwaypoints[0].getpossibilities():
+                    tryset = [inputwaypoints[0].getpossibilities()[possibility], inputwaypoints[1]]
+                    trydistance = functions.vincenty((inputwaypoints[0].getpossibilities()[possibility],
+                                                      inputwaypoints[1]))
+                    if trydistance < shortestdistance:
+                        shortestdistance = trydistance
+                        shortestpossibility = possibility
+                        shortestset = tryset
+                    possibility += 1
+                    # put lat/long back where it belongs
+                inputwaypoints[0] = inputwaypoints[0].getpossibilities()[shortestpossibility]
+            elif len(inputwaypoints) - 1 in multipleset:
+                print('Single multiple was found at the end')
+                shortestdistance = float("inf")  # establish worst case scenario so anything would be better
+                possibility = 0
+                for iter in inputwaypoints[multipleset[0]].getpossibilities():
+                    tryset = [inputwaypoints[multipleset[0] - 1],
+                              inputwaypoints[multipleset[0]].getpossibilities()[possibility]]
+                    trydistance = functions.vincenty((inputwaypoints[multipleset[0] - 1],
+                                                      inputwaypoints[multipleset[0]].getpossibilities()[possibility]))
+                    if trydistance < shortestdistance:
+                        shortestdistance = trydistance
+                        shortestpossibility = possibility
+                        shortestset = tryset
+                    possibility += 1
+                    # put lat/long back where it belongs
+                inputwaypoints[multipleset[0]] = inputwaypoints[multipleset[0]].getpossibilities()[shortestpossibility]
+            else:
+                print('Single multiple found in middle of route')
+                shortestdistance = float("inf")  # establish worst case scenario so anything would be better
+                possibility = 0
+                for iter in inputwaypoints[multipleset[0]].getpossibilities():
+                    tryset = [inputwaypoints[multipleset[0] - 1],
+                              inputwaypoints[multipleset[0]].getpossibilities()[possibility],
+                              inputwaypoints[multipleset[0] + 1]]
+                    trydistance = functions.vincenty((inputwaypoints[multipleset[0] - 1],
+                                                      inputwaypoints[multipleset[0]].getpossibilities()[possibility])) + \
+                                  functions.vincenty((inputwaypoints[multipleset[0]].getpossibilities()[possibility],
+                                                      inputwaypoints[multipleset[0] + 1]))
+                    if trydistance < shortestdistance:
+                        shortestdistance = trydistance
+                        shortestpossibility = possibility
+                        shortestset = tryset
+                    possibility += 1
+                    # put lat/long back where it belongs
+                inputwaypoints[multipleset[0]] = inputwaypoints[multipleset[0]].getpossibilities()[shortestpossibility]
