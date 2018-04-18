@@ -72,7 +72,21 @@ class Possibility(object):
         self.possibility = possibility
 
     def getoriginalposition(self):
-        return originalposition
+        return self.originalposition
 
     def getpossibility(self):
-        return possibility
+        return self.possibility
+
+class Route(object):
+
+    def __init__(self):
+        self.route = []
+
+    def addelement(self, element):
+        self.route.append(element)
+
+    def deambiguate(self, position, possibilitynumber):
+        self.route[position] = self.route[position].getpossibilities()[possibilitynumber]
+
+    def getroute(self):
+        return self.route
