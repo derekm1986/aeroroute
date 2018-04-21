@@ -51,7 +51,7 @@ while True:
     if inputwaypointsobj == "invalidinput":  # something bad came back from stringreader
         continue
 
-    if len(inputwaypointsobj) == 1:
+    if len(inputwaypointsobj.getroute()) == 1:
         print('Single item detected, printing entry:', inputwaypointsobj[0])
         continue
 
@@ -71,9 +71,9 @@ while True:
 
     elementplace = 0
 
-    for element in inputwaypointsobj:
+    for element in inputwaypointsobj.getroute():
         if type(element) is Ambiguouselement:
-            inputwaypointsobj[elementplace] = element.getpossibilities()[0]
+            inputwaypointsobj.getroute()[elementplace] = element.getpossibilities()[0]
             elementplace += 1
         else:
             elementplace += 1

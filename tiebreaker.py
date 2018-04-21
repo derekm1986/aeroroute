@@ -15,52 +15,52 @@ def tiebreaker(inputwaypoints, multiplesmatrix):
                 print('Single multiple was found at the beginning')
                 shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
-                for iter in inputwaypoints[0].getpossibilities():
-                    tryset = [inputwaypoints[0].getpossibilities()[possibility], inputwaypoints[1]]
-                    trydistance = functions.vincentyindirect((inputwaypoints[0].getpossibilities()[possibility],
-                        inputwaypoints[1]))
+                for iter in inputwaypoints.getroute()[0].getpossibilities():
+                    tryset = [inputwaypoints.getroute()[0].getpossibilities()[possibility], inputwaypoints.getroute()[1]]
+                    trydistance = functions.vincentyindirect((inputwaypoints.getroute()[0].getpossibilities()[possibility],
+                        inputwaypoints.getroute()[1]))
                     if trydistance < shortestdistance:
                         shortestdistance = trydistance
                         shortestpossibility = possibility
                         shortestset = tryset                    
                     possibility += 1
                     # put lat/long back where it belongs
-                inputwaypoints[0] = inputwaypoints[0].getpossibilities()[shortestpossibility]
-            elif len(inputwaypoints) - 1 in multipleset:
+                inputwaypoints[0]????????????????? = inputwaypoints.getroute()[0].getpossibilities()[shortestpossibility]
+            elif len(inputwaypoints.getroute()) - 1 in multipleset:
                 print('Single multiple was found at the end')
                 shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
-                for iter in inputwaypoints[multipleset[0]].getpossibilities():
-                    tryset = [inputwaypoints[multipleset[0]-1],
-                        inputwaypoints[multipleset[0]].getpossibilities()[possibility]]
-                    trydistance = functions.vincentyindirect((inputwaypoints[multipleset[0]-1],
-                        inputwaypoints[multipleset[0]].getpossibilities()[possibility]))
+                for iter in inputwaypoints.getroute()[multipleset[0]].getpossibilities():
+                    tryset = [inputwaypoints.getroute()[multipleset[0]-1],
+                        inputwaypoints.getroute()[multipleset[0]].getpossibilities()[possibility]]
+                    trydistance = functions.vincentyindirect((inputwaypoints.getroute()[multipleset[0]-1],
+                        inputwaypoints.getroute()[multipleset[0]].getpossibilities()[possibility]))
                     if trydistance < shortestdistance:
                         shortestdistance = trydistance
                         shortestpossibility = possibility
                         shortestset = tryset
                     possibility += 1
                     # put lat/long back where it belongs
-                inputwaypoints[multipleset[0]] = inputwaypoints[multipleset[0]].getpossibilities()[shortestpossibility]
+                inputwaypoints[multipleset[0]]???????????????? = inputwaypoints.getroute()[multipleset[0]].getpossibilities()[shortestpossibility]
             else:
                 print('Single multiple found in middle of route')
                 shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
-                for iter in inputwaypoints[multipleset[0]].getpossibilities():
-                    tryset = [inputwaypoints[multipleset[0]-1],
-                        inputwaypoints[multipleset[0]].getpossibilities()[possibility],
-                        inputwaypoints[multipleset[0]+1]]
-                    trydistance = functions.vincentyindirect((inputwaypoints[multipleset[0]-1],
-                        inputwaypoints[multipleset[0]].getpossibilities()[possibility])) + \
-                        functions.vincentyindirect((inputwaypoints[multipleset[0]].getpossibilities()[possibility],
-                        inputwaypoints[multipleset[0]+1]))
+                for iter in inputwaypoints.getroute()[multipleset[0]].getpossibilities():
+                    tryset = [inputwaypoints.getroute()[multipleset[0]-1],
+                        inputwaypoints.getroute()[multipleset[0]].getpossibilities()[possibility],
+                        inputwaypoints.getroute()[multipleset[0]+1]]
+                    trydistance = functions.vincentyindirect((inputwaypoints.getroute()[multipleset[0]-1],
+                        inputwaypoints.getroute()[multipleset[0]].getpossibilities()[possibility])) + \
+                        functions.vincentyindirect((inputwaypoints.getroute()[multipleset[0]].getpossibilities()[possibility],
+                        inputwaypoints.getroute()[multipleset[0]+1]))
                     if trydistance < shortestdistance:
                         shortestdistance = trydistance
                         shortestpossibility = possibility
                         shortestset = tryset
                     possibility += 1
                     # put lat/long back where it belongs
-                inputwaypoints[multipleset[0]] = inputwaypoints[multipleset[0]].getpossibilities()[shortestpossibility]
+                inputwaypoints[multipleset[0]]?????????????????????? = inputwaypoints.getroute()[multipleset[0]].getpossibilities()[shortestpossibility]
 #        elif len(multipleset) > 1:  # more than one multiple is inside multipleset
 #            print('multiple set with more than one multiple found, no functionality yet')
 #            if 0 in multipleset and len(inputwaypoints) - 1 in multipleset:  # all are multiples
@@ -139,22 +139,22 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
         firstisambiguous = False
         lastisambiguous = False
 
-        if len(multipleset) == len(inputwaypoints):
+        if len(multipleset) == len(inputwaypoints.getroute()):
             allareambiguous = True
 
         elif 0 in multipleset:
             firstisambiguous = True
 
-        elif len(inputwaypoints) - 1 in multipleset:
+        elif len(inputwaypoints.getroute()) - 1 in multipleset:
             lastisambiguous = True
 
         if allareambiguous == True or firstisambiguous == True:
             # start with first possibility
-            for element in inputwaypoints[multipleset[0]]:
+            for element in inputwaypoints.getroute()[multipleset[0]]:
                 possibilitieslist.append(element)
 
         else:
-            possibilitieslist.append(inputwaypoints[multipleset[0]-1])
+            possibilitieslist.append(inputwaypoints.getroute()[multipleset[0]-1])
             # go to the point before the first ambiguouselement and start the list
 
     print(possibilitieslist)

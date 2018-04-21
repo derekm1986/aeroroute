@@ -42,8 +42,8 @@ def pairmaker(inputwaypoints):
 
     i = 0
 
-    while i <= (len(inputwaypoints) - 2):  # make pairs of each waypoint and the waypoint after it
-        pair = [inputwaypoints[i], inputwaypoints[i + 1]]
+    while i <= (len(inputwaypoints.getroute()) - 2):  # make pairs of each waypoint and the waypoint after it
+        pair = [inputwaypoints.getroute()[i], inputwaypoints.getroute()[i + 1]]
         i += 1
         yield pair
 
@@ -61,7 +61,7 @@ def distancefinder(input):
 
 def stringreader(inputstring):
 
-    output = []
+    output = Route()
 
     manualwaypointnumber = 1
 
@@ -102,7 +102,7 @@ def stringreader(inputstring):
             doubleinputflag = True
 
         if notfoundflag is False:
-            output.append(founditem)
+            output.addelement(founditem)
 
         previousitemname = itemname  # for double input detection
 
@@ -118,7 +118,7 @@ def multiplefinder(inputwaypoints):
 
     # finding ambiguous waypoint positions
 
-    foundmultiples = [i for i, x in enumerate(inputwaypoints) if type(x) is Ambiguouselement]
+    foundmultiples = [i for i, x in enumerate(inputwaypoints.getroute()) if type(x) is Ambiguouselement]
 
     multiplesmatrix = []
 

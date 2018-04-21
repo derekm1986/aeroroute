@@ -81,6 +81,7 @@ class Route(object):
 
     def __init__(self):
         self.route = []
+        self.containsmultiples = False
 
     def addelement(self, element):
         self.route.append(element)
