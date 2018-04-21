@@ -80,16 +80,19 @@ class Possibility(object):
 class Route(object):
 
     def __init__(self):
-        self.route = []
+        self.waypoints = []
         self.containsambiguous = False
 
     def addelement(self, element):
         if type(element) is Ambiguouselement:
             self.containsambiguous = True
-        self.route.append(element)
+        self.waypoints.append(element)
+        
+    def getelement(self, element):
+        return self.waypoints[element]
 
     def deambiguate(self, position, possibilitynumber):
-        self.route[position] = self.route[position].getpossibilities()[possibilitynumber]
+        self.waypoints[position] = self.waypoints[position].getpossibilities()[possibilitynumber]
 
     def getroute(self):
-        return self.route
+        return self.waypoints
