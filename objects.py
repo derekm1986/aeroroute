@@ -60,6 +60,9 @@ class Ambiguouselement(object):
 
     def getidentifier(self):
         return self.identifier
+    
+    def getpossibility(self, possibilitynumber):
+        return self.possibilities[possibilitynumber]
 
     def getpossibilities(self):
         return self.possibilities
