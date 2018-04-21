@@ -25,7 +25,7 @@ def tiebreaker(inputwaypoints, multiplesmatrix):
                         shortestset = tryset                    
                     possibility += 1
                     # put lat/long back where it belongs
-                inputwaypoints[0]????????????????? = inputwaypoints.getroute()[0].getpossibilities()[shortestpossibility]
+                inputwaypoints.deambiguate(0, shortestpossibility)
             elif len(inputwaypoints.getroute()) - 1 in multipleset:
                 print('Single multiple was found at the end')
                 shortestdistance = float("inf")  # establish worst case scenario so anything would be better
@@ -41,7 +41,7 @@ def tiebreaker(inputwaypoints, multiplesmatrix):
                         shortestset = tryset
                     possibility += 1
                     # put lat/long back where it belongs
-                inputwaypoints[multipleset[0]]???????????????? = inputwaypoints.getroute()[multipleset[0]].getpossibilities()[shortestpossibility]
+                inputwaypoints.deambiguate(multipleset[0], shortestpossibility)
             else:
                 print('Single multiple found in middle of route')
                 shortestdistance = float("inf")  # establish worst case scenario so anything would be better
@@ -60,7 +60,7 @@ def tiebreaker(inputwaypoints, multiplesmatrix):
                         shortestset = tryset
                     possibility += 1
                     # put lat/long back where it belongs
-                inputwaypoints[multipleset[0]]?????????????????????? = inputwaypoints.getroute()[multipleset[0]].getpossibilities()[shortestpossibility]
+                inputwaypoints.deambiguate(multipleset[0], shortestpossibility)
 #        elif len(multipleset) > 1:  # more than one multiple is inside multipleset
 #            print('multiple set with more than one multiple found, no functionality yet')
 #            if 0 in multipleset and len(inputwaypoints) - 1 in multipleset:  # all are multiples
