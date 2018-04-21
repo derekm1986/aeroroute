@@ -57,6 +57,9 @@ class Ambiguouselement(object):
 
     def addpossibility(self, possibility):
         self.possibilities.append(possibility)
+        
+    def howmanypossibilities(self):
+        return len(self.possibilities)
 
     def getidentifier(self):
         return self.identifier
@@ -80,6 +83,7 @@ class Possibility(object):
     def getpossibility(self):
         return self.possibility
 
+    
 class Route(object):
 
     def __init__(self):
@@ -93,6 +97,9 @@ class Route(object):
         
     def getelement(self, element):
         return self.waypoints[element]
+    
+    def howmanyelements(self):
+        return len(self.waypoints)
     
     def getpossibility(self, position, possibilitynumber):
         # must be Ambiguouselement at position
