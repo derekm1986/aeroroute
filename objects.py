@@ -81,9 +81,11 @@ class Route(object):
 
     def __init__(self):
         self.route = []
-        self.containsmultiples = False
+        self.containsambiguous = False
 
     def addelement(self, element):
+        if type(element) is Ambiguouselement:
+            self.containsambiguous = True
         self.route.append(element)
 
     def deambiguate(self, position, possibilitynumber):
