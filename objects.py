@@ -101,6 +101,9 @@ class Route(object):
     def howmanyelements(self):
         return len(self.waypoints)
     
+    def getcontainsambiguity(self):
+        return self.containsambiguity
+    
     def getpossibility(self, position, possibilitynumber):
         # must be Ambiguouselement at position
         return self.waypoints[position].getpossibility(possibilitynumber)
