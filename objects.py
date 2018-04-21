@@ -81,11 +81,11 @@ class Route(object):
 
     def __init__(self):
         self.waypoints = []
-        self.containsambiguous = False
+        self.containsambiguity = False
 
     def addelement(self, element):
         if type(element) is Ambiguouselement:
-            self.containsambiguous = True
+            self.containsambiguity = True
         self.waypoints.append(element)
         
     def getelement(self, element):
