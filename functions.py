@@ -40,10 +40,16 @@ def pointsinspacedictcombiner():
 
 def pairmaker(inputwaypoints):
 
+    # below is so that the function will accept a list of elements as well
+    if type(inputwaypoints) is Route:
+        route = inputwaypoints.getroute()
+    else:
+        route = inputwaypoints
+
     i = 0
 
-    while i <= (len(inputwaypoints.getroute()) - 2):  # make pairs of each waypoint and the waypoint after it
-        pair = [inputwaypoints.getroute()[i], inputwaypoints.getroute()[i + 1]]
+    while i <= (len(route) - 2):  # make pairs of each waypoint and the waypoint after it
+        pair = [route[i], route[i + 1]]
         i += 1
         yield pair
 

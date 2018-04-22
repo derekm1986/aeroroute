@@ -60,7 +60,7 @@ while True:
     multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
 
     if len(multiplesmatrix) > 0:
-        inputwaypointsobj = tiebreaker.testtiebreaker(inputwaypointsobj, multiplesmatrix)
+        inputwaypointsobj = tiebreaker.tiebreaker(inputwaypointsobj, multiplesmatrix)
 
 #    for element in inputwaypointsobj:
 #        if type(element) is Ambiguouselement:  # more than one lat/long possibility was found
