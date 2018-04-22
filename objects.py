@@ -108,6 +108,10 @@ class Route(object):
         # must be Ambiguouselement at position
         return self.waypoints[position].getpossibility(possibilitynumber)
 
+    def getpossibilities(self, position):
+        # must be Ambiguouselement at position
+        return self.waypoints[position].getpossibilities()
+
     def deambiguate(self, position, possibilitynumber):
         #must be Ambiguouselement at position
         self.waypoints[position] = self.waypoints[position].getpossibility(possibilitynumber)
