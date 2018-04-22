@@ -16,8 +16,8 @@ def tiebreaker(inputwaypoints, multiplesmatrix):
                 shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
                 for iter in inputwaypoints.getpossibilities(0):
-                    trydistance = functions.vincentyindirect((inputwaypoints.getroute()[0].getpossibilities()[possibility],
-                        inputwaypoints.getelement(1)))
+                    trydistance = functions.distancefinder(((inputwaypoints.getpossibility(0, possibility),
+                        inputwaypoints.getelement(1))))
                     if trydistance < shortestdistance:
                         shortestdistance = trydistance
                         shortestpossibility = possibility
@@ -29,8 +29,8 @@ def tiebreaker(inputwaypoints, multiplesmatrix):
                 shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
                 for iter in inputwaypoints.getpossibilities(multipleset[0]):
-                    trydistance = functions.vincentyindirect((inputwaypoints.getelement(multipleset[0]-1),
-                        inputwaypoints.getroute()[multipleset[0]].getpossibilities()[possibility]))
+                    trydistance = functions.distancefinder((inputwaypoints.getelement(multipleset[0]-1),
+                        inputwaypoints.getpossibility(multipleset[0], possibility)))
                     if trydistance < shortestdistance:
                         shortestdistance = trydistance
                         shortestpossibility = possibility
@@ -42,9 +42,8 @@ def tiebreaker(inputwaypoints, multiplesmatrix):
                 shortestdistance = float("inf")  # establish worst case scenario so anything would be better
                 possibility = 0
                 for iter in inputwaypoints.getpossibilities(multipleset[0]):
-                    trydistance = functions.vincentyindirect((inputwaypoints.getelement(multipleset[0]-1),
-                        inputwaypoints.getroute()[multipleset[0]].getpossibilities()[possibility])) + \
-                        functions.vincentyindirect((inputwaypoints.getroute()[multipleset[0]].getpossibilities()[possibility],
+                    trydistance = functions.distancefinder((inputwaypoints.getelement(multipleset[0]-1),
+                        inputwaypoints.getpossibility(multipleset[0], possibility),
                         inputwaypoints.getelement(multipleset[0]+1)))
                     if trydistance < shortestdistance:
                         shortestdistance = trydistance
