@@ -75,7 +75,7 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
         elif inputwaypoints.howmanyelements() - 1 in multipleset:
             lastisambiguous = True
 
-        if allareambiguous == True or firstisambiguous == True:
+        if allareambiguous is True or firstisambiguous is True:
             # start with first possibility
             for element in inputwaypoints.getelement(multipleset[0]):
                 possibilitieslist.append(element)
