@@ -73,9 +73,11 @@ class Ambiguouselement(object):
 
 class Possibility(object):
 
-    def __init__(self, originalposition, possibility):
+    def __init__(self, waypoint, originalposition, possibility, wasiambiguous=False):
+        self.waypoint = waypoint
         self.originalposition = originalposition
         self.possibility = possibility
+        self.wasiambiguous = wasiambiguous
 
     def getoriginalposition(self):
         return self.originalposition
@@ -83,7 +85,12 @@ class Possibility(object):
     def getpossibility(self):
         return self.possibility
 
-    
+    def getwasiambiguous(self):
+        return self.wasiambiguous
+
+    def getwaypoint(self):
+        return self.waypoint
+
 class Route(object):
 
     def __init__(self):
