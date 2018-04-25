@@ -95,11 +95,8 @@ class Route(object):
 
     def __init__(self):
         self.waypoints = []
-        self.containsambiguity = False
 
     def addelement(self, element):
-        if type(element) is Ambiguouselement:
-            self.containsambiguity = True
         self.waypoints.append(element)
         
     def getelement(self, element):
@@ -109,6 +106,10 @@ class Route(object):
         return len(self.waypoints)
     
     def getcontainsambiguity(self):
+        self.containsambiguity = False
+        for element in self.waypoints:
+            if type(element) is Ambiguouselement:
+                self.containsambiguity = True        
         return self.containsambiguity
     
     def getpossibility(self, position, possibilitynumber):
