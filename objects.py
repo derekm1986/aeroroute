@@ -109,7 +109,8 @@ class Route(object):
         self.containsambiguity = False
         for element in self.waypoints:
             if type(element) is Ambiguouselement:
-                self.containsambiguity = True        
+                self.containsambiguity = True
+                break
         return self.containsambiguity
     
     def getpossibility(self, position, possibilitynumber):
