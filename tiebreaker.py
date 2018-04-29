@@ -1,6 +1,7 @@
 # this file is for when a route item is returned with multiple lat/longs, keeping separate for testing
 
 import functions
+import objects
 
 
 def tiebreaker(inputwaypoints, multiplesmatrix):
@@ -79,12 +80,17 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
 
         if allareambiguous is True or firstisambiguous is True:
             # start with first possibility
+            position = 0
             for element in inputwaypoints.getelement(multipleset[0]):
-                possibilitieslist.append(element)
+                possibilitieslist.append(objects.Possibility(element, 0, position, True))
+                position += 1
 
         else:
-            possibilitieslist.append(inputwaypoints.getelement(multipleset[0]-1))
+            possibilitieslist.append(objects.Possibility(inputwaypoints.getelement(multipleset[0]-1),
+                                                         multipleset[0]-1, 0))
             # go to the point before the first ambiguouselement and start the list
+
+
 
 # ----------------------then do other things??-------------------------------------------------------------------
 # -----------------------what goes last??------------------------------------------------------------------------
