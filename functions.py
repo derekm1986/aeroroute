@@ -42,7 +42,7 @@ def pairmaker(inputwaypoints):
 
     # below is so that the function will accept a list of elements as well
     if type(inputwaypoints) is Route:
-        route = inputwaypoints.getroute()
+        route = inputwaypoints.getwaypoints()
     else:
         route = inputwaypoints
 
@@ -124,7 +124,7 @@ def multiplefinder(inputwaypoints):
 
     # finding ambiguous waypoint positions
 
-    foundmultiples = [i for i, x in enumerate(inputwaypoints.getroute()) if type(x) is Ambiguouselement]
+    foundmultiples = [i for i, x in enumerate(inputwaypoints.getwaypoints()) if type(x) is Ambiguouselement]
 
     multiplesmatrix = []
 

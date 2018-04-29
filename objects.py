@@ -125,5 +125,5 @@ class Route(object):
         #must be Ambiguouselement at position
         self.waypoints[position] = self.waypoints[position].getpossibility(possibilitynumber)
 
-    def getroute(self):
+    def getwaypoints(self):
         return self.waypoints
