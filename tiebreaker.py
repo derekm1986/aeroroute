@@ -90,7 +90,9 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                                                          multipleset[0]-1, 0))
             # go to the point before the first ambiguouselement and start the list
 
-
+            for element in inputwaypoints.getelement(multipleset[0]):
+                # copy possibilitieslist
+                # append element
 
 # ----------------------then do other things??-------------------------------------------------------------------
 # -----------------------what goes last??------------------------------------------------------------------------
