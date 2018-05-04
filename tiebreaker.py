@@ -62,6 +62,7 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
     for multipleset in multiplesmatrix:
 
         possibilitieslist = []
+        testmultipleset = multipleset
 
         allareambiguous = False
         firstisambiguous = False
@@ -75,6 +76,12 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
 
         elif inputwaypoints.howmanyelements() - 1 in multipleset:
             lastisambiguous = True
+
+        if allareambiguous is False and firstisambiguous is False:
+            # add previous waypoint to testmultipleset
+
+        if allareambiguous is False and lastisambiguous is False:
+            # add following waypoint to testmultipleset
 
 # ---------------------establish the first element of the possibilitieslist------------------------------------
 
