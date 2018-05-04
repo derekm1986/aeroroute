@@ -62,8 +62,12 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
     for multipleset in multiplesmatrix:
 
         possibilitieslist = []
+        multiplesetelements = []
         testmultipleset = multipleset
-
+        
+        for item in multipleset:
+            multiplesetelements.append(inputwaypoints[item])
+        
         allareambiguous = False
         firstisambiguous = False
         lastisambiguous = False
