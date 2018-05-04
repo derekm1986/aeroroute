@@ -81,7 +81,7 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
             # add previous waypoint to beginning of testmultipleset
 
         if allareambiguous is False and lastisambiguous is False:
-            # .append following waypoint to testmultipleset\
+            #testmultipleset.append(inputwaypoints[(multipleset#last?? + 1)])
 
         print multipleset
         print testmultipleset
