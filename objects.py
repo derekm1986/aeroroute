@@ -71,18 +71,18 @@ class Ambiguouselement(object):
         return self.possibilities
 
 
-class Possibility(object):
+class TBWrapper(object):
 
-    def __init__(self, waypoint, originalposition, ambiguousposition=None):
+    def __init__(self, waypoint, originalposition, wasiambiguous=False):
         self.waypoint = waypoint
         self.originalposition = originalposition
-        self.ambiguousposition = ambiguousposition
+        self.wasiambiguous = wasiambiguous
 
     def getoriginalposition(self):
         return self.originalposition
 
-    def getambiguousposition(self):
-        return self.ambiguousposition
+    def wasiambiguous(self):
+        return self.wasiambiguous
 
     def getwaypoint(self):
         return self.waypoint
