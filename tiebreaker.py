@@ -61,21 +61,19 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
 
     for multipleset in multiplesmatrix:
 
-        possibilitieslist = []
-        multiplesetelements = []
-        
         print('multipleset was: ', multipleset)
-
-        for listposition in multipleset:
-            multiplesetelements.append(objects.TBWrapper(inputwaypoints.getelement(listposition), 
-                                       listposition, True))
         
         allareambiguous = False
         firstisambiguous = False
         lastisambiguous = False
 
+        possibilitieslist = []
+        multiplesetelements = []
+        
         if len(multipleset) == inputwaypoints.howmanyelements():
             allareambiguous = True
+            firstisambiguous = True
+            lastisambiguous = True
 
         elif 0 in multipleset:
             firstisambiguous = True
@@ -83,6 +81,10 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
         elif inputwaypoints.howmanyelements() - 1 in multipleset:
             lastisambiguous = True
 
+        for listposition in multipleset:
+            multiplesetelements.append(objects.TBWrapper(inputwaypoints.getelement(listposition), 
+                                       listposition, True))
+                
         if allareambiguous is False and firstisambiguous is False:
             # add previous waypoint to beginning of testmultipleset
             multiplesetelements.insert(0, objects.TBWrapper(inputwaypoints.getelement(multipleset[0] - 1),
