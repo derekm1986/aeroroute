@@ -86,12 +86,12 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                                        listposition, True))
                 
         if allareambiguous is False and firstisambiguous is False:
-            # add previous waypoint to beginning of testmultipleset
+            # add previous waypoint to beginning of multiplesetelements
             multiplesetelements.insert(0, objects.TBWrapper(inputwaypoints.getelement(multipleset[0] - 1),
                                        multipleset[0] - 1))
             
         if allareambiguous is False and lastisambiguous is False:
-            # add following waypoint to end of testmultipleset 
+            # add following waypoint to end of multiplesetelements 
             multiplesetelements.append(objects.TBWrapper(inputwaypoints.getelement(multipleset[-1] + 1),
                                        multipleset[-1] + 1))
             
