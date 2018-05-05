@@ -66,7 +66,7 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
         testmultipleset = multipleset
         
         for item in multipleset:
-            multiplesetelements.append(inputwaypoints[item])
+            multiplesetelements.append(inputwaypoints.getelement(item))
         
         allareambiguous = False
         firstisambiguous = False
@@ -82,33 +82,34 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
             lastisambiguous = True
 
         if allareambiguous is False and firstisambiguous is False:
-            testmultipleset = inputwaypoints[multipleset[0] - 1] + testmultipleset
+            testmultipleset.insert(0, inputwaypoints.getelement(multipleset[0] - 1))
             # add previous waypoint to beginning of testmultipleset
 
         if allareambiguous is False and lastisambiguous is False:
-            testmultipleset.append(inputwaypoints[(multipleset[-1] + 1)])
+            testmultipleset.append(inputwaypoints.getelement(multipleset[-1] + 1))
             # add following waypoint to end of testmultipleset 
 
-        print multipleset
-        print testmultipleset
+        print('multipleset is: ', multipleset)
+        print('testmultipleset is: ', testmultipleset)
 
 # ---------------------establish the first element of the possibilitieslist------------------------------------
 
-        if allareambiguous is True or firstisambiguous is True:
-            # start with first possibility
-            position = 0
-            for element in inputwaypoints.getelement(multipleset[0]):
-                possibilitieslist.append(objects.Possibility(element, 0, position, True))
-                position += 1
-
-        else:
-            possibilitieslist.append(objects.Possibility(inputwaypoints.getelement(multipleset[0]-1),
-                                                         multipleset[0]-1, 0))
-            # go to the point before the first ambiguouselement and start the list
-
-            for element in inputwaypoints.getelement(multipleset[0]):
-                # copy possibilitieslist
-                # append element
+#        if allareambiguous is True or firstisambiguous is True:
+#            # start with first possibility
+#            position = 0
+#            for element in inputwaypoints.getelement(multipleset[0]):
+#                possibilitieslist.append(objects.Possibility(element, 0, position, True))
+#                position += 1
+#
+#        else:
+#           possibilitieslist.append(objects.Possibility(inputwaypoints.getelement(multipleset[0]-1),
+#                                                         multipleset[0]-1, 0))
+#            # go to the point before the first ambiguouselement and start the list
+#
+#            for element in inputwaypoints.getelement(multipleset[0]):
+#                pass
+#                # copy possibilitieslist
+#                # append element
 
 # ----------------------then do other things??-------------------------------------------------------------------
 # -----------------------what goes last??------------------------------------------------------------------------
