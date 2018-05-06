@@ -73,19 +73,32 @@ class Ambiguouselement(object):
 
 class TBWrapper(object):
 
-    def __init__(self, waypoint, originalposition, wasiambiguous=False):
+    def __init__(self, waypoint, originalposition, wasambiguous=False):
         self.waypoint = waypoint
         self.originalposition = originalposition
-        self.wasiambiguous = wasiambiguous
+        self.wasambiguous = wasambiguous
+        self.ambiguousid = None
+
+    def setambiguousid(self, ambiguousid):
+        assert self.wasambiguous is True
+        self.ambiguousid = ambiguousid
+
+    def getwasambiguous(self):
+        return self.wasambiguous
 
     def getoriginalposition(self):
         return self.originalposition
 
-    def wasiambiguous(self):
-        return self.wasiambiguous
+    def getambiguousid(self):
+        return self.ambiguousid
 
     def getwaypoint(self):
         return self.waypoint
+
+    def getcoordinates(self):
+        assert type(self.waypoint) is not Ambiguouselement
+        return self.waypoint.getcoordinates()
+
 
 class Route(object):
 
