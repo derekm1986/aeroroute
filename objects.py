@@ -99,6 +99,9 @@ class TBWrapper(object):
         assert type(self.waypoint) is not Ambiguouselement
         return self.waypoint.getcoordinates()
 
+    def printme(self):
+        print('Wrapper original position:', self.originalposition, ',', 'Wrapper ambiguous ID:', self.ambiguousid, ',',
+              'Wrapper contains:', self.waypoint)
 
 class Route(object):
 
@@ -136,3 +139,6 @@ class Route(object):
 
     def getwaypoints(self):
         return self.waypoints
+
+    def printme(self):
+        print(self.waypoints)
