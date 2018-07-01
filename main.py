@@ -55,7 +55,8 @@ while True:
         print('Single item detected, printing entry:', inputwaypointsobj[0])
         continue
 
-    print(inputwaypointsobj.printme())
+    for thing in inputwaypointsobj.getwaypoints():
+        print(thing)
 
     multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
 

@@ -22,7 +22,7 @@ class Pointinspace(object):
             pass
 
     def __str__(self):
-        return self.identifier + ' ' + self.typeelement + ' coordinates: ' + str(self.coordinates)
+        return self.identifier + ' point in space ' + self.typeelement + ' coordinates: ' + str(self.coordinates)
 
 
 class Airport(object):
@@ -49,7 +49,7 @@ class Airport(object):
             pass
 
     def __str__(self):
-        return self.identifier + ' ' + self.elementname
+        return self.identifier + ' airport ' + self.elementname + ' coordinates: ' + str(self.coordinates)
 
 
 class Ambiguouselement(object):
@@ -78,7 +78,7 @@ class Ambiguouselement(object):
         return self.possibilities
 
     def __str__(self):
-        return self.identifier + ' ambiguous element'
+        return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities'
 
 
 class TBWrapper(object):
@@ -109,9 +109,9 @@ class TBWrapper(object):
         assert type(self.waypoint) is not Ambiguouselement
         return self.waypoint.getcoordinates()
 
-    def printme(self):
-        print('Wrapper original position:', self.originalposition, ',', 'Wrapper ambiguous ID:', self.ambiguousid, ',',
-              'Wrapper contains:', self.waypoint)
+    def __str__(self):
+        return ('Wrapper original position:' + str(self.originalposition) + ',' + 'Wrapper ambiguous ID:' +
+                str(self.ambiguousid) + ', Wrapper contains:' + str(self.waypoint))
 
 class Route(object):
 
@@ -150,5 +150,5 @@ class Route(object):
     def getwaypoints(self):
         return self.waypoints
 
-    def printme(self):
-        print(self.waypoints)
+    def __str__(self): #this doesnt work
+        return str(self.waypoints)

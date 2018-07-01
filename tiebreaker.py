@@ -99,7 +99,7 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
         print('multiplesetelements is: ', multiplesetelements)
 
         for thing in multiplesetelements:
-            thing.printme()
+            print(thing)
 
     print(possibilitieslist)
 
