@@ -27,26 +27,29 @@ class Pointinspace(object):
 
 class Airport(object):
 
-        def __init__(self, identifier, coordinates, elementname=None):
-            self.identifier = identifier
-            self.coordinates = coordinates
-            self.typeelement = 'airport'
-            self.elementname = elementname
+    def __init__(self, identifier, coordinates, elementname=None):
+        self.identifier = identifier
+        self.coordinates = coordinates
+        self.typeelement = 'airport'
+        self.elementname = elementname
 
-        def getidentifier(self):
-            return self.identifier
+    def getidentifier(self):
+        return self.identifier
 
-        def getcoordinates(self):
-            return self.coordinates
+    def getcoordinates(self):
+        return self.coordinates
 
-        def gettypeelement(self):
-            return self.typeelement
+    def gettypeelement(self):
+        return self.typeelement
 
-        def getelementname(self):
-            if self.elementname is not None:
-                return self.elementname
-            else:
-                pass
+    def getelementname(self):
+        if self.elementname is not None:
+            return self.elementname
+        else:
+            pass
+
+    def __str__(self):
+        return self.identifier + ' ' + self.elementname
 
 
 class Ambiguouselement(object):
@@ -73,6 +76,9 @@ class Ambiguouselement(object):
 
     def getpossibilities(self):
         return self.possibilities
+
+    def __str__(self):
+        return self.identifier + ' ambiguous element'
 
 
 class TBWrapper(object):
