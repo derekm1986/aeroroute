@@ -110,8 +110,8 @@ class TBWrapper(object):
         return self.waypoint.getcoordinates()
 
     def __str__(self):
-        return ('Wrapper original position:' + str(self.originalposition) + ',' + 'Wrapper ambiguous ID:' +
-                str(self.ambiguousid) + ', Wrapper contains:' + str(self.waypoint))
+        return ('TBWrapper original position: ' + str(self.originalposition) + ', ' + 'Wrapper ambiguous ID: ' +
+                str(self.ambiguousid) + ', Wrapper contains: ' + str(self.waypoint))
 
 class Route(object):
 
