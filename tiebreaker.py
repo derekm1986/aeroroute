@@ -58,6 +58,7 @@ def tiebreaker(inputwaypoints, multiplesmatrix):
 
 def testtiebreaker(inputwaypoints, multiplesmatrix):
 
+    print('was sent to testtiebreaker')
 
     for multipleset in multiplesmatrix:
 
@@ -81,6 +82,10 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
         elif inputwaypoints.howmanyelements() - 1 in multipleset:
             lastisambiguous = True
 
+        print('allareambiguous is ' + str(allareambiguous))
+        print('firstisambiguous is ' + str(firstisambiguous))
+        print('lastisambiguous is ' + str(lastisambiguous))
+
         for listposition in multipleset:
             multiplesetelements.append(objects.TBWrapper(inputwaypoints.getelement(listposition), 
                                        listposition, True))
@@ -100,6 +105,12 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
 
         for thing in multiplesetelements:
             print(thing)
+
+        ###############################################################
+        #do magic things here like unpacking possibilities
+        #for thing in multiplesetelements:
+            #unpack somehow
+        ###############################################################
 
     print(possibilitieslist)
 
