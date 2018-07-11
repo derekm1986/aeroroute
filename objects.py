@@ -83,11 +83,11 @@ class Ambiguouselement(object):
 
 class TBWrapper(object):
 
-    def __init__(self, waypoint, originalposition, wasambiguous=False):
+    def __init__(self, waypoint, originalposition, wasambiguous=False, ambiguousid = None):
         self.waypoint = waypoint
         self.originalposition = originalposition
         self.wasambiguous = wasambiguous
-        self.ambiguousid = None
+        self.ambiguousid = ambiguousid
 
     def setambiguousid(self, ambiguousid):
         assert self.wasambiguous is True

@@ -108,10 +108,44 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
 
         ###############################################################
         #do magic things here like unpacking possibilities
+
+        elementposition = 0
+
+        for element in multiplesetelements:
+            print('current element is: ', element)
+            if elementposition == 0: # first in the list, no copying needed here
+                if element.wasambiguous is False: # single element present
+                    possibilitieslist.append([element])
+                else: # the element is ambiguous
+                    ambiguousid = 0
+                    for possibility in element.waypoint.getpossibilities():
+                        possibilitieslist.append([objects.TBWrapper(possibility, element.getoriginalposition(), True,
+                                                                   ambiguousid)])
+                        ambiguousid += 1
+
+            else: # it's after first in the list
+
+                if element.wasambiguous is False: # single element present
+                    for item in possibilitieslist:
+                        item.append(element) # add to each list by one
+                else: # the element is ambiguous
+                    print('more work to do here')
+                    ambiguousid = 0
+                    for possibility in element.waypoint.getpossibilities():
+                        print(len(element.waypoint.getpossibilities())) # copy the ones already present by this number
+#                        possibilitieslist.append() to each possibility **use from above**
+                        ambiguousid =+ 1
+
+            elementposition += 1
+
+
         #for thing in multiplesetelements:
             #unpack somehow
         ###############################################################
 
-    print(possibilitieslist)
+    print('possibilitieslist is:', possibilitieslist)
+
+    for thing in possibilitieslist:
+        print(thing)
 
     return inputwaypoints
