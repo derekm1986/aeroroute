@@ -128,24 +128,26 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                 if element.wasambiguous is False: # single element present
                     for item in possibilitieslist:
                         item.append(element) # add to each list by one
-                else: # the element is ambiguous
-                    print('more work to do here')
+
+                else:  # the element is ambiguous, complicated copy and append operation needed
                     ambiguousid = 0
+                    print('more work needed to add multiple to lists')
+                    print('copy each by', len(element.waypoint.getpossibilities())-1) # copy the ones already present by this number
                     for possibility in element.waypoint.getpossibilities():
-                        print(len(element.waypoint.getpossibilities())) # copy the ones already present by this number
+
 #                        possibilitieslist.append() to each possibility **use from above**
                         ambiguousid =+ 1
 
             elementposition += 1
 
+        print('possibilitieslist is:') # for debug
+        for thing in possibilitieslist:
+            print(thing)
+            for insidething in thing:
+                print(insidething)
 
-        #for thing in multiplesetelements:
-            #unpack somehow
         ###############################################################
 
-    print('possibilitieslist is:', possibilitieslist)
 
-    for thing in possibilitieslist:
-        print(thing)
 
     return inputwaypoints
