@@ -130,14 +130,20 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                         item.append(element) # add to each list by one
 
                 else:  # the element is ambiguous, complicated copy and append operation needed
-                    ambiguousid = 0
+#####################################################################################################
+
                     print('more work needed to add multiple to lists')
                     print('copy each by', len(element.waypoint.getpossibilities())-1) # copy the ones already present by this number
-                    for possibility in element.waypoint.getpossibilities():
+                    for routealreadyinlist in possibilitieslist:
+                        print('copy and append to me')
+                        ambiguousid = 0
+                        for possibility in element.waypoint.getpossibilities():
+                            #######copy something?? extend??
+                            routealreadyinlist.extend([('test', ambiguousid)])
+#                           possibilitieslist.append() to each routealreadyinlist **use from above**
+                            ambiguousid += 1
 
-#                        possibilitieslist.append() to each possibility **use from above**
-                        ambiguousid =+ 1
-
+#####################################################################################################
             elementposition += 1
 
         print('possibilitieslist is:') # for debug
