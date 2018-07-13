@@ -128,7 +128,6 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                 if element.wasambiguous is False: # single element present
                     for item in possibilitieslist:
                         item.append(element) # add to each list by one
-
                 else:  # the element is ambiguous, complicated copy and append operation needed
 #####################################################################################################
 
@@ -138,8 +137,8 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                         print('copy and append to me')
                         ambiguousid = 0
                         for possibility in element.waypoint.getpossibilities():
-                            #######copy something?? extend??
-                            routealreadyinlist.extend([('test', ambiguousid)])
+                            #######copy something?? append??
+                            routealreadyinlist.append(['test', ambiguousid])
 #                           possibilitieslist.append() to each routealreadyinlist **use from above**
                             ambiguousid += 1
 
