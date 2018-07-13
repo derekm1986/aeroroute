@@ -106,9 +106,6 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
         for thing in multiplesetelements:
             print(thing)
 
-        ###############################################################
-        #do magic things here like unpacking possibilities
-
         elementposition = 0
 
         for element in multiplesetelements:
@@ -131,16 +128,34 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                 else:  # the element is ambiguous, complicated copy and append operation needed
 #####################################################################################################
 
-                    print('more work needed to add multiple to lists')
-                    print('copy each by', len(element.waypoint.getpossibilities())-1) # copy the ones already present by this number
+                    #print('more work needed to add multiple to lists')
                     for routealreadyinlist in possibilitieslist:
-                        print('copy and append to me')
+                        currentsegment = routealreadyinlist
+                        possibilitieslist.remove(routealreadyinlist)
+                        print('this should only trigger once')
+
+                        currentsegment = [currentsegment] * len(element.waypoint.getpossibilities()) # expand so we can add
+
+                        print('currentsegment after multiplication: ', currentsegment)
+
                         ambiguousid = 0
-                        for possibility in element.waypoint.getpossibilities():
-                            #######copy something?? append??
-                            routealreadyinlist.append(['test', ambiguousid])
-#                           possibilitieslist.append() to each routealreadyinlist **use from above**
+
+                        while ambiguousid <= len(element.waypoint.getpossibilities()) - 1: # change this?
+
+                            print('currentsegment 2 is:', currentsegment)
+#                            segment.append(objects.TBWrapper(element.waypoint.getpossibility(ambiguousid), element.getoriginalposition(),  # doesn't work right yet
+#                                                                             True, ambiguousid))
+
+#                           currentsegment[0].append(ambiguousid)
+
+                            print(currentsegment[0])
+                            currentsegment[0].append('test')
+                            print(currentsegment[0])
+                            print(ambiguousid)
+
                             ambiguousid += 1
+
+                        print('currentsegment 3 is:', currentsegment)
 
 #####################################################################################################
             elementposition += 1
@@ -150,9 +165,5 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
             print(thing)
             for insidething in thing:
                 print(insidething)
-
-        ###############################################################
-
-
 
     return inputwaypoints
