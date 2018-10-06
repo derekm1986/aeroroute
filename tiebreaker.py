@@ -134,9 +134,11 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                         possibilitieslist.remove(routealreadyinlist)
                         print('this should only trigger once')
 
-                        currentsegment = [currentsegment] * len(element.waypoint.getpossibilities()) # expand so we can add
-
+                        currentsegment = ['currentsegmenttest'] * len(element.waypoint.getpossibilities()) # expand so we can add
+# does line above mess the append statement up later because they are dumb copies
                         print('currentsegment after multiplication: ', currentsegment)
+
+ #                       newroute = []
 
                         ambiguousid = 0
 
@@ -145,13 +147,15 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                             print('currentsegment 2 is:', currentsegment)
 #                            segment.append(objects.TBWrapper(element.waypoint.getpossibility(ambiguousid), element.getoriginalposition(),  # doesn't work right yet
 #                                                                             True, ambiguousid))
+#                            newroute[ambiguousid].append([currentsegment, test, ambiguousid])
 
-#                           currentsegment[0].append(ambiguousid)
+                            currentsegment[ambiguousid] = currentsegment
+                            print('ambiguousid is', ambiguousid)
+                            print('currentsegment[ambiguousid] before append',currentsegment[ambiguousid])
+                            currentsegment[ambiguousid].append(('ambiguousid',ambiguousid))
+                            print('currentsegment[ambiguousid] after append', currentsegment[ambiguousid])
 
-                            print(currentsegment[0])
-                            currentsegment[0].append('test')
-                            print(currentsegment[0])
-                            print(ambiguousid)
+#                            print(newroute)
 
                             ambiguousid += 1
 
