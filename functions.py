@@ -220,20 +220,6 @@ def vincentyindirect(pair, heading=False):
     else:
         return distanceinNM
 
-    
-def complicatedappender(possibilitieslist, element):
-
-    returnedlist = []
-
-    for possibilityfromlist in possibilitieslist:
-        ambiguousid = 0
-        for possibilityfromelement in element.waypoint.getpossibilities():
-           returnedlist.append(possibilityfromlist + [objects.TBWrapper(possibilityfromelement, element.getoriginalposition(), True,
-                                                                   ambiguousid)])
-           ambiguousid += 1
-
-    return returnedlist
-
 
 def deambiguator(inputwaypoints, multiplesmatrix):
 
@@ -290,7 +276,20 @@ def deambiguator(inputwaypoints, multiplesmatrix):
                     for item in possibilitieslist:
                         item.append(element) # add to each list by one
                 else:  # the element is ambiguous, complicated copy and append operation needed
-                    possibilitieslist = complicatedappender(possibilitieslist, element)
+
+                    returnedlist = []
+
+                    for possibilityfromlist in possibilitieslist:
+                        ambiguousid = 0
+                        for possibilityfromelement in element.waypoint.getpossibilities():
+                            returnedlist.append(possibilityfromlist + [objects.TBWrapper(possibilityfromelement,
+                                                                element.getoriginalposition(), True, ambiguousid)])
+                            ambiguousid += 1
+
+                    possibilitieslist = returnedlist
+
+
+
 
             elementposition += 1
 
