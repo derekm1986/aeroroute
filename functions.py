@@ -83,7 +83,7 @@ def stringreader(inputstring):
             itemname = 'WAYPOINT' + str(manualwaypointnumber)
             coordinates = [tuple(item.split('/'))]
             # assert that it's valid
-            founditem = Pointinspace(itemname, coordinates, 'manual waypoint')
+            founditem = objects.Pointinspace(itemname, coordinates, 'manual waypoint')
             manualwaypointnumber += 1
 
         elif item in airportsreader.airportdictobj:
