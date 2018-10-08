@@ -54,13 +54,13 @@ while True:
         print('Single item detected, printing entry:', inputwaypointsobj[0])
         continue
 
-    for thing in inputwaypointsobj.getwaypoints():
-        print(thing)
-
     multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
 
     if len(multiplesmatrix) > 0:
         inputwaypointsobj = functions.deambiguator(inputwaypointsobj, multiplesmatrix)
+
+    for item in inputwaypointsobj.getwaypoints():
+        print(item)
 
     sumdistance = functions.distancefinder(inputwaypointsobj)
 

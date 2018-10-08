@@ -2,7 +2,7 @@ import math
 import airportsreader
 import navaidsreader
 import waypointsreader
-from objects import *
+import objects
 
 
 def pointsinspacedictcombiner():
@@ -14,9 +14,9 @@ def pointsinspacedictcombiner():
     for key, val in waypointsreader.waypointdictobj.items():
         if key in pointsinspacedictobj:
             # the entry is already in pointsinspacedictobj
-            if type(pointsinspacedictobj[key]) is Ambiguouselement:
+            if type(pointsinspacedictobj[key]) is objects.Ambiguouselement:
                 # pointsinspacedictobj already has Ambiguouselement
-                if type(val) is Ambiguouselement:
+                if type(val) is objects.Ambiguouselement:
                     # must add Ambiguouselement to Ambiguouselement
                     pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key].getpossibilities())
                 else:
@@ -24,14 +24,14 @@ def pointsinspacedictcombiner():
                     pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key])
             else:
                 # pointsinspacedictobj contains a Pointinspace
-                if type(val) is Ambiguouselement:
+                if type(val) is objects.Ambiguouselement:
                     # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
                     originalpointinspace = pointsinspacedictobj[key]
                     pointsinspacedictobj[key] = val
                     pointsinspacedictobj[key].addpossibility(originalpointinspace)
                 else:
                     # Adding Pointinspace to a Pointinspace
-                    pointsinspacedictobj[key] = Ambiguouselement(key, pointsinspacedictobj[key])
+                    pointsinspacedictobj[key] = objects.Ambiguouselement(key, pointsinspacedictobj[key])
                     pointsinspacedictobj[key].addpossibility(val)
         else:
             # the entry is not yet in pointsinspacedictobj, so just add it
@@ -41,7 +41,7 @@ def pointsinspacedictcombiner():
 def pairmaker(inputwaypoints):
 
     # below is so that the function will accept a list of elements as well
-    if type(inputwaypoints) is Route:
+    if type(inputwaypoints) is objects.Route:
         route = inputwaypoints.getwaypoints()
     else:
         route = inputwaypoints
@@ -67,7 +67,7 @@ def distancefinder(input):
 
 def stringreader(inputstring):
 
-    output = Route()
+    output = objects.Route()
 
     manualwaypointnumber = 1
 
@@ -124,7 +124,7 @@ def multiplefinder(inputwaypoints):
 
     # finding ambiguous waypoint positions
 
-    foundmultiples = [i for i, x in enumerate(inputwaypoints.getwaypoints()) if type(x) is Ambiguouselement]
+    foundmultiples = [i for i, x in enumerate(inputwaypoints.getwaypoints()) if type(x) is objects.Ambiguouselement]
 
     multiplesmatrix = []
 
@@ -228,7 +228,7 @@ def complicatedappender(possibilitieslist, element):
     for possibilityfromlist in possibilitieslist:
         ambiguousid = 0
         for possibilityfromelement in element.waypoint.getpossibilities():
-           returnedlist.append(possibilityfromlist + [TBWrapper(possibilityfromelement, element.getoriginalposition(), True,
+           returnedlist.append(possibilityfromlist + [objects.TBWrapper(possibilityfromelement, element.getoriginalposition(), True,
                                                                    ambiguousid)])
            ambiguousid += 1
 
@@ -290,16 +290,16 @@ def deambiguator(inputwaypoints, multiplesmatrix):
                     for item in possibilitieslist:
                         item.append(element) # add to each list by one
                 else:  # the element is ambiguous, complicated copy and append operation needed
-                    possibilitieslist = functions.complicatedappender(possibilitieslist, element)
+                    possibilitieslist = complicatedappender(possibilitieslist, element)
 
             elementposition += 1
 
-        print('there are ', len(possibilitieslist), 'possibilities to compute')
+        print('There are', len(possibilitieslist), 'possibilities to compute')
 
         leaderboard = []
 
         for possibility in possibilitieslist: # compute distances
-            leaderboard.append([functions.distancefinder(possibility), possibility])
+            leaderboard.append([distancefinder(possibility), possibility])
 
         shortestdistance = float('Inf')
 
