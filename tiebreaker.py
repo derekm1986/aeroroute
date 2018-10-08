@@ -139,13 +139,12 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
 # does line above mess the append statement up later because they are dumb copies
 #                        print('currentsegment after multiplication: ', currentsegment)
 
- #                       newroute = []
+#                       newroute = []
+#                       ambiguousid = 0
 
- #                       ambiguousid = 0
+#                       while ambiguousid <= len(element.waypoint.getpossibilities()) - 1: # change this?
 
- #                       while ambiguousid <= len(element.waypoint.getpossibilities()) - 1: # change this?
-
-  #                          print('currentsegment 2 is:', currentsegment)
+#                          print('currentsegment 2 is:', currentsegment)
 #                            segment.append(objects.TBWrapper(element.waypoint.getpossibility(ambiguousid), element.getoriginalposition(),  # doesn't work right yet
 #                                                                             True, ambiguousid))
 #                            newroute[ambiguousid].append([currentsegment, test, ambiguousid])
@@ -158,7 +157,7 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
 
 #                            print(newroute)
 
- #                           ambiguousid += 1
+#                           ambiguousid += 1
 
 #                    print('currentsegment 3 is:', currentsegment)
 
@@ -171,20 +170,37 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
             for insidething in thing:
                 print(insidething)
 
-    print('there are ', len(possibilitieslist), 'possibilities to compute')
+        print('there are ', len(possibilitieslist), 'possibilities to compute')
 
-    # compute distances
+        # compute distances
 
-    leaderboard = []
+        leaderboard = []
 
-    for possibility in possibilitieslist:
-        print(functions.distancefinder(possibility))
-        leaderboard.append([functions.distancefinder(possibility), possibility])
+        for possibility in possibilitieslist:
+            print(functions.distancefinder(possibility))
+            leaderboard.append([functions.distancefinder(possibility), possibility])
 
-    print(leaderboard)
+        print('leaderboard is: ', leaderboard)
 
-    # which is shortest
+        shortestdistance = float('Inf')
 
-    # deambiguate the ambiguouselements in shortest list
+        for competitor in leaderboard: # establish which is shortest
+            print(competitor[0], shortestdistance)
+            if competitor[0] < shortestdistance:
+                shortestdistance = competitor[0]
+                shortestcompetitor = competitor
+
+        print('shortestcompetitor is: ', shortestcompetitor)
+
+        # which is shortest
+
+        # deambiguate the ambiguouselements in shortest list in inputwaypoints
+
+        for point in shortestcompetitor[1]:
+            if point.getwasambiguous() is True:
+                print(point, 'was ambiguous')
+                inputwaypoints.deambiguate(point.getoriginalposition(), point.getambiguousid())
+                #deambiguate!!!!
+
 
     return inputwaypoints
