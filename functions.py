@@ -228,8 +228,10 @@ def complicatedappender(possibilitieslist, element):
     elementpossibilitieslength = len(element.waypoint.getpossibilities())
 
     for possibilityfromlist in possibilitieslist:
+        ambiguousid = 0
         for possibilityfromelement in element.waypoint.getpossibilities():
            returnedlist.append(possibilityfromlist + [possibilityfromelement])
+           ambiguousid += 1
 
     #copy so it is multiplied by length of inputpossibilities
     #append a possibility to each
