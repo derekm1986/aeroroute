@@ -230,7 +230,7 @@ def complicatedappender(possibilitieslist, element):
     for possibilityfromlist in possibilitieslist:
         ambiguousid = 0
         for possibilityfromelement in element.waypoint.getpossibilities():
-           returnedlist.append(possibilityfromlist + [objects.TBWrapper(possibilityfromelement, element.getoriginalposition(), True,
+           returnedlist.append(possibilityfromlist + [TBWrapper(possibilityfromelement, element.getoriginalposition(), True,
                                                                    ambiguousid)])
            ambiguousid += 1
 
