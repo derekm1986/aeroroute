@@ -220,6 +220,17 @@ def vincentyindirect(pair, heading=False):
     else:
         return distanceinNM
 
+def complicatedappender(possibilitieslist,element):
+
+
+    returnedlist = []
+    possibilitieslistlength = len(possibilitieslist)
+    elementpossibilitieslength = len(element.waypoint.getpossibilities())
+    #copy so it is multiplied by length of inputpossibilities
+    #append a possibility to each
+
+    print('complicatedappender has: ',possibilitieslistlength, elementpossibilitieslength)
+
 
 #def testtiebreaker(inputroute):
 

@@ -127,7 +127,8 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                         item.append(element) # add to each list by one
                 else:  # the element is ambiguous, complicated copy and append operation needed
 #####################################################################################################
-
+                    #trigger a separate function, complicatedappender
+                    functions.complicatedappender(possibilitieslist, element)
                     #print('more work needed to add multiple to lists')
                     for routealreadyinlist in possibilitieslist:
                         currentsegment = routealreadyinlist
