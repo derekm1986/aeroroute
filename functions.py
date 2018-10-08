@@ -220,14 +220,22 @@ def vincentyindirect(pair, heading=False):
     else:
         return distanceinNM
 
-def complicatedappender(possibilitieslist,element):
+def complicatedappender(possibilitieslist, element):
 
 
     returnedlist = []
     possibilitieslistlength = len(possibilitieslist)
     elementpossibilitieslength = len(element.waypoint.getpossibilities())
+
+    for possibilityfromlist in possibilitieslist:
+        for possibilityfromelement in element.waypoint.getpossibilities():
+           returnedlist.append(possibilityfromlist + [possibilityfromelement])
+
     #copy so it is multiplied by length of inputpossibilities
     #append a possibility to each
+
+    print(returnedlist)
+    print(len(returnedlist))
 
     print('complicatedappender has: ',possibilitieslistlength, elementpossibilitieslength)
 

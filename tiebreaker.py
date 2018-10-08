@@ -130,37 +130,37 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
                     #trigger a separate function, complicatedappender
                     functions.complicatedappender(possibilitieslist, element)
                     #print('more work needed to add multiple to lists')
-                    for routealreadyinlist in possibilitieslist:
-                        currentsegment = routealreadyinlist
-                        possibilitieslist.remove(routealreadyinlist)
-                        print('this should only trigger once')
+#                    for routealreadyinlist in possibilitieslist:
+#                        currentsegment = routealreadyinlist
+#                        possibilitieslist.remove(routealreadyinlist)
+#                        print('this should only trigger once')
 
-                        currentsegment = ['currentsegmenttest'] * len(element.waypoint.getpossibilities()) # expand so we can add
+#                        currentsegment = ['currentsegmenttest'] * len(element.waypoint.getpossibilities()) # expand so we can add
 # does line above mess the append statement up later because they are dumb copies
-                        print('currentsegment after multiplication: ', currentsegment)
+#                        print('currentsegment after multiplication: ', currentsegment)
 
  #                       newroute = []
 
-                        ambiguousid = 0
+ #                       ambiguousid = 0
 
-                        while ambiguousid <= len(element.waypoint.getpossibilities()) - 1: # change this?
+ #                       while ambiguousid <= len(element.waypoint.getpossibilities()) - 1: # change this?
 
-                            print('currentsegment 2 is:', currentsegment)
+  #                          print('currentsegment 2 is:', currentsegment)
 #                            segment.append(objects.TBWrapper(element.waypoint.getpossibility(ambiguousid), element.getoriginalposition(),  # doesn't work right yet
 #                                                                             True, ambiguousid))
 #                            newroute[ambiguousid].append([currentsegment, test, ambiguousid])
 
-                            currentsegment[ambiguousid] = currentsegment
-                            print('ambiguousid is', ambiguousid)
-                            print('currentsegment[ambiguousid] before append',currentsegment[ambiguousid])
-                            currentsegment[ambiguousid].append(('ambiguousid',ambiguousid))
-                            print('currentsegment[ambiguousid] after append', currentsegment[ambiguousid])
+#                            currentsegment[ambiguousid] = currentsegment
+#                            print('ambiguousid is', ambiguousid)
+#                            print('currentsegment[ambiguousid] before append',currentsegment[ambiguousid])
+#                            currentsegment[ambiguousid].append(('ambiguousid',ambiguousid))
+#                            print('currentsegment[ambiguousid] after append', currentsegment[ambiguousid])
 
 #                            print(newroute)
 
-                            ambiguousid += 1
+ #                           ambiguousid += 1
 
-                        print('currentsegment 3 is:', currentsegment)
+#                    print('currentsegment 3 is:', currentsegment)
 
 #####################################################################################################
             elementposition += 1
