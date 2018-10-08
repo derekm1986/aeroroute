@@ -222,10 +222,7 @@ def vincentyindirect(pair, heading=False):
 
 def complicatedappender(possibilitieslist, element):
 
-
     returnedlist = []
-    possibilitieslistlength = len(possibilitieslist)
-    elementpossibilitieslength = len(element.waypoint.getpossibilities())
 
     for possibilityfromlist in possibilitieslist:
         ambiguousid = 0
@@ -234,17 +231,6 @@ def complicatedappender(possibilitieslist, element):
                                                                    ambiguousid)])
            ambiguousid += 1
 
-    #copy so it is multiplied by length of inputpossibilities
-    #append a possibility to each
-
-    print(returnedlist)
-    print(len(returnedlist))
-
-    print('complicatedappender has: ',possibilitieslistlength, elementpossibilitieslength)
-    
     return returnedlist
-
-
-#def testtiebreaker(inputroute):
 
 

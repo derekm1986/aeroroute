@@ -6,12 +6,9 @@ import objects
 
 def testtiebreaker(inputwaypoints, multiplesmatrix):
 
-    print('was sent to testtiebreaker')
 
     for multipleset in multiplesmatrix:
 
-        print('multipleset was: ', multipleset)
-        
         allareambiguous = False
         firstisambiguous = False
         lastisambiguous = False
@@ -30,10 +27,6 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
         elif inputwaypoints.howmanyelements() - 1 in multipleset:
             lastisambiguous = True
 
-        print('allareambiguous is ' + str(allareambiguous))
-        print('firstisambiguous is ' + str(firstisambiguous))
-        print('lastisambiguous is ' + str(lastisambiguous))
-
         for listposition in multipleset:
             multiplesetelements.append(objects.TBWrapper(inputwaypoints.getelement(listposition), 
                                        listposition, True))
@@ -48,16 +41,9 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
             multiplesetelements.append(objects.TBWrapper(inputwaypoints.getelement(multipleset[-1] + 1),
                                        multipleset[-1] + 1))
             
-
-        print('multiplesetelements is: ', multiplesetelements)
-
-        for thing in multiplesetelements:
-            print(thing)
-
         elementposition = 0
 
         for element in multiplesetelements:
-            print('current element is: ', element)
             if elementposition == 0: # first in the list, no copying needed here
                 if element.wasambiguous is False: # single element present
                     possibilitieslist.append([element])
@@ -78,43 +64,22 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
 
             elementposition += 1
 
-        print('possibilitieslist is:') # for debug
-        for thing in possibilitieslist:
-            print(thing)
-            for insidething in thing:
-                print(insidething)
-
         print('there are ', len(possibilitieslist), 'possibilities to compute')
-
-        # compute distances
 
         leaderboard = []
 
-        for possibility in possibilitieslist:
-            print(functions.distancefinder(possibility))
+        for possibility in possibilitieslist: # compute distances
             leaderboard.append([functions.distancefinder(possibility), possibility])
-
-        print('leaderboard is: ', leaderboard)
 
         shortestdistance = float('Inf')
 
         for competitor in leaderboard: # establish which is shortest
-            print(competitor[0], shortestdistance)
             if competitor[0] < shortestdistance:
                 shortestdistance = competitor[0]
                 shortestcompetitor = competitor
 
-        print('shortestcompetitor is: ', shortestcompetitor)
-
-        # which is shortest
-
-        # deambiguate the ambiguouselements in shortest list in inputwaypoints
-
-        for point in shortestcompetitor[1]:
+        for point in shortestcompetitor[1]: # deambiguate using shortestcompetitor
             if point.getwasambiguous() is True:
-                print(point, 'was ambiguous')
                 inputwaypoints.deambiguate(point.getoriginalposition(), point.getambiguousid())
-                #deambiguate!!!!
-
 
     return inputwaypoints
