@@ -233,7 +233,7 @@ def complicatedappender(possibilitieslist, element):
 
     return returnedlist
 
-def tiebreaker(inputwaypoints, multiplesmatrix):
+def deambiguator(inputwaypoints, multiplesmatrix):
 
 
     for multipleset in multiplesmatrix:
