@@ -220,6 +220,7 @@ def vincentyindirect(pair, heading=False):
     else:
         return distanceinNM
 
+    
 def complicatedappender(possibilitieslist, element):
 
     returnedlist = []
@@ -233,8 +234,8 @@ def complicatedappender(possibilitieslist, element):
 
     return returnedlist
 
-def deambiguator(inputwaypoints, multiplesmatrix):
 
+def deambiguator(inputwaypoints, multiplesmatrix):
 
     for multipleset in multiplesmatrix:
 
