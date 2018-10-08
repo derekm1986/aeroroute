@@ -63,24 +63,6 @@ while True:
     if len(multiplesmatrix) > 0:
         inputwaypointsobj = tiebreaker.testtiebreaker(inputwaypointsobj, multiplesmatrix)
 
-#    for element in inputwaypointsobj:
-#        if type(element) is Ambiguouselement:  # more than one lat/long possibility was found
-#            inputwaypointsobj = tiebreaker.tiebreaker(inputwaypointsobj)  # an ambiguous element was found
-#            break  # otherwise this could trigger multiple times
-
-    # an ambiguouselement made it too far, code below forces it to the first possibility ------------
-
-    elementplace = 0
-
-    for element in inputwaypointsobj.getwaypoints():
-        if type(element) is Ambiguouselement:
-            inputwaypointsobj.getwaypoints()[elementplace] = element.getpossibilities()[0]
-            elementplace += 1
-        else:
-            elementplace += 1
-
-    # -----------------------------------------------------------------------------------------------
-
     sumdistance = functions.distancefinder(inputwaypointsobj)
 
     print('Distance in nm:', sumdistance)
