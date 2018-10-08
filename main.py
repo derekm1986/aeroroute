@@ -61,7 +61,7 @@ while True:
     multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
 
     if len(multiplesmatrix) > 0:
-        inputwaypointsobj = functions.tiebreaker(inputwaypointsobj, multiplesmatrix)
+        inputwaypointsobj = functions.deambiguator(inputwaypointsobj, multiplesmatrix)
 
     sumdistance = functions.distancefinder(inputwaypointsobj)
 
