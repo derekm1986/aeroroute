@@ -238,6 +238,8 @@ def complicatedappender(possibilitieslist, element):
     print(len(returnedlist))
 
     print('complicatedappender has: ',possibilitieslistlength, elementpossibilitieslength)
+    
+    return returnedlist
 
 
 #def testtiebreaker(inputroute):
