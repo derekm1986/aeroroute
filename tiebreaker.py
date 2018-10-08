@@ -4,7 +4,7 @@ import functions
 import objects
 
 
-def testtiebreaker(inputwaypoints, multiplesmatrix):
+def tiebreaker(inputwaypoints, multiplesmatrix):
 
 
     for multipleset in multiplesmatrix:
