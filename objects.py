@@ -22,7 +22,10 @@ class Pointinspace(object):
             pass
 
     def __str__(self):
-        return self.identifier + ' point-in-space ' + self.typeelement + ' coordinates: ' + str(self.coordinates)
+        if self.elementname is not None:
+            return self.identifier + ' point-in-space ' + self.typeelement + ' ' + self.elementname + ' coordinates: ' + str(self.coordinates)
+        else:
+            return self.identifier + ' point-in-space ' + self.typeelement + ' coordinates: ' + str(self.coordinates)
 
 
 class Airport(object):
