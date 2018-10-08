@@ -171,4 +171,13 @@ def testtiebreaker(inputwaypoints, multiplesmatrix):
             for insidething in thing:
                 print(insidething)
 
+    print('there are ', len(possibilitieslist), 'possibilities to compute')
+
+    # compute distances
+    for possibility in possibilitieslist:
+        print(functions.distancefinder(possibility))
+    # which is shortest
+
+    # deambiguate the ambiguouselements in shortest list
+
     return inputwaypoints
