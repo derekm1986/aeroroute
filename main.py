@@ -1,7 +1,6 @@
 import airportsreader
 import waypointsreader
 import navaidsreader
-import tiebreaker
 import functions
 from objects import Ambiguouselement
 
