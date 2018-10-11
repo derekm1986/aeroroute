@@ -81,7 +81,7 @@ def stringreader(inputstring):
 
         if "/" in item:  # manual input detected
             itemname = 'WAYPOINT' + str(manualwaypointnumber)
-            coordinates = [tuple(item.split('/'))]
+            coordinates = tuple(item.split('/'))
             # assert that it's valid
             founditem = objects.Pointinspace(itemname, coordinates, 'manual waypoint')
             manualwaypointnumber += 1
