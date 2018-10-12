@@ -1,6 +1,7 @@
 import airportsreader
 import waypointsreader
 import navaidsreader
+import airwayreader
 import functions
 from objects import Ambiguouselement
 
@@ -27,6 +28,8 @@ print('   Combining NAVAID and waypoints dictionaries...', end="")
 functions.pointsinspacedictcombiner()
 
 print("OK")  # dictionary combination was successful
+
+airwayreader.airwaydictmaker()
 
 while True:
 

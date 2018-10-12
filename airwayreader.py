@@ -3,34 +3,37 @@
 
 # need to finish
 
-text_file = open("AIRAC/ATS.txt")
+def airwaydictmaker():
+    pass
+
+#text_file = open("AIRAC/ATS.txt")
 
 #airwayresult = []
 
-thewholefile = text_file.read()
+#thewholefile = text_file.read()
 
-thewholefile = thewholefile.split("\n\n")  # this only works with Windows-formatted text files, splits data between two blank lines
+#thewholefile = thewholefile.split("\n\n")  # this only works with Windows-formatted text files, splits data between two blank lines
 
-airwaydict = {}
+#airwaydict = {}
 
-for airwaystring in thewholefile:
-    tempitem = airwaystring.split()
-    try:
-        firstline = tempitem[0]  # this blows up when you reach the end of the file, hence the need for try/except
-    except:
-        break
-    restofstring = tempitem[1:]
+#for airwaystring in thewholefile:
+#    tempitem = airwaystring.split()
+#    try:
+#        firstline = tempitem[0]  # this blows up when you reach the end of the file, hence the need for try/except
+#    except:
+#        break
+#    restofstring = tempitem[1:]
     
-    firstline = firstline.split("|")
-    airwayid = firstline[1]
-    airwaydict.setdefault(airwayid, []).append((restofstring))  # want to put rest of airwaystring here
+#    firstline = firstline.split("|")
+#    airwayid = firstline[1]
+#    airwaydict.setdefault(airwayid, []).append((restofstring))  # want to put rest of airwaystring here
 
 # airway dictionary is established,
     
-for airwaysegment in airwaydict["Q822"][0]:
-    airwaysegment = airwaysegment.split("|")
-    del airwaysegment[0]  # deletes S at beginning of every line
-    print(airwaysegment)    
+#for airwaysegment in airwaydict["Q822"][0]:
+#    airwaysegment = airwaysegment.split("|")
+#    del airwaysegment[0]  # deletes S at beginning of every line
+#    print(airwaysegment)
     
 #    if not line.strip():
 #        continue
@@ -51,4 +54,4 @@ for airwaysegment in airwaydict["Q822"][0]:
     
 # print airwayresult
 
-text_file.close()
+#text_file.close()
