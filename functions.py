@@ -90,7 +90,7 @@ def stringreader(inputstring):
             itemname = item
             founditem = airportsreader.airportdictobj[item]
 
-        # elif put something here to read airways
+        #elif item in airwayreader.airwaydictobj: # not finished
 
         # elif put something here to read SIDs/STARs
 
