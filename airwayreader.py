@@ -4,9 +4,9 @@
 # need to finish
 
 def airwaydictmaker():
-    pass
+    print('   ***airwaydictmaker was called***')
 
-#text_file = open("AIRAC/ATS.txt")
+    #text_file = open("AIRAC/ATS.txt")
 
 #airwayresult = []
 
@@ -54,4 +54,4 @@ def airwaydictmaker():
     
 # print airwayresult
 
-#text_file.close()
+    #text_file.close()
