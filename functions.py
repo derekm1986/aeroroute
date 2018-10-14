@@ -86,17 +86,17 @@ def stringreader(inputstring):
             founditem = objects.Pointinspace(itemname, coordinates, 'manual waypoint')
             manualwaypointnumber += 1
 
-        elif item in airportsreader.airportdictobj:
+        elif item in airportsreader.airportdict:
             itemname = item
-            founditem = airportsreader.airportdictobj[item]
+            founditem = airportsreader.airportdict[item]
 
-        #elif item in atsreader.airwaydictobj: # not finished
+        #elif item in atsreader.airwaydict: # not finished
 
         # elif put something here to read SIDs/STARs
 
-        elif item in pointsinspacedictobj:
+        elif item in pointsinspacedict:
             itemname = item
-            founditem = pointsinspacedictobj[item]
+            founditem = pointsinspacedict[item]
 
         else:
             print(item, "not found")
