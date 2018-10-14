@@ -10,9 +10,9 @@ def airportdictmaker():
 
     airport_file = open("AIRAC/Airports.txt")
 
-    global airportdictobj
+    global airportdict
 
-    airportdictobj = {}
+    airportdict = {}
 
     for line in airport_file:
         if line.startswith("A"):
@@ -48,6 +48,6 @@ def airportdictmaker():
 
             airportobj = Airport(airportid, (airportlatwithdecimal, airportlongwithdecimal), airportname)
 
-            airportdictobj[airportid] = airportobj
+            airportdict[airportid] = airportobj
 
     airport_file.close()
