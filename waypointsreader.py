@@ -8,9 +8,9 @@ def waypointdictmaker():
 
     waypoint_file = open("AIRAC/Waypoints.txt")
 
-    global waypointdictobj
+    global waypointdict
 
-    waypointdictobj = {}
+    waypointdict = {}
 
     for line in waypoint_file:
         waypointid, waypointlat, waypointlong, waypointregion = line.rstrip().split("|")
@@ -46,13 +46,13 @@ def waypointdictmaker():
 
         waypointobj = Pointinspace(waypointid, (waypointlatwithdecimal, waypointlongwithdecimal), 'waypoint')
 
-        if waypointid in waypointdictobj:
-            if type(waypointdictobj[waypointid]) is Ambiguouselement:
-                waypointdictobj[waypointid].addpossibility(waypointobj)
+        if waypointid in waypointdict:
+            if type(waypointdict[waypointid]) is Ambiguouselement:
+                waypointdict[waypointid].addpossibility(waypointobj)
             else:
-                waypointdictobj[waypointid] = Ambiguouselement(waypointid, waypointdictobj[waypointid])
-                waypointdictobj[waypointid].addpossibility(waypointobj)
+                waypointdict[waypointid] = Ambiguouselement(waypointid, waypointdict[waypointid])
+                waypointdict[waypointid].addpossibility(waypointobj)
         else:
-            waypointdictobj[waypointid] = waypointobj
+            waypointdict[waypointid] = waypointobj
 
     waypoint_file.close()
