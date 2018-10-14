@@ -1,7 +1,7 @@
 import airportsreader
 import waypointsreader
 import navaidsreader
-import airwayreader
+import atsreader
 import functions
 from objects import Ambiguouselement
 
@@ -29,7 +29,7 @@ functions.pointsinspacedictcombiner()
 
 print("OK")  # dictionary combination was successful
 
-airwayreader.airwaydictmaker()
+atsreader.airwaydictmaker()
 
 while True:
 
