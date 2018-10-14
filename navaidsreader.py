@@ -9,9 +9,9 @@ def navaiddictmaker():
 
     navaid_file = open("AIRAC/Navaids.txt")
 
-    global navaiddictobj
+    global navaiddict
 
-    navaiddictobj = {}
+    navaiddict = {}
 
     for line in navaid_file:
         navaidid, navaidname, navaidfrequency, navaidunknown1, navaidunknown2, navaidunknown3, navaidlat, navaidlong, navaidelevation, navaidregion = line.rstrip().split("|")
@@ -45,13 +45,13 @@ def navaiddictmaker():
 
         navaidobj = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
 
-        if navaidid in navaiddictobj:
-            if type(navaiddictobj[navaidid]) is Ambiguouselement:
-                navaiddictobj[navaidid].addpossibility(navaidobj)
+        if navaidid in navaiddict:
+            if type(navaiddict[navaidid]) is Ambiguouselement:
+                navaiddict[navaidid].addpossibility(navaidobj)
             else:
-                navaiddictobj[navaidid] = Ambiguouselement(navaidid, navaiddictobj[navaidid])
-                navaiddictobj[navaidid].addpossibility(navaidobj)
+                navaiddict[navaidid] = Ambiguouselement(navaidid, navaiddict[navaidid])
+                navaiddict[navaidid].addpossibility(navaidobj)
         else:
-            navaiddictobj[navaidid] = navaidobj
+            navaiddict[navaidid] = navaidobj
 
     navaid_file.close()
