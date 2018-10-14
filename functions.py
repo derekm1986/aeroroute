@@ -7,35 +7,35 @@ import objects
 
 def pointsinspacedictcombiner():
 
-    global pointsinspacedictobj
+    global pointsinspacedict
 
-    pointsinspacedictobj = navaidsreader.navaiddictobj.copy()
+    pointsinspacedict = navaidsreader.navaiddict.copy()
 
-    for key, val in waypointsreader.waypointdictobj.items():
-        if key in pointsinspacedictobj:
-            # the entry is already in pointsinspacedictobj
-            if type(pointsinspacedictobj[key]) is objects.Ambiguouselement:
-                # pointsinspacedictobj already has Ambiguouselement
+    for key, val in waypointsreader.waypointdict.items():
+        if key in pointsinspacedict:
+            # the entry is already in pointsinspacedict
+            if type(pointsinspacedict[key]) is objects.Ambiguouselement:
+                # pointsinspacedict already has Ambiguouselement
                 if type(val) is objects.Ambiguouselement:
                     # must add Ambiguouselement to Ambiguouselement
-                    pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key].getpossibilities())
+                    pointsinspacedict[key].addpossibility(waypointsreader.waypointdict[key].getpossibilities())
                 else:
                     # must add Pointinspace to Ambiguouselement
-                    pointsinspacedictobj[key].addpossibility(waypointsreader.waypointdictobj[key])
+                    pointsinspacedict[key].addpossibility(waypointsreader.waypointdict[key])
             else:
-                # pointsinspacedictobj contains a Pointinspace
+                # pointsinspacedict contains a Pointinspace
                 if type(val) is objects.Ambiguouselement:
                     # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
-                    originalpointinspace = pointsinspacedictobj[key]
-                    pointsinspacedictobj[key] = val
-                    pointsinspacedictobj[key].addpossibility(originalpointinspace)
+                    originalpointinspace = pointsinspacedict[key]
+                    pointsinspacedict[key] = val
+                    pointsinspacedict[key].addpossibility(originalpointinspace)
                 else:
                     # Adding Pointinspace to a Pointinspace
-                    pointsinspacedictobj[key] = objects.Ambiguouselement(key, pointsinspacedictobj[key])
-                    pointsinspacedictobj[key].addpossibility(val)
+                    pointsinspacedict[key] = objects.Ambiguouselement(key, pointsinspacedict[key])
+                    pointsinspacedict[key].addpossibility(val)
         else:
-            # the entry is not yet in pointsinspacedictobj, so just add it
-            pointsinspacedictobj[key] = val
+            # the entry is not yet in pointsinspacedict, so just add it
+            pointsinspacedict[key] = val
 
 
 def pairmaker(inputwaypoints):
