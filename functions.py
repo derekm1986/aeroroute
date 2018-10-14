@@ -90,7 +90,7 @@ def stringreader(inputstring):
             itemname = item
             founditem = airportsreader.airportdictobj[item]
 
-        #elif item in airwayreader.airwaydictobj: # not finished
+        #elif item in atsreader.airwaydictobj: # not finished
 
         # elif put something here to read SIDs/STARs
 
@@ -287,9 +287,6 @@ def deambiguator(inputwaypoints, multiplesmatrix):
                             ambiguousid += 1
 
                     possibilitieslist = returnedlist
-
-
-
 
             elementposition += 1
 
