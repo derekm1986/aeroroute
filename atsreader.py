@@ -1,12 +1,77 @@
 # This file parses the vasFMC format ATS.txt file
-# ATS.txt file must be in same directory
+# ATS.txt file must be in AIRAC directory
 
 # need to finish
 
 def airwaydictmaker():
     print('   ***airwaydictmaker was called***')
 
-    #text_file = open("AIRAC/ATS.txt")
+    ats_file = open("AIRAC/ATS.txt")
+
+    global atsdict
+
+    atsdict = {}
+
+    for line in ats_file:
+        if line.startswith("A"):
+            print(line)
+
+    #do stuff here
+
+    ats_file.close()
+
+
+#def airportdictmaker():
+
+#    airport_file = open("AIRAC/Airports.txt")
+
+#    global airportdict
+
+#    airportdict = {}
+
+#    for line in airport_file:
+#        if line.startswith("A"):
+#            linefirstletter, airportid, airportname, airportlat, airportlong, airportelevation = line.rstrip().split("|")
+
+#            airportlatisnegative = False  # establish variable
+
+#           if airportlat.startswith("-"):
+#                airportlatisnegative = True
+#                airportlat = airportlat[1:]
+
+            #if len(airportlat) < 7:
+#                airportlat = "0" * (7 - len(airportlat)) + airportlat
+
+#            airportlatwithdecimal = airportlat[:len(airportlat)-6] + "." + airportlat[len(airportlat)-6:]  # 6 decimal places
+
+#            if airportlatisnegative is True:
+ #               airportlatwithdecimal = "-" + airportlatwithdecimal
+
+  #          airportlongisnegative = False  # establish variable
+
+   #         if airportlong.startswith("-"):
+   #             airportlongisnegative = True
+    #            airportlong = airportlong[1:]
+
+     #       if len(airportlong) < 7:
+#                airportlong = "0" * (7 - len(airportlong)) + airportlong
+#
+ #           airportlongwithdecimal = airportlong[:len(airportlong)-6] + "." + airportlong[len(airportlong)-6:]  # 6 decimal places
+#
+  #          if airportlongisnegative is True:
+   #             airportlongwithdecimal = "-" + airportlongwithdecimal
+
+    #        airportobj = Airport(airportid, (airportlatwithdecimal, airportlongwithdecimal), airportname)
+
+     #       airportdict[airportid] = airportobj
+
+    #airport_file.close()
+
+
+
+
+
+
 
 #airwayresult = []
 
