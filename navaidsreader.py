@@ -1,5 +1,5 @@
 # This file parses the vasFMC format Navaids.txt file
-# Navaids.txt file must be in same directory
+# Navaids.txt file must be in AIRAC directory
 
 from objects import Pointinspace
 from objects import Ambiguouselement
@@ -14,7 +14,12 @@ def navaiddictmaker():
     navaiddict = {}
 
     for line in navaid_file:
-        navaidid, navaidname, navaidfrequency, navaidunknown1, navaidunknown2, navaidunknown3, navaidlat, navaidlong, navaidelevation, navaidregion = line.rstrip().split("|")
+        currentline = line.rstrip().split("|")
+        navaidid = currentline[0]
+        navaidname = currentline[1]
+        navaidlat = currentline[6]
+        navaidlong = currentline[7]
+
         navaidlatisnegative = False  # establish variable
             
         if navaidlat.startswith("-"):

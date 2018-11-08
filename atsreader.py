@@ -8,13 +8,26 @@ def airwaydictmaker():
 
     ats_file = open("AIRAC/ATS.txt")
 
-    global atsdict
+    global airwaydict
 
-    atsdict = {}
+    airwaydict = {}
 
     for line in ats_file:
+
         if line.startswith("A"):
-            print(line)
+            currentline = line.rstrip().split("|")
+            routeid = currentline[1]
+            print(routeid)
+
+        elif line.startswith("S"):
+            currentline = line.rstrip().split("|")
+            firstid = currentline[1]
+            firstlat = currentline[2]
+            firstlong = currentline[3]
+            secondid = currentline[4]
+            secondlat = currentline[5]
+            secondlong = currentline[6]
+            print(firstid, firstlat, firstlong, secondid, secondlat, secondlong)
 
     #do stuff here
 

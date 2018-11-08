@@ -1,5 +1,5 @@
 # This file parses the vasFMC format Waypoints.txt file
-# Waypoints.txt file must be in same directory
+# Waypoints.txt file must be in AIRAC directory
 
 from objects import Pointinspace
 from objects import Ambiguouselement
@@ -13,7 +13,11 @@ def waypointdictmaker():
     waypointdict = {}
 
     for line in waypoint_file:
-        waypointid, waypointlat, waypointlong, waypointregion = line.rstrip().split("|")
+        currentline = line.rstrip().split("|")
+        waypointid = currentline[0]
+        waypointlat = currentline[1]
+        waypointlong = currentline[2]
+
         waypointlatisnegative = False  # establish variable
             
         if waypointlat.startswith("-"):

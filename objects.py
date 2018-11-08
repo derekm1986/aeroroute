@@ -156,3 +156,19 @@ class Route(object):
 
     def __str__(self): #this doesnt work
         return str(self.waypoints)
+
+
+class Airway(object):
+
+    def __init__(self, airwayname):
+        self.airwayname = airwayname
+        self.waypoints = []
+
+    def addelement(self, element):
+        self.waypoints.append(element)
+
+    def getname(self):
+        return self.airwayname
+
+    def getelement(self, element):
+        return self.waypoints[element]

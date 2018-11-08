@@ -1,5 +1,5 @@
 # This file parses the vasFMC format Airports.txt file
-# Airports.txt file must be in same directory
+# Airports.txt file must be in AIRAC directory
 
 # This file does not attempt to read runway data
 
@@ -16,7 +16,11 @@ def airportdictmaker():
 
     for line in airport_file:
         if line.startswith("A"):
-            linefirstletter, airportid, airportname, airportlat, airportlong, airportelevation = line.rstrip().split("|")
+            currentline = line.rstrip().split("|")
+            airportid = currentline[1]
+            airportname = currentline[2]
+            airportlat = currentline[3]
+            airportlong = currentline[4]
 
             airportlatisnegative = False  # establish variable
 
