@@ -3,6 +3,8 @@
 
 # need to finish
 
+from objects import Airway
+
 def airwaydictmaker():
     print('   ***airwaydictmaker was called***')
 
@@ -19,7 +21,11 @@ def airwaydictmaker():
             routeid = currentline[1]
             print(routeid)
             if routeid not in airwaydict:
-                airwaydict[routeid] = routeid
+                airwaydict[routeid] = [Airway(routeid)]
+            else:
+                print(type(airwaydict[routeid]))
+                airwaydict[routeid] = airwaydict[routeid]
+                    .append(Airway(routeid))
 
         elif line.startswith("S"):
             currentline = line.rstrip().split("|")
