@@ -22,10 +22,9 @@ def airwaydictmaker():
             print(routeid)
             if routeid not in airwaydict:
                 airwaydict[routeid] = [Airway(routeid)]
-            else:
-                print(type(airwaydict[routeid]))
-                airwaydict[routeid] = airwaydict[routeid]
-                    .append(Airway(routeid))
+            else:  # it's already in there
+                print("it's already in there", airwaydict[routeid], type(airwaydict[routeid]))
+                #airwaydict[routeid] = airwaydict[routeid].append(Airway(routeid))
 
         elif line.startswith("S"):
             currentline = line.rstrip().split("|")
