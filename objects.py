@@ -162,6 +162,7 @@ class Airway(object):
 
     def __init__(self, airwayname):
         self.airwayname = airwayname
+        self.uniqueid = 'testuniqueid'
         self.waypoints = []
 
     def addelement(self, element):
