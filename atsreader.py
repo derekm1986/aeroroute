@@ -20,6 +20,8 @@ def airwaydictmaker():
             currentline = line.rstrip().split("|")
             routeid = currentline[1]
             
+            currentairway = Airway(routeid)
+            
             print(routeid) # for testing
             
             ################################ move this stuff down?###################
@@ -45,6 +47,8 @@ def airwaydictmaker():
             
             print(firstid, firstlat, firstlong, secondid, secondlat, secondlong) # for testing
 
+            currentairway.append????
+            
     print(airwaydict) # for testing
 
     #do stuff here
