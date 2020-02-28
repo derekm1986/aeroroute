@@ -22,14 +22,18 @@ def airwaydictmaker():
             
             print(routeid) # for testing
             
-            if routeid not in airwaydict:
-                airwaydict[routeid] = [Airway(routeid)]
-            else:  # routeid already in airwaydict
+            ################################ move this stuff down?###################
+            
+            #if routeid not in airwaydict:
+            #    airwaydict[routeid] = [Airway(routeid)]
+            #else:  # routeid already in airwaydict
                 
-                print("routeid alrady in airwaydict, trying to append", airwaydict[routeid], type(airwaydict[routeid])) # for testing
+            #    print("routeid alrady in airwaydict, trying to append", airwaydict[routeid], type(airwaydict[routeid])) # for testing
                 
-                airwaydict[routeid].append(Airway(routeid))
+            #    airwaydict[routeid].append(Airway(routeid))
 
+            #########################################################################
+            
         elif line.startswith("S"):
             currentline = line.rstrip().split("|")
             firstid = currentline[1]
