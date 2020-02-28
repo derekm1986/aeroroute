@@ -19,7 +19,9 @@ def airwaydictmaker():
         if line.startswith("A"):
             currentline = line.rstrip().split("|")
             routeid = currentline[1]
+            
             print(routeid)
+            
             if routeid not in airwaydict:
                 airwaydict[routeid] = [Airway(routeid)]
             else:  # it's already in there
