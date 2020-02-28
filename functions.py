@@ -154,9 +154,11 @@ def vincentyindirect(pair, heading=False):
     if lat1 == lat2 and lon1 == lon2:
         return 0.0
 
+    # official WGS-84 ellipsoid parameters for output in meters
     a = 6378137.0
     b = 6356752.314245
-    f = 1 / 298.257223563  # official WGS-84 ellipsoid parameters for output in meters
+    f = 1 / 298.257223563  
+    
     L = math.radians(lon2 - lon1)
     U1 = math.atan((1 - f) * math.tan(math.radians(lat1)))
     U2 = math.atan((1 - f) * math.tan(math.radians(lat2)))
