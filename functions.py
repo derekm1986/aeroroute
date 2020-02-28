@@ -122,7 +122,7 @@ def stringreader(inputstring):
 
 def multiplefinder(inputwaypoints):
 
-    # finding ambiguous waypoint positions
+    # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
     foundmultiples = [i for i, x in enumerate(inputwaypoints.getwaypoints()) if type(x) is objects.Ambiguouselement]
 
