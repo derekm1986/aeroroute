@@ -49,6 +49,8 @@ def airwaydictmaker():
 
             currentairway.addelement(firstid)
             
+    print(currentairway) # for testing
+    
     print(airwaydict) # for testing
 
     #do stuff here
