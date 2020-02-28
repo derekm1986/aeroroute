@@ -20,7 +20,7 @@ def airwaydictmaker():
             currentline = line.rstrip().split("|")
             routeid = currentline[1]
             
-            print(routeid)
+            print(routeid) # for testing
             
             if routeid not in airwaydict:
                 airwaydict[routeid] = [Airway(routeid)]
@@ -37,9 +37,9 @@ def airwaydictmaker():
             secondlat = currentline[5]
             secondlong = currentline[6]
             
-            print(firstid, firstlat, firstlong, secondid, secondlat, secondlong)
+            print(firstid, firstlat, firstlong, secondid, secondlat, secondlong) # for testing
 
-    print(airwaydict)
+    print(airwaydict) # for testing
 
     #do stuff here
 
