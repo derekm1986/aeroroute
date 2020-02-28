@@ -133,7 +133,7 @@ def multiplefinder(inputwaypoints):
     # this groups ambiguous waypoints together if they are sequential
     for waypoint in foundmultiples:  # detect if waypoints are next to each other
         if waypoint == lastwaypoint + 1:  # waypoint is sequential to waypoint before it
-            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint)  # group with previous
+            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint)  # group with previous waypoint
         else:  # waypoint stands alone
             multiplesmatrix.append([waypoint])
         lastwaypoint = waypoint
