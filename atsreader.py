@@ -47,7 +47,7 @@ def airwaydictmaker():
             
             print(firstid, firstlat, firstlong, secondid, secondlat, secondlong) # for testing
 
-            currentairway.append????
+            currentairway.addelement(firstid)
             
     print(airwaydict) # for testing
 
