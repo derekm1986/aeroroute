@@ -26,7 +26,7 @@ def airwaydictmaker():
                 airwaydict[routeid] = [Airway(routeid)]
             else:  # routeid already in airwaydict
                 
-                print("it's already in there", airwaydict[routeid], type(airwaydict[routeid])) # for testing
+                print("routeid alrady in airwaydict, trying to append", airwaydict[routeid], type(airwaydict[routeid])) # for testing
                 
                 airwaydict[routeid].append(Airway(routeid))
 
