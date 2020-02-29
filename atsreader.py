@@ -19,13 +19,23 @@ def airwaydictmaker():
         if line.startswith("A"):
             currentline = line.rstrip().split("|")
             routeid = currentline[1]
-            print(routeid)
-            if routeid not in airwaydict:
-                airwaydict[routeid] = [Airway(routeid)]
-            else:  # it's already in there
-                print("it's already in there", airwaydict[routeid], type(airwaydict[routeid]))
-                #airwaydict[routeid] = airwaydict[routeid].append(Airway(routeid))
+            
+            currentairway = Airway(routeid)
+            
+            print(routeid) # for testing
+            
+            ################################ move this stuff down?###################
+            
+            #if routeid not in airwaydict:
+            #    airwaydict[routeid] = [Airway(routeid)]
+            #else:  # routeid already in airwaydict
+                
+            #    print("routeid alrady in airwaydict, trying to append", airwaydict[routeid], type(airwaydict[routeid])) # for testing
+                
+            #    airwaydict[routeid].append(Airway(routeid))
 
+            #########################################################################
+            
         elif line.startswith("S"):
             currentline = line.rstrip().split("|")
             firstid = currentline[1]
@@ -34,9 +44,14 @@ def airwaydictmaker():
             secondid = currentline[4]
             secondlat = currentline[5]
             secondlong = currentline[6]
-            print(firstid, firstlat, firstlong, secondid, secondlat, secondlong)
+            
+            print(firstid, firstlat, firstlong, secondid, secondlat, secondlong) # for testing
 
-    print(airwaydict)
+            currentairway.addelement(firstid)
+            
+    print(currentairway) # for testing
+    
+    print(airwaydict) # for testing
 
     #do stuff here
 

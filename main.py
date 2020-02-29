@@ -36,7 +36,7 @@ while True:
     print('\n')
     
     # allows user to input waypoint(s)/exit instructions to list
-    print('Type "quit" to exit program, enter 20.000000/-123.000000 format for manual LAT/LONG')
+    print('Type "quit" to exit program, enter 20.000000/-123.000000 format for manual waypoints')
     inputstring = input("Enter input string: ")
     inputstring = inputstring.upper().split()
 

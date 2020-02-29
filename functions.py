@@ -122,7 +122,7 @@ def stringreader(inputstring):
 
 def multiplefinder(inputwaypoints):
 
-    # finding ambiguous waypoint positions
+    # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
     foundmultiples = [i for i, x in enumerate(inputwaypoints.getwaypoints()) if type(x) is objects.Ambiguouselement]
 
@@ -133,7 +133,7 @@ def multiplefinder(inputwaypoints):
     # this groups ambiguous waypoints together if they are sequential
     for waypoint in foundmultiples:  # detect if waypoints are next to each other
         if waypoint == lastwaypoint + 1:  # waypoint is sequential to waypoint before it
-            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint)  # group with previous
+            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint)  # group with previous waypoint
         else:  # waypoint stands alone
             multiplesmatrix.append([waypoint])
         lastwaypoint = waypoint
@@ -154,9 +154,11 @@ def vincentyindirect(pair, heading=False):
     if lat1 == lat2 and lon1 == lon2:
         return 0.0
 
+    # official WGS-84 ellipsoid parameters for output in meters
     a = 6378137.0
     b = 6356752.314245
-    f = 1 / 298.257223563  # official WGS-84 ellipsoid parameters for output in meters
+    f = 1 / 298.257223563  
+    
     L = math.radians(lon2 - lon1)
     U1 = math.atan((1 - f) * math.tan(math.radians(lat1)))
     U2 = math.atan((1 - f) * math.tan(math.radians(lat2)))
