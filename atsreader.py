@@ -36,6 +36,9 @@ def airwaydictmaker():
             secondlong = currentline[6]
             print(firstid, firstlat, firstlong, secondid, secondlat, secondlong)
 
+    #for airwayname, airway in airwaydict.items():
+    #    print(airwayname, id(airway))
+
     print(airwaydict)
 
     #do stuff here
