@@ -1,2 +1,4 @@
-import airwaydictmaker
-from Objects import Airway
+import atsreader
+from objects import Airway
+
+atsreader.airwaydictmaker()
