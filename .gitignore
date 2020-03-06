@@ -1,8 +1,7 @@
-
 *.xml
 *.pyc
-*.txt
 *.iml
 *.xml___jb_tmp___
 venv/
+AIRAC/
 
