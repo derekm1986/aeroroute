@@ -4,10 +4,5 @@
 *.txt
 *.iml
 *.xml___jb_tmp___
-*.pyc
-*.pyc
-*.pyc
-*.pyc
-*.pyc
-*.pyc
-*.pyc
+venv/
+
