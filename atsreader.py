@@ -14,38 +14,14 @@ def airwaydictmaker():
 
     airwaydict = {}
 
-    previousid = 'blank'
-
     for line in ats_file:
 
         if line.startswith("A"):
             currentline = line.rstrip().split("|")
             routeid = currentline[1]
             
-            if routeid == previousid:
-                    print('multiple found with name ' + routeid)
-
-            previousid = routeid
-
             currentairway = Airway(routeid)
 
-            airwaydict[routeid] = currentairway
-
-            print('current route is ' + routeid) # for testing
-            print('airwaynamefrom object is ' + currentairway.getairwayname())  # for testing
-
-            ################################ move this stuff down?###################
-            
-            #if routeid not in airwaydict:
-            #    airwaydict[routeid] = [Airway(routeid)]
-            #else:  # routeid already in airwaydict
-                
-            #    print("routeid alrady in airwaydict, trying to append", airwaydict[routeid], type(airwaydict[routeid])) # for testing
-                
-            #    airwaydict[routeid].append(Airway(routeid))
-
-            #########################################################################
-            
         elif line.startswith("S"):
             currentline = line.rstrip().split("|")
             firstid = currentline[1]
@@ -60,12 +36,21 @@ def airwaydictmaker():
             currentairway.addelement(firstid)
             
 
+            if routeid in airwaydict:
+                airwaydict[routeid].append(currentairway)
+            else:
+                airwaydict[routeid] = [currentairway]
+
+            print('current route is ' + routeid) # for testing
+            print('airwaynamefrom object is ' + currentairway.getairwayname())  # for testing
+
+
     
     print(airwaydict) # for testing
 
     #do stuff here
 
-    print (airwaydict['J174']) # for testing
+    print(airwaydict['UV456']) # for testing
 
     ats_file.close()
 
