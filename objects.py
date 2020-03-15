@@ -68,7 +68,7 @@ class Ambiguouselement(object):
 
     def addpossibility(self, possibility):
         self.possibilities.append(possibility)
-        # should this be .extend instead of append?
+        # should this be .extend instead of append in case I get passed a list?
         
     def howmanypossibilities(self):
         return len(self.possibilities)
