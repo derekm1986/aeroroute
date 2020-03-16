@@ -67,7 +67,7 @@ class Ambiguouselement(object):
             yield possibility
 
     def addpossibility(self, possibility):
-        if possibility is type(list):
+        if type(possibility) is list:
             self.possibilities.extend(possibility)
         else:
             self.possibilities.append(possibility)
