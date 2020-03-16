@@ -67,7 +67,10 @@ class Ambiguouselement(object):
             yield possibility
 
     def addpossibility(self, possibility):
-        self.possibilities.append(possibility)
+        if possibility is type(list):
+            self.possibilities.extend(possibility)
+        else:
+            self.possibilities.append(possibility)
         # should this be .extend instead of append in case I get passed a list?
         
     def howmanypossibilities(self):

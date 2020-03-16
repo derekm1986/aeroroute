@@ -29,7 +29,7 @@ functions.pointsinspacedictcombiner()
 
 print("OK")  # dictionary combination was successful
 
-atsreader.airwaydictmaker()
+# atsreader.airwaydictmaker()
 
 while True:
 
@@ -54,7 +54,7 @@ while True:
         continue
 
     if len(inputwaypointsobj.getwaypoints()) == 1:
-        print('Single item detected, printing entry:', inputwaypointsobj[0])
+        print('Single item detected, printing entry:', inputwaypointsobj.getelement(0))
         continue
 
     multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
