@@ -14,6 +14,8 @@ def airwaydictmaker():
 
     airwaydict = {}
 
+    lastsecondid = None
+
     for line in ats_file:
 
         if line.startswith("A"):
@@ -21,6 +23,8 @@ def airwaydictmaker():
             routeid = currentline[1]
             
             currentairway = Airway(routeid)
+
+            airwaylist = []
 
         elif line.startswith("S"):
             currentline = line.rstrip().split("|")
@@ -30,10 +34,21 @@ def airwaydictmaker():
             secondid = currentline[4]
             secondlat = currentline[5]
             secondlong = currentline[6]
-            
-            print(firstid, firstlat, firstlong, secondid, secondlat, secondlong) # for testing
 
-            currentairway.addelement(firstid)
+            firstwaypoint = [firstid, firstlat, firstlong]
+            secondwaypoint = [secondid, secondlat, secondlong]
+
+            print(firstwaypoint, secondwaypoint) # for testing
+
+            if firstwaypoint not in airwaylist:
+                airwaylist.append(firstwaypoint)
+
+            if secondwaypoint not in airwaylist:
+                airwaylist.append(secondwaypoint)
+
+            print(airwaylist)
+
+            currentairway.addelement(airwaylist)
             
 
             if routeid in airwaydict:
@@ -46,11 +61,11 @@ def airwaydictmaker():
 
 
     
-    print(airwaydict) # for testing
+    # print(airwaydict) # for testing
 
     #do stuff here
 
-    print(airwaydict['UV456']) # for testing
+    # print(airwaydict['UV456']) # for testing
 
     ats_file.close()
 
