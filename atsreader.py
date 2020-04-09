@@ -46,18 +46,18 @@ def airwaydictmaker():
             if secondwaypoint not in airwaylist:
                 airwaylist.append(secondwaypoint)
 
-       print(airwaylist)
+    print(airwaylist)
 
-       currentairway.addelement(airwaylist)
+    currentairway.addelement(airwaylist)
             
 
-       if routeid in airwaydict:
-           airwaydict[routeid].append(currentairway)
-       else:
-           airwaydict[routeid] = [currentairway]
+    if routeid in airwaydict:
+        airwaydict[routeid].append(currentairway)
+    else:
+        airwaydict[routeid] = [currentairway]
 
-       print('current route is ' + routeid) # for testing
-       print('airwaynamefrom object is ' + currentairway.getairwayname())  # for testing
+    print('current route is ' + routeid) # for testing
+    print('airwaynamefrom object is ' + currentairway.getairwayname())  # for testing
 
 
     
