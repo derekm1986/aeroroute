@@ -5,6 +5,10 @@
 
 from objects import Airway
 
+def airwaylatlongmaker():
+    print('airwaylatlongmaker was called')
+
+
 def airwaydictmaker():
     print('   ***airwaydictmaker was called***')
 
@@ -55,10 +59,14 @@ def airwaydictmaker():
                 secondlat = currentline[5]
                 secondlong = currentline[6]
 
+                #  ****do stuff with airwaylatlongmaker here****
+
                 firstwaypoint = [firstid, firstlat, firstlong]
                 secondwaypoint = [secondid, secondlat, secondlong]
 
 #                print(firstwaypoint, secondwaypoint) #  for testing
+
+                #  somewhere in here I need to convert lat/long to decimals
 
                 if firstwaypoint not in airwaylist:
                     airwaylist.append(firstwaypoint)
@@ -69,9 +77,6 @@ def airwaydictmaker():
 #        print(airwaylist)
 
         currentairway.addelement(airwaylist)
-                #  is this in the right place?
-
-
 
         if routeid in airwaydict:
             airwaydict[routeid].append(currentairway)
@@ -83,11 +88,11 @@ def airwaydictmaker():
 
 
     
-    print(airwaydict) # for testing
+#    print(airwaydict) # for testing
 
     #do stuff here
 
-#    print(airwaydict['UV456']) # for testing
+    print(airwaydict['UV456'][0].getwaypoints()) # for testing
 
     ats_file.close()
 
@@ -140,44 +145,6 @@ def airwaydictmaker():
 
 
 
-
-
-
-
-#airwayresult = []
-
-#thewholefile = text_file.read()
-
-#thewholefile = thewholefile.split("\n\n")  # this only works with Windows-formatted text files, splits data between two blank lines
-
-#airwaydict = {}
-
-#for airwaystring in thewholefile:
-#    tempitem = airwaystring.split()
-#    try:
-#        firstline = tempitem[0]  # this blows up when you reach the end of the file, hence the need for try/except
-#    except:
-#        break
-#    restofstring = tempitem[1:]
-    
-#    firstline = firstline.split("|")
-#    airwayid = firstline[1]
-#    airwaydict.setdefault(airwayid, []).append((restofstring))  # want to put rest of airwaystring here
-
-# airway dictionary is established,
-    
-#for airwaysegment in airwaydict["Q822"][0]:
-#    airwaysegment = airwaysegment.split("|")
-#    del airwaysegment[0]  # deletes S at beginning of every line
-#    print(airwaysegment)
-    
-#    if not line.strip():
-#        continue
-#    else:
-#        airwayresult.append(line)
-
-
-
 # for line in text_file:
 #    if line.startswith(airwayinput + "|"):
 #        line = line.rstrip()
@@ -187,7 +154,3 @@ def airwaydictmaker():
 #       #navaidlatwithdecimal = navaidlat[:len(navaidlat)-6] + "." + navaidlat[len(navaidlat)-6:] #6 decimal places
 #       #navaidlongwithdecimal = navaidlong[:len(navaidlong)-6] + "." + navaidlong[len(navaidlong)-6:] #6 decimal places
 #       #navaidresult.append(navaidlatwithdecimal + " " + navaidlongwithdecimal)
-    
-# print airwayresult
-
-    #text_file.close()
