@@ -29,7 +29,7 @@ functions.pointsinspacedictcombiner()
 
 print("OK")  # dictionary combination was successful
 
-# atsreader.airwaydictmaker()
+atsreader.airwaydictmaker()
 
 while True:
 

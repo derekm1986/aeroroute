@@ -16,56 +16,78 @@ def airwaydictmaker():
 
     lastsecondid = None
 
-    for line in ats_file:
+    contents = ats_file.read()
 
-        if line.startswith("A"):
-            currentline = line.rstrip().split("|")
-            routeid = currentline[1]
-            
-            currentairway = Airway(routeid)
+    paragraphs = contents.split("\n\n")
+    #  each paragraph should be an airway
 
-            airwaylist = []
+    #  remove blank strings that will occur at end of list
+    while ("" in paragraphs):
+        paragraphs.remove("")
 
-        elif line.startswith("S"):
-            currentline = line.rstrip().split("|")
-            firstid = currentline[1]
-            firstlat = currentline[2]
-            firstlong = currentline[3]
-            secondid = currentline[4]
-            secondlat = currentline[5]
-            secondlong = currentline[6]
+    splitparagraphs = []
 
-            firstwaypoint = [firstid, firstlat, firstlong]
-            secondwaypoint = [secondid, secondlat, secondlong]
+    for paragraph in paragraphs:
+        splitparagraphs.append(paragraph.split('\n'))
+    #  each split paragraph is an airway with lines in a list
 
-            print(firstwaypoint, secondwaypoint) # for testing
+#    print(splitparagraphs)
 
-            if firstwaypoint not in airwaylist:
-                airwaylist.append(firstwaypoint)
+    for splitparagraph in splitparagraphs:
 
-            if secondwaypoint not in airwaylist:
-                airwaylist.append(secondwaypoint)
+        for line in splitparagraph:
 
-    print(airwaylist)
+            if line.startswith("A"):  #  this is the beginning of an airway
+                currentline = line.rstrip().split("|")
+                routeid = currentline[1]
 
-    currentairway.addelement(airwaylist)
-            
+                currentairway = Airway(routeid)
 
-    if routeid in airwaydict:
-        airwaydict[routeid].append(currentairway)
-    else:
-        airwaydict[routeid] = [currentairway]
+                airwaylist = []
 
-    print('current route is ' + routeid) # for testing
-    print('airwaynamefrom object is ' + currentairway.getairwayname())  # for testing
+            elif line.startswith("S"):
+
+                currentline = line.rstrip().split("|")
+                firstid = currentline[1]
+                firstlat = currentline[2]
+                firstlong = currentline[3]
+                secondid = currentline[4]
+                secondlat = currentline[5]
+                secondlong = currentline[6]
+
+                firstwaypoint = [firstid, firstlat, firstlong]
+                secondwaypoint = [secondid, secondlat, secondlong]
+
+#                print(firstwaypoint, secondwaypoint) #  for testing
+
+                if firstwaypoint not in airwaylist:
+                    airwaylist.append(firstwaypoint)
+
+                if secondwaypoint not in airwaylist:
+                    airwaylist.append(secondwaypoint)
+
+#        print(airwaylist)
+
+        currentairway.addelement(airwaylist)
+                #  is this in the right place?
+
+
+
+        if routeid in airwaydict:
+            airwaydict[routeid].append(currentairway)
+        else:
+            airwaydict[routeid] = [currentairway]
+
+        print('current route is ' + routeid) # for testing
+        print('airwaynamefrom object is ' + currentairway.getairwayname())  # for testing
 
 
     
-    # print(airwaydict) # for testing
+    print(airwaydict) # for testing
 
     #do stuff here
 
-    # print(airwaydict['UV456']) # for testing
+#    print(airwaydict['UV456']) # for testing
 
     ats_file.close()
 
