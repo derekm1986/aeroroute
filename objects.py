@@ -172,6 +172,9 @@ class Airway(object):
     def addelement(self, element):
         self.waypoints.append(element)
 
+    def setwaypoints(self, waypoints):
+        self.waypoints = waypoints
+
     def getairwayname(self):
         return self.airwayname
 

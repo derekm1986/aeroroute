@@ -4,10 +4,37 @@
 # need to finish
 
 from objects import Airway
+from objects import Pointinspace
 
-def airwaylatlongmaker():
-    print('airwaylatlongmaker was called')
+def airwaylatlongmaker(input):
+#    print('airwaylatlongmaker was called')
+    inputwasnegative = False  #fill it with something
 
+#    print(input)
+
+    if input.startswith('-'):
+        inputwasnegative = True
+
+    #remove the negative, if necessary
+    if inputwasnegative == True:
+        input = input[1:]
+
+    #remove leading zeros
+    input = input.lstrip('0')
+
+    #last two digits are decimal
+    inputwithdecimal = input[:len(input) - 6] + '.' + input[len(input) - 6:]
+
+    #airportlatwithdecimal = airportlat[:len(airportlat) - 6] + "." + airportlat[len(airportlat) - 6:]
+
+    if inputwasnegative == True:
+        #  put the negative sign back if needed
+        inputwithdecimal = '-' + inputwithdecimal
+#        print('Input was negative')
+
+    output = inputwithdecimal  #  for testing only
+#    print(output)
+    return output
 
 def airwaydictmaker():
     print('   ***airwaydictmaker was called***')
@@ -18,15 +45,12 @@ def airwaydictmaker():
 
     airwaydict = {}
 
-    lastsecondid = None
-
     contents = ats_file.read()
 
-    paragraphs = contents.split("\n\n")
-    #  each paragraph should be an airway
+    paragraphs = contents.split("\n\n")  #  each paragraph should be an airway
 
     #  remove blank strings that will occur at end of list
-    while ("" in paragraphs):
+    while "" in paragraphs:
         paragraphs.remove("")
 
     splitparagraphs = []
@@ -48,6 +72,7 @@ def airwaydictmaker():
                 currentairway = Airway(routeid)
 
                 airwaylist = []
+                simpleairwaylist = []
 
             elif line.startswith("S"):
 
@@ -59,51 +84,55 @@ def airwaydictmaker():
                 secondlat = currentline[5]
                 secondlong = currentline[6]
 
-                #  ****do stuff with airwaylatlongmaker here****
+                firstlat = airwaylatlongmaker(firstlat)
+                firstlong = airwaylatlongmaker(firstlong)
+                secondlat = airwaylatlongmaker(secondlat)
+                secondlong = airwaylatlongmaker(secondlong)
 
                 firstwaypoint = [firstid, firstlat, firstlong]
                 secondwaypoint = [secondid, secondlat, secondlong]
 
 #                print(firstwaypoint, secondwaypoint) #  for testing
 
-                #  somewhere in here I need to convert lat/long to decimals
 
-                if firstwaypoint not in airwaylist:
-                    airwaylist.append(firstwaypoint)
+#               this is asking if an object is already in the list.  comparing an object to an object is bad news.
 
-                if secondwaypoint not in airwaylist:
-                    airwaylist.append(secondwaypoint)
+                if firstwaypoint not in simpleairwaylist:
+                    airwaylist.append(Pointinspace(firstwaypoint[0], (firstwaypoint[1],firstwaypoint[2]),'airwaywaypoint'))
+                    simpleairwaylist.append(firstwaypoint)
+
+                if secondwaypoint not in simpleairwaylist:
+                    airwaylist.append(Pointinspace(secondwaypoint[0], (secondwaypoint[1],secondwaypoint[2]),'airwaywaypoint'))
+                    simpleairwaylist.append(secondwaypoint)
 
 #        print(airwaylist)
 
-        currentairway.addelement(airwaylist)
+        currentairway.setwaypoints(airwaylist)
 
         if routeid in airwaydict:
             airwaydict[routeid].append(currentairway)
         else:
             airwaydict[routeid] = [currentairway]
 
-        print('current route is ' + routeid) # for testing
-        print('airwaynamefrom object is ' + currentairway.getairwayname())  # for testing
+#        print('current route is ' + routeid) # for testing
+#        print('airwaynamefrom object is ' + currentairway.getairwayname())  # for testing
 
 
-    
+
 #    print(airwaydict) # for testing
 
     #do stuff here
 
-    print(airwaydict['UV456'][0].getwaypoints()) # for testing
+    testwaypoints = airwaydict['J121'][1].getwaypoints()
+
+    print(testwaypoints)
+
+    for testwaypoint in testwaypoints:
+        print(testwaypoint)
 
     ats_file.close()
 
 
-#def airportdictmaker():
-
-#    airport_file = open("AIRAC/Airports.txt")
-
-#    global airportdict
-
-#    airportdict = {}
 
 #    for line in airport_file:
 #        if line.startswith("A"):
@@ -137,9 +166,6 @@ def airwaydictmaker():
   #          if airportlongisnegative is True:
    #             airportlongwithdecimal = "-" + airportlongwithdecimal
 
-    #        airportobj = Airport(airportid, (airportlatwithdecimal, airportlongwithdecimal), airportname)
-
-     #       airportdict[airportid] = airportobj
 
     #airport_file.close()
 
