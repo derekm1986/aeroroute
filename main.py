@@ -57,6 +57,8 @@ while True:
         print('Single item detected, printing entry:', inputwaypointsobj.getelement(0))
         continue
 
+    # if there is an airway in inputwaypointsobj, call a function that incorporates the airway into the route
+        
     multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
 
     if len(multiplesmatrix) > 0:
