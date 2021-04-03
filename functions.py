@@ -299,7 +299,7 @@ def deambiguator(inputwaypoints, multiplesmatrix):
         for possibility in possibilitieslist: # compute distances
             leaderboard.append([distancefinder(possibility), possibility])
 
-        shortestdistance = float('Inf')
+        shortestdistance = float('Inf') # fill with worst-case scenario so anything else is smaller
 
         for competitor in leaderboard: # establish which is shortest
             if competitor[0] < shortestdistance:
