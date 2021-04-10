@@ -31,7 +31,7 @@ def airportdictmaker():
             if len(airportlat) < 7:
                 airportlat = "0" * (7 - len(airportlat)) + airportlat
 
-            airportlatwithdecimal = airportlat[:len(airportlat)-6] + "." + airportlat[len(airportlat)-6:]  # 6 decimal places
+            airportlatwithdecimal = airportlat[:len(airportlat)-6] + "." + airportlat[len(airportlat)-6:]  # 6 decimal places - possible to use negative index instead?
 
             if airportlatisnegative is True:
                 airportlatwithdecimal = "-" + airportlatwithdecimal
@@ -45,7 +45,7 @@ def airportdictmaker():
             if len(airportlong) < 7:
                 airportlong = "0" * (7 - len(airportlong)) + airportlong
 
-            airportlongwithdecimal = airportlong[:len(airportlong)-6] + "." + airportlong[len(airportlong)-6:]  # 6 decimal places
+            airportlongwithdecimal = airportlong[:len(airportlong)-6] + "." + airportlong[len(airportlong)-6:]  # 6 decimal places - possible to use negative index instead?
 
             if airportlongisnegative is True:
                 airportlongwithdecimal = "-" + airportlongwithdecimal
