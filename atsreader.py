@@ -23,7 +23,7 @@ def airwaylatlongmaker(input):
     input = input.lstrip('0')
 
     #last two digits are decimal
-    inputwithdecimal = input[:len(input) - 6] + '.' + input[len(input) - 6:]
+    inputwithdecimal = input[:len(input) - 6] + '.' + input[len(input) - 6:] # possible to use negative index instead?
 
     #airportlatwithdecimal = airportlat[:len(airportlat) - 6] + "." + airportlat[len(airportlat) - 6:]
 
