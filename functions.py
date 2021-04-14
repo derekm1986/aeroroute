@@ -2,6 +2,7 @@ import math
 import airportsreader
 import navaidsreader
 import waypointsreader
+import atsreader
 import objects
 
 
@@ -90,7 +91,8 @@ def stringreader(inputstring):
             itemname = item
             founditem = airportsreader.airportdict[item]
 
-        #elif item in atsreader.airwaydict: # not finished
+        elif item in atsreader.airwaydict: # not finished, also should assert not at beginning or end of inputstring
+            print(item + ' was found in airwaydict')
 
         # elif put something here to read SIDs/STARs
 
