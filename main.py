@@ -25,7 +25,7 @@ print('OK')  # loading waypoints was successful
 
 print('   Combining NAVAID and waypoints dictionaries...', end="")
 
-functions.pointsinspacedictcombiner()
+functions.pointsinspacedictcombiner()  # dictionary = functions.pointsinspacedictcombiner(navaiddict, waypointdict)?
 
 print("OK")  # dictionary combination was successful
 
