@@ -121,6 +121,7 @@ class TBWrapper(object):
         return ('TBWrapper original position: ' + str(self.originalposition) + ', ' + 'Wrapper ambiguous ID: ' +
                 str(self.ambiguousid) + ', Wrapper contains: ' + str(self.waypoint))
 
+
 class Route(object):
 
     def __init__(self):
@@ -152,13 +153,13 @@ class Route(object):
         return self.waypoints[position].getpossibilities()
 
     def deambiguate(self, position, possibilitynumber):
-        #must be Ambiguouselement at position
+        # must be Ambiguouselement at position
         self.waypoints[position] = self.waypoints[position].getpossibility(possibilitynumber)
 
     def getwaypoints(self):
         return self.waypoints
 
-    def __str__(self): #this doesnt work
+    def __str__(self):  # this doesnt work
         return str(self.waypoints)
 
 

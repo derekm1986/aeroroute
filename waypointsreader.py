@@ -4,6 +4,7 @@
 from objects import Pointinspace
 from objects import Ambiguouselement
 
+
 def waypointdictmaker():
 
     waypoint_file = open("AIRAC/Waypoints.txt")
@@ -27,12 +28,11 @@ def waypointdictmaker():
         if len(waypointlat) < 7:
             waypointlat = "0" * (7 - len(waypointlat)) + waypointlat
             
-        waypointlatwithdecimal = waypointlat[:len(waypointlat)-6] + "." + waypointlat[len(waypointlat)-6:]  # 6 decimal places - negative index instead?
+        waypointlatwithdecimal = waypointlat[:-6] + "." + waypointlat[-6:]  # 6 decimal places
             
         if waypointlatisnegative is True:
             waypointlatwithdecimal = "-" + waypointlatwithdecimal
-            
-            
+
         waypointlongisnegative = False  # establish variable
             
         if waypointlong.startswith("-"):
@@ -42,11 +42,10 @@ def waypointdictmaker():
         if len(waypointlong) < 7:
             waypointlong = "0" * (7 - len(waypointlong)) + waypointlong
                 
-        waypointlongwithdecimal = waypointlong[:len(waypointlong)-6] + "." + waypointlong[len(waypointlong)-6:]  # 6 decimal places - negative index instead?
+        waypointlongwithdecimal = waypointlong[:-6] + "." + waypointlong[-6:]  # 6 decimal places
             
         if waypointlongisnegative is True:
             waypointlongwithdecimal = "-" + waypointlongwithdecimal
-
 
         waypointobj = Pointinspace(waypointid, (waypointlatwithdecimal, waypointlongwithdecimal), 'waypoint')
 

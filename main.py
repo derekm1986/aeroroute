@@ -10,15 +10,15 @@ print('\n***Program loading***', '\n')
 print('Reading AIRAC data...')
 
 print('   Loading airports into memory...', end="")
-airportsreader.airportdictmaker()
+airportsreader.airportdictmaker()  # dictionary = airportsreader.airportdictmaker()?
 print('OK')  # loading airports was successful
 
 print('   Loading NAVAIDs into memory...', end="")
-navaidsreader.navaiddictmaker()
+navaidsreader.navaiddictmaker()  # dictionary = navaidsreader.navaiddictmaker()?
 print('OK')  # loading NAVAIDs was successful
 
 print('   Loading waypoints into memory...', end="")
-waypointsreader.waypointdictmaker()
+waypointsreader.waypointdictmaker()  # dictionary = waypointsreader.waypointdictmaker()?
 print('OK')  # loading waypoints was successful
 
 # combining navaiddict and waypointdict dictionaries into one
@@ -29,7 +29,7 @@ functions.pointsinspacedictcombiner()
 
 print("OK")  # dictionary combination was successful
 
-atsreader.airwaydictmaker()
+atsreader.airwaydictmaker()  # dictionary = atsreader.airwaydictmaker()?
 
 while True:
 

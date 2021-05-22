@@ -122,6 +122,7 @@ def stringreader(inputstring):
 
     return output
 
+
 def multiplefinder(inputwaypoints):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
@@ -274,7 +275,7 @@ def deambiguator(inputwaypoints, multiplesmatrix):
                                                                    ambiguousid)])
                         ambiguousid += 1
 
-            else: # it's after first in the list
+            else:  # it's after first in the list
 
                 if element.wasambiguous is False: # single element present
                     for item in possibilitieslist:
@@ -298,17 +299,17 @@ def deambiguator(inputwaypoints, multiplesmatrix):
 
         leaderboard = []
 
-        for possibility in possibilitieslist: # compute distances
+        for possibility in possibilitieslist:  # compute distances
             leaderboard.append([distancefinder(possibility), possibility])
 
-        shortestdistance = float('Inf') # fill with worst-case scenario so anything else is smaller
+        shortestdistance = float('Inf')  # fill with worst-case scenario so anything else is smaller
 
-        for competitor in leaderboard: # establish which is shortest
+        for competitor in leaderboard:  # establish which is shortest
             if competitor[0] < shortestdistance:
                 shortestdistance = competitor[0]
                 shortestcompetitor = competitor
 
-        for point in shortestcompetitor[1]: # deambiguate using shortestcompetitor
+        for point in shortestcompetitor[1]:  # deambiguate using shortestcompetitor
             if point.getwasambiguous() is True:
                 inputwaypoints.deambiguate(point.getoriginalposition(), point.getambiguousid())
 
