@@ -6,7 +6,7 @@ import atsreader
 import objects
 
 
-def pointsinspacedictcombiner():
+def pointsinspacedictcombiner():  # change to accept arguments
 
     global pointsinspacedict
 
