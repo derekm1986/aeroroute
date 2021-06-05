@@ -9,8 +9,6 @@ def navaiddictmaker():
 
     navaid_file = open("AIRAC/Navaids.txt")
 
-    global navaiddict
-
     navaiddict = {}
 
     for line in navaid_file:
@@ -60,3 +58,5 @@ def navaiddictmaker():
             navaiddict[navaidid] = navaidobj
 
     navaid_file.close()
+
+    return navaiddict

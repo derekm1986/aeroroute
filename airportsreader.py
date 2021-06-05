@@ -10,8 +10,6 @@ def airportdictmaker():
 
     airport_file = open("AIRAC/Airports.txt")
 
-    global airportdict
-
     airportdict = {}
 
     for line in airport_file:
@@ -55,3 +53,5 @@ def airportdictmaker():
             airportdict[airportid] = airportobj
 
     airport_file.close()
+
+    return airportdict

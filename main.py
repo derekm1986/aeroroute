@@ -3,38 +3,29 @@ import waypointsreader
 import navaidsreader
 import atsreader
 import functions
-from objects import Ambiguouselement
+
 
 print('\n***Program loading***', '\n')
 
 print('Reading AIRAC data...')
 
 print('   Loading airports into memory...', end="")
-airportsreader.airportdictmaker()
-# airportdict = airportsreader.airportdictmaker()?
+airportdict = airportsreader.airportdictmaker()
 print('OK')  # loading airports was successful
 
 print('   Loading NAVAIDs into memory...', end="")
-navaidsreader.navaiddictmaker()
-# navaiddict = navaidsreader.navaiddictmaker()?
+navaiddict = navaidsreader.navaiddictmaker()
 print('OK')  # loading NAVAIDs was successful
 
 print('   Loading waypoints into memory...', end="")
-waypointsreader.waypointdictmaker()
-# waypointdict = waypointsreader.waypointdictmaker()?
+waypointdict = waypointsreader.waypointdictmaker()
 print('OK')  # loading waypoints was successful
 
-# combining navaiddict and waypointdict dictionaries into one
-
 print('   Combining NAVAID and waypoints dictionaries...', end="")
-
-functions.pointsinspacedictcombiner()
-# pointsinspacedict = functions.pointsinspacedictcombiner(navaiddict, waypointdict)?
-
+pointsinspacedict = functions.pointsinspacedictcombiner(navaiddict, waypointdict)
 print("OK")  # dictionary combination was successful
 
-atsreader.airwaydictmaker()
-# airwaydict = atsreader.airwaydictmaker()?
+airwaydict = atsreader.airwaydictmaker()
 
 while True:
 
@@ -53,7 +44,7 @@ while True:
         print('***Program exiting***')
         break
 
-    inputwaypointsobj = functions.stringreader(inputstring)
+    inputwaypointsobj = functions.stringreader(inputstring, airportdict, pointsinspacedict, airwaydict)
 
     if inputwaypointsobj == "invalidinput":  # something bad came back from stringreader
         continue

@@ -9,8 +9,6 @@ def waypointdictmaker():
 
     waypoint_file = open("AIRAC/Waypoints.txt")
 
-    global waypointdict
-
     waypointdict = {}
 
     for line in waypoint_file:
@@ -59,3 +57,5 @@ def waypointdictmaker():
             waypointdict[waypointid] = waypointobj
 
     waypoint_file.close()
+
+    return waypointdict

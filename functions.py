@@ -1,28 +1,22 @@
 import math
-import airportsreader
-import navaidsreader
-import waypointsreader
-import atsreader
 import objects
 
 
-def pointsinspacedictcombiner():  # change to accept arguments
+def pointsinspacedictcombiner(navaiddict, waypointdict):
 
-    global pointsinspacedict
+    pointsinspacedict = navaiddict.copy()
 
-    pointsinspacedict = navaidsreader.navaiddict.copy()
-
-    for key, val in waypointsreader.waypointdict.items():
+    for key, val in waypointdict.items():
         if key in pointsinspacedict:
             # the entry is already in pointsinspacedict
             if type(pointsinspacedict[key]) is objects.Ambiguouselement:
                 # pointsinspacedict already has Ambiguouselement
                 if type(val) is objects.Ambiguouselement:
                     # must add Ambiguouselement to Ambiguouselement
-                    pointsinspacedict[key].addpossibility(waypointsreader.waypointdict[key].getpossibilities())
+                    pointsinspacedict[key].addpossibility(waypointdict[key].getpossibilities())
                 else:
                     # must add Pointinspace to Ambiguouselement
-                    pointsinspacedict[key].addpossibility(waypointsreader.waypointdict[key])
+                    pointsinspacedict[key].addpossibility(waypointdict[key])
             else:
                 # pointsinspacedict contains a Pointinspace
                 if type(val) is objects.Ambiguouselement:
@@ -37,6 +31,8 @@ def pointsinspacedictcombiner():  # change to accept arguments
         else:
             # the entry is not yet in pointsinspacedict, so just add it
             pointsinspacedict[key] = val
+
+    return pointsinspacedict
 
 
 def pairmaker(inputwaypoints):
@@ -66,7 +62,7 @@ def distancefinder(input):
     return sumdistance
 
 
-def stringreader(inputstring):
+def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     output = objects.Route()
 
@@ -87,11 +83,11 @@ def stringreader(inputstring):
             founditem = objects.Pointinspace(itemname, coordinates, 'manual waypoint')
             manualwaypointnumber += 1
 
-        elif item in airportsreader.airportdict:
+        elif item in airportdict:
             itemname = item
-            founditem = airportsreader.airportdict[item]
+            founditem = airportdict[item]
 
-        elif item in atsreader.airwaydict: # not finished, also should assert not at beginning or end of inputstring
+        elif item in airwaydict: # not finished, also should assert not at beginning or end of inputstring
             print(item + ' was found in airwaydict')
 
         # elif put something here to read SIDs/STARs

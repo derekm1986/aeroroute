@@ -45,8 +45,6 @@ def airwaydictmaker():
 
     ats_file = open("AIRAC/ATS.txt")
 
-    global airwaydict
-
     airwaydict = {}
 
     contents = ats_file.read()
@@ -125,3 +123,5 @@ def airwaydictmaker():
     # do stuff here
 
     ats_file.close()
+
+    return airwaydict
