@@ -3,11 +3,11 @@ from objects import Airway
 
 # make this more interactive to be more useful
 
-print('Running atsreader...')
+print('Calling atsreader.airwaydictmaker...')
 
 airwaydict = atsreader.airwaydictmaker()
 
-print('atsreader.airwaydictmaker ran successfully')
+print('atsreader.airwaydictmaker ran')
 
 testwaypoints = airwaydict['Q822'][0].getwaypoints()
 
