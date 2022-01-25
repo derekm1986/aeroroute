@@ -5,11 +5,11 @@ from objects import Airway
 
 print('Running atsreader...')
 
-atsreader.airwaydictmaker()
+airwaydict = atsreader.airwaydictmaker()
 
 print('atsreader ran successfully')
 
-testwaypoints = atsreader.airwaydict['Q822'][0].getwaypoints()
+testwaypoints = airwaydict['Q822'][0].getwaypoints()
 
 print(testwaypoints)
 
