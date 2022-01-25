@@ -9,7 +9,10 @@ airwaydict = atsreader.airwaydictmaker()
 
 print('atsreader.airwaydictmaker ran')
 
-testwaypoints = airwaydict['Q822'][0].getwaypoints()
+inputstring = input("Enter airway: ")
+   inputstring = inputstring.upper()
+
+testwaypoints = airwaydict[inputstring][0].getwaypoints()
 
 print(testwaypoints)
 
