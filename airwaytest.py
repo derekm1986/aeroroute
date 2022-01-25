@@ -1,6 +1,8 @@
 import atsreader
 from objects import Airway
 
+# make this more interactive to be more useful
+
 print('Running atsreader...')
 
 atsreader.airwaydictmaker()
