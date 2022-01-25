@@ -7,7 +7,7 @@ print('Calling atsreader.airwaydictmaker...')
 
 airwaydict = atsreader.airwaydictmaker()
 
-print('atsreader.airwaydictmaker ran')
+print('atsreader.airwaydictmaker returned')
 
 inputstring = input("Enter airway: ")
    inputstring = inputstring.upper()
