@@ -7,7 +7,7 @@ print('Running atsreader...')
 
 airwaydict = atsreader.airwaydictmaker()
 
-print('atsreader ran successfully')
+print('atsreader.airwaydictmaker ran successfully')
 
 testwaypoints = airwaydict['Q822'][0].getwaypoints()
 
