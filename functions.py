@@ -97,6 +97,7 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
       # elif put something here to read SIDs/STARs
             # is it adjacent to an airport? if no, reject
             # combination of letters and numbers? HYLND6 or SHB4 or UNOKO3A
+            # flag as possible SID/STAR?
 
         else:
             print(item, "not found")
