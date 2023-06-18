@@ -1,3 +1,7 @@
+"""
+A nameless program I use to get the length of routes typed in human-readable
+format.  Requires AIRAC files in vasFMC format in a /AIRAC/ folder.
+"""
 import airportsreader
 import waypointsreader
 import navaidsreader
@@ -6,6 +10,11 @@ import functions
 
 
 def main():
+    """
+    The main method of the program
+    :return: nothing
+    """
+
     print('\n***Program loading***', '\n')
 
     print('Reading AIRAC data...')
