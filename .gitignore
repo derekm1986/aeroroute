@@ -4,5 +4,6 @@
 *.xml___jb_tmp___
 venv/
 AIRAC/
-
 *.pyc
+.idea/
+__pycache__/
