@@ -1,5 +1,5 @@
 """
-A nameless program I use to get the length of routes typed in human-readable
+A program I use to get the length of routes typed in human-readable
 format.  Requires AIRAC files in vasFMC format in a /AIRAC/ folder.
 """
 import airportsreader
