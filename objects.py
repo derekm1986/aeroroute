@@ -5,6 +5,7 @@ class Pointinspace(object):
         self.coordinates = coordinates
         self.typeelement = typeelement
         self.elementname = elementname
+        self.onairways = []
 
     def getidentifier(self):
         return self.identifier
@@ -21,12 +22,19 @@ class Pointinspace(object):
         else:
             pass
 
+    def getairways(self):
+        return self.onairways
+
+    def addairway(self, airway):
+        self.onairways.append(airway)
+
     def __str__(self):
         if self.elementname is not None:
             return (self.identifier + ' point-in-space ' + self.typeelement + ' ' + self.elementname +
-                    ' coordinates: ' + str(self.coordinates))
+                    ' coordinates: ' + str(self.coordinates) + ' on airways ' + str(self.onairways))
         else:
-            return self.identifier + ' point-in-space ' + self.typeelement + ' coordinates: ' + str(self.coordinates)
+            return (self.identifier + ' point-in-space ' + self.typeelement + ' coordinates: ' + str(self.coordinates) +
+                    ' on airways ' + str(self.onairways))
 
 
 class Airport(object):

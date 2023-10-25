@@ -7,6 +7,7 @@ import waypointsreader
 import navaidsreader
 import atsreader
 import functions
+import airwaymatcher
 
 
 def main():
@@ -36,6 +37,9 @@ def main():
     print("OK")  # dictionary combination was successful
 
     airwaydict = atsreader.airwaydictmaker()
+
+    # NEW FOR TESTING BELOW!!!!
+    pointsinspacedict = airwaymatcher.airwaymatcher(pointsinspacedict, airwaydict)
 
     while True:
 
