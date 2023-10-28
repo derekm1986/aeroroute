@@ -9,10 +9,7 @@ from objects import Pointinspace
 
 def airwaylatlongmaker(input):
 
-    # print('airwaylatlongmaker was called')
     inputwasnegative = False  # fill it with something
-
-    # print(input)
 
     if input.startswith('-'):
         inputwasnegative = True
@@ -27,12 +24,9 @@ def airwaylatlongmaker(input):
     # last two digits are decimal
     inputwithdecimal = input[:-6] + '.' + input[-6:]  # 6 decimal places
 
-    # airportlatwithdecimal = airportlat[:len(airportlat) - 6] + "." + airportlat[len(airportlat) - 6:]
-
     if inputwasnegative == True:
         # put the negative sign back if needed
         inputwithdecimal = '-' + inputwithdecimal
-    # print('Input was negative')
 
     output = inputwithdecimal  # for testing only
     # print(output)
@@ -60,8 +54,6 @@ def airwaydictmaker():
     for paragraph in paragraphs:
         splitparagraphs.append(paragraph.split('\n'))
     #  each split paragraph is an airway with lines in a list
-
-    # print(splitparagraphs)
 
     for splitparagraph in splitparagraphs:
 
@@ -94,8 +86,6 @@ def airwaydictmaker():
                 firstwaypoint = [firstid, firstlat, firstlong]
                 secondwaypoint = [secondid, secondlat, secondlong]
 
-                # print(firstwaypoint, secondwaypoint) #  for testing
-
                 # this is asking if an object is already in the list.  comparing an object to an object is bad news.
 
                 if firstwaypoint not in simpleairwaylist:
@@ -106,21 +96,12 @@ def airwaydictmaker():
                     airwaylist.append(Pointinspace(secondwaypoint[0], (secondwaypoint[1],secondwaypoint[2]),'airwaywaypoint'))
                     simpleairwaylist.append(secondwaypoint)
 
-        # print(airwaylist)
-
         currentairway.setwaypoints(airwaylist)
 
         if routeid in airwaydict:
             airwaydict[routeid].append(currentairway)
         else:
             airwaydict[routeid] = [currentairway]
-
-        # print('current route is ' + routeid) # for testing
-        # print('airwaynamefrom object is ' + currentairway.getairwayname())  # for testing
-
-    # print(airwaydict) # for testing
-
-    # do stuff here
 
     ats_file.close()
 
