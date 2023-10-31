@@ -35,8 +35,6 @@ def airwaylatlongmaker(input):
 
 def airwaydictmaker():
 
-    print('   ***airwaydictmaker was called***')
-
     ats_file = open("AIRAC/ATS.txt")
 
     airwaydict = {}

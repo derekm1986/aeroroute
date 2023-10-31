@@ -16,7 +16,7 @@ def main():
     :return: nothing
     """
 
-    print('\n***Program loading***', '\n')
+    print('\n***Aeroroute loading***', '\n')
 
     print('Reading AIRAC data...')
 
@@ -32,14 +32,17 @@ def main():
     waypointdict = waypointsreader.waypointdictmaker()
     print('OK')  # loading waypoints was successful
 
+    print('   Loading airways into memory...', end="")
+    airwaydict = atsreader.airwaydictmaker()
+    print('OK')  # loading airways was successful
+
     print('   Combining NAVAID and waypoints dictionaries...', end="")
     pointsinspacedict = functions.pointsinspacedictcombiner(navaiddict, waypointdict)
     print("OK")  # dictionary combination was successful
 
-    airwaydict = atsreader.airwaydictmaker()
-
-    # NEW FOR TESTING BELOW!!!!
+    print('   Adding airway references to combined dictionary...', end="")
     pointsinspacedict = airwaymatcher.airwaymatcher(pointsinspacedict, airwaydict)
+    print("OK")  # reference matching was successful
 
     while True:
 
@@ -66,6 +69,8 @@ def main():
         if len(inputwaypointsobj.getwaypoints()) == 1:
             print('Single item detected, printing entry:', inputwaypointsobj.getelement(0))
             continue
+
+        # are airways in illegal locations (beginning/end)?
 
         # can any ambiguous elements be solved by matching with an adjacent airway?
 

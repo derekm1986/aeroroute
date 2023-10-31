@@ -88,7 +88,9 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
             founditem = airportdict[item]
 
         elif item in airwaydict: # not finished, also should assert not at beginning or end of inputstring
-            print(item + ' was found in airwaydict')
+            print(item + ' was found in airwaydict, functionality not finished')
+            #itemname = item
+            #founditem = airwaydict[item]
 
         elif item in pointsinspacedict:
             itemname = item
