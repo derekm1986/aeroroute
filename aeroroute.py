@@ -69,6 +69,8 @@ def main():
 
         # if there is an airway in inputwaypointsobj, call a function that incorporates the airway into the route
 
+        # can any ambiguous elements be solved by matching with an adjacent airway?
+        
         multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
 
         if len(multiplesmatrix) > 0:
