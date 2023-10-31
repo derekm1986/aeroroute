@@ -36,20 +36,18 @@ def main():
     airwaydict = atsreader.airwaydictmaker()
     print('OK')  # loading airways was successful
 
-    print('   Combining NAVAID and waypoints dictionaries...', end="")
+    print('Combining NAVAID and waypoints dictionaries...', end="")
     pointsinspacedict = functions.pointsinspacedictcombiner(navaiddict, waypointdict)
     print("OK")  # dictionary combination was successful
 
-    print('   Adding airway references to combined dictionary...', end="")
+    print('Adding airway references to combined dictionary...', end="")
     pointsinspacedict = airwaymatcher.airwaymatcher(pointsinspacedict, airwaydict)
     print("OK")  # reference matching was successful
 
     while True:
 
-        print('\n')
-
         # allows user to input waypoint(s)/exit instructions to list
-        print('Type "quit" to exit program, enter 20.000000/-123.000000 format for manual waypoints')
+        print('\nType "quit" to exit program, enter 20.000000/-123.000000 format for manual waypoints')
         inputstring = input("Enter input string: ")
         inputstring = inputstring.upper().split()
 

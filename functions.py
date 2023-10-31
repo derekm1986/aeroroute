@@ -87,15 +87,15 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
             itemname = item
             founditem = airportdict[item]
 
-        elif item in airwaydict: # not finished, also should assert not at beginning or end of inputstring
-            print(item + ' was found in airwaydict, functionality not finished')
-            #itemname = item
-            #founditem = airwaydict[item]
-
         elif item in pointsinspacedict:
             itemname = item
             founditem = pointsinspacedict[item]
-            
+
+        elif item in airwaydict:  # not finished, also should assert not at beginning or end of inputstring
+            print(item + ' was found in airwaydict, functionality not finished')
+            itemname = item
+            founditem = airwaydict[item]
+
       # elif put something here to read SIDs/STARs
             # is it adjacent to an airport? if no, reject
             # combination of letters and numbers? HYLND6 or SHB4 or UNOKO3A
