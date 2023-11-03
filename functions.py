@@ -66,6 +66,8 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     output = objects.Route()
 
+    founditem = None
+
     manualwaypointnumber = 1
 
     notfoundflag = False
@@ -120,6 +122,14 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     if doubleinputflag is True:
         output = 'invalidinput'
+
+    if output.howmanyelements() > 1:
+        if isinstance(output.getelement(0)[0], objects.Airway):  # we started with an airway, not OK!
+            print("Route cannot begin with an airway - unable to compute.")
+            output = 'invalidoutput'
+        if isinstance(output.getelement(output.howmanyelements() - 1)[0], objects.Airway):  # we ended with an airway, not OK!
+            print("Route cannot end with an airway - unable to compute.")
+            output = 'invalidoutput'
 
     return output
 
