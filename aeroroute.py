@@ -8,6 +8,7 @@ import navaidsreader
 import atsreader
 import functions
 import airwaymatcher
+import objects
 
 
 def main():
@@ -68,7 +69,15 @@ def main():
             print('Single item detected, printing entry:', inputwaypointsobj.getelement(0))
             continue
 
-        # are airways in illegal locations (beginning/end)?
+        # is airway at beginning of route?
+        if isinstance(inputwaypointsobj[0], objects.Airway):
+            print("Route cannot start with an airway")
+            continue
+
+        # is airway at end of route?
+        if isinstance(inputwaypointsobj[len(inputwaypointsobj) - 1], objects.Airway):
+            print("Route cannot end with an airway")
+            continue
 
         # can any ambiguous elements be solved by matching with an adjacent airway?
 
