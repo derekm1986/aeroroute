@@ -70,14 +70,14 @@ def main():
             continue
 
         # is airway at beginning of route?
-        if isinstance(inputwaypointsobj.getelement(0), objects.Airway):
-            print("Route cannot start with an airway")
-            continue
+        #if isinstance(inputwaypointsobj.getelement(0), objects.Airway):
+        #    print("Route cannot start with an airway")
+        #    continue
 
         # is airway at end of route? - this is probably broken!
-        if isinstance(inputwaypointsobj[len(inputwaypointsobj) - 1], objects.Airway):
-            print("Route cannot end with an airway")
-            continue
+        #if isinstance(inputwaypointsobj[len(inputwaypointsobj) - 1], objects.Airway):
+         #   print("Route cannot end with an airway")
+        #    continue
 
         # can any ambiguous elements be solved by matching with an adjacent airway?
 
