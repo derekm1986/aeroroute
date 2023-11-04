@@ -37,7 +37,7 @@ def main():
     airwaydict = atsreader.airwaydictmaker()
     print('OK')  # loading airways was successful
 
-    print('Combining NAVAID and waypoints dictionaries...', end="")
+    print('\nCombining NAVAID and waypoints dictionaries...', end="")
     pointsinspacedict = functions.pointsinspacedictcombiner(navaiddict, waypointdict)
     print("OK")  # dictionary combination was successful
 
@@ -69,24 +69,27 @@ def main():
             print('Single item detected, printing entry:', inputwaypointsobj.getelement(0))
             continue
 
-        # is airway at beginning of route?
-        #if isinstance(inputwaypointsobj.getelement(0), objects.Airway):
-        #    print("Route cannot start with an airway")
-        #    continue
+        if inputwaypointsobj.getcontainsairway():  # is there an airway in the route?
+            # is airway at beginning of route? - not OK
+            if isinstance(inputwaypointsobj.getelement(0), list):
+                print("Route cannot start with an airway")
+                continue
 
-        # is airway at end of route? - this is probably broken!
-        #if isinstance(inputwaypointsobj[len(inputwaypointsobj) - 1], objects.Airway):
-         #   print("Route cannot end with an airway")
-        #    continue
+            # is airway at end of route? - not OK
+            if isinstance(inputwaypointsobj.getelement(inputwaypointsobj.howmanyelements() - 1), list):
+                print("Route cannot end with an airway")
+                continue
 
-        # can any ambiguous elements be solved by matching with an adjacent airway?
+            # can any ambiguous elements be solved by matching with an adjacent airway?
 
-        # if there is an airway in inputwaypointsobj, call a function that incorporates the airway into the route        
-        
-        multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
 
-        if len(multiplesmatrix) > 0:
-            inputwaypointsobj = functions.deambiguator(inputwaypointsobj, multiplesmatrix)
+            # if there is an airway in inputwaypointsobj, call a function that incorporates the airway into the route
+
+        if inputwaypointsobj.getcontainsambiguity():  # do we contain an ambiguouselement?
+
+            multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
+
+            inputwaypointsobj = functions.deambiguatorbrute(inputwaypointsobj, multiplesmatrix)
 
         for item in inputwaypointsobj.getwaypoints():
             print(item)

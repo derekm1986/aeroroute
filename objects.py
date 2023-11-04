@@ -143,7 +143,15 @@ class Route(object):
     
     def howmanyelements(self):
         return len(self.waypoints)
-    
+
+    def getcontainsairway(self):
+        self.containsairway = False
+        for element in self.waypoints:
+            if type(element) is list:
+                self.containsairway = True
+                break
+        return self.containsairway
+
     def getcontainsambiguity(self):
         self.containsambiguity = False
         for element in self.waypoints:

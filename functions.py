@@ -123,13 +123,15 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
     if doubleinputflag is True:
         output = 'invalidinput'
 
-    if output.howmanyelements() > 1:
-        if isinstance(output.getelement(0)[0], objects.Airway):  # we started with an airway, not OK!
-            print("Route cannot begin with an airway - unable to compute.")
-            output = 'invalidoutput'
-        if isinstance(output.getelement(output.howmanyelements() - 1)[0], objects.Airway):  # we ended with an airway, not OK!
-            print("Route cannot end with an airway - unable to compute.")
-            output = 'invalidoutput'
+
+    # checking for airway at beginning/end of route
+    #if output.howmanyelements() > 1:
+    #    if isinstance(output.getelement(0)[0], objects.Airway):  # we started with an airway, not OK!
+    #        print("Route cannot begin with an airway - unable to compute.")
+    #        output = 'invalidoutput'
+    #    if isinstance(output.getelement(output.howmanyelements() - 1)[0], objects.Airway):  # we ended with an airway, not OK!
+    #        print("Route cannot end with an airway - unable to compute.")
+    #        output = 'invalidoutput'
 
     return output
 
@@ -232,12 +234,12 @@ def vincentyindirect(pair, heading=False):
     # .5mm, which is 0.000000269 nm
 
     if heading is True:
-        return (distanceinNM, fwdAz, revAz)
+        return distanceinNM, fwdAz, revAz
     else:
         return distanceinNM
 
 
-def deambiguator(inputwaypoints, multiplesmatrix):
+def deambiguatorbrute(inputwaypoints, multiplesmatrix):
 
     for multipleset in multiplesmatrix:
 
@@ -276,10 +278,10 @@ def deambiguator(inputwaypoints, multiplesmatrix):
         elementposition = 0
 
         for element in multiplesetelements:
-            if elementposition == 0: # first in the list, no copying needed here
+            if elementposition == 0:  # first in the list, no copying needed here
                 if element.wasambiguous is False: # single element present
                     possibilitieslist.append([element])
-                else: # the element is ambiguous
+                else:  # the element is ambiguous
                     ambiguousid = 0
                     for possibility in element.waypoint.getpossibilities():
                         possibilitieslist.append([objects.TBWrapper(possibility, element.getoriginalposition(), True,
@@ -288,9 +290,9 @@ def deambiguator(inputwaypoints, multiplesmatrix):
 
             else:  # it's after first in the list
 
-                if element.wasambiguous is False: # single element present
+                if element.wasambiguous is False:  # single element present
                     for item in possibilitieslist:
-                        item.append(element) # add to each list by one
+                        item.append(element)  # add to each list by one
                 else:  # the element is ambiguous, complicated copy and append operation needed
 
                     returnedlist = []
@@ -323,5 +325,10 @@ def deambiguator(inputwaypoints, multiplesmatrix):
         for point in shortestcompetitor[1]:  # deambiguate using shortestcompetitor
             if point.getwasambiguous() is True:
                 inputwaypoints.deambiguate(point.getoriginalposition(), point.getambiguousid())
+
+    return inputwaypoints
+
+def deambiguatorairway(inputwaypoints):
+    # use adjacent airways to solve ambiguous elements
 
     return inputwaypoints
