@@ -55,7 +55,7 @@ def main():
             print("No input detected")
             continue
 
-        doubleinputflag = False     # double adjacent input detection
+        doubleinputflag = False  # double adjacent input detection
 
         if len(inputstring) > 1:
             for i in range(len(inputstring) - 1):
