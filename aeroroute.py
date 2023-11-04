@@ -8,7 +8,6 @@ import navaidsreader
 import atsreader
 import functions
 import airwaymatcher
-import objects
 
 
 def main():
@@ -56,6 +55,18 @@ def main():
             print("No input detected")
             continue
 
+        doubleinputflag = False     # double adjacent input detection
+
+        if len(inputstring) > 1:
+            for i in range(len(inputstring) - 1):
+                if inputstring[i] == inputstring[i + 1]:
+                    print('Multiple adjacent input found with name', inputstring[i], '- unable to compute.')
+                    doubleinputflag = True
+                    break
+
+        if doubleinputflag:
+            continue
+
         if "QUIT" in inputstring:
             print('***Program exiting***')
             break
@@ -79,6 +90,8 @@ def main():
             if isinstance(inputwaypointsobj.getelement(inputwaypointsobj.howmanyelements() - 1), list):
                 print("Route cannot end with an airway")
                 continue
+
+            # no airways should touch another airway
 
             # can any ambiguous elements be solved by matching with an adjacent airway?
 

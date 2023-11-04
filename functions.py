@@ -74,8 +74,6 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     previousitemname = None  # this is used below to detect a double input
 
-    doubleinputflag = False
-
     for item in inputstring:
 
         if "/" in item:  # manual input detected
@@ -100,28 +98,19 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
 
       # elif put something here to read SIDs/STARs
             # is it adjacent to an airport? if no, reject
-            # combination of letters and numbers? HYLND6 or SHB4 or UNOKO3A
+            # combination of letters and numbers? HYLND6 or CSTL4 or SHB4 or UNOKO3A
             # flag as possible SID/STAR?
 
         else:
             print(item, "not found")
-            itemname = item  # needed for double input detection later
             notfoundflag = True
-
-        if previousitemname == itemname and notfoundflag is False:  # double input detection
-            print('Multiple adjacent input found with name', itemname, '- unable to compute.')
-            doubleinputflag = True
 
         if notfoundflag is False:
             output.addelement(founditem)
 
-        previousitemname = itemname  # for double input detection
-
     if notfoundflag is True:
         output = 'invalidinput'
 
-    if doubleinputflag is True:
-        output = 'invalidinput'
 
 
     # checking for airway at beginning/end of route
