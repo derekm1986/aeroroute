@@ -93,7 +93,7 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
             itemname = item
             founditem = pointsinspacedict[item]
 
-        elif item in airwaydict:  # not finished, also should assert not at beginning or end of inputstring
+        elif item in airwaydict:  # not finished
             print(item + ' was found in airwaydict, functionality not finished')
             itemname = item
             founditem = airwaydict[item]
@@ -327,6 +327,7 @@ def deambiguatorbrute(inputwaypoints, multiplesmatrix):
                 inputwaypoints.deambiguate(point.getoriginalposition(), point.getambiguousid())
 
     return inputwaypoints
+
 
 def deambiguatorairway(inputwaypoints):
     # use adjacent airways to solve ambiguous elements
