@@ -64,7 +64,7 @@ class Airport(object):
         return self.identifier + ' airport ' + self.elementname + ' coordinates: ' + str(self.coordinates)
 
 
-class Ambiguouselement(object):
+class Ambiguouselement(object):  # consider changing to Ambiguouspoint?
 
     def __init__(self, identifier, initialpossibility):
         self.identifier = identifier
@@ -200,3 +200,35 @@ class Airway(object):
 
     def getelement(self, element):
         return self.waypoints[element]
+
+
+class Ambiguousairway(object):
+    def __init__(self, identifier, initialpossibility):
+        self.identifier = identifier
+        self.possibilities = [initialpossibility]
+
+    def __iter__(self):
+        for possibility in self.possibilities:
+            yield possibility
+
+    def addpossibility(self, possibility):
+        if type(possibility) is list:
+            self.possibilities.extend(possibility)
+        else:
+            self.possibilities.append(possibility)
+        # should this be .extend instead of append in case I get passed a list?
+
+    def howmanypossibilities(self):
+        return len(self.possibilities)
+
+    def getidentifier(self):
+        return self.identifier
+
+    def getpossibility(self, possibilitynumber):
+        return self.possibilities[possibilitynumber]
+
+    def getpossibilities(self):
+        return self.possibilities
+
+    def __str__(self):
+        return self.identifier + ' ambiguous airway with ' + str(len(self.possibilities)) + ' possibilities'

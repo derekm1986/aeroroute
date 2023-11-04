@@ -72,28 +72,23 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     notfoundflag = False
 
-    previousitemname = None  # this is used below to detect a double input
-
     for item in inputstring:
 
         if "/" in item:  # manual input detected
             itemname = 'WAYPOINT' + str(manualwaypointnumber)
             coordinates = tuple(item.split('/'))
-            # assert that it's valid
+            # assert that it's valid?
             founditem = objects.Pointinspace(itemname, coordinates, 'manual waypoint')
             manualwaypointnumber += 1
 
         elif item in airportdict:
-            itemname = item
             founditem = airportdict[item]
 
         elif item in pointsinspacedict:
-            itemname = item
             founditem = pointsinspacedict[item]
 
         elif item in airwaydict:  # not finished
             print(item + ' was found in airwaydict, functionality not finished')
-            itemname = item
             founditem = airwaydict[item]
 
       # elif put something here to read SIDs/STARs
@@ -104,14 +99,13 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
         else:
             print(item, "not found")
             notfoundflag = True
+            # maybe return from here?  then wouldn't see if anything else was not found
 
         if notfoundflag is False:
             output.addelement(founditem)
 
     if notfoundflag is True:
         output = 'invalidinput'
-
-
 
     # checking for airway at beginning/end of route
     #if output.howmanyelements() > 1:
@@ -213,8 +207,6 @@ def vincentyindirect(pair, heading=False):
     # to return initial/final azimuths in addition to distance
     fwdAz = math.degrees(math.atan2(cosU2 * sinlmbda, cosU1 * sinU2 - sinU1 * cosU2 * coslmbda))
     revAz = math.degrees(math.atan2(cosU1 * sinlmbda, -sinU1 * cosU2 + cosU1 * sinU2 * coslmbda))
-
-    # print('forwardazimuth: '+ str(fwdAz) + ',  ' + 'reverseazimuth: '+ str(revAz))
 
     distanceinNM = s / 1852.0  # s is output in meters, converting to nautical miles ->
     # 1852 meters in a nautical mile (official and exact)
