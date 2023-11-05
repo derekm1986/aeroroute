@@ -96,10 +96,10 @@ def airwaydictmaker():
 
         currentairway.setwaypoints(airwaylist)
 
-        if routeid in airwaydict:
+        if routeid in airwaydict:  # add ambigousairway functionality here
             airwaydict[routeid].append(currentairway)
         else:
-            airwaydict[routeid] = [currentairway]
+            airwaydict[routeid] = [currentairway]  # change when we add ambiguousairway functionality?
 
     ats_file.close()
 
