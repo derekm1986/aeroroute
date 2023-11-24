@@ -134,6 +134,7 @@ class Route(object):
 
     def __init__(self):
         self.waypoints = []
+        self.containsairway = False
 
     def addelement(self, element):
         self.waypoints.append(element)
@@ -155,8 +156,12 @@ class Route(object):
     def getcontainsairway(self):
         self.containsairway = False
         for element in self.waypoints:
+<<<<<<< Updated upstream
             # does this work anymore?
             if type(element) is list:
+=======
+            if type(element) is Airway or type(element) is Ambiguousairway:
+>>>>>>> Stashed changes
                 self.containsairway = True
                 break
         return self.containsairway

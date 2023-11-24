@@ -5,6 +5,7 @@
 
 from objects import Airway
 from objects import Pointinspace
+from objects import Ambiguousairway
 
 
 def airwaylatlongmaker(input):
@@ -96,10 +97,14 @@ def airwaydictmaker():
 
         currentairway.setwaypoints(airwaylist)
 
-        if routeid in airwaydict:  # add ambigousairway functionality here
-            airwaydict[routeid].append(currentairway)
+        if routeid in airwaydict:
+            if type(airwaydict[routeid]) is Ambiguousairway:
+                airwaydict[routeid].addpossibility(currentairway)
+            else:
+                airwaydict[routeid] = Ambiguousairway(routeid, airwaydict[routeid])
+                airwaydict[routeid].addpossibility(currentairway)
         else:
-            airwaydict[routeid] = [currentairway]  # change when we add ambiguousairway functionality?
+            airwaydict[routeid] = currentairway
 
     ats_file.close()
 
