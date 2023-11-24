@@ -83,15 +83,14 @@ def main():
 
         if inputwaypointsobj.getcontainsairway():  # is there an airway in the route?
             # is airway at beginning of route? - not OK
-            if isinstance(inputwaypointsobj.getelement(0), objects.Airway) or \
-                    isinstance(inputwaypointsobj.getelement(0), objects.AmbiguousAirway):
+            if isinstance(inputwaypointsobj.getfirstelement(), objects.Airway) or \
+                    isinstance(inputwaypointsobj.getfirstelement(), objects.AmbiguousAirway):
                 print("Route cannot start with an airway")
                 continue
 
             # is airway at end of route? - not OK
-            if isinstance(inputwaypointsobj.getelement(inputwaypointsobj.howmanyelements() - 1), objects.Airway) or \
-                    isinstance(inputwaypointsobj.getelement(inputwaypointsobj.howmanyelements() - 1),
-                               objects.AmbiguousAirway):
+            if isinstance(inputwaypointsobj.getlastelement(), objects.Airway) or \
+                    isinstance(inputwaypointsobj.getlastelement(), objects.AmbiguousAirway):
                 print("Route cannot end with an airway")
                 continue
 
