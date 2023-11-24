@@ -144,6 +144,14 @@ class Route(object):
     def howmanyelements(self):
         return len(self.waypoints)
 
+    def getlastelement(self):
+        # return last element, not done
+        return
+
+    def getfirstelement(self):
+        # return first element, not done
+        return
+
     def getcontainsairway(self):
         self.containsairway = False
         for element in self.waypoints:
