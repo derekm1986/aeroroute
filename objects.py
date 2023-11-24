@@ -145,12 +145,12 @@ class Route(object):
         return len(self.waypoints)
 
     def getlastelement(self):
-        # return last element, not done
-        return
+        # return last element
+        return self.waypoints[-1]
 
     def getfirstelement(self):
-        # return first element, not done
-        return
+        # return first element
+        return self.waypoints[0]
 
     def getcontainsairway(self):
         self.containsairway = False
