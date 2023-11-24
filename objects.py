@@ -155,6 +155,7 @@ class Route(object):
     def getcontainsairway(self):
         self.containsairway = False
         for element in self.waypoints:
+            # does this work anymore?
             if type(element) is list:
                 self.containsairway = True
                 break
