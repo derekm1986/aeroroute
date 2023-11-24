@@ -9,9 +9,9 @@ def pointsinspacedictcombiner(navaiddict, waypointdict):
     for key, val in waypointdict.items():
         if key in pointsinspacedict:
             # the entry is already in pointsinspacedict
-            if type(pointsinspacedict[key]) is objects.Ambiguouselement:
+            if type(pointsinspacedict[key]) is objects.AmbiguousElement:
                 # pointsinspacedict already has Ambiguouselement
-                if type(val) is objects.Ambiguouselement:
+                if type(val) is objects.AmbiguousElement:
                     # must add Ambiguouselement to Ambiguouselement
                     pointsinspacedict[key].addpossibility(waypointdict[key].getpossibilities())
                 else:
@@ -19,14 +19,14 @@ def pointsinspacedictcombiner(navaiddict, waypointdict):
                     pointsinspacedict[key].addpossibility(waypointdict[key])
             else:
                 # pointsinspacedict contains a Pointinspace
-                if type(val) is objects.Ambiguouselement:
+                if type(val) is objects.AmbiguousElement:
                     # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
                     originalpointinspace = pointsinspacedict[key]
                     pointsinspacedict[key] = val
                     pointsinspacedict[key].addpossibility(originalpointinspace)
                 else:
                     # Adding Pointinspace to a Pointinspace
-                    pointsinspacedict[key] = objects.Ambiguouselement(key, pointsinspacedict[key])
+                    pointsinspacedict[key] = objects.AmbiguousElement(key, pointsinspacedict[key])
                     pointsinspacedict[key].addpossibility(val)
         else:
             # the entry is not yet in pointsinspacedict, so just add it
@@ -78,7 +78,7 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
             itemname = 'WAYPOINT' + str(manualwaypointnumber)
             coordinates = tuple(item.split('/'))
             # assert that it's valid?
-            founditem = objects.Pointinspace(itemname, coordinates, 'manual waypoint')
+            founditem = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
             manualwaypointnumber += 1
 
         elif item in airportdict:
@@ -123,7 +123,7 @@ def multiplefinder(inputwaypoints):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
-    foundmultiples = [i for i, x in enumerate(inputwaypoints.getwaypoints()) if type(x) is objects.Ambiguouselement]
+    foundmultiples = [i for i, x in enumerate(inputwaypoints.getwaypoints()) if type(x) is objects.AmbiguousElement]
 
     multiplesmatrix = []
 

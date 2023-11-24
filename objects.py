@@ -1,4 +1,4 @@
-class Pointinspace(object):
+class PointInSpace(object):
 
     def __init__(self, identifier, coordinates, typeelement, elementname=None):
         self.identifier = identifier
@@ -64,7 +64,7 @@ class Airport(object):
         return self.identifier + ' airport ' + self.elementname + ' coordinates: ' + str(self.coordinates)
 
 
-class Ambiguouselement(object):  # consider changing to Ambiguouspoint?
+class AmbiguousElement(object):  # consider changing to Ambiguouspoint?
 
     def __init__(self, identifier, initialpossibility):
         self.identifier = identifier
@@ -99,7 +99,7 @@ class Ambiguouselement(object):  # consider changing to Ambiguouspoint?
 
 class TBWrapper(object):
 
-    def __init__(self, waypoint, originalposition, wasambiguous=False, ambiguousid = None):
+    def __init__(self, waypoint, originalposition, wasambiguous=False, ambiguousid=None):
         self.waypoint = waypoint
         self.originalposition = originalposition
         self.wasambiguous = wasambiguous
@@ -122,7 +122,7 @@ class TBWrapper(object):
         return self.waypoint
 
     def getcoordinates(self):
-        assert type(self.waypoint) is not Ambiguouselement
+        assert type(self.waypoint) is not AmbiguousElement
         return self.waypoint.getcoordinates()
 
     def __str__(self):
@@ -156,7 +156,7 @@ class Route(object):
     def getcontainsairway(self):
         self.containsairway = False
         for element in self.waypoints:
-            if type(element) is Airway or type(element) is Ambiguousairway:
+            if type(element) is Airway or type(element) is AmbiguousAirway:
                 self.containsairway = True
                 break
         return self.containsairway
@@ -164,7 +164,7 @@ class Route(object):
     def getcontainsambiguity(self):
         self.containsambiguity = False
         for element in self.waypoints:
-            if type(element) is Ambiguouselement:
+            if type(element) is AmbiguousElement:
                 self.containsambiguity = True
                 break
         return self.containsambiguity
@@ -211,7 +211,7 @@ class Airway(object):
         return self.waypoints[element]
 
 
-class Ambiguousairway(object):
+class AmbiguousAirway(object):
     def __init__(self, identifier, initialpossibility):
         self.identifier = identifier
         self.possibilities = [initialpossibility]

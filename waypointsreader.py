@@ -1,8 +1,8 @@
 # This file parses the vasFMC format Waypoints.txt file
 # Waypoints.txt file must be in AIRAC directory
 
-from objects import Pointinspace
-from objects import Ambiguouselement
+from objects import PointInSpace
+from objects import AmbiguousElement
 
 
 def waypointdictmaker():
@@ -45,13 +45,13 @@ def waypointdictmaker():
         if waypointlongisnegative is True:
             waypointlongwithdecimal = "-" + waypointlongwithdecimal
 
-        waypointobj = Pointinspace(waypointid, (waypointlatwithdecimal, waypointlongwithdecimal), 'waypoint')
+        waypointobj = PointInSpace(waypointid, (waypointlatwithdecimal, waypointlongwithdecimal), 'waypoint')
 
         if waypointid in waypointdict:
-            if type(waypointdict[waypointid]) is Ambiguouselement:
+            if type(waypointdict[waypointid]) is AmbiguousElement:
                 waypointdict[waypointid].addpossibility(waypointobj)
             else:
-                waypointdict[waypointid] = Ambiguouselement(waypointid, waypointdict[waypointid])
+                waypointdict[waypointid] = AmbiguousElement(waypointid, waypointdict[waypointid])
                 waypointdict[waypointid].addpossibility(waypointobj)
         else:
             waypointdict[waypointid] = waypointobj

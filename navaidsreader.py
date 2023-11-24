@@ -1,8 +1,8 @@
 # This file parses the vasFMC format Navaids.txt file
 # Navaids.txt file must be in AIRAC directory
 
-from objects import Pointinspace
-from objects import Ambiguouselement
+from objects import PointInSpace
+from objects import AmbiguousElement
 
 
 def navaiddictmaker():
@@ -46,13 +46,13 @@ def navaiddictmaker():
         if navaidlongisnegative is True:
             navaidlongwithdecimal = "-" + navaidlongwithdecimal
 
-        navaidobj = Pointinspace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
+        navaidobj = PointInSpace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
 
         if navaidid in navaiddict:
-            if type(navaiddict[navaidid]) is Ambiguouselement:
+            if type(navaiddict[navaidid]) is AmbiguousElement:
                 navaiddict[navaidid].addpossibility(navaidobj)
             else:
-                navaiddict[navaidid] = Ambiguouselement(navaidid, navaiddict[navaidid])
+                navaiddict[navaidid] = AmbiguousElement(navaidid, navaiddict[navaidid])
                 navaiddict[navaidid].addpossibility(navaidobj)
         else:
             navaiddict[navaidid] = navaidobj

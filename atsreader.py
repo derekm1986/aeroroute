@@ -4,8 +4,8 @@
 # need to finish
 
 from objects import Airway
-from objects import Pointinspace
-from objects import Ambiguousairway
+from objects import PointInSpace
+from objects import AmbiguousAirway
 
 
 def airwaylatlongmaker(input):
@@ -88,20 +88,20 @@ def airwaydictmaker():
                 # this is asking if an object is already in the list.  comparing an object to an object is bad news.
 
                 if firstwaypoint not in simpleairwaylist:
-                    airwaylist.append(Pointinspace(firstwaypoint[0], (firstwaypoint[1],firstwaypoint[2]),'airwaywaypoint'))
+                    airwaylist.append(PointInSpace(firstwaypoint[0], (firstwaypoint[1], firstwaypoint[2]), 'airwaywaypoint'))
                     simpleairwaylist.append(firstwaypoint)
 
                 if secondwaypoint not in simpleairwaylist:
-                    airwaylist.append(Pointinspace(secondwaypoint[0], (secondwaypoint[1],secondwaypoint[2]),'airwaywaypoint'))
+                    airwaylist.append(PointInSpace(secondwaypoint[0], (secondwaypoint[1], secondwaypoint[2]), 'airwaywaypoint'))
                     simpleairwaylist.append(secondwaypoint)
 
         currentairway.setwaypoints(airwaylist)
 
         if routeid in airwaydict:
-            if type(airwaydict[routeid]) is Ambiguousairway:
+            if type(airwaydict[routeid]) is AmbiguousAirway:
                 airwaydict[routeid].addpossibility(currentairway)
             else:
-                airwaydict[routeid] = Ambiguousairway(routeid, airwaydict[routeid])
+                airwaydict[routeid] = AmbiguousAirway(routeid, airwaydict[routeid])
                 airwaydict[routeid].addpossibility(currentairway)
         else:
             airwaydict[routeid] = currentairway
