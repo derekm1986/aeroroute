@@ -22,75 +22,75 @@ def main():
     print('Reading AIRAC data...')
 
     print('   Loading airports into memory...', end="")
-    airportdict = airportsreader.airportdictmaker()
+    airport_dict = airportsreader.airportdictmaker()
     print('OK')  # loading airports was successful
 
     print('   Loading NAVAIDs into memory...', end="")
-    navaiddict = navaidsreader.navaid_dict_maker()
+    navaid_dict = navaidsreader.navaid_dict_maker()
     print('OK')  # loading NAVAIDs was successful
 
     print('   Loading waypoints into memory...', end="")
-    waypointdict = waypointsreader.waypointdictmaker()
+    waypoint_dict = waypointsreader.waypointdictmaker()
     print('OK')  # loading waypoints was successful
 
     print('   Loading airways into memory...', end="")
-    airwaydict = atsreader.airwaydict_maker()
+    airway_dict = atsreader.airwaydict_maker()
     print('OK')  # loading airways was successful
 
     print('\nCombining NAVAID and waypoints dictionaries...', end="")
-    pointsinspacedict = functions.points_in_space_dict_combiner(navaiddict, waypointdict)
+    points_in_space_dict = functions.points_in_space_dict_combiner(navaid_dict, waypoint_dict)
     print("OK")  # dictionary combination was successful
 
     print('Adding airway references to combined dictionary...', end="")
-    pointsinspacedict = airwaymatcher.airway_matcher(pointsinspacedict, airwaydict)
+    points_in_space_dict = airwaymatcher.airway_matcher(points_in_space_dict, airway_dict)
     print("OK")  # reference matching was successful
 
     while True:
 
         # allows user to input waypoint(s)/exit instructions to list
         print('\nType "quit" to exit program, enter 20.000000/-123.000000 format for manual waypoints')
-        inputstring = input("Enter input string: ")
-        inputstring = inputstring.upper().split()
+        input_string = input("Enter input string: ")
+        input_string = input_string.upper().split()
 
-        if len(inputstring) == 0:
+        if len(input_string) == 0:
             print("No input detected")
             continue
 
-        doubleinputflag = False  # double adjacent input detection
+        double_input_flag = False  # double adjacent input detection
 
-        if len(inputstring) > 1:
-            for i in range(len(inputstring) - 1):
-                if inputstring[i] == inputstring[i + 1]:
-                    print('Multiple adjacent input found with name', inputstring[i], '- unable to compute.')
-                    doubleinputflag = True
+        if len(input_string) > 1:
+            for i in range(len(input_string) - 1):
+                if input_string[i] == input_string[i + 1]:
+                    print('Multiple adjacent input found with name', input_string[i], '- unable to compute.')
+                    double_input_flag = True
                     break
 
-        if doubleinputflag:
+        if double_input_flag:
             continue
 
-        if "QUIT" in inputstring:
+        if "QUIT" in input_string:
             print('***Program exiting***')
             break
 
-        inputwaypointsobj = functions.string_reader(inputstring, airportdict, pointsinspacedict, airwaydict)
+        input_waypoints_obj = functions.string_reader(input_string, airport_dict, points_in_space_dict, airway_dict)
 
-        if inputwaypointsobj == "invalidinput":  # something bad came back from stringreader
+        if input_waypoints_obj == "invalidinput":  # something bad came back from string_reader
             continue
 
-        if len(inputwaypointsobj.get_waypoints()) == 1:
-            print('Single item detected, printing entry:', inputwaypointsobj.get_element(0))
+        if len(input_waypoints_obj.get_waypoints()) == 1:
+            print('Single item detected, printing entry:', input_waypoints_obj.get_element(0))
             continue
 
-        if inputwaypointsobj.get_contains_airway():  # is there an airway in the route?
+        if input_waypoints_obj.get_contains_airway():  # is there an airway in the route?
             # is airway at beginning of route? - not OK
-            if isinstance(inputwaypointsobj.get_first_element(), objects.Airway) or \
-                    isinstance(inputwaypointsobj.get_first_element(), objects.AmbiguousAirway):
+            if isinstance(input_waypoints_obj.get_first_element(), objects.Airway) or \
+                    isinstance(input_waypoints_obj.get_first_element(), objects.AmbiguousAirway):
                 print("Route cannot start with an airway")
                 continue
 
             # is airway at end of route? - not OK
-            if isinstance(inputwaypointsobj.get_last_element(), objects.Airway) or \
-                    isinstance(inputwaypointsobj.get_last_element(), objects.AmbiguousAirway):
+            if isinstance(input_waypoints_obj.get_last_element(), objects.Airway) or \
+                    isinstance(input_waypoints_obj.get_last_element(), objects.AmbiguousAirway):
                 print("Route cannot end with an airway")
                 continue
 
@@ -98,20 +98,20 @@ def main():
 
             # can any ambiguous elements be solved by matching with an adjacent airway?
 
-            # if there is an airway in inputwaypointsobj, call a function that incorporates the airway into the route
+            # if there is an airway in input_waypoints_obj, call a function that incorporates the airway into the route
 
-        if inputwaypointsobj.get_contains_ambiguity():  # do we contain an ambiguouselement?
+        if input_waypoints_obj.get_contains_ambiguity():  # do we contain an ambiguouselement?
 
-            multiplesmatrix = functions.multiple_finder(inputwaypointsobj)
+            multiples_matrix = functions.multiple_finder(input_waypoints_obj)
 
-            inputwaypointsobj = functions.deambiguator_brute(inputwaypointsobj, multiplesmatrix)
+            input_waypoints_obj = functions.deambiguator_brute(input_waypoints_obj, multiples_matrix)
 
-        for item in inputwaypointsobj.get_waypoints():
+        for item in input_waypoints_obj.get_waypoints():
             print(item)
 
-        sumdistance = functions.distance_finder(inputwaypointsobj)
+        sum_distance = functions.distance_finder(input_waypoints_obj)
 
-        print('Distance in nm:', sumdistance)
+        print('Distance in nm:', sum_distance)
 
 
 if __name__ == "__main__":

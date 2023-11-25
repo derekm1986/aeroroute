@@ -2,21 +2,21 @@ import math
 import objects
 
 
-def points_in_space_dict_combiner(navaiddict, waypointdict):
+def points_in_space_dict_combiner(navaid_dict, waypoint_dict):
 
-    pointsinspacedict = navaiddict.copy()
+    pointsinspacedict = navaid_dict.copy()
 
-    for key, val in waypointdict.items():
+    for key, val in waypoint_dict.items():
         if key in pointsinspacedict:
             # the entry is already in pointsinspacedict
             if type(pointsinspacedict[key]) is objects.AmbiguousElement:
                 # pointsinspacedict already has Ambiguouselement
                 if type(val) is objects.AmbiguousElement:
                     # must add Ambiguouselement to Ambiguouselement
-                    pointsinspacedict[key].add_possibility(waypointdict[key].get_possibilities())
+                    pointsinspacedict[key].add_possibility(waypoint_dict[key].get_possibilities())
                 else:
                     # must add Pointinspace to Ambiguouselement
-                    pointsinspacedict[key].add_possibility(waypointdict[key])
+                    pointsinspacedict[key].add_possibility(waypoint_dict[key])
             else:
                 # pointsinspacedict contains a Pointinspace
                 if type(val) is objects.AmbiguousElement:
