@@ -26,7 +26,7 @@ def main():
     print('OK')  # loading airports was successful
 
     print('   Loading NAVAIDs into memory...', end="")
-    navaiddict = navaidsreader.navaiddictmaker()
+    navaiddict = navaidsreader.navaid_dict_maker()
     print('OK')  # loading NAVAIDs was successful
 
     print('   Loading waypoints into memory...', end="")
@@ -34,15 +34,15 @@ def main():
     print('OK')  # loading waypoints was successful
 
     print('   Loading airways into memory...', end="")
-    airwaydict = atsreader.airwaydictmaker()
+    airwaydict = atsreader.airwaydict_maker()
     print('OK')  # loading airways was successful
 
     print('\nCombining NAVAID and waypoints dictionaries...', end="")
-    pointsinspacedict = functions.pointsinspacedictcombiner(navaiddict, waypointdict)
+    pointsinspacedict = functions.points_in_space_dict_combiner(navaiddict, waypointdict)
     print("OK")  # dictionary combination was successful
 
     print('Adding airway references to combined dictionary...', end="")
-    pointsinspacedict = airwaymatcher.airwaymatcher(pointsinspacedict, airwaydict)
+    pointsinspacedict = airwaymatcher.airway_matcher(pointsinspacedict, airwaydict)
     print("OK")  # reference matching was successful
 
     while True:
@@ -72,7 +72,7 @@ def main():
             print('***Program exiting***')
             break
 
-        inputwaypointsobj = functions.stringreader(inputstring, airportdict, pointsinspacedict, airwaydict)
+        inputwaypointsobj = functions.string_reader(inputstring, airportdict, pointsinspacedict, airwaydict)
 
         if inputwaypointsobj == "invalidinput":  # something bad came back from stringreader
             continue
@@ -103,14 +103,14 @@ def main():
 
         if inputwaypointsobj.getcontainsambiguity():  # do we contain an ambiguouselement?
 
-            multiplesmatrix = functions.multiplefinder(inputwaypointsobj)
+            multiplesmatrix = functions.multiple_finder(inputwaypointsobj)
 
-            inputwaypointsobj = functions.deambiguatorbrute(inputwaypointsobj, multiplesmatrix)
+            inputwaypointsobj = functions.deambiguator_brute(inputwaypointsobj, multiplesmatrix)
 
         for item in inputwaypointsobj.getwaypoints():
             print(item)
 
-        sumdistance = functions.distancefinder(inputwaypointsobj)
+        sumdistance = functions.distance_finder(inputwaypointsobj)
 
         print('Distance in nm:', sumdistance)
 

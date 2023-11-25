@@ -8,7 +8,7 @@ from objects import Airway
 # make this more interactive to be more useful
 
 print('   Loading NAVAIDs into memory...', end="")
-navaiddict = navaidsreader.navaiddictmaker()
+navaiddict = navaidsreader.navaid_dict_maker()
 print('OK')  # loading NAVAIDs was successful
 
 print('   Loading waypoints into memory...', end="")
@@ -16,19 +16,19 @@ waypointdict = waypointsreader.waypointdictmaker()
 print('OK')  # loading waypoints was successful
 
 print('   Combining NAVAID and waypoints dictionaries...', end="")
-pointsinspacedict = functions.pointsinspacedictcombiner(navaiddict, waypointdict)
+pointsinspacedict = functions.points_in_space_dict_combiner(navaiddict, waypointdict)
 print("OK")  # dictionary combination was successful
 
 
 print('Calling atsreader.airwaydictmaker...')
 
-airwaydict = atsreader.airwaydictmaker()
+airwaydict = atsreader.airwaydict_maker()
 
 print('atsreader.airwaydictmaker returned')
 
 #print(airwaydict)
 
-airwaymatcher.airwaymatcher(airwaydict, pointsinspacedict)
+airwaymatcher.airway_matcher(airwaydict, pointsinspacedict)
 
 inputstring = input("Enter airway: ")
 

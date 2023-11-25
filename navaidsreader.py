@@ -5,7 +5,7 @@ from objects import PointInSpace
 from objects import AmbiguousElement
 
 
-def navaiddictmaker():
+def navaid_dict_maker():
 
     navaid_file = open("AIRAC/Navaids.txt")
 

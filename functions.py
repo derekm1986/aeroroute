@@ -2,7 +2,7 @@ import math
 import objects
 
 
-def pointsinspacedictcombiner(navaiddict, waypointdict):
+def points_in_space_dict_combiner(navaiddict, waypointdict):
 
     pointsinspacedict = navaiddict.copy()
 
@@ -35,7 +35,7 @@ def pointsinspacedictcombiner(navaiddict, waypointdict):
     return pointsinspacedict
 
 
-def pairmaker(inputwaypoints):
+def pair_maker(inputwaypoints):
 
     # below is so that the function will accept a list of elements as well
     if type(inputwaypoints) is objects.Route:
@@ -51,18 +51,18 @@ def pairmaker(inputwaypoints):
         yield pair
 
 
-def distancefinder(input):
+def distance_finder(input):
   
     sumdistance = 0.00  # establish sumdistance and put zero in it
   
-    for pair in pairmaker(input):
-        pairdistance = vincentyindirect(pair)
+    for pair in pair_maker(input):
+        pairdistance = vincenty_indirect(pair)
         sumdistance += pairdistance
 
     return sumdistance
 
 
-def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
+def string_reader(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     output = objects.Route()
 
@@ -119,7 +119,7 @@ def stringreader(inputstring, airportdict, pointsinspacedict, airwaydict):
     return output
 
 
-def multiplefinder(inputwaypoints):
+def multiple_finder(inputwaypoints):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
@@ -140,7 +140,7 @@ def multiplefinder(inputwaypoints):
     return multiplesmatrix
 
 
-def vincentyindirect(pair, heading=False):
+def vincenty_indirect(pair, heading=False):
 
     #  Requires a tuple of two objects with the attribute .getcoordinates() which returns a
     #  tuple of type (-lat.00, lon.00)
@@ -220,7 +220,7 @@ def vincentyindirect(pair, heading=False):
         return distanceinNM
 
 
-def deambiguatorbrute(inputwaypoints, multiplesmatrix):
+def deambiguator_brute(inputwaypoints, multiplesmatrix):
 
     for multipleset in multiplesmatrix:
 
@@ -294,7 +294,7 @@ def deambiguatorbrute(inputwaypoints, multiplesmatrix):
         leaderboard = []
 
         for possibility in possibilitieslist:  # compute distances
-            leaderboard.append([distancefinder(possibility), possibility])
+            leaderboard.append([distance_finder(possibility), possibility])
 
         shortestdistance = float('Inf')  # fill with worst-case scenario so anything else is smaller
 
@@ -310,7 +310,7 @@ def deambiguatorbrute(inputwaypoints, multiplesmatrix):
     return inputwaypoints
 
 
-def deambiguatorairway(inputwaypoints):
+def deambiguator_airway(inputwaypoints):
     # use adjacent airways to solve ambiguous elements
 
     return inputwaypoints

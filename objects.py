@@ -7,7 +7,7 @@ class PointInSpace(object):
         self.elementname = elementname
         self.onairways = []
 
-    def getidentifier(self):
+    def get_identifier(self):
         return self.identifier
 
     def getcoordinates(self):
