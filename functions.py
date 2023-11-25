@@ -4,44 +4,44 @@ import objects
 
 def points_in_space_dict_combiner(navaid_dict, waypoint_dict):
 
-    pointsinspacedict = navaid_dict.copy()
+    points_in_space_dict = navaid_dict.copy()
 
     for key, val in waypoint_dict.items():
-        if key in pointsinspacedict:
-            # the entry is already in pointsinspacedict
-            if type(pointsinspacedict[key]) is objects.AmbiguousElement:
-                # pointsinspacedict already has Ambiguouselement
+        if key in points_in_space_dict:
+            # the entry is already in points_in_space_dict
+            if type(points_in_space_dict[key]) is objects.AmbiguousElement:
+                # points_in_space_dict already has Ambiguouselement
                 if type(val) is objects.AmbiguousElement:
                     # must add Ambiguouselement to Ambiguouselement
-                    pointsinspacedict[key].add_possibility(waypoint_dict[key].get_possibilities())
+                    points_in_space_dict[key].add_possibility(waypoint_dict[key].get_possibilities())
                 else:
                     # must add Pointinspace to Ambiguouselement
-                    pointsinspacedict[key].add_possibility(waypoint_dict[key])
+                    points_in_space_dict[key].add_possibility(waypoint_dict[key])
             else:
-                # pointsinspacedict contains a Pointinspace
+                # points_in_space_dict contains a Pointinspace
                 if type(val) is objects.AmbiguousElement:
                     # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
-                    originalpointinspace = pointsinspacedict[key]
-                    pointsinspacedict[key] = val
-                    pointsinspacedict[key].add_possibility(originalpointinspace)
+                    originalpointinspace = points_in_space_dict[key]
+                    points_in_space_dict[key] = val
+                    points_in_space_dict[key].add_possibility(originalpointinspace)
                 else:
                     # Adding Pointinspace to a Pointinspace
-                    pointsinspacedict[key] = objects.AmbiguousElement(key, pointsinspacedict[key])
-                    pointsinspacedict[key].add_possibility(val)
+                    points_in_space_dict[key] = objects.AmbiguousElement(key, points_in_space_dict[key])
+                    points_in_space_dict[key].add_possibility(val)
         else:
-            # the entry is not yet in pointsinspacedict, so just add it
-            pointsinspacedict[key] = val
+            # the entry is not yet in points_in_space_dict, so just add it
+            points_in_space_dict[key] = val
 
-    return pointsinspacedict
+    return points_in_space_dict
 
 
-def pair_maker(inputwaypoints):
+def pair_maker(input_waypoints):
 
     # below is so that the function will accept a list of elements as well
-    if type(inputwaypoints) is objects.Route:
-        route = inputwaypoints.get_waypoints()
+    if type(input_waypoints) is objects.Route:
+        route = input_waypoints.get_waypoints()
     else:
-        route = inputwaypoints
+        route = input_waypoints
 
     i = 0
 
@@ -53,13 +53,13 @@ def pair_maker(inputwaypoints):
 
 def distance_finder(input):
   
-    sumdistance = 0.00  # establish sumdistance and put zero in it
+    sum_distance = 0.00  # establish sum_distance and put zero in it
   
     for pair in pair_maker(input):
-        pairdistance = vincenty_indirect(pair)
-        sumdistance += pairdistance
+        pair_distance = vincenty_indirect(pair)
+        sum_distance += pair_distance
 
-    return sumdistance
+    return sum_distance
 
 
 def string_reader(inputstring, airportdict, pointsinspacedict, airwaydict):
@@ -119,25 +119,25 @@ def string_reader(inputstring, airportdict, pointsinspacedict, airwaydict):
     return output
 
 
-def multiple_finder(inputwaypoints):
+def multiple_finder(input_waypoints):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
-    foundmultiples = [i for i, x in enumerate(inputwaypoints.get_waypoints()) if type(x) is objects.AmbiguousElement]
+    found_multiples = [i for i, x in enumerate(input_waypoints.get_waypoints()) if type(x) is objects.AmbiguousElement]
 
-    multiplesmatrix = []
+    multiples_matrix = []
 
     lastwaypoint = -9  # have to fill it with something
 
     # this groups ambiguous waypoints together if they are sequential
-    for waypoint in foundmultiples:  # detect if waypoints are next to each other
+    for waypoint in found_multiples:  # detect if waypoints are next to each other
         if waypoint == lastwaypoint + 1:  # waypoint is sequential to waypoint before it
-            multiplesmatrix[len(multiplesmatrix) - 1].append(waypoint)  # group with previous waypoint
+            multiples_matrix[len(multiples_matrix) - 1].append(waypoint)  # group with previous waypoint
         else:  # waypoint stands alone
-            multiplesmatrix.append([waypoint])
+            multiples_matrix.append([waypoint])
         lastwaypoint = waypoint
 
-    return multiplesmatrix
+    return multiples_matrix
 
 
 def vincenty_indirect(pair, heading=False):
@@ -310,7 +310,7 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
     return inputwaypoints
 
 
-def deambiguator_airway(inputwaypoints):
+def deambiguator_airway(inputway_points):
     # use adjacent airways to solve ambiguous elements
 
-    return inputwaypoints
+    return inputway_points
