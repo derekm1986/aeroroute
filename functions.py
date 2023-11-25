@@ -13,21 +13,21 @@ def points_in_space_dict_combiner(navaiddict, waypointdict):
                 # pointsinspacedict already has Ambiguouselement
                 if type(val) is objects.AmbiguousElement:
                     # must add Ambiguouselement to Ambiguouselement
-                    pointsinspacedict[key].addpossibility(waypointdict[key].getpossibilities())
+                    pointsinspacedict[key].add_possibility(waypointdict[key].get_possibilities())
                 else:
                     # must add Pointinspace to Ambiguouselement
-                    pointsinspacedict[key].addpossibility(waypointdict[key])
+                    pointsinspacedict[key].add_possibility(waypointdict[key])
             else:
                 # pointsinspacedict contains a Pointinspace
                 if type(val) is objects.AmbiguousElement:
                     # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
                     originalpointinspace = pointsinspacedict[key]
                     pointsinspacedict[key] = val
-                    pointsinspacedict[key].addpossibility(originalpointinspace)
+                    pointsinspacedict[key].add_possibility(originalpointinspace)
                 else:
                     # Adding Pointinspace to a Pointinspace
                     pointsinspacedict[key] = objects.AmbiguousElement(key, pointsinspacedict[key])
-                    pointsinspacedict[key].addpossibility(val)
+                    pointsinspacedict[key].add_possibility(val)
         else:
             # the entry is not yet in pointsinspacedict, so just add it
             pointsinspacedict[key] = val
@@ -39,7 +39,7 @@ def pair_maker(inputwaypoints):
 
     # below is so that the function will accept a list of elements as well
     if type(inputwaypoints) is objects.Route:
-        route = inputwaypoints.getwaypoints()
+        route = inputwaypoints.get_waypoints()
     else:
         route = inputwaypoints
 
@@ -102,7 +102,7 @@ def string_reader(inputstring, airportdict, pointsinspacedict, airwaydict):
             # maybe return from here?  then wouldn't see if anything else was not found
 
         if notfoundflag is False:
-            output.addelement(founditem)
+            output.add_element(founditem)
 
     if notfoundflag is True:
         output = 'invalidinput'
@@ -123,7 +123,7 @@ def multiple_finder(inputwaypoints):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
-    foundmultiples = [i for i, x in enumerate(inputwaypoints.getwaypoints()) if type(x) is objects.AmbiguousElement]
+    foundmultiples = [i for i, x in enumerate(inputwaypoints.get_waypoints()) if type(x) is objects.AmbiguousElement]
 
     multiplesmatrix = []
 
@@ -145,10 +145,10 @@ def vincenty_indirect(pair, heading=False):
     #  Requires a tuple of two objects with the attribute .getcoordinates() which returns a
     #  tuple of type (-lat.00, lon.00)
 
-    lat1 = float(pair[0].getcoordinates()[0])
-    lon1 = float(pair[0].getcoordinates()[1])
-    lat2 = float(pair[1].getcoordinates()[0])
-    lon2 = float(pair[1].getcoordinates()[1])
+    lat1 = float(pair[0].get_coordinates()[0])
+    lon1 = float(pair[0].get_coordinates()[1])
+    lat2 = float(pair[1].get_coordinates()[0])
+    lon2 = float(pair[1].get_coordinates()[1])
 
     if lat1 == lat2 and lon1 == lon2:
         return 0.0
@@ -231,7 +231,7 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
         possibilitieslist = []
         multiplesetelements = []
         
-        if len(multipleset) == inputwaypoints.howmanyelements():
+        if len(multipleset) == inputwaypoints.how_many_elements():
             allareambiguous = True
             firstisambiguous = True
             lastisambiguous = True
@@ -239,22 +239,22 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
         elif 0 in multipleset:
             firstisambiguous = True
 
-        elif inputwaypoints.howmanyelements() - 1 in multipleset:
+        elif inputwaypoints.how_many_elements() - 1 in multipleset:
             lastisambiguous = True
 
         for listposition in multipleset:
-            multiplesetelements.append(objects.TBWrapper(inputwaypoints.getelement(listposition), 
-                                       listposition, True))
+            multiplesetelements.append(objects.TBWrapper(inputwaypoints.get_element(listposition),
+                                                         listposition, True))
                 
         if allareambiguous is False and firstisambiguous is False:
             # add previous waypoint to beginning of multiplesetelements
-            multiplesetelements.insert(0, objects.TBWrapper(inputwaypoints.getelement(multipleset[0] - 1),
-                                       multipleset[0] - 1))
+            multiplesetelements.insert(0, objects.TBWrapper(inputwaypoints.get_element(multipleset[0] - 1),
+                                                            multipleset[0] - 1))
             
         if allareambiguous is False and lastisambiguous is False:
             # add following waypoint to end of multiplesetelements 
-            multiplesetelements.append(objects.TBWrapper(inputwaypoints.getelement(multipleset[-1] + 1),
-                                       multipleset[-1] + 1))
+            multiplesetelements.append(objects.TBWrapper(inputwaypoints.get_element(multipleset[-1] + 1),
+                                                         multipleset[-1] + 1))
             
         elementposition = 0
 
@@ -264,9 +264,9 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
                     possibilitieslist.append([element])
                 else:  # the element is ambiguous
                     ambiguousid = 0
-                    for possibility in element.waypoint.getpossibilities():
-                        possibilitieslist.append([objects.TBWrapper(possibility, element.getoriginalposition(), True,
-                                                                   ambiguousid)])
+                    for possibility in element.waypoint.get_possibilities():
+                        possibilitieslist.append([objects.TBWrapper(possibility, element.get_original_position(), True,
+                                                                    ambiguousid)])
                         ambiguousid += 1
 
             else:  # it's after first in the list
@@ -280,9 +280,9 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
 
                     for possibilityfromlist in possibilitieslist:
                         ambiguousid = 0
-                        for possibilityfromelement in element.waypoint.getpossibilities():
+                        for possibilityfromelement in element.waypoint.get_possibilities():
                             returnedlist.append(possibilityfromlist + [objects.TBWrapper(possibilityfromelement,
-                                                                element.getoriginalposition(), True, ambiguousid)])
+                                                                                         element.get_original_position(), True, ambiguousid)])
                             ambiguousid += 1
 
                     possibilitieslist = returnedlist
@@ -304,8 +304,8 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
                 shortestcompetitor = competitor
 
         for point in shortestcompetitor[1]:  # deambiguate using shortestcompetitor
-            if point.getwasambiguous() is True:
-                inputwaypoints.deambiguate(point.getoriginalposition(), point.getambiguousid())
+            if point.get_was_ambiguous() is True:
+                inputwaypoints.deambiguate(point.get_original_position(), point.get_ambiguous_id())
 
     return inputwaypoints
 

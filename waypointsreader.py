@@ -49,10 +49,10 @@ def waypointdictmaker():
 
         if waypointid in waypointdict:
             if type(waypointdict[waypointid]) is AmbiguousElement:
-                waypointdict[waypointid].addpossibility(waypointobj)
+                waypointdict[waypointid].add_possibility(waypointobj)
             else:
                 waypointdict[waypointid] = AmbiguousElement(waypointid, waypointdict[waypointid])
-                waypointdict[waypointid].addpossibility(waypointobj)
+                waypointdict[waypointid].add_possibility(waypointobj)
         else:
             waypointdict[waypointid] = waypointobj
 

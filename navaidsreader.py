@@ -50,10 +50,10 @@ def navaid_dict_maker():
 
         if navaidid in navaiddict:
             if type(navaiddict[navaidid]) is AmbiguousElement:
-                navaiddict[navaidid].addpossibility(navaidobj)
+                navaiddict[navaidid].add_possibility(navaidobj)
             else:
                 navaiddict[navaidid] = AmbiguousElement(navaidid, navaiddict[navaidid])
-                navaiddict[navaidid].addpossibility(navaidobj)
+                navaiddict[navaidid].add_possibility(navaidobj)
         else:
             navaiddict[navaidid] = navaidobj
 

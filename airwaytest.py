@@ -34,7 +34,7 @@ inputstring = input("Enter airway: ")
 
 inputstring = inputstring.upper()
 
-testwaypoints = airwaydict[inputstring][0].getwaypoints()
+testwaypoints = airwaydict[inputstring][0].get_waypoints()
 
 print(testwaypoints)
 

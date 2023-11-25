@@ -77,20 +77,20 @@ def main():
         if inputwaypointsobj == "invalidinput":  # something bad came back from stringreader
             continue
 
-        if len(inputwaypointsobj.getwaypoints()) == 1:
-            print('Single item detected, printing entry:', inputwaypointsobj.getelement(0))
+        if len(inputwaypointsobj.get_waypoints()) == 1:
+            print('Single item detected, printing entry:', inputwaypointsobj.get_element(0))
             continue
 
-        if inputwaypointsobj.getcontainsairway():  # is there an airway in the route?
+        if inputwaypointsobj.get_contains_airway():  # is there an airway in the route?
             # is airway at beginning of route? - not OK
-            if isinstance(inputwaypointsobj.getfirstelement(), objects.Airway) or \
-                    isinstance(inputwaypointsobj.getfirstelement(), objects.AmbiguousAirway):
+            if isinstance(inputwaypointsobj.get_first_element(), objects.Airway) or \
+                    isinstance(inputwaypointsobj.get_first_element(), objects.AmbiguousAirway):
                 print("Route cannot start with an airway")
                 continue
 
             # is airway at end of route? - not OK
-            if isinstance(inputwaypointsobj.getlastelement(), objects.Airway) or \
-                    isinstance(inputwaypointsobj.getlastelement(), objects.AmbiguousAirway):
+            if isinstance(inputwaypointsobj.get_last_element(), objects.Airway) or \
+                    isinstance(inputwaypointsobj.get_last_element(), objects.AmbiguousAirway):
                 print("Route cannot end with an airway")
                 continue
 
@@ -101,13 +101,13 @@ def main():
 
             # if there is an airway in inputwaypointsobj, call a function that incorporates the airway into the route
 
-        if inputwaypointsobj.getcontainsambiguity():  # do we contain an ambiguouselement?
+        if inputwaypointsobj.get_contains_ambiguity():  # do we contain an ambiguouselement?
 
             multiplesmatrix = functions.multiple_finder(inputwaypointsobj)
 
             inputwaypointsobj = functions.deambiguator_brute(inputwaypointsobj, multiplesmatrix)
 
-        for item in inputwaypointsobj.getwaypoints():
+        for item in inputwaypointsobj.get_waypoints():
             print(item)
 
         sumdistance = functions.distance_finder(inputwaypointsobj)

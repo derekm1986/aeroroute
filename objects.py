@@ -10,22 +10,22 @@ class PointInSpace(object):
     def get_identifier(self):
         return self.identifier
 
-    def getcoordinates(self):
+    def get_coordinates(self):
         return self.coordinates
 
-    def gettypeelement(self):
+    def get_type_element(self):
         return self.typeelement
 
-    def getelementname(self):
+    def get_element_name(self):
         if self.elementname is not None:
             return self.elementname
         else:
             pass
 
-    def getairways(self):
+    def get_airways(self):
         return self.onairways
 
-    def addairway(self, airway):
+    def add_airway(self, airway):
         self.onairways.append(airway)
 
     def __str__(self):
@@ -45,16 +45,16 @@ class Airport(object):
         self.typeelement = 'airport'
         self.elementname = elementname
 
-    def getidentifier(self):
+    def get_identifier(self):
         return self.identifier
 
-    def getcoordinates(self):
+    def get_coordinates(self):
         return self.coordinates
 
-    def gettypeelement(self):
+    def get_type_element(self):
         return self.typeelement
 
-    def getelementname(self):
+    def get_element_name(self):
         if self.elementname is not None:
             return self.elementname
         else:
@@ -74,23 +74,23 @@ class AmbiguousElement(object):  # consider changing to Ambiguouspoint?
         for possibility in self.possibilities:
             yield possibility
 
-    def addpossibility(self, possibility):
+    def add_possibility(self, possibility):
         if type(possibility) is list:
             self.possibilities.extend(possibility)
         else:
             self.possibilities.append(possibility)
         # should this be .extend instead of append in case I get passed a list?
         
-    def howmanypossibilities(self):
+    def how_many_possibilities(self):
         return len(self.possibilities)
 
-    def getidentifier(self):
+    def get_identifier(self):
         return self.identifier
     
-    def getpossibility(self, possibilitynumber):
+    def get_possibility(self, possibilitynumber):
         return self.possibilities[possibilitynumber]
 
-    def getpossibilities(self):
+    def get_possibilities(self):
         return self.possibilities
 
     def __str__(self):
@@ -105,25 +105,25 @@ class TBWrapper(object):
         self.wasambiguous = wasambiguous
         self.ambiguousid = ambiguousid
 
-    def setambiguousid(self, ambiguousid):
+    def set_ambiguous_id(self, ambiguousid):
         assert self.wasambiguous is True
         self.ambiguousid = ambiguousid
 
-    def getwasambiguous(self):
+    def get_was_ambiguous(self):
         return self.wasambiguous
 
-    def getoriginalposition(self):
+    def get_original_position(self):
         return self.originalposition
 
-    def getambiguousid(self):
+    def get_ambiguous_id(self):
         return self.ambiguousid
 
-    def getwaypoint(self):
+    def get_waypoint(self):
         return self.waypoint
 
-    def getcoordinates(self):
+    def get_coordinates(self):
         assert type(self.waypoint) is not AmbiguousElement
-        return self.waypoint.getcoordinates()
+        return self.waypoint.get_coordinates()
 
     def __str__(self):
         return ('TBWrapper original position: ' + str(self.originalposition) + ', ' + 'Wrapper ambiguous ID: ' +
@@ -136,24 +136,24 @@ class Route(object):
         self.waypoints = []
         self.containsairway = False
 
-    def addelement(self, element):
+    def add_element(self, element):
         self.waypoints.append(element)
         
-    def getelement(self, element):
+    def get_element(self, element):
         return self.waypoints[element]
     
-    def howmanyelements(self):
+    def how_many_elements(self):
         return len(self.waypoints)
 
-    def getlastelement(self):
+    def get_last_element(self):
         # return last element
         return self.waypoints[-1]
 
-    def getfirstelement(self):
+    def get_first_element(self):
         # return first element
         return self.waypoints[0]
 
-    def getcontainsairway(self):
+    def get_contains_airway(self):
         self.containsairway = False
         for element in self.waypoints:
             if type(element) is Airway or type(element) is AmbiguousAirway:
@@ -161,7 +161,7 @@ class Route(object):
                 break
         return self.containsairway
 
-    def getcontainsambiguity(self):
+    def get_contains_ambiguity(self):
         self.containsambiguity = False
         for element in self.waypoints:
             if type(element) is AmbiguousElement:
@@ -169,11 +169,11 @@ class Route(object):
                 break
         return self.containsambiguity
     
-    def getpossibility(self, position, possibilitynumber):
+    def get_possibility(self, position, possibilitynumber):
         # must be Ambiguouselement at position
         return self.waypoints[position].getpossibility(possibilitynumber)
 
-    def getpossibilities(self, position):
+    def get_possibilities(self, position):
         # must be Ambiguouselement at position
         return self.waypoints[position].getpossibilities()
 
@@ -181,7 +181,7 @@ class Route(object):
         # must be Ambiguouselement at position
         self.waypoints[position] = self.waypoints[position].getpossibility(possibilitynumber)
 
-    def getwaypoints(self):
+    def get_waypoints(self):
         return self.waypoints
 
     def __str__(self):  # this doesnt work
@@ -195,19 +195,19 @@ class Airway(object):
         self.uniqueid = 'testuniqueid'
         self.waypoints = []
 
-    def addelement(self, element):
+    def add_element(self, element):
         self.waypoints.append(element)
 
-    def setwaypoints(self, waypoints):
+    def set_waypoints(self, waypoints):
         self.waypoints = waypoints
 
-    def getairwayname(self):
+    def get_airway_name(self):
         return self.airwayname
 
-    def getwaypoints(self):
+    def get_waypoints(self):
         return self.waypoints
 
-    def getelement(self, element):
+    def get_element(self, element):
         return self.waypoints[element]
 
 
@@ -220,23 +220,23 @@ class AmbiguousAirway(object):
         for possibility in self.possibilities:
             yield possibility
 
-    def addpossibility(self, possibility):
+    def add_possibility(self, possibility):
         if type(possibility) is list:
             self.possibilities.extend(possibility)
         else:
             self.possibilities.append(possibility)
         # should this be .extend instead of append in case I get passed a list?
 
-    def howmanypossibilities(self):
+    def how_many_possibilities(self):
         return len(self.possibilities)
 
-    def getidentifier(self):
+    def get_identifier(self):
         return self.identifier
 
-    def getpossibility(self, possibilitynumber):
+    def get_possibility(self, possibilitynumber):
         return self.possibilities[possibilitynumber]
 
-    def getpossibilities(self):
+    def get_possibilities(self):
         return self.possibilities
 
     def __str__(self):

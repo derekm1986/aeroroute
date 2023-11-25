@@ -95,14 +95,14 @@ def airwaydict_maker():
                     airwaylist.append(PointInSpace(secondwaypoint[0], (secondwaypoint[1], secondwaypoint[2]), 'airwaywaypoint'))
                     simpleairwaylist.append(secondwaypoint)
 
-        currentairway.setwaypoints(airwaylist)
+        currentairway.set_waypoints(airwaylist)
 
         if routeid in airwaydict:
             if type(airwaydict[routeid]) is AmbiguousAirway:
-                airwaydict[routeid].addpossibility(currentairway)
+                airwaydict[routeid].add_possibility(currentairway)
             else:
                 airwaydict[routeid] = AmbiguousAirway(routeid, airwaydict[routeid])
-                airwaydict[routeid].addpossibility(currentairway)
+                airwaydict[routeid].add_possibility(currentairway)
         else:
             airwaydict[routeid] = currentairway
 
