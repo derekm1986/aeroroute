@@ -1,12 +1,13 @@
 import objects
 
+
 def airway_matcher(pointsinspacedict, airwaydict):
     for airwaynames in airwaydict.values():
-        #print(airwaynames)
-        #print(type(airwaynames))
+        # print(airwaynames)
+        # print(type(airwaynames))
         if isinstance(airwaynames, objects.AmbiguousAirway):  # we have encountered an Ambiguousairway
             for airway in airwaynames.get_possibilities():
-                #print(airway)
+                # print(airway)
                 for waypoint in airway.get_waypoints():
                     if waypoint.get_identifier() in pointsinspacedict:
                         if isinstance(pointsinspacedict[waypoint.get_identifier()], objects.AmbiguousElement):
