@@ -184,7 +184,7 @@ class Route(object):
     def get_waypoints(self):
         return self.waypoints
 
-    def __str__(self):  # this doesnt work
+    def __str__(self):  # this doesn't work
         return str(self.waypoints)
 
 
