@@ -108,7 +108,7 @@ def string_reader(inputstring, airportdict, pointsinspacedict, airwaydict):
         output = 'invalidinput'
 
     # checking for airway at beginning/end of route
-    #if output.howmanyelements() > 1:
+    # if output.howmanyelements() > 1:
     #    if isinstance(output.getelement(0)[0], objects.Airway):  # we started with an airway, not OK!
     #        print("Route cannot begin with an airway - unable to compute.")
     #        output = 'invalidoutput'

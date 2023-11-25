@@ -98,7 +98,6 @@ def main():
 
             # can any ambiguous elements be solved by matching with an adjacent airway?
 
-
             # if there is an airway in inputwaypointsobj, call a function that incorporates the airway into the route
 
         if inputwaypointsobj.get_contains_ambiguity():  # do we contain an ambiguouselement?
