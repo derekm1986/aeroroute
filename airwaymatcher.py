@@ -18,9 +18,11 @@ def airway_matcher(pointsinspacedict, airwaydict):
                                         point.add_airway(airway.get_airway_name())
                         else:
                             # trying to match with a single item
-                            if pointsinspacedict[waypoint.get_identifier()].get_coordinates() == waypoint.get_coordinates():
+                            if pointsinspacedict[waypoint.get_identifier()].get_coordinates() == \
+                                    waypoint.get_coordinates():
                                 # need to check if it's there first!
-                                if airway.get_airway_name() not in pointsinspacedict[waypoint.get_identifier()].get_airways():
+                                if airway.get_airway_name() not in \
+                                        pointsinspacedict[waypoint.get_identifier()].get_airways():
                                     pointsinspacedict[waypoint.get_identifier()].add_airway(airway.get_airway_name())
         else:  # we have encountered an Airway by itself
             for waypoint in airwaynames.get_waypoints():
@@ -35,6 +37,7 @@ def airway_matcher(pointsinspacedict, airwaydict):
                         # trying to match with a single item
                         if pointsinspacedict[waypoint.get_identifier()].get_coordinates() == waypoint.get_coordinates():
                             # need to check if it's there first!
-                            if airwaynames.get_airway_name() not in pointsinspacedict[waypoint.get_identifier()].get_airways():
+                            if airwaynames.get_airway_name() not in \
+                                    pointsinspacedict[waypoint.get_identifier()].get_airways():
                                 pointsinspacedict[waypoint.get_identifier()].add_airway(airwaynames.get_airway_name())
     return pointsinspacedict
