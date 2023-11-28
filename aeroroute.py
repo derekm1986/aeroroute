@@ -58,7 +58,7 @@ def main():
 
         double_input_flag = False  # double adjacent input detection
 
-        #put a flag here for double airway input?
+        # put a flag here for double airway input?
 
         if len(input_string) > 1:
             for i in range(len(input_string) - 1):
