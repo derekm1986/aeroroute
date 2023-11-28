@@ -34,7 +34,7 @@ def airway_latlong_maker(input):
     return output
 
 
-def airwaydict_maker():
+def airway_dict_maker():
 
     ats_file = open("AIRAC/ATS.txt")
 

@@ -22,7 +22,7 @@ print("OK")  # dictionary combination was successful
 
 print('Calling atsreader.airwaydictmaker...')
 
-airwaydict = atsreader.airwaydict_maker()
+airwaydict = atsreader.airway_dict_maker()
 
 print('atsreader.airwaydictmaker returned')
 

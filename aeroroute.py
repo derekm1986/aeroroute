@@ -34,7 +34,7 @@ def main():
     print('OK')  # loading elements was successful
 
     print('   Loading airways into memory...', end="")
-    airway_dict = atsreader.airwaydict_maker()
+    airway_dict = atsreader.airway_dict_maker()
     print('OK')  # loading airways was successful
 
     print('\nCombining NAVAID and elements dictionaries...', end="")
