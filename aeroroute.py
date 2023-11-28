@@ -102,7 +102,7 @@ def main():
 
             # if there is an airway in input_waypoints_obj, call a function that incorporates the airway into the route
 
-        if input_waypoints_obj.get_contains_ambiguous_element():  # do we contain an ambiguouselement?
+        if input_waypoints_obj.get_contains_ambiguous_element():  # do we contain an AmbiguousElement?
 
             multiples_matrix = functions.multiple_finder(input_waypoints_obj)
 
