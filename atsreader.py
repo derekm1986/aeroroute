@@ -8,7 +8,7 @@ from objects import PointInSpace
 from objects import AmbiguousAirway
 
 
-def airway_latlong_maker(input):
+def airway_lat_long_maker(input):
 
     inputwasnegative = False  # fill it with something
 
@@ -77,10 +77,10 @@ def airway_dict_maker():
                 secondlat = currentline[5]
                 secondlong = currentline[6]
 
-                firstlat = airway_latlong_maker(firstlat)
-                firstlong = airway_latlong_maker(firstlong)
-                secondlat = airway_latlong_maker(secondlat)
-                secondlong = airway_latlong_maker(secondlong)
+                firstlat = airway_lat_long_maker(firstlat)
+                firstlong = airway_lat_long_maker(firstlong)
+                secondlat = airway_lat_long_maker(secondlat)
+                secondlong = airway_lat_long_maker(secondlong)
 
                 firstwaypoint = [firstid, firstlat, firstlong]
                 secondwaypoint = [secondid, secondlat, secondlong]
