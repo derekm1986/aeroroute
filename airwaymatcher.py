@@ -11,7 +11,7 @@ def airway_matcher(points_in_space_dict, airway_dict):
                 for waypoint in airway.get_waypoints():
                     if waypoint.get_identifier() in points_in_space_dict:
                         if isinstance(points_in_space_dict[waypoint.get_identifier()], objects.AmbiguousElement):
-                            # trying to match with an ambiguous element in the points_in_space_dict, need a loop
+                            # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
                             for point in points_in_space_dict[waypoint.get_identifier()].get_possibilities():
                                 if point.get_coordinates() == waypoint.get_coordinates():
                                     if airway.get_airway_name() not in point.get_airways():
