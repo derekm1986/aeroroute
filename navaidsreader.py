@@ -9,7 +9,7 @@ def navaid_dict_maker():
 
     navaid_file = open("AIRAC/Navaids.txt")
 
-    navaiddict = {}
+    navaid_dict = {}
 
     for line in navaid_file:
         currentline = line.rstrip().split("|")
@@ -48,15 +48,15 @@ def navaid_dict_maker():
 
         navaidobj = PointInSpace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
 
-        if navaidid in navaiddict:
-            if type(navaiddict[navaidid]) is AmbiguousElement:
-                navaiddict[navaidid].add_possibility(navaidobj)
+        if navaidid in navaid_dict:
+            if type(navaid_dict[navaidid]) is AmbiguousElement:
+                navaid_dict[navaidid].add_possibility(navaidobj)
             else:
-                navaiddict[navaidid] = AmbiguousElement(navaidid, navaiddict[navaidid])
-                navaiddict[navaidid].add_possibility(navaidobj)
+                navaid_dict[navaidid] = AmbiguousElement(navaidid, navaid_dict[navaidid])
+                navaid_dict[navaidid].add_possibility(navaidobj)
         else:
-            navaiddict[navaidid] = navaidobj
+            navaid_dict[navaidid] = navaidobj
 
     navaid_file.close()
 
-    return navaiddict
+    return navaid_dict
