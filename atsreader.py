@@ -8,22 +8,22 @@ from objects import PointInSpace
 from objects import AmbiguousAirway
 
 
-def airway_lat_long_maker(input):
+def airway_lat_long_maker(input_string):
 
     inputwasnegative = False  # fill it with something
 
-    if input.startswith('-'):
+    if input_string.startswith('-'):
         inputwasnegative = True
 
     # remove the negative, if necessary
     if inputwasnegative == True:
-        input = input[1:]
+        input_string = input_string[1:]
 
     # remove leading zeros
-    input = input.lstrip('0')
+    input_string = input_string.lstrip('0')
 
     # last two digits are decimal
-    inputwithdecimal = input[:-6] + '.' + input[-6:]  # 6 decimal places
+    inputwithdecimal = input_string[:-6] + '.' + input_string[-6:]  # 6 decimal places
 
     if inputwasnegative == True:
         # put the negative sign back if needed
@@ -38,7 +38,7 @@ def airway_dict_maker():
 
     ats_file = open("AIRAC/ATS.txt")
 
-    airwaydict = {}
+    airway_dict = {}
 
     contents = ats_file.read()
 
@@ -97,15 +97,15 @@ def airway_dict_maker():
 
         currentairway.set_waypoints(airwaylist)
 
-        if routeid in airwaydict:
-            if type(airwaydict[routeid]) is AmbiguousAirway:
-                airwaydict[routeid].add_possibility(currentairway)
+        if routeid in airway_dict:
+            if type(airway_dict[routeid]) is AmbiguousAirway:
+                airway_dict[routeid].add_possibility(currentairway)
             else:
-                airwaydict[routeid] = AmbiguousAirway(routeid, airwaydict[routeid])
-                airwaydict[routeid].add_possibility(currentairway)
+                airway_dict[routeid] = AmbiguousAirway(routeid, airway_dict[routeid])
+                airway_dict[routeid].add_possibility(currentairway)
         else:
-            airwaydict[routeid] = currentairway
+            airway_dict[routeid] = currentairway
 
     ats_file.close()
 
-    return airwaydict
+    return airway_dict
