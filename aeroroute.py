@@ -29,15 +29,15 @@ def main():
     navaid_dict = navaidsreader.navaid_dict_maker()
     print('OK')  # loading NAVAIDs was successful
 
-    print('   Loading waypoints into memory...', end="")
+    print('   Loading elements into memory...', end="")
     waypoint_dict = waypointsreader.waypointdictmaker()
-    print('OK')  # loading waypoints was successful
+    print('OK')  # loading elements was successful
 
     print('   Loading airways into memory...', end="")
     airway_dict = atsreader.airwaydict_maker()
     print('OK')  # loading airways was successful
 
-    print('\nCombining NAVAID and waypoints dictionaries...', end="")
+    print('\nCombining NAVAID and elements dictionaries...', end="")
     points_in_space_dict = functions.points_in_space_dict_combiner(navaid_dict, waypoint_dict)
     print("OK")  # dictionary combination was successful
 
@@ -48,7 +48,7 @@ def main():
     while True:
 
         # allows user to input waypoint(s)/exit instructions to list
-        print('\nType "quit" to exit program, enter 20.000000/-123.000000 format for manual waypoints')
+        print('\nType "quit" to exit program, enter 20.000000/-123.000000 format for manual elements')
         input_string = input("Enter input string: ")
         input_string = input_string.upper().split()
 
@@ -102,7 +102,7 @@ def main():
 
             # if there is an airway in input_waypoints_obj, call a function that incorporates the airway into the route
 
-        if input_waypoints_obj.get_contains_ambiguity():  # do we contain an ambiguouselement?
+        if input_waypoints_obj.get_contains_ambiguous_element():  # do we contain an ambiguouselement?
 
             multiples_matrix = functions.multiple_finder(input_waypoints_obj)
 

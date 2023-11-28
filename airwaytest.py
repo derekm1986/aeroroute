@@ -11,11 +11,11 @@ print('   Loading NAVAIDs into memory...', end="")
 navaiddict = navaidsreader.navaid_dict_maker()
 print('OK')  # loading NAVAIDs was successful
 
-print('   Loading waypoints into memory...', end="")
+print('   Loading elements into memory...', end="")
 waypointdict = waypointsreader.waypointdictmaker()
-print('OK')  # loading waypoints was successful
+print('OK')  # loading elements was successful
 
-print('   Combining NAVAID and waypoints dictionaries...', end="")
+print('   Combining NAVAID and elements dictionaries...', end="")
 pointsinspacedict = functions.points_in_space_dict_combiner(navaiddict, waypointdict)
 print("OK")  # dictionary combination was successful
 

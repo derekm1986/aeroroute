@@ -133,59 +133,59 @@ class TBWrapper(object):
 class Route(object):
 
     def __init__(self):
-        self.waypoints = []
-        self.containsairway = False
+        self.elements = []
+        self.contains_airway = False
+        self.contains_ambiguous_element = False
 
     def add_element(self, element):
-        self.waypoints.append(element)
+        self.elements.append(element)
         
     def get_element(self, element):
-        return self.waypoints[element]
+        return self.elements[element]
     
     def how_many_elements(self):
-        return len(self.waypoints)
+        return len(self.elements)
 
     def get_last_element(self):
         # return last element
-        return self.waypoints[-1]
+        return self.elements[-1]
 
     def get_first_element(self):
         # return first element
-        return self.waypoints[0]
+        return self.elements[0]
 
     def get_contains_airway(self):
-        self.containsairway = False
-        for element in self.waypoints:
+        self.contains_airway = False
+        for element in self.elements:
             if type(element) is Airway or type(element) is AmbiguousAirway:
-                self.containsairway = True
+                self.contains_airway = True
                 break
-        return self.containsairway
+        return self.contains_airway
 
-    def get_contains_ambiguity(self):
-        self.containsambiguity = False
-        for element in self.waypoints:
+    def get_contains_ambiguous_element(self):
+        for element in self.elements:
             if type(element) is AmbiguousElement:
-                self.containsambiguity = True
+                self.contains_ambiguous_element = True
                 break
-        return self.containsambiguity
+        return self.contains_ambiguous_element
     
     def get_possibility(self, position, possibilitynumber):
         # must be Ambiguouselement at position
-        return self.waypoints[position].getpossibility(possibilitynumber)
+        return self.elements[position].getpossibility(possibilitynumber)
 
     def get_possibilities(self, position):
         # must be Ambiguouselement at position
-        return self.waypoints[position].getpossibilities()
+        return self.elements[position].getpossibilities()
 
     def deambiguate(self, position, possibilitynumber):
         # must be Ambiguouselement at position
-        self.waypoints[position] = self.waypoints[position].get_possibility(possibilitynumber)
+        self.elements[position] = self.elements[position].get_possibility(possibilitynumber)
 
     def get_waypoints(self):
-        return self.waypoints
+        return self.elements
 
     def __str__(self):  # this doesn't work
-        return str(self.waypoints)
+        return str(self.elements)
 
 
 class Airway(object):
