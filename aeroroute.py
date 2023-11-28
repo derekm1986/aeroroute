@@ -22,7 +22,7 @@ def main():
     print('Reading AIRAC data...')
 
     print('   Loading airports into memory...', end="")
-    airport_dict = airportsreader.airportdictmaker()
+    airport_dict = airportsreader.airport_dict_maker()
     print('OK')  # loading airports was successful
 
     print('   Loading NAVAIDs into memory...', end="")
@@ -30,7 +30,7 @@ def main():
     print('OK')  # loading NAVAIDs was successful
 
     print('   Loading elements into memory...', end="")
-    waypoint_dict = waypointsreader.waypointdictmaker()
+    waypoint_dict = waypointsreader.waypoint_dict_maker()
     print('OK')  # loading elements was successful
 
     print('   Loading airways into memory...', end="")

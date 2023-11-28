@@ -12,7 +12,7 @@ navaiddict = navaidsreader.navaid_dict_maker()
 print('OK')  # loading NAVAIDs was successful
 
 print('   Loading elements into memory...', end="")
-waypointdict = waypointsreader.waypointdictmaker()
+waypointdict = waypointsreader.waypoint_dict_maker()
 print('OK')  # loading elements was successful
 
 print('   Combining NAVAID and elements dictionaries...', end="")

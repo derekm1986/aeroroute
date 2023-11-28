@@ -6,7 +6,7 @@
 from objects import Airport
 
 
-def airportdictmaker():
+def airport_dict_maker():
 
     airport_file = open("AIRAC/Airports.txt")
 

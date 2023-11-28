@@ -5,7 +5,7 @@ from objects import PointInSpace
 from objects import AmbiguousElement
 
 
-def waypointdictmaker():
+def waypoint_dict_maker():
 
     waypoint_file = open("AIRAC/Waypoints.txt")
 
