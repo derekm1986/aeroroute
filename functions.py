@@ -62,7 +62,7 @@ def distance_finder(input):
     return sum_distance
 
 
-def string_reader(inputstring, airportdict, pointsinspacedict, airwaydict):
+def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     output = objects.Route()
 

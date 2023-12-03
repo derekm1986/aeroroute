@@ -56,10 +56,8 @@ def main():
             print("No input detected")
             continue
 
-        double_input_flag = False  # double adjacent input detection
-
-        # put a flag here for double airway input?
-
+        # double adjacent input detection
+        double_input_flag = False
         if len(input_string) > 1:
             for i in range(len(input_string) - 1):
                 if input_string[i] == input_string[i + 1]:
@@ -74,7 +72,8 @@ def main():
             print('***Program exiting***')
             break
 
-        input_waypoints_obj = functions.string_reader(input_string, airport_dict, points_in_space_dict, airway_dict)
+        # no double inputs, pass on to string_reader
+        input_waypoints_obj = functions.string_parser(input_string, airport_dict, points_in_space_dict, airway_dict)
 
         if input_waypoints_obj == "invalidinput":  # something bad came back from string_reader
             continue
