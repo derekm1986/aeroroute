@@ -9,6 +9,7 @@ import atsreader
 import functions
 import airwaymatcher
 import objects
+import logging
 
 
 def main():
@@ -16,6 +17,8 @@ def main():
     The main method of the program
     :return: nothing
     """
+
+    logging.critical("TEST CRITICAL MESSAGE")
 
     print('\n***Aeroroute loading***', '\n')
 
@@ -72,10 +75,10 @@ def main():
             print('***Program exiting***')
             break
 
-        # no double inputs, pass on to string_reader
+        # no double inputs, pass on to string_parser
         input_waypoints_obj = functions.string_parser(input_string, airport_dict, points_in_space_dict, airway_dict)
 
-        if input_waypoints_obj == "invalidinput":  # something bad came back from string_reader
+        if input_waypoints_obj == "invalidinput":  # something bad came back from string_parser
             continue
 
         if len(input_waypoints_obj.get_waypoints()) == 1:

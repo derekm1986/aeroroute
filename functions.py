@@ -81,6 +81,8 @@ def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
             founditem = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
             manualwaypointnumber += 1
 
+        # call nav_data_finder here?
+
         elif item in airportdict:
             founditem = airportdict[item]
 
@@ -118,6 +120,11 @@ def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
     #        output = 'invalidoutput'
 
     return output
+
+
+def nav_data_searcher(inputstring, airportdict, pointsinspacedict, airwaydict):
+    # looking to separate out from string_parser, will look up one item at a time
+    pass
 
 
 def multiple_finder(input_waypoints):
