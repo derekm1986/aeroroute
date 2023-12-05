@@ -113,7 +113,7 @@ def main():
         for item in input_waypoints_obj.get_waypoints():
             print(item)
 
-        sum_distance = functions.distance_finder(input_waypoints_obj)
+        sum_distance = functions.distance_summer(input_waypoints_obj)
 
         print('Distance in nm:', sum_distance)
 

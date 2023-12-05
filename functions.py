@@ -51,7 +51,7 @@ def pair_maker(input_waypoints):
         yield pair
 
 
-def distance_finder(input):
+def distance_summer(input):
   
     sum_distance = 0.00  # establish sum_distance and put zero in it
   
@@ -302,7 +302,7 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
         leaderboard = []
 
         for possibility in possibilitieslist:  # compute distances
-            leaderboard.append([distance_finder(possibility), possibility])
+            leaderboard.append([distance_summer(possibility), possibility])
 
         shortestdistance = float('Inf')  # fill with worst-case scenario so anything else is smaller
 
