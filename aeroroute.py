@@ -84,7 +84,7 @@ def main():
         # no double inputs, pass on to string_parser
         input_waypoints_obj = functions.string_parser(input_string, airport_dict, points_in_space_dict, airway_dict)
 
-        if input_waypoints_obj == "invalidinput":  # something bad came back from string_parser
+        if input_waypoints_obj is None:  # something bad came back from string_parser
             continue
 
         if input_waypoints_obj.get_contains_airway():  # is there an airway in the route?

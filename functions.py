@@ -68,22 +68,19 @@ def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     found_item = None
 
-    not_found_flag = False
-
     for item in inputstring:
 
         found_item = nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict)
 
         if found_item is None:  # item was None - nothing found by nav_data_searcher!
             print(item, "not found")
-            not_found_flag = True
-            # maybe return from here?  then wouldn't see if anything else was not found
+            return None
+            # return from here?  then wouldn't see if anything else was not found
 
-        if not_found_flag is False:
-            output.add_element(found_item)
+        output.add_element(found_item)
 
-    if not_found_flag is True:  # maybe need to keep this flag to work with SIDs + STARs?
-        output = 'invalidinput'
+    # if not_found_flag is True:  # maybe need to keep this flag to work with SIDs + STARs?
+    #     output = 'invalidinput'
 
     # checking for airway at beginning/end of route
     # if output.howmanyelements() > 1:
@@ -99,7 +96,7 @@ def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
 
 
 def nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict):
-    # looking to separate out from string_parser, will look up one item at a time
+    # separated out from string_parser, will look up one item at a time
     ######NOT FINISHED!!!!!##########
     found_item = None
 
