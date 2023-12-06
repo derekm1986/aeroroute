@@ -103,14 +103,14 @@ def nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict):
     ######NOT FINISHED!!!!!##########
     found_item = None
 
-    manualwaypointnumber = 1
+    manual_waypoint_number = 1
 
     if "/" in item:  # manual input detected
-        itemname = 'WAYPOINT' + str(manualwaypointnumber)
+        itemname = 'WAYPOINT' + str(manual_waypoint_number)
         coordinates = tuple(item.split('/'))
         # assert that it's valid?
         found_item = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
-        manualwaypointnumber += 1
+        manual_waypoint_number += 1
 
     elif item in airportdict:
         found_item = airportdict[item]
