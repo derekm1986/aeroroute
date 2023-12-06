@@ -6,6 +6,7 @@ import airportsreader
 import waypointsreader
 import navaidsreader
 import atsreader
+import nav_data_library
 import functions
 import airwaymatcher
 import objects
@@ -22,6 +23,11 @@ def main():
 
     print('\n***Aeroroute loading***', '\n')
 
+    # make nav_data_library object here
+    nav_data = nav_data_library.NavDataLibrary()
+
+    print(nav_data.waypoint_dict['HYLND'])
+
     print('Reading AIRAC data...')
 
     print('   Loading airports into memory...', end="")
@@ -32,7 +38,7 @@ def main():
     navaid_dict = navaidsreader.navaid_dict_maker()
     print('OK')  # loading NAVAIDs was successful
 
-    print('   Loading elements into memory...', end="")
+    print('   Loading waypoints into memory...', end="")
     waypoint_dict = waypointsreader.waypoint_dict_maker()
     print('OK')  # loading elements was successful
 
@@ -40,15 +46,13 @@ def main():
     airway_dict = atsreader.airway_dict_maker()
     print('OK')  # loading airways was successful
 
-    print('\nCombining NAVAID and elements dictionaries...', end="")
+    print('\nCombining NAVAID and waypoint dictionaries...', end="")
     points_in_space_dict = functions.points_in_space_dict_combiner(navaid_dict, waypoint_dict)
     print("OK")  # dictionary combination was successful
 
     print('Adding airway references to combined dictionary...', end="")
     points_in_space_dict = airwaymatcher.airway_matcher(points_in_space_dict, airway_dict)
     print("OK")  # reference matching was successful
-
-    # make nav_data_library object here
 
     while True:
 

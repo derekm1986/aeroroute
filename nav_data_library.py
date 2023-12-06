@@ -1,16 +1,27 @@
+import airportsreader
+import navaidsreader
+import waypointsreader
+import atsreader
+
+
 class NavDataLibrary(object):
     # trying to keep all the nav data in an object
     def __init__(self):
-        self.points_in_space_dict = {}
-        self.airway_dict = {}
-        self.airport_dict = {}
+        print('   OBJLoading airports into memory...', end="")
+        self.airport_dict = airportsreader.airport_dict_maker()
+        print('OK')  # loading airports was successful
 
-    def add_airway_dict(self, airway_dict):
-        # for testing only
-        self.airway_dict = airway_dict
+        print('   OBJLoading NAVAIDs into memory...', end="")
+        self.navaid_dict = navaidsreader.navaid_dict_maker()
+        print('OK')  # loading NAVAIDs was successful
 
-    def add_points_in_space_dict(self, points_in_space_dict):
-        self.points_in_space_dict = points_in_space_dict
+        print('   OBJLoading waypoints into memory...', end="")
+        self.waypoint_dict = waypointsreader.waypoint_dict_maker()
+        print('OK')  # loading elements was successful
+
+        print('   OBJLoading airways into memory...', end="")
+        airway_dict = atsreader.airway_dict_maker()
+        print('OK')  # loading airways was successful
 
     def add_airport_dict(self, airport_dict):
         self.airport_dict = airport_dict
