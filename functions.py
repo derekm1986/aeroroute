@@ -51,11 +51,11 @@ def pair_maker(input_waypoints):
         yield pair
 
 
-def distance_summer(input):
+def distance_summer(input_tuples):
   
     sum_distance = 0.00  # establish sum_distance and put zero in it
   
-    for pair in pair_maker(input):
+    for pair in pair_maker(input_tuples):
         pair_distance = vincenty_indirect(pair)
         sum_distance += pair_distance
 
