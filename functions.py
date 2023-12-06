@@ -74,8 +74,8 @@ def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
 
         if found_item is None:  # item was None - nothing found by nav_data_searcher!
             print(item, "not found")
+            # return from here - then wouldn't see if anything else was not found
             return None
-            # return from here?  then wouldn't see if anything else was not found
 
         output.add_element(found_item)
 
