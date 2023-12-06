@@ -81,8 +81,8 @@ def main():
         if double_input_flag:
             continue
 
-        # no double inputs, pass on to string_parser
-        input_waypoints_obj = functions.string_parser(input_string, airport_dict, points_in_space_dict, airway_dict)
+        # no double inputs, pass on to list_parser
+        input_waypoints_obj = functions.list_parser(input_string, airport_dict, points_in_space_dict, airway_dict)
 
         if input_waypoints_obj is None:  # something bad came back from string_parser
             continue

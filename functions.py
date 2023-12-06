@@ -62,15 +62,13 @@ def distance_summer(input):
     return sum_distance
 
 
-def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
+def list_parser(input_list, airport_dict, points_in_space_dict, airway_dict):
 
     output = objects.Route()
 
-    found_item = None
+    for item in input_list:
 
-    for item in inputstring:
-
-        found_item = nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict)
+        found_item = nav_data_searcher(item, airport_dict, points_in_space_dict, airway_dict)
 
         if found_item is None:  # item was None - nothing found by nav_data_searcher!
             print(item, "not found")
