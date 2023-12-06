@@ -63,7 +63,7 @@ def main():
             print('***Program exiting***')
             break
 
-        if len(input_string) == 1:  # single item but what if it's a manual waypoint?
+        if len(input_string) == 1:  # single item
             print('Single item detected, printing entry:', functions.nav_data_searcher(input_string[0], airport_dict,
                                                                                        points_in_space_dict,
                                                                                        airway_dict))

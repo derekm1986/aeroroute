@@ -109,7 +109,7 @@ def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
         if notfoundflag is False:
             output.add_element(founditem)
 
-    if notfoundflag is True:
+    if notfoundflag is True:  # maybe need to keep this flag to work with SIDs + STARs?
         output = 'invalidinput'
 
     # checking for airway at beginning/end of route
