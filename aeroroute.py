@@ -48,6 +48,8 @@ def main():
     points_in_space_dict = airwaymatcher.airway_matcher(points_in_space_dict, airway_dict)
     print("OK")  # reference matching was successful
 
+    # make nav_data_library object here
+
     while True:
 
         # allows user to input waypoint(s)/exit instructions to list
