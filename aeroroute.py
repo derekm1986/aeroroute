@@ -59,6 +59,16 @@ def main():
             print("No input detected")
             continue
 
+        if "QUIT" in input_string:
+            print('***Program exiting***')
+            break
+
+        if len(input_string) == 1:  # single item but what if it's a manual waypoint?
+            print('Single item detected, printing entry:', functions.nav_data_searcher(input_string[0], airport_dict,
+                                                                                       points_in_space_dict,
+                                                                                       airway_dict))
+            continue
+
         # double adjacent input detection
         double_input_flag = False
         if len(input_string) > 1:
@@ -71,18 +81,10 @@ def main():
         if double_input_flag:
             continue
 
-        if "QUIT" in input_string:
-            print('***Program exiting***')
-            break
-
         # no double inputs, pass on to string_parser
         input_waypoints_obj = functions.string_parser(input_string, airport_dict, points_in_space_dict, airway_dict)
 
         if input_waypoints_obj == "invalidinput":  # something bad came back from string_parser
-            continue
-
-        if len(input_waypoints_obj.get_waypoints()) == 1:
-            print('Single item detected, printing entry:', input_waypoints_obj.get_element(0))
             continue
 
         if input_waypoints_obj.get_contains_airway():  # is there an airway in the route?

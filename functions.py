@@ -74,31 +74,34 @@ def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     for item in inputstring:
 
-        if "/" in item:  # manual input detected
-            itemname = 'WAYPOINT' + str(manualwaypointnumber)
-            coordinates = tuple(item.split('/'))
-            # assert that it's valid?
-            founditem = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
-            manualwaypointnumber += 1
+        #if "/" in item:  # manual input detected
+        #    itemname = 'WAYPOINT' + str(manualwaypointnumber)
+        #    coordinates = tuple(item.split('/'))
+        #    # assert that it's valid?
+        #    founditem = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
+        #    manualwaypointnumber += 1
 
-        # call nav_data_finder here?
+        # call nav_data_searcher here?
 
-        elif item in airportdict:
-            founditem = airportdict[item]
+        #else:
+        founditem = nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict)
 
-        elif item in pointsinspacedict:
-            founditem = pointsinspacedict[item]
+        #elif item in airportdict:
+        #    founditem = airportdict[item]
 
-        elif item in airwaydict:  # not finished
-            print(item + ' was found in airwaydict, functionality not finished')
-            founditem = airwaydict[item]
+        #elif item in pointsinspacedict:
+        #    founditem = pointsinspacedict[item]
 
-      # elif put something here to read SIDs/STARs
+        #elif item in airwaydict:  # not finished
+        #    print(item + ' was found in airwaydict, functionality not finished')
+        #    founditem = airwaydict[item]
+
+        # elif put something here to read SIDs/STARs
             # is it adjacent to an airport? if no, reject
             # combination of letters and numbers? HYLND6 or CSTL4 or SHB4 or UNOKO3A
             # flag as possible SID/STAR?
 
-        else:
+        if founditem is None:  # item was None - nothing found!
             print(item, "not found")
             notfoundflag = True
             # maybe return from here?  then wouldn't see if anything else was not found
@@ -127,7 +130,16 @@ def nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict):
     ######NOT FINISHED!!!!!##########
     found_item = None
 
-    if item in airportdict:
+    manualwaypointnumber = 1
+
+    if "/" in item:  # manual input detected
+        itemname = 'WAYPOINT' + str(manualwaypointnumber)
+        coordinates = tuple(item.split('/'))
+        # assert that it's valid?
+        found_item = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
+        manualwaypointnumber += 1
+
+    elif item in airportdict:
         found_item = airportdict[item]
 
     elif item in pointsinspacedict:
@@ -136,6 +148,11 @@ def nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict):
     elif item in airwaydict:  # not finished
         print(item + ' was found in airwaydict, functionality not finished')
         found_item = airwaydict[item]
+
+    # elif put something here to read SIDs/STARs
+    # is it adjacent to an airport? if no, reject
+    # combination of letters and numbers? HYLND6 or CSTL4 or SHB4 or UNOKO3A
+    # flag as possible SID/STAR?
 
     return found_item
 
