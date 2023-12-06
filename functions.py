@@ -70,7 +70,7 @@ def list_parser(input_list, airport_dict, points_in_space_dict, airway_dict):
 
         found_item = nav_data_searcher(item, airport_dict, points_in_space_dict, airway_dict)
 
-        if found_item is None:  # item was None - nothing found by nav_data_searcher!
+        if found_item is None:  # nothing found by nav_data_searcher!
             print(item, "not found")
             # return from here - then wouldn't see if anything else was not found
             return None
@@ -80,7 +80,7 @@ def list_parser(input_list, airport_dict, points_in_space_dict, airway_dict):
     # if not_found_flag is True:  # maybe need to keep this flag to work with SIDs + STARs?
     #     output = 'invalidinput'
 
-    # checking for airway at beginning/end of route
+    # check for airway at beginning/end of route
     # if output.howmanyelements() > 1:
     #    if isinstance(output.getelement(0)[0], objects.Airway):  # we started with an airway, not OK!
     #        print("Route cannot begin with an airway - unable to compute.")
@@ -93,7 +93,7 @@ def list_parser(input_list, airport_dict, points_in_space_dict, airway_dict):
     return output
 
 
-def nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict):
+def nav_data_searcher(item, airport_dict, points_in_space_dict, airway_dict):
     # separated out from string_parser, will look up one item at a time
     ######NOT FINISHED!!!!!##########
     found_item = None
@@ -107,15 +107,15 @@ def nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict):
         found_item = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
         manual_waypoint_number += 1
 
-    elif item in airportdict:
-        found_item = airportdict[item]
+    elif item in airport_dict:
+        found_item = airport_dict[item]
 
-    elif item in pointsinspacedict:
-        found_item = pointsinspacedict[item]
+    elif item in points_in_space_dict:
+        found_item = points_in_space_dict[item]
 
-    elif item in airwaydict:  # not finished
-        print(item + ' was found in airwaydict, functionality not finished')
-        found_item = airwaydict[item]
+    elif item in airway_dict:  # not finished
+        print(item + ' was found in airway_dict, functionality not finished')
+        found_item = airway_dict[item]
 
     # elif put something here to read SIDs/STARs
     # is it adjacent to an airport? if no, reject
@@ -133,15 +133,15 @@ def multiple_finder(input_waypoints):
 
     multiples_matrix = []
 
-    lastwaypoint = -9  # have to fill it with something
+    last_waypoint = -9  # have to fill it with something
 
     # this groups ambiguous elements together if they are sequential
     for waypoint in found_multiples:  # detect if elements are next to each other
-        if waypoint == lastwaypoint + 1:  # waypoint is sequential to waypoint before it
+        if waypoint == last_waypoint + 1:  # waypoint is sequential to waypoint before it
             multiples_matrix[len(multiples_matrix) - 1].append(waypoint)  # group with previous waypoint
         else:  # waypoint stands alone
             multiples_matrix.append([waypoint])
-        lastwaypoint = waypoint
+        last_waypoint = waypoint
 
     return multiples_matrix
 
