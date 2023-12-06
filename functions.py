@@ -122,9 +122,22 @@ def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
     return output
 
 
-def nav_data_searcher(inputstring, airportdict, pointsinspacedict, airwaydict):
+def nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict):
     # looking to separate out from string_parser, will look up one item at a time
-    pass
+    ######NOT FINISHED!!!!!##########
+    found_item = None
+
+    if item in airportdict:
+        found_item = airportdict[item]
+
+    elif item in pointsinspacedict:
+        found_item = pointsinspacedict[item]
+
+    elif item in airwaydict:  # not finished
+        print(item + ' was found in airwaydict, functionality not finished')
+        found_item = airwaydict[item]
+
+    return found_item
 
 
 def multiple_finder(input_waypoints):
