@@ -17,4 +17,3 @@ class NavDataLibrary(object):
 
     def lookup_item(self, search_string):
         pass
-    
