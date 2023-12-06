@@ -66,50 +66,23 @@ def string_parser(inputstring, airportdict, pointsinspacedict, airwaydict):
 
     output = objects.Route()
 
-    founditem = None
+    found_item = None
 
-    manualwaypointnumber = 1
-
-    notfoundflag = False
+    not_found_flag = False
 
     for item in inputstring:
 
-        #if "/" in item:  # manual input detected
-        #    itemname = 'WAYPOINT' + str(manualwaypointnumber)
-        #    coordinates = tuple(item.split('/'))
-        #    # assert that it's valid?
-        #    founditem = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
-        #    manualwaypointnumber += 1
+        found_item = nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict)
 
-        # call nav_data_searcher here?
-
-        #else:
-        founditem = nav_data_searcher(item, airportdict, pointsinspacedict, airwaydict)
-
-        #elif item in airportdict:
-        #    founditem = airportdict[item]
-
-        #elif item in pointsinspacedict:
-        #    founditem = pointsinspacedict[item]
-
-        #elif item in airwaydict:  # not finished
-        #    print(item + ' was found in airwaydict, functionality not finished')
-        #    founditem = airwaydict[item]
-
-        # elif put something here to read SIDs/STARs
-            # is it adjacent to an airport? if no, reject
-            # combination of letters and numbers? HYLND6 or CSTL4 or SHB4 or UNOKO3A
-            # flag as possible SID/STAR?
-
-        if founditem is None:  # item was None - nothing found!
+        if found_item is None:  # item was None - nothing found by nav_data_searcher!
             print(item, "not found")
-            notfoundflag = True
+            not_found_flag = True
             # maybe return from here?  then wouldn't see if anything else was not found
 
-        if notfoundflag is False:
-            output.add_element(founditem)
+        if not_found_flag is False:
+            output.add_element(found_item)
 
-    if notfoundflag is True:  # maybe need to keep this flag to work with SIDs + STARs?
+    if not_found_flag is True:  # maybe need to keep this flag to work with SIDs + STARs?
         output = 'invalidinput'
 
     # checking for airway at beginning/end of route
