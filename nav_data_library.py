@@ -20,7 +20,7 @@ class NavDataLibrary(object):
         print('OK')  # loading elements was successful
 
         print('   OBJLoading airways into memory...', end="")
-        airway_dict = atsreader.airway_dict_maker()
+        self.airway_dict = atsreader.airway_dict_maker()
         print('OK')  # loading airways was successful
 
     def add_airport_dict(self, airport_dict):
