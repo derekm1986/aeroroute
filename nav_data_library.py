@@ -2,6 +2,8 @@ import airportsreader
 import navaidsreader
 import waypointsreader
 import atsreader
+import functions
+import airwaymatcher
 
 
 class NavDataLibrary(object):

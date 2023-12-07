@@ -26,7 +26,7 @@ def main():
     # make nav_data_library object here
     nav_data = nav_data_library.NavDataLibrary()
 
-    print(nav_data.waypoint_dict['HYLND'])
+    print(nav_data.waypoint_dict['GONZZ'])
 
     print('Reading AIRAC data...')
 
