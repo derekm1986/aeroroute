@@ -19,6 +19,14 @@ def main():
     :return: nothing
     """
 
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s %(levelname)s %(message)s",
+        datefmt='%Y-%m-%d %H:%M:%S',
+        filename='aeroroute.log',
+        encoding='utf-8'
+    )
+
     logging.critical("TEST CRITICAL MESSAGE")
 
     print('\n***Aeroroute loading***', '\n')
