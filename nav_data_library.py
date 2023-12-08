@@ -5,6 +5,7 @@ import atsreader
 import functions
 import airwaymatcher
 import logging
+import objects
 
 
 class NavDataLibrary(object):
@@ -27,7 +28,8 @@ class NavDataLibrary(object):
         print('OK')  # loading airways was successful
 
         print('\nOBJ*Combining NAVAID and waypoint dictionaries...', end="")
-        self.points_in_space_dict = functions.points_in_space_dict_combiner(self.navaid_dict, self.waypoint_dict)
+        # self.points_in_space_dict = functions.points_in_space_dict_combiner(self.navaid_dict, self.waypoint_dict)
+        self.points_in_space_dict = self.points_in_space_dict_combiner()
         print("OK")  # dictionary combination was successful
         
         print('OBJ*Adding airway references to combined dictionary...', end="")
@@ -42,3 +44,36 @@ class NavDataLibrary(object):
     def lookup_item(self, search_string):
         # put functionality from nav_data_searcher here
         pass
+
+    def points_in_space_dict_combiner(self):
+
+        points_in_space_dict = self.navaid_dict.copy()
+
+        for key, val in self.waypoint_dict.items():
+            if key in points_in_space_dict:
+                # the entry is already in points_in_space_dict
+                if type(points_in_space_dict[key]) is objects.AmbiguousElement:
+                    # points_in_space_dict already has Ambiguouselement
+                    if type(val) is objects.AmbiguousElement:
+                        # must add Ambiguouselement to Ambiguouselement
+                        points_in_space_dict[key].add_possibility(self.waypoint_dict[key].get_possibilities())
+                    else:
+                        # must add Pointinspace to Ambiguouselement
+                        points_in_space_dict[key].add_possibility(self.waypoint_dict[key])
+                else:
+                    # points_in_space_dict contains a Pointinspace
+                    if type(val) is objects.AmbiguousElement:
+                        # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
+                        originalpointinspace = points_in_space_dict[key]
+                        points_in_space_dict[key] = val
+                        points_in_space_dict[key].add_possibility(originalpointinspace)
+                    else:
+                        # Adding Pointinspace to a Pointinspace
+                        points_in_space_dict[key] = objects.AmbiguousElement(key, points_in_space_dict[key])
+                        points_in_space_dict[key].add_possibility(val)
+            else:
+                # the entry is not yet in points_in_space_dict, so just add it
+                points_in_space_dict[key] = val
+
+        return points_in_space_dict
+
