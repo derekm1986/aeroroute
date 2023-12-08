@@ -27,12 +27,11 @@ def main():
         encoding='utf-8',
         filemode='w'
     )
-
-    logging.critical("TEST CRITICAL MESSAGE")
-    logging.info("TEST INFO MESSAGE")
-
+    
     print('\n***Aeroroute loading***', '\n')
 
+    logging.info("Program starting")
+    
     # make nav_data_library object here
     nav_data = nav_data_library.NavDataLibrary()
 
