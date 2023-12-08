@@ -4,6 +4,7 @@ import waypointsreader
 import atsreader
 import functions
 import airwaymatcher
+import logging
 
 
 class NavDataLibrary(object):
@@ -32,6 +33,8 @@ class NavDataLibrary(object):
         print('OBJ*Adding airway references to combined dictionary...', end="")
         self.points_in_space_dict = airwaymatcher.airway_matcher(self.points_in_space_dict, self.airway_dict)
         print("OK")  # reference matching was successful
+
+        logging.info("Test message from object")
 
     def add_airport_dict(self, airport_dict):
         self.airport_dict = airport_dict
