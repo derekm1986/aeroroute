@@ -69,7 +69,6 @@ def list_parser(input_list, nav_library):
 
     for item in input_list:
 
-        #found_item = nav_data_searcher(item, airport_dict, points_in_space_dict, airway_dict)
         found_item = nav_library.nav_data_searcher(item)
 
         if found_item is None:  # nothing found by nav_data_searcher!
