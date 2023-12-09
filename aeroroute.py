@@ -35,7 +35,7 @@ def main():
     # make nav_data_library object here
     nav_data = nav_data_library.NavDataLibrary()
 
-    print(nav_data.points_in_space_dict['GONZZ'])
+    print(nav_data.points_in_space_dict['BIGGO'])
 
     print('Reading AIRAC data...')
 
