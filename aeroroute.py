@@ -31,43 +31,9 @@ def main():
     print('\n***Aeroroute loading***', '\n')
 
     logging.info("Program starting")
-    
-    # make nav_data_library object here
+
+    # create nav_data_library object
     nav_data = nav_data_library.NavDataLibrary()
-
-    print(nav_data.points_in_space_dict['BIGGO'])
-
-    print('Reading AIRAC data...')
-
-    print('   Loading airports into memory...', end="")
-    airport_dict = airportsreader.airport_dict_maker()
-    print('OK')  # loading airports was successful
-    logging.info("Loaded airports into memory")
-
-    print('   Loading NAVAIDs into memory...', end="")
-    navaid_dict = navaidsreader.navaid_dict_maker()
-    print('OK')  # loading NAVAIDs was successful
-    logging.info("Loaded NAVAIDs into memory")
-
-    print('   Loading waypoints into memory...', end="")
-    waypoint_dict = waypointsreader.waypoint_dict_maker()
-    print('OK')  # loading elements was successful
-    logging.info("Loaded waypoints into memory")
-
-    print('   Loading airways into memory...', end="")
-    airway_dict = atsreader.airway_dict_maker()
-    print('OK')  # loading airways was successful
-    logging.info("Loaded airways into memory")
-
-    print('\nCombining NAVAID and waypoint dictionaries...', end="")
-    points_in_space_dict = functions.points_in_space_dict_combiner(navaid_dict, waypoint_dict)
-    print("OK")  # dictionary combination was successful
-    logging.info("Combined NAVAID and waypoint dictionaries")
-
-    print('Adding airway references to combined dictionary...', end="")
-    points_in_space_dict = airwaymatcher.airway_matcher(points_in_space_dict, airway_dict)
-    print("OK")  # reference matching was successful
-    logging.info("Added airway references to combined dictionary")
 
     while True:
 

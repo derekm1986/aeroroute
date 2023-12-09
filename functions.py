@@ -95,38 +95,6 @@ def list_parser(input_list, nav_library):
     return output
 
 
-def nav_data_searcher(item, airport_dict, points_in_space_dict, airway_dict):
-    # separated out from string_parser, will look up one item at a time
-    ######NOT FINISHED!!!!!##########
-    found_item = None
-
-    manual_waypoint_number = 1
-
-    if "/" in item:  # manual input detected
-        itemname = 'WAYPOINT' + str(manual_waypoint_number)
-        coordinates = tuple(item.split('/'))
-        # assert that it's valid?
-        found_item = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
-        manual_waypoint_number += 1
-
-    elif item in airport_dict:
-        found_item = airport_dict[item]
-
-    elif item in points_in_space_dict:
-        found_item = points_in_space_dict[item]
-
-    elif item in airway_dict:  # not finished
-        print(item + ' was found in airway_dict, functionality not finished')
-        found_item = airway_dict[item]
-
-    # elif put something here to read SIDs/STARs
-    # is it adjacent to an airport? if no, reject
-    # combination of letters and numbers? HYLND6 or CSTL4 or SHB4 or UNOKO3A
-    # flag as possible SID/STAR?
-
-    return found_item
-
-
 def multiple_finder(input_waypoints):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
