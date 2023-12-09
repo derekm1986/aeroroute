@@ -40,10 +40,6 @@ class NavDataLibrary(object):
     def add_airport_dict(self, airport_dict):
         self.airport_dict = airport_dict
 
-    def lookup_item(self, search_string):
-        # put functionality from nav_data_searcher here
-        pass
-
     def points_in_space_dict_combiner(self):
 
         points_in_space_dict = self.navaid_dict.copy()
@@ -119,5 +115,36 @@ class NavDataLibrary(object):
                                     self.points_in_space_dict[waypoint.get_identifier()].add_airway(
                                         airway_names.get_airway_name())
         return
+
+    def nav_data_searcher(self, item):
+        # separated out from string_parser, will look up one item at a time
+        ######NOT FINISHED!!!!!##########
+        found_item = None
+
+        manual_waypoint_number = 1
+
+        if "/" in item:  # manual input detected
+            itemname = 'WAYPOINT' + str(manual_waypoint_number)
+            coordinates = tuple(item.split('/'))
+            # assert that it's valid?
+            found_item = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
+            manual_waypoint_number += 1
+
+        elif item in self.airport_dict:
+            found_item = self.airport_dict[item]
+
+        elif item in self.points_in_space_dict:
+            found_item = self.points_in_space_dict[item]
+
+        elif item in self.airway_dict:  # not finished
+            print(item + ' was found in airway_dict, functionality not finished')
+            found_item = self.airway_dict[item]
+
+        # elif put something here to read SIDs/STARs
+        # is it adjacent to an airport? if no, reject
+        # combination of letters and numbers? HYLND6 or CSTL4 or SHB4 or UNOKO3A
+        # flag as possible SID/STAR?
+
+        return found_item
 
 

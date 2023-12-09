@@ -1,5 +1,6 @@
 import math
 import objects
+import nav_data_library
 
 
 def points_in_space_dict_combiner(navaid_dict, waypoint_dict):
@@ -62,13 +63,14 @@ def distance_summer(input_tuples):
     return sum_distance
 
 
-def list_parser(input_list, airport_dict, points_in_space_dict, airway_dict):
+def list_parser(input_list, nav_library):
 
     output = objects.Route()
 
     for item in input_list:
 
-        found_item = nav_data_searcher(item, airport_dict, points_in_space_dict, airway_dict)
+        #found_item = nav_data_searcher(item, airport_dict, points_in_space_dict, airway_dict)
+        found_item = nav_library.nav_data_searcher(item)
 
         if found_item is None:  # nothing found by nav_data_searcher!
             print(item, "not found")
