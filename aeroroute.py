@@ -67,7 +67,6 @@ def main():
             continue
 
         # no double inputs, pass on to list_parser
-        #input_waypoints_obj = functions.list_parser(input_string, airport_dict, points_in_space_dict, airway_dict)
         input_waypoints_obj = functions.list_parser(input_string, nav_data)
 
         if input_waypoints_obj is None:  # something bad came back from string_parser
