@@ -37,9 +37,6 @@ class NavDataLibrary(object):
 
         logging.info("NAV data loading complete")
 
-    def add_airport_dict(self, airport_dict):
-        self.airport_dict = airport_dict
-
     def points_in_space_dict_combiner(self):
 
         points_in_space_dict = self.navaid_dict.copy()
