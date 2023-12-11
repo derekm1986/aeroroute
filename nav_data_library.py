@@ -11,31 +11,31 @@ import objects
 class NavDataLibrary(object):
     # trying to keep all the nav data in an object
     def __init__(self):
-        print('   OBJ*Loading airports into memory...', end="")
+        logging.info("Loading airports into memory")
         self.airport_dict = airportsreader.airport_dict_maker()
-        print('OK')  # loading airports was successful
+        logging.info("Airports loaded into memory")  # loading airports was successful
 
-        print('   OBJ*Loading NAVAIDs into memory...', end="")
+        logging.info("Loading NAVAIDs into memory")
         self.navaid_dict = navaidsreader.navaid_dict_maker()
-        print('OK')  # loading NAVAIDs was successful
+        logging.info("NAVAIDs loaded into memory")  # loading NAVAIDs was successful
 
-        print('   OBJ*Loading waypoints into memory...', end="")
+        logging.info("Loading waypoints into memory")
         self.waypoint_dict = waypointsreader.waypoint_dict_maker()
-        print('OK')  # loading elements was successful
+        logging.info("Waypoints loaded into memory")  # loading elements was successful
 
-        print('   OBJ*Loading airways into memory...', end="")
+        logging.info("Loading airways into memory")
         self.airway_dict = atsreader.airway_dict_maker()
-        print('OK')  # loading airways was successful
+        logging.info("Airways loaded into memory")  # loading airways was successful
 
-        print('\nOBJ*Combining NAVAID and waypoint dictionaries...', end="")
+        logging.info("Combining NAVAID and waypoint dictionaries")
         self.points_in_space_dict = self.points_in_space_dict_combiner()
-        print("OK")  # dictionary combination was successful
+        logging.info("NAVAID and waypoint dictionaries combined")  # dictionary combination was successful
         
-        print('OBJ*Adding airway references to combined dictionary...', end="")
+        logging.info("Adding airway references to combined dictionary")
         self.airway_matcher()
-        print("OK")  # reference matching was successful
+        logging.info("Airway references added to combined dictionary")  # reference matching was successful
 
-        logging.info("Test message from object")
+        logging.info("NAV data loading complete")
 
     def add_airport_dict(self, airport_dict):
         self.airport_dict = airport_dict
@@ -117,8 +117,7 @@ class NavDataLibrary(object):
         return
 
     def nav_data_searcher(self, item):
-        # separated out from string_parser, will look up one item at a time
-        ######NOT FINISHED!!!!!##########
+
         found_item = None
 
         manual_waypoint_number = 1
