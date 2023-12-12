@@ -2,13 +2,8 @@
 A program I use to get the length of routes typed in human-readable
 format.  Requires AIRAC files in vasFMC format in a /AIRAC/ folder.
 """
-import airportsreader
-import waypointsreader
-import navaidsreader
-import atsreader
 import nav_data_library
 import functions
-import airwaymatcher
 import objects
 import logging
 

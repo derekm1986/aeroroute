@@ -2,8 +2,6 @@ import airportsreader
 import navaidsreader
 import waypointsreader
 import atsreader
-import functions
-import airwaymatcher
 import logging
 import objects
 
@@ -111,7 +109,6 @@ class NavDataLibrary(object):
                                         self.points_in_space_dict[waypoint.get_identifier()].get_airways():
                                     self.points_in_space_dict[waypoint.get_identifier()].add_airway(
                                         airway_names.get_airway_name())
-        return
 
     def nav_data_searcher(self, item):
 
