@@ -230,7 +230,7 @@ class AmbiguousAirway(object):
     def how_many_possibilities(self) -> int:
         return len(self.possibilities)
 
-    def get_identifier(self):
+    def get_identifier(self) -> str:
         return self.identifier
 
     def get_possibility(self, possibilitynumber):
