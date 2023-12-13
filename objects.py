@@ -54,7 +54,7 @@ class Airport(object):
     def get_type_element(self):
         return self.typeelement
 
-    def get_element_name(self):
+    def get_element_name(self) -> str | None:
         if self.elementname is not None:
             return self.elementname
         else:
@@ -84,7 +84,7 @@ class AmbiguousElement(object):  # consider changing to Ambiguouspoint?
     def how_many_possibilities(self) -> int:
         return len(self.possibilities)
 
-    def get_identifier(self):
+    def get_identifier(self) -> str:
         return self.identifier
     
     def get_possibility(self, possibilitynumber):
