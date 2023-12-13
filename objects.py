@@ -135,7 +135,7 @@ class Route:
     def __init__(self):
         self.elements = []
         self.contains_airway = False
-        self.contains_ambiguous_element = False
+        self.contains_ambiguous_point = False
 
     def add_element(self, element) -> None:
         self.elements.append(element)
@@ -162,12 +162,12 @@ class Route:
                 break
         return self.contains_airway
 
-    def get_contains_ambiguous_element(self) -> bool:
+    def get_contains_ambiguous_point(self) -> bool:
         for element in self.elements:
             if type(element) is AmbiguousPoint:
-                self.contains_ambiguous_element = True
+                self.contains_ambiguous_point = True
                 break
-        return self.contains_ambiguous_element
+        return self.contains_ambiguous_point
     
     def get_possibility(self, position: int, possibility_number: int):
         # must be AmbiguousPoint at position
