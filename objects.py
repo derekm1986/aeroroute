@@ -241,3 +241,8 @@ class AmbiguousAirway(object):
 
     def __str__(self):
         return self.identifier + ' ambiguous airway with ' + str(len(self.possibilities)) + ' possibilities'
+
+
+class Coordinates:
+    # store coordinates here
+    pass
