@@ -201,7 +201,7 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
 
         for element in multiplesetelements:
             if elementposition == 0:  # first in the list, no copying needed here
-                if element.wasambiguous is False: # single element present
+                if element.was_ambiguous is False: # single element present
                     possibilitieslist.append([element])
                 else:  # the element is ambiguous
                     ambiguousid = 0
@@ -212,7 +212,7 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
 
             else:  # it's after first in the list
 
-                if element.wasambiguous is False:  # single element present
+                if element.was_ambiguous is False:  # single element present
                     for item in possibilitieslist:
                         item.append(element)  # add to each list by one
                 else:  # the element is ambiguous, complicated copy and append operation needed

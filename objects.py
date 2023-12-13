@@ -1,11 +1,11 @@
 class PointInSpace(object):
 
-    def __init__(self, identifier, coordinates, typeelement, elementname=None):
+    def __init__(self, identifier, coordinates, type_element, element_name=None):
         self.identifier = identifier
         self.coordinates = coordinates
-        self.typeelement = typeelement
-        self.elementname = elementname
-        self.onairways = []
+        self.type_element = type_element
+        self.element_name = element_name
+        self.on_airways = []
 
     def get_identifier(self):
         return self.identifier
@@ -14,36 +14,36 @@ class PointInSpace(object):
         return self.coordinates
 
     def get_type_element(self):
-        return self.typeelement
+        return self.type_element
 
     def get_element_name(self):
-        if self.elementname is not None:
-            return self.elementname
+        if self.element_name is not None:
+            return self.element_name
         else:
             pass
 
     def get_airways(self):
-        return self.onairways
+        return self.on_airways
 
     def add_airway(self, airway) -> None:
-        self.onairways.append(airway)
+        self.on_airways.append(airway)
 
     def __str__(self):
-        if self.elementname is not None:
-            return (self.identifier + ' point-in-space ' + self.typeelement + ' ' + self.elementname +
-                    ' coordinates: ' + str(self.coordinates) + ' on airways ' + str(self.onairways))
+        if self.element_name is not None:
+            return (self.identifier + ' point-in-space ' + self.type_element + ' ' + self.element_name +
+                    ' coordinates: ' + str(self.coordinates) + ' on airways ' + str(self.on_airways))
         else:
-            return (self.identifier + ' point-in-space ' + self.typeelement + ' coordinates: ' + str(self.coordinates) +
-                    ' on airways ' + str(self.onairways))
+            return (self.identifier + ' point-in-space ' + self.type_element + ' coordinates: ' +
+                    str(self.coordinates) + ' on airways ' + str(self.on_airways))
 
 
 class Airport(object):
 
-    def __init__(self, identifier, coordinates, elementname=None):
+    def __init__(self, identifier, coordinates, element_name=None):
         self.identifier = identifier
         self.coordinates = coordinates
-        self.typeelement = 'airport'
-        self.elementname = elementname
+        self.type_element = 'airport'
+        self.element_name = element_name
 
     def get_identifier(self):
         return self.identifier
@@ -52,16 +52,16 @@ class Airport(object):
         return self.coordinates
 
     def get_type_element(self):
-        return self.typeelement
+        return self.type_element
 
     def get_element_name(self) -> str | None:
-        if self.elementname is not None:
-            return self.elementname
+        if self.element_name is not None:
+            return self.element_name
         else:
             pass
 
     def __str__(self):
-        return self.identifier + ' airport ' + self.elementname + ' coordinates: ' + str(self.coordinates)
+        return self.identifier + ' airport ' + self.element_name + ' coordinates: ' + str(self.coordinates)
 
 
 class AmbiguousPoint(object):
@@ -99,21 +99,21 @@ class AmbiguousPoint(object):
 
 class TBWrapper(object):
 
-    def __init__(self, waypoint, originalposition, wasambiguous=False, ambiguous_id=None):
+    def __init__(self, waypoint, original_position, was_ambiguous=False, ambiguous_id=None):
         self.waypoint = waypoint
-        self.originalposition = originalposition
-        self.wasambiguous = wasambiguous
+        self.original_position = original_position
+        self.was_ambiguous = was_ambiguous
         self.ambiguous_id = ambiguous_id
 
     def set_ambiguous_id(self, ambiguous_id: int) -> None:
-        assert self.wasambiguous is True
+        assert self.was_ambiguous is True
         self.ambiguous_id = ambiguous_id
 
     def get_was_ambiguous(self) -> bool:
-        return self.wasambiguous
+        return self.was_ambiguous
 
     def get_original_position(self) -> int:
-        return self.originalposition
+        return self.original_position
 
     def get_ambiguous_id(self) -> int:
         return self.ambiguous_id
@@ -126,7 +126,7 @@ class TBWrapper(object):
         return self.waypoint.get_coordinates()
 
     def __str__(self):
-        return ('TBWrapper original position: ' + str(self.originalposition) + ', ' + 'Wrapper ambiguous ID: ' +
+        return ('TBWrapper original position: ' + str(self.original_position) + ', ' + 'Wrapper ambiguous ID: ' +
                 str(self.ambiguous_id) + ', Wrapper contains: ' + str(self.waypoint))
 
 
@@ -190,8 +190,8 @@ class Route(object):
 
 class Airway(object):
 
-    def __init__(self, airwayname):
-        self.airwayname = airwayname
+    def __init__(self, airway_name):
+        self.airway_name = airway_name
         self.uniqueid = 'testuniqueid'
         self.waypoints = []
 
@@ -202,7 +202,7 @@ class Airway(object):
         self.waypoints = waypoints
 
     def get_airway_name(self) -> str:
-        return self.airwayname
+        return self.airway_name
 
     def get_waypoints(self):
         return self.waypoints
