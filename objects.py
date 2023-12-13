@@ -1,4 +1,4 @@
-class PointInSpace(object):
+class PointInSpace:
 
     def __init__(self, identifier, coordinates, type_element, element_name=None):
         self.identifier = identifier
@@ -37,7 +37,7 @@ class PointInSpace(object):
                     str(self.coordinates) + ' on airways ' + str(self.on_airways))
 
 
-class Airport(object):
+class Airport:
 
     def __init__(self, identifier, coordinates, element_name=None):
         self.identifier = identifier
@@ -64,7 +64,7 @@ class Airport(object):
         return self.identifier + ' airport ' + self.element_name + ' coordinates: ' + str(self.coordinates)
 
 
-class AmbiguousPoint(object):
+class AmbiguousPoint:
 
     def __init__(self, identifier, initial_possibility):
         self.identifier = identifier
@@ -97,7 +97,7 @@ class AmbiguousPoint(object):
         return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities'
 
 
-class TBWrapper(object):
+class TBWrapper:
 
     def __init__(self, waypoint, original_position, was_ambiguous=False, ambiguous_id=None):
         self.waypoint = waypoint
@@ -130,7 +130,7 @@ class TBWrapper(object):
                 str(self.ambiguous_id) + ', Wrapper contains: ' + str(self.waypoint))
 
 
-class Route(object):
+class Route:
 
     def __init__(self):
         self.elements = []
@@ -188,7 +188,7 @@ class Route(object):
         return str(self.elements)
 
 
-class Airway(object):
+class Airway:
 
     def __init__(self, airway_name):
         self.airway_name = airway_name
@@ -211,7 +211,7 @@ class Airway(object):
         return self.waypoints[element]
 
 
-class AmbiguousAirway(object):
+class AmbiguousAirway:
     def __init__(self, identifier, initial_possibility):
         self.identifier = identifier
         self.possibilities = [initial_possibility]
