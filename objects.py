@@ -169,12 +169,12 @@ class Route(object):
                 break
         return self.contains_ambiguous_element
     
-    def get_possibility(self, position, possibilitynumber):
-        # must be Ambiguouselement at position
-        return self.elements[position].getpossibility(possibilitynumber)
+    def get_possibility(self, position, possibility_number):
+        # must be AmbiguousPoint at position
+        return self.elements[position].getpossibility(possibility_number)
 
     def get_possibilities(self, position):
-        # must be Ambiguouselement at position
+        # must be AmbiguousPoint at position
         return self.elements[position].getpossibilities()
 
     def deambiguate(self, position, possibilitynumber) -> None:
