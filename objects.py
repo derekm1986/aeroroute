@@ -177,7 +177,7 @@ class Route(object):
         # must be Ambiguouselement at position
         return self.elements[position].getpossibilities()
 
-    def deambiguate(self, position, possibilitynumber):
+    def deambiguate(self, position, possibilitynumber) -> None:
         # must be Ambiguouselement at position
         self.elements[position] = self.elements[position].get_possibility(possibilitynumber)
 
@@ -201,7 +201,7 @@ class Airway(object):
     def set_waypoints(self, waypoints) -> None:
         self.waypoints = waypoints
 
-    def get_airway_name(self):
+    def get_airway_name(self) -> str:
         return self.airwayname
 
     def get_waypoints(self):
@@ -220,14 +220,14 @@ class AmbiguousAirway(object):
         for possibility in self.possibilities:
             yield possibility
 
-    def add_possibility(self, possibility):
+    def add_possibility(self, possibility) -> None:
         if type(possibility) is list:
             self.possibilities.extend(possibility)
         else:
             self.possibilities.append(possibility)
         # should this be .extend instead of append in case I get passed a list?
 
-    def how_many_possibilities(self):
+    def how_many_possibilities(self) -> int:
         return len(self.possibilities)
 
     def get_identifier(self):
