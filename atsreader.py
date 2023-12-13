@@ -8,28 +8,28 @@ from objects import PointInSpace
 from objects import AmbiguousAirway
 
 
-def airway_lat_long_maker(input_string):
+def airway_lat_long_maker(input_string) -> str:
 
-    inputwasnegative = False  # fill it with something
+    input_was_negative = False  # fill it with something
 
     if input_string.startswith('-'):
-        inputwasnegative = True
+        input_was_negative = True
 
     # remove the negative, if necessary
-    if inputwasnegative == True:
+    if input_was_negative:
         input_string = input_string[1:]
 
     # remove leading zeros
     input_string = input_string.lstrip('0')
 
     # last two digits are decimal
-    inputwithdecimal = input_string[:-6] + '.' + input_string[-6:]  # 6 decimal places
+    input_with_decimal = input_string[:-6] + '.' + input_string[-6:]  # 6 decimal places
 
-    if inputwasnegative == True:
+    if input_was_negative:
         # put the negative sign back if needed
-        inputwithdecimal = '-' + inputwithdecimal
+        input_with_decimal = '-' + input_with_decimal
 
-    output = inputwithdecimal  # for testing only
+    output = input_with_decimal  # for testing only
     # print(output)
     return output
 
@@ -48,34 +48,34 @@ def airway_dict_maker():
     while "" in paragraphs:
         paragraphs.remove("")
 
-    splitparagraphs = []
+    split_paragraphs = []
 
     for paragraph in paragraphs:
-        splitparagraphs.append(paragraph.split('\n'))
+        split_paragraphs.append(paragraph.split('\n'))
     #  each split paragraph is an airway with lines in a list
 
-    for splitparagraph in splitparagraphs:
+    for split_paragraph in split_paragraphs:
 
-        for line in splitparagraph:
+        for line in split_paragraph:
 
             if line.startswith("A"):  # this is the beginning of an airway
-                currentline = line.rstrip().split("|")
-                routeid = currentline[1]
+                current_line = line.rstrip().split("|")
+                route_id = current_line[1]
 
-                currentairway = Airway(routeid)
+                currentairway = Airway(route_id)
 
                 airwaylist = []
                 simpleairwaylist = []
 
             elif line.startswith("S"):
 
-                currentline = line.rstrip().split("|")
-                firstid = currentline[1]
-                firstlat = currentline[2]
-                firstlong = currentline[3]
-                secondid = currentline[4]
-                secondlat = currentline[5]
-                secondlong = currentline[6]
+                current_line = line.rstrip().split("|")
+                firstid = current_line[1]
+                firstlat = current_line[2]
+                firstlong = current_line[3]
+                secondid = current_line[4]
+                secondlat = current_line[5]
+                secondlong = current_line[6]
 
                 firstlat = airway_lat_long_maker(firstlat)
                 firstlong = airway_lat_long_maker(firstlong)
@@ -88,23 +88,25 @@ def airway_dict_maker():
                 # this is asking if an object is already in the list.  comparing an object to an object is bad news.
 
                 if firstwaypoint not in simpleairwaylist:
-                    airwaylist.append(PointInSpace(firstwaypoint[0], (firstwaypoint[1], firstwaypoint[2]), 'airwaywaypoint'))
+                    airwaylist.append(PointInSpace(firstwaypoint[0], (firstwaypoint[1], firstwaypoint[2]),
+                                                   'airwaywaypoint'))
                     simpleairwaylist.append(firstwaypoint)
 
                 if secondwaypoint not in simpleairwaylist:
-                    airwaylist.append(PointInSpace(secondwaypoint[0], (secondwaypoint[1], secondwaypoint[2]), 'airwaywaypoint'))
+                    airwaylist.append(PointInSpace(secondwaypoint[0], (secondwaypoint[1], secondwaypoint[2]),
+                                                   'airwaywaypoint'))
                     simpleairwaylist.append(secondwaypoint)
 
         currentairway.set_waypoints(airwaylist)
 
-        if routeid in airway_dict:
-            if type(airway_dict[routeid]) is AmbiguousAirway:
-                airway_dict[routeid].add_possibility(currentairway)
+        if route_id in airway_dict:
+            if type(airway_dict[route_id]) is AmbiguousAirway:
+                airway_dict[route_id].add_possibility(currentairway)
             else:
-                airway_dict[routeid] = AmbiguousAirway(routeid, airway_dict[routeid])
-                airway_dict[routeid].add_possibility(currentairway)
+                airway_dict[route_id] = AmbiguousAirway(route_id, airway_dict[route_id])
+                airway_dict[route_id].add_possibility(currentairway)
         else:
-            airway_dict[routeid] = currentairway
+            airway_dict[route_id] = currentairway
 
     ats_file.close()
 
