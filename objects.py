@@ -146,13 +146,13 @@ class Route(object):
     def how_many_elements(self) -> int:
         return len(self.elements)
 
-    def get_last_element(self):
-        # return last element
-        return self.elements[-1]
-
     def get_first_element(self):
         # return first element
         return self.elements[0]
+
+    def get_last_element(self):
+        # return last element
+        return self.elements[-1]
 
     def get_contains_airway(self) -> bool:
         self.contains_airway = False
