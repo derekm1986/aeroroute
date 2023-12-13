@@ -2,7 +2,7 @@
 # Waypoints.txt file must be in AIRAC directory
 
 from objects import PointInSpace
-from objects import AmbiguousElement
+from objects import AmbiguousPoint
 
 
 def waypoint_dict_maker():
@@ -48,10 +48,10 @@ def waypoint_dict_maker():
         waypointobj = PointInSpace(waypointid, (waypointlatwithdecimal, waypointlongwithdecimal), 'waypoint')
 
         if waypointid in waypoint_dict:
-            if type(waypoint_dict[waypointid]) is AmbiguousElement:
+            if type(waypoint_dict[waypointid]) is AmbiguousPoint:
                 waypoint_dict[waypointid].add_possibility(waypointobj)
             else:
-                waypoint_dict[waypointid] = AmbiguousElement(waypointid, waypoint_dict[waypointid])
+                waypoint_dict[waypointid] = AmbiguousPoint(waypointid, waypoint_dict[waypointid])
                 waypoint_dict[waypointid].add_possibility(waypointobj)
         else:
             waypoint_dict[waypointid] = waypointobj

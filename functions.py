@@ -64,7 +64,7 @@ def multiple_finder(input_waypoints):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
-    found_multiples = [i for i, x in enumerate(input_waypoints.get_waypoints()) if type(x) is objects.AmbiguousElement]
+    found_multiples = [i for i, x in enumerate(input_waypoints.get_waypoints()) if type(x) is objects.AmbiguousPoint]
 
     multiples_matrix = []
 

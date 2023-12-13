@@ -64,7 +64,7 @@ class Airport(object):
         return self.identifier + ' airport ' + self.elementname + ' coordinates: ' + str(self.coordinates)
 
 
-class AmbiguousElement(object):  # consider changing to Ambiguouspoint?
+class AmbiguousPoint(object):  # consider changing to Ambiguouspoint?
 
     def __init__(self, identifier, initialpossibility):
         self.identifier = identifier
@@ -122,7 +122,7 @@ class TBWrapper(object):
         return self.waypoint
 
     def get_coordinates(self):
-        assert type(self.waypoint) is not AmbiguousElement
+        assert type(self.waypoint) is not AmbiguousPoint
         return self.waypoint.get_coordinates()
 
     def __str__(self):
@@ -164,7 +164,7 @@ class Route(object):
 
     def get_contains_ambiguous_element(self) -> bool:
         for element in self.elements:
-            if type(element) is AmbiguousElement:
+            if type(element) is AmbiguousPoint:
                 self.contains_ambiguous_element = True
                 break
         return self.contains_ambiguous_element

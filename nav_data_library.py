@@ -42,9 +42,9 @@ class NavDataLibrary(object):
         for key, val in self.waypoint_dict.items():
             if key in points_in_space_dict:
                 # the entry is already in points_in_space_dict
-                if type(points_in_space_dict[key]) is objects.AmbiguousElement:
+                if type(points_in_space_dict[key]) is objects.AmbiguousPoint:
                     # points_in_space_dict already has Ambiguouselement
-                    if type(val) is objects.AmbiguousElement:
+                    if type(val) is objects.AmbiguousPoint:
                         # must add Ambiguouselement to Ambiguouselement
                         points_in_space_dict[key].add_possibility(self.waypoint_dict[key].get_possibilities())
                     else:
@@ -52,14 +52,14 @@ class NavDataLibrary(object):
                         points_in_space_dict[key].add_possibility(self.waypoint_dict[key])
                 else:
                     # points_in_space_dict contains a Pointinspace
-                    if type(val) is objects.AmbiguousElement:
+                    if type(val) is objects.AmbiguousPoint:
                         # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
                         originalpointinspace = points_in_space_dict[key]
                         points_in_space_dict[key] = val
                         points_in_space_dict[key].add_possibility(originalpointinspace)
                     else:
                         # Adding Pointinspace to a Pointinspace
-                        points_in_space_dict[key] = objects.AmbiguousElement(key, points_in_space_dict[key])
+                        points_in_space_dict[key] = objects.AmbiguousPoint(key, points_in_space_dict[key])
                         points_in_space_dict[key].add_possibility(val)
             else:
                 # the entry is not yet in points_in_space_dict, so just add it
@@ -76,7 +76,7 @@ class NavDataLibrary(object):
                     # print(airway)
                     for waypoint in airway.get_waypoints():
                         if waypoint.get_identifier() in self.points_in_space_dict:
-                            if isinstance(self.points_in_space_dict[waypoint.get_identifier()], objects.AmbiguousElement):
+                            if isinstance(self.points_in_space_dict[waypoint.get_identifier()], objects.AmbiguousPoint):
                                 # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
                                 for point in self.points_in_space_dict[waypoint.get_identifier()].get_possibilities():
                                     if point.get_coordinates() == waypoint.get_coordinates():
@@ -94,7 +94,7 @@ class NavDataLibrary(object):
             else:  # we have encountered an Airway by itself
                 for waypoint in airway_names.get_waypoints():
                     if waypoint.get_identifier() in self.points_in_space_dict:
-                        if isinstance(self.points_in_space_dict[waypoint.get_identifier()], objects.AmbiguousElement):
+                        if isinstance(self.points_in_space_dict[waypoint.get_identifier()], objects.AmbiguousPoint):
                             # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
                             for point in self.points_in_space_dict[waypoint.get_identifier()].get_possibilities():
                                 if point.get_coordinates() == waypoint.get_coordinates():

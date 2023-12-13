@@ -2,7 +2,7 @@
 # Navaids.txt file must be in AIRAC directory
 
 from objects import PointInSpace
-from objects import AmbiguousElement
+from objects import AmbiguousPoint
 
 
 def navaid_dict_maker():
@@ -49,10 +49,10 @@ def navaid_dict_maker():
         navaidobj = PointInSpace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
 
         if navaidid in navaid_dict:
-            if type(navaid_dict[navaidid]) is AmbiguousElement:
+            if type(navaid_dict[navaidid]) is AmbiguousPoint:
                 navaid_dict[navaidid].add_possibility(navaidobj)
             else:
-                navaid_dict[navaidid] = AmbiguousElement(navaidid, navaid_dict[navaidid])
+                navaid_dict[navaidid] = AmbiguousPoint(navaidid, navaid_dict[navaidid])
                 navaid_dict[navaidid].add_possibility(navaidobj)
         else:
             navaid_dict[navaidid] = navaidobj
