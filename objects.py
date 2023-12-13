@@ -87,8 +87,8 @@ class AmbiguousPoint(object):  # consider changing to Ambiguouspoint?
     def get_identifier(self) -> str:
         return self.identifier
     
-    def get_possibility(self, possibilitynumber):
-        return self.possibilities[possibilitynumber]
+    def get_possibility(self, possibility_number: int):
+        return self.possibilities[possibility_number]
 
     def get_possibilities(self):
         return self.possibilities
