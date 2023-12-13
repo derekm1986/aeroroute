@@ -64,11 +64,11 @@ class Airport(object):
         return self.identifier + ' airport ' + self.elementname + ' coordinates: ' + str(self.coordinates)
 
 
-class AmbiguousPoint(object):  # consider changing to Ambiguouspoint?
+class AmbiguousPoint(object):
 
-    def __init__(self, identifier, initialpossibility):
+    def __init__(self, identifier, initial_possibility):
         self.identifier = identifier
-        self.possibilities = [initialpossibility]
+        self.possibilities = [initial_possibility]
 
     def __iter__(self):
         for possibility in self.possibilities:
@@ -140,7 +140,7 @@ class Route(object):
     def add_element(self, element) -> None:
         self.elements.append(element)
         
-    def get_element(self, element):
+    def get_element(self, element: int):
         return self.elements[element]
     
     def how_many_elements(self) -> int:
@@ -169,11 +169,11 @@ class Route(object):
                 break
         return self.contains_ambiguous_element
     
-    def get_possibility(self, position, possibility_number):
+    def get_possibility(self, position: int, possibility_number: int):
         # must be AmbiguousPoint at position
         return self.elements[position].getpossibility(possibility_number)
 
-    def get_possibilities(self, position):
+    def get_possibilities(self, position: int):
         # must be AmbiguousPoint at position
         return self.elements[position].getpossibilities()
 
@@ -212,9 +212,9 @@ class Airway(object):
 
 
 class AmbiguousAirway(object):
-    def __init__(self, identifier, initialpossibility):
+    def __init__(self, identifier, initial_possibility):
         self.identifier = identifier
-        self.possibilities = [initialpossibility]
+        self.possibilities = [initial_possibility]
 
     def __iter__(self):
         for possibility in self.possibilities:
@@ -233,8 +233,8 @@ class AmbiguousAirway(object):
     def get_identifier(self) -> str:
         return self.identifier
 
-    def get_possibility(self, possibilitynumber):
-        return self.possibilities[possibilitynumber]
+    def get_possibility(self, possibility_number: int):
+        return self.possibilities[possibility_number]
 
     def get_possibilities(self):
         return self.possibilities
