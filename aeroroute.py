@@ -8,7 +8,7 @@ import objects
 import logging
 
 
-def main():
+def main() -> None:
     """
     The main method of the program
     :return: nothing

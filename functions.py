@@ -1,6 +1,5 @@
 import math
 import objects
-import nav_data_library
 
 
 def pair_maker(input_waypoints):
@@ -19,7 +18,7 @@ def pair_maker(input_waypoints):
         yield pair
 
 
-def distance_summer(input_tuples):
+def distance_summer(input_tuples) -> float:
   
     sum_distance = 0.00  # establish sum_distance and put zero in it
   
@@ -30,7 +29,7 @@ def distance_summer(input_tuples):
     return sum_distance
 
 
-def list_parser(input_list, nav_library):
+def list_parser(input_list, nav_library) -> objects.Route | None:
 
     output = objects.Route()
 
@@ -252,7 +251,7 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
     return inputwaypoints
 
 
-def deambiguator_airway(inputway_points):
+def deambiguator_airway(input_waypoints):
     # use adjacent airways to solve ambiguous elements
 
-    return inputway_points
+    return input_waypoints

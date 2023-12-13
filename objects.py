@@ -25,7 +25,7 @@ class PointInSpace(object):
     def get_airways(self):
         return self.onairways
 
-    def add_airway(self, airway):
+    def add_airway(self, airway) -> None:
         self.onairways.append(airway)
 
     def __str__(self):
@@ -74,14 +74,14 @@ class AmbiguousElement(object):  # consider changing to Ambiguouspoint?
         for possibility in self.possibilities:
             yield possibility
 
-    def add_possibility(self, possibility):
+    def add_possibility(self, possibility) -> None:
         if type(possibility) is list:
             self.possibilities.extend(possibility)
         else:
             self.possibilities.append(possibility)
         # should this be .extend instead of append in case I get passed a list?
         
-    def how_many_possibilities(self):
+    def how_many_possibilities(self) -> int:
         return len(self.possibilities)
 
     def get_identifier(self):
@@ -105,17 +105,17 @@ class TBWrapper(object):
         self.wasambiguous = wasambiguous
         self.ambiguousid = ambiguousid
 
-    def set_ambiguous_id(self, ambiguousid):
+    def set_ambiguous_id(self, ambiguousid) -> None:
         assert self.wasambiguous is True
         self.ambiguousid = ambiguousid
 
-    def get_was_ambiguous(self):
+    def get_was_ambiguous(self) -> bool:
         return self.wasambiguous
 
-    def get_original_position(self):
+    def get_original_position(self) -> int:
         return self.originalposition
 
-    def get_ambiguous_id(self):
+    def get_ambiguous_id(self) -> int:
         return self.ambiguousid
 
     def get_waypoint(self):
@@ -137,13 +137,13 @@ class Route(object):
         self.contains_airway = False
         self.contains_ambiguous_element = False
 
-    def add_element(self, element):
+    def add_element(self, element) -> None:
         self.elements.append(element)
         
     def get_element(self, element):
         return self.elements[element]
     
-    def how_many_elements(self):
+    def how_many_elements(self) -> int:
         return len(self.elements)
 
     def get_last_element(self):
@@ -154,7 +154,7 @@ class Route(object):
         # return first element
         return self.elements[0]
 
-    def get_contains_airway(self):
+    def get_contains_airway(self) -> bool:
         self.contains_airway = False
         for element in self.elements:
             if type(element) is Airway or type(element) is AmbiguousAirway:
@@ -162,7 +162,7 @@ class Route(object):
                 break
         return self.contains_airway
 
-    def get_contains_ambiguous_element(self):
+    def get_contains_ambiguous_element(self) -> bool:
         for element in self.elements:
             if type(element) is AmbiguousElement:
                 self.contains_ambiguous_element = True
@@ -195,10 +195,10 @@ class Airway(object):
         self.uniqueid = 'testuniqueid'
         self.waypoints = []
 
-    def add_element(self, element):
+    def add_element(self, element) -> None:
         self.waypoints.append(element)
 
-    def set_waypoints(self, waypoints):
+    def set_waypoints(self, waypoints) -> None:
         self.waypoints = waypoints
 
     def get_airway_name(self):
