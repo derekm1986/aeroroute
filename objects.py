@@ -185,7 +185,7 @@ class Route:
 
 class Airway:
 
-    def __init__(self, airway_name):
+    def __init__(self, airway_name: str):
         self.airway_name = airway_name
         self.uniqueid = 'testuniqueid'
         self.waypoints = []
@@ -207,7 +207,7 @@ class Airway:
 
 
 class AmbiguousAirway:
-    def __init__(self, identifier, initial_possibility):
+    def __init__(self, identifier: str, initial_possibility):
         self.identifier = identifier
         self.possibilities = [initial_possibility]
 
