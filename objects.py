@@ -171,11 +171,11 @@ class Route(object):
     
     def get_possibility(self, position: int, possibility_number: int):
         # must be AmbiguousPoint at position
-        return self.elements[position].getpossibility(possibility_number)
+        return self.elements[position].get_possibility(possibility_number)
 
     def get_possibilities(self, position: int):
         # must be AmbiguousPoint at position
-        return self.elements[position].getpossibilities()
+        return self.elements[position].get_possibilities()
 
     def deambiguate(self, position: int, possibility_number: int) -> None:
         # must be AmbiguousPoint at position
