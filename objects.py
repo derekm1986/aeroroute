@@ -99,15 +99,15 @@ class AmbiguousPoint(object):  # consider changing to Ambiguouspoint?
 
 class TBWrapper(object):
 
-    def __init__(self, waypoint, originalposition, wasambiguous=False, ambiguousid=None):
+    def __init__(self, waypoint, originalposition, wasambiguous=False, ambiguous_id=None):
         self.waypoint = waypoint
         self.originalposition = originalposition
         self.wasambiguous = wasambiguous
-        self.ambiguousid = ambiguousid
+        self.ambiguous_id = ambiguous_id
 
-    def set_ambiguous_id(self, ambiguousid) -> None:
+    def set_ambiguous_id(self, ambiguous_id: int) -> None:
         assert self.wasambiguous is True
-        self.ambiguousid = ambiguousid
+        self.ambiguous_id = ambiguous_id
 
     def get_was_ambiguous(self) -> bool:
         return self.wasambiguous
@@ -116,7 +116,7 @@ class TBWrapper(object):
         return self.originalposition
 
     def get_ambiguous_id(self) -> int:
-        return self.ambiguousid
+        return self.ambiguous_id
 
     def get_waypoint(self):
         return self.waypoint
@@ -127,7 +127,7 @@ class TBWrapper(object):
 
     def __str__(self):
         return ('TBWrapper original position: ' + str(self.originalposition) + ', ' + 'Wrapper ambiguous ID: ' +
-                str(self.ambiguousid) + ', Wrapper contains: ' + str(self.waypoint))
+                str(self.ambiguous_id) + ', Wrapper contains: ' + str(self.waypoint))
 
 
 class Route(object):
