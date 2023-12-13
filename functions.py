@@ -60,7 +60,7 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
     return output
 
 
-def multiple_finder(input_waypoints):
+def multiple_finder(input_waypoints: objects.Route):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
