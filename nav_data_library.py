@@ -43,22 +43,22 @@ class NavDataLibrary(object):
             if key in points_in_space_dict:
                 # the entry is already in points_in_space_dict
                 if type(points_in_space_dict[key]) is objects.AmbiguousPoint:
-                    # points_in_space_dict already has Ambiguouselement
+                    # points_in_space_dict already has AmbiguousPoint
                     if type(val) is objects.AmbiguousPoint:
-                        # must add Ambiguouselement to Ambiguouselement
+                        # must add AmbiguousPoint to AmbiguousPoint
                         points_in_space_dict[key].add_possibility(self.waypoint_dict[key].get_possibilities())
                     else:
-                        # must add Pointinspace to Ambiguouselement
+                        # must add PointInSpace to AmbiguousPoint
                         points_in_space_dict[key].add_possibility(self.waypoint_dict[key])
                 else:
-                    # points_in_space_dict contains a Pointinspace
+                    # points_in_space_dict contains a PointInSpace
                     if type(val) is objects.AmbiguousPoint:
-                        # Adding Ambigouselement to a Pointinspace, make a new Ambiguouselement
-                        originalpointinspace = points_in_space_dict[key]
+                        # Adding AmbiguousPoint to a PointInSpace, make a new AmbiguousPoint
+                        original_point_in_space = points_in_space_dict[key]
                         points_in_space_dict[key] = val
-                        points_in_space_dict[key].add_possibility(originalpointinspace)
+                        points_in_space_dict[key].add_possibility(original_point_in_space)
                     else:
-                        # Adding Pointinspace to a Pointinspace
+                        # Adding PointInSpace to a PointInSpace
                         points_in_space_dict[key] = objects.AmbiguousPoint(key, points_in_space_dict[key])
                         points_in_space_dict[key].add_possibility(val)
             else:
@@ -117,10 +117,10 @@ class NavDataLibrary(object):
         manual_waypoint_number = 1
 
         if "/" in item:  # manual input detected
-            itemname = 'WAYPOINT' + str(manual_waypoint_number)
+            item_name = 'WAYPOINT' + str(manual_waypoint_number)
             coordinates = tuple(item.split('/'))
             # assert that it's valid?
-            found_item = objects.PointInSpace(itemname, coordinates, 'manual waypoint')
+            found_item = objects.PointInSpace(item_name, coordinates, 'manual waypoint')
             manual_waypoint_number += 1
 
         elif item in self.airport_dict:
