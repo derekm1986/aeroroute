@@ -1,40 +1,44 @@
 class PointInSpace:
 
     def __init__(self, identifier, coordinates, type_element, element_name=None):
-        self.identifier = identifier
-        self.coordinates = coordinates
-        self.type_element = type_element
-        self.element_name = element_name
-        self.on_airways = []
+        self._identifier = identifier
+        self._coordinates = coordinates
+        self._type_element = type_element
+        self._element_name = element_name
+        self._available_airways = []
 
     def get_identifier(self):
-        return self.identifier
+        return self._identifier
+
+    #@property
+    #def identifier(self):
+    #    return self._identifier
 
     def get_coordinates(self):
-        return self.coordinates
+        return self._coordinates
 
     def get_type_element(self):
-        return self.type_element
+        return self._type_element
 
     def get_element_name(self):
-        if self.element_name is not None:
-            return self.element_name
+        if self._element_name is not None:
+            return self._element_name
         else:
             pass
 
-    def get_airways(self):
-        return self.on_airways
+    def get_airways(self):  # rename me!!!
+        return self._available_airways
 
-    def add_airway(self, airway) -> None:
-        self.on_airways.append(airway)
+    def add_airway(self, airway) -> None:  # rename me!!!
+        self._available_airways.append(airway)
 
     def __str__(self):
-        if self.element_name is not None:
-            return (self.identifier + ' point-in-space ' + self.type_element + ' ' + self.element_name +
-                    ' coordinates: ' + str(self.coordinates) + ' on airways ' + str(self.on_airways))
+        if self._element_name is not None:
+            return (self._identifier + ' point-in-space ' + self._type_element + ' ' + self._element_name +
+                    ' coordinates: ' + str(self._coordinates) + ' on airways ' + str(self._available_airways))
         else:
-            return (self.identifier + ' point-in-space ' + self.type_element + ' coordinates: ' +
-                    str(self.coordinates) + ' on airways ' + str(self.on_airways))
+            return (self._identifier + ' point-in-space ' + self._type_element + ' coordinates: ' +
+                    str(self._coordinates) + ' on airways ' + str(self._available_airways))
 
 
 class Airport:
