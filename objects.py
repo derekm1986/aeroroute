@@ -6,6 +6,7 @@ class PointInSpace:
         self._type_element = type_element
         self._element_name = element_name
         self._available_airways = []
+        self._on_airway = None
 
     def get_identifier(self):
         return self._identifier
