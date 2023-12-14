@@ -26,10 +26,10 @@ class PointInSpace:
         else:
             pass
 
-    def get_airways(self):  # rename me!!!
+    def get_available_airways(self):
         return self._available_airways
 
-    def add_airway(self, airway) -> None:  # rename me!!!
+    def add_available_airway(self, airway) -> None:
         self._available_airways.append(airway)
 
     def __str__(self):
