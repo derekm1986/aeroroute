@@ -23,7 +23,7 @@ def main() -> None:
         filemode='w'
     )
     
-    print('\n***Aeroroute loading***', '\n')
+    print('\n***Aeroroute loading***')
 
     logging.info("Program starting")
 
