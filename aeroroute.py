@@ -100,5 +100,9 @@ def main() -> None:
         print('Distance in nm:', sum_distance)
 
 
+def double_adjacent_detector(inputlist):
+    pass
+
+
 if __name__ == "__main__":
     main()
