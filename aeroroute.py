@@ -52,7 +52,7 @@ def main() -> None:
         if multiple_adjacent_detector(input_list):
             continue
 
-        # no multiple inputs, pass on to list_parser
+        # no multiple adjacent inputs, pass on to list_parser
         input_waypoints_obj = functions.list_parser(input_list, nav_data)
 
         if input_waypoints_obj is None:  # something bad came back from string_parser
