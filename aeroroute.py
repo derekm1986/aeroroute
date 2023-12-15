@@ -46,7 +46,7 @@ def main() -> None:
             break
 
         if len(input_list) == 1:  # single item, what happens if item doesn't exist?
-            print('Single item detected, printing entry:', nav_data.nav_data_searcher(input_list[0]))
+            print('Single item detected, looking up entry:', nav_data.nav_data_searcher(input_list[0]))
             continue
 
         if multiple_adjacent_detector(input_list):
