@@ -33,7 +33,7 @@ def main() -> None:
     while True:
 
         # allows user to input waypoint(s)/exit instructions to list
-        print('\nType "quit" to exit program, enter 20.000000/-123.000000 or N34234/W343423 format for manual waypoints')
+        print('\nType "quit" to exit program, enter 20.000000/-123.000000 or 5029N/05120W format for manual waypoints')
         input_string = input("Enter input string: ")
         print("")
         input_list = input_string.upper().split()
@@ -47,7 +47,12 @@ def main() -> None:
             break
 
         if len(input_list) == 1:  # single item, what happens if item doesn't exist?
-            print('Single item detected, looking up entry:', nav_data.nav_data_searcher(input_list[0]))
+            print('Single item detected, looking up item.')
+            found_item = nav_data.nav_data_searcher(input_list[0])
+            if found_item is None:
+                print(input_list[0] + " not found.")
+            else:
+                print(found_item)
             continue
 
         if multiple_adjacent_detector(input_list):
@@ -92,12 +97,18 @@ def main() -> None:
         print('Distance in nm:', sum_distance)
 
 
-def multiple_adjacent_detector(input_list):
+def multiple_adjacent_detector(input_list: list[str]) -> bool:
+    """
+    detects if there are multiple adjacent identical strings
+    :param input_list: list of strings
+    :return: True if detected, False if not detected
+    """
     for i in range(len(input_list) - 1):
         if input_list[i] == input_list[i + 1]:
             print('Multiple adjacent input found with name', input_list[i], '- unable to compute.')
             return True
     return False
+
 
 if __name__ == "__main__":
     main()

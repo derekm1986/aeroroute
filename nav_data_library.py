@@ -114,14 +114,8 @@ class NavDataLibrary(object):
 
         found_item = None
 
-        manual_waypoint_number = 1
-
         if "/" in item:  # manual input detected
-            item_name = 'WAYPOINT' + str(manual_waypoint_number)
-            coordinates = tuple(item.split('/'))
-            # assert that it's valid?
-            found_item = objects.PointInSpace(item_name, coordinates, 'manual waypoint')
-            manual_waypoint_number += 1
+            found_item = self.manual_waypoint_maker(item)
 
         elif item in self.airport_dict:
             found_item = self.airport_dict[item]
@@ -139,5 +133,15 @@ class NavDataLibrary(object):
         # flag as possible SID/STAR?
 
         return found_item
+
+    @staticmethod
+    def manual_waypoint_maker(input_string: str) -> objects.PointInSpace:
+        # also need to allow for 234234N/234234W format
+        coordinates = tuple(input_string.split('/'))
+        # assert that it's valid?  maybe that's handled in new coordinates object?
+        manual_waypoint = objects.PointInSpace(input_string, coordinates, 'manual waypoint')
+
+        return manual_waypoint
+
 
 
