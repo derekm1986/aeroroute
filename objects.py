@@ -245,4 +245,5 @@ class AmbiguousAirway:
 
 class Coordinates:
     # store coordinates here
+    # some logic to make sure it's valid?
     pass
