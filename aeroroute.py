@@ -35,34 +35,25 @@ def main() -> None:
         # allows user to input waypoint(s)/exit instructions to list
         print('\nType "quit" to exit program, enter 20.000000/-123.000000 format for manual elements')
         input_string = input("Enter input string: ")
-        input_string = input_string.upper().split()
+        input_list = input_string.upper().split()
 
-        if len(input_string) == 0:
+        if len(input_list) == 0:
             print("No input detected")
             continue
 
-        if "QUIT" in input_string:
+        if "QUIT" in input_list:
             print('***Program exiting***')
             break
 
-        if len(input_string) == 1:  # single item, what happens if item doesn't exist?
-            print('Single item detected, printing entry:', nav_data.nav_data_searcher(input_string[0]))
+        if len(input_list) == 1:  # single item, what happens if item doesn't exist?
+            print('Single item detected, printing entry:', nav_data.nav_data_searcher(input_list[0]))
             continue
 
-        # double adjacent input detection
-        double_input_flag = False
-        if len(input_string) > 1:  # rework this, we could only get to this point if length is greater than 1
-            for i in range(len(input_string) - 1):
-                if input_string[i] == input_string[i + 1]:
-                    print('Multiple adjacent input found with name', input_string[i], '- unable to compute.')
-                    double_input_flag = True
-                    break
-
-        if double_input_flag:
+        if multiple_adjacent_detector(input_list):
             continue
 
-        # no double inputs, pass on to list_parser
-        input_waypoints_obj = functions.list_parser(input_string, nav_data)
+        # no multiple inputs, pass on to list_parser
+        input_waypoints_obj = functions.list_parser(input_list, nav_data)
 
         if input_waypoints_obj is None:  # something bad came back from string_parser
             continue
@@ -100,9 +91,12 @@ def main() -> None:
         print('Distance in nm:', sum_distance)
 
 
-def double_adjacent_detector(inputlist):
-    pass
-
+def multiple_adjacent_detector(input_list):
+    for i in range(len(input_list) - 1):
+        if input_list[i] == input_list[i + 1]:
+            print('Multiple adjacent input found with name', input_list[i], '- unable to compute.')
+            return True
+    return False
 
 if __name__ == "__main__":
     main()
