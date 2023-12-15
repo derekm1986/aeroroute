@@ -35,6 +35,7 @@ def main() -> None:
         # allows user to input waypoint(s)/exit instructions to list
         print('\nType "quit" to exit program, enter 20.000000/-123.000000 or N34234/W343423 format for manual waypoints')
         input_string = input("Enter input string: ")
+        print("")
         input_list = input_string.upper().split()
 
         if len(input_list) == 0:

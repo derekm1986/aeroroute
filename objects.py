@@ -36,10 +36,10 @@ class PointInSpace:
     def __str__(self):
         if self._element_name is not None:
             return (self._identifier + ' point-in-space ' + self._type_element + ' ' + self._element_name +
-                    ' coordinates: ' + str(self._coordinates) + ' on airways ' + str(self._available_airways))
+                    ' coordinates: ' + str(self._coordinates) + ' available airways ' + str(self._available_airways))
         else:
             return (self._identifier + ' point-in-space ' + self._type_element + ' coordinates: ' +
-                    str(self._coordinates) + ' on airways ' + str(self._available_airways))
+                    str(self._coordinates) + ' available airways ' + str(self._available_airways))
 
 
 class Airport:
