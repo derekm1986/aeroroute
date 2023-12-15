@@ -1,6 +1,6 @@
 # aeroroute
 
-I work in the aviation industry and am trying to make a program that can read flight plan routes and calculate how long it is.
+I work in the aviation industry and am trying to make a program that can read flight plan routes and calculate how long they are.
 
 I am still learning and as I have time I am trying to improve the program.
 
