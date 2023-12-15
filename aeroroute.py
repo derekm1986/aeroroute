@@ -45,13 +45,13 @@ def main() -> None:
             print('***Program exiting***')
             break
 
-        if len(input_string) == 1:  # single item
+        if len(input_string) == 1:  # single item, what happens if item doesn't exist?
             print('Single item detected, printing entry:', nav_data.nav_data_searcher(input_string[0]))
             continue
 
         # double adjacent input detection
         double_input_flag = False
-        if len(input_string) > 1:
+        if len(input_string) > 1:  # rework this, we could only get to this point if length is greater than 1
             for i in range(len(input_string) - 1):
                 if input_string[i] == input_string[i + 1]:
                     print('Multiple adjacent input found with name', input_string[i], '- unable to compute.')
