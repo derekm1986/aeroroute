@@ -223,7 +223,8 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
                         ambiguousid = 0
                         for possibilityfromelement in element.waypoint.get_possibilities():
                             returnedlist.append(possibilityfromlist + [objects.TBWrapper(possibilityfromelement,
-                                                                                         element.get_original_position(), True, ambiguousid)])
+                                                                                         element.get_original_position()
+                                                                                         , True, ambiguousid)])
                             ambiguousid += 1
 
                     possibilitieslist = returnedlist
