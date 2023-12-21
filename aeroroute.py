@@ -55,7 +55,7 @@ def main() -> None:
                 print(found_item)
             continue
 
-        if multiple_adjacent_detector(input_list):
+        if multiple_adjacent_detector(input_list):  # if true, there were multiple identical adjacent items
             continue
 
         # no multiple adjacent inputs, pass on to list_parser
