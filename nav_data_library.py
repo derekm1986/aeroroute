@@ -135,7 +135,7 @@ class NavDataLibrary(object):
         return found_item
 
     @staticmethod
-    def manual_waypoint_maker(input_string: str) -> objects.PointInSpace:
+    def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
         # also need to allow for 234234N/234234W format
         if "." in input_string:  # decimal format entered
             coordinates = tuple(input_string.split('/'))
