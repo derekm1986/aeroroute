@@ -137,7 +137,12 @@ class NavDataLibrary(object):
     @staticmethod
     def manual_waypoint_maker(input_string: str) -> objects.PointInSpace:
         # also need to allow for 234234N/234234W format
-        coordinates = tuple(input_string.split('/'))
+        if "." in input_string:  # decimal format entered
+            coordinates = tuple(input_string.split('/'))
+        elif "N" or "S" or "E" or "W" in input_string  # degrees/minutes format entered
+            coordinates = tuple(input_string.split('/'))  # not done - need to finish!
+        else:  # no good waypoint entered
+            return None
         # assert that it's valid?  maybe that's handled in new coordinates object?
         manual_waypoint = objects.PointInSpace(input_string, coordinates, 'manual waypoint')
 
