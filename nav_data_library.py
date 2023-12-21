@@ -139,7 +139,7 @@ class NavDataLibrary(object):
         # also need to allow for 234234N/234234W format
         if "." in input_string:  # decimal format entered
             coordinates = tuple(input_string.split('/'))
-        elif "N" or "S" or "E" or "W" in input_string  # N/S/E/W degrees/minutes format entered
+        elif "N" or "S" or "E" or "W" in input_string:  # N/S/E/W degrees/minutes format entered
             coordinates = tuple(input_string.split('/'))  # not done - need to finish!
         else:  # bad coordinates entered
             return None
