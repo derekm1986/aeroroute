@@ -141,7 +141,7 @@ class NavDataLibrary(object):
             coordinates = tuple(input_string.split('/'))
         elif "N" or "S" or "E" or "W" in input_string  # N/S/E/W degrees/minutes format entered
             coordinates = tuple(input_string.split('/'))  # not done - need to finish!
-        else:  # no good waypoint entered
+        else:  # bad coordinates entered
             return None
         # assert that it's valid?  maybe that's handled in new coordinates object?
         manual_waypoint = objects.PointInSpace(input_string, coordinates, 'manual waypoint')
