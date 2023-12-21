@@ -245,7 +245,14 @@ class AmbiguousAirway:
 
 class Coordinates:
     # store coordinates here
-    def __init__(self, latitude, longitude):
-        self._latitude = latitude
-        self._longitude = longitude
+    def __init__(self, latitude: str, longitude: str):
+        self._latitude: str
+        self._longitude: str
+        
     # some logic to make sure it's valid?
+    
+    def lat_checker(latitude: str) -> str | None:
+        return None
+
+    def long_checker(longitude: str) -> str | None:
+        return None
