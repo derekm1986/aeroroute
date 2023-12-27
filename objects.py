@@ -141,11 +141,11 @@ class Route:
         self.elements = []
 
     def add_element(self, element) -> None:
-        self.elements.append(element)
         # put smarts here to protect from:
         # starting/ending with an airway
         # airway next to another airway
-        
+        self.elements.append(element)
+
     def get_element(self, element: int):
         return self.elements[element]
     
