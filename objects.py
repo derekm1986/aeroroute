@@ -142,6 +142,9 @@ class Route:
 
     def add_element(self, element) -> None:
         self.elements.append(element)
+        # put smarts here to protect from:
+        # starting/ending with an airway
+        # airway next to another airway
         
     def get_element(self, element: int):
         return self.elements[element]
@@ -169,7 +172,7 @@ class Route:
                 return True
         return False
     
-    def get_possibility(self, position: int, possibility_number: int):
+    def get_possibility(self, position: int, possibility_number: int) -> PointInSpace:
         # must be AmbiguousPoint at position
         return self.elements[position].get_possibility(possibility_number)
 
