@@ -41,6 +41,14 @@ class PointInSpace:
             return (self._identifier + ' point-in-space ' + self._type_element + ' coordinates: ' +
                     str(self._coordinates) + ' available airways ' + str(self._available_airways))
 
+    def __repr__(self):
+        if self._element_name is not None:
+            return (self._identifier + ' point-in-space ' + self._type_element + ' ' + self._element_name +
+                    ' coordinates: ' + str(self._coordinates) + ' available airways ' + str(self._available_airways))
+        else:
+            return (self._identifier + ' point-in-space ' + self._type_element + ' coordinates: ' +
+                    str(self._coordinates) + ' available airways ' + str(self._available_airways))
+
 
 class Airport:
 
@@ -66,6 +74,9 @@ class Airport:
             pass
 
     def __str__(self):
+        return self.identifier + ' airport ' + self.element_name + ' coordinates: ' + str(self.coordinates)
+
+    def __repr__(self):
         return self.identifier + ' airport ' + self.element_name + ' coordinates: ' + str(self.coordinates)
 
 
@@ -101,6 +112,8 @@ class AmbiguousPoint:
     def __str__(self):
         return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities'
 
+    def __repr__(self):
+        return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities'
 
 class TBWrapper:
 
@@ -188,6 +201,9 @@ class Route:
         return self.elements
 
     def __str__(self):  # this doesn't work
+        return str(self.elements)
+
+    def __repr__(self):  # this doesn't work
         return str(self.elements)
 
 
