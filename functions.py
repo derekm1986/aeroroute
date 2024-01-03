@@ -13,16 +13,16 @@ def pair_maker(input_waypoints):
     i = 0
 
     while i <= (len(route) - 2):  # make pairs of each waypoint and the waypoint after it
-        pair = [route[i], route[i + 1]]
+        pair = [route[i].get_coordinates(), route[i + 1].get_coordinates()]
         i += 1
         yield pair
 
 
-def distance_summer(input_tuples) -> float:
+def distance_summer(input_coordinates) -> float:
   
     sum_distance = 0.00  # establish sum_distance and put zero in it
   
-    for pair in pair_maker(input_tuples):
+    for pair in pair_maker(input_coordinates):
         pair_distance = vincenty_indirect(pair)
         sum_distance += pair_distance
 
@@ -83,13 +83,13 @@ def multiple_finder(input_waypoints: objects.Route):
 
 def vincenty_indirect(pair, heading=False):
 
-    #  Requires a tuple of two objects with the attribute .getcoordinates() which returns a
+    #  Requires a tuple of two Coordinates objects
     #  tuple of type (-lat.00, lon.00)
 
-    lat1 = float(pair[0].get_coordinates()[0])
-    lon1 = float(pair[0].get_coordinates()[1])
-    lat2 = float(pair[1].get_coordinates()[0])
-    lon2 = float(pair[1].get_coordinates()[1])
+    lat1 = float(pair[0].latitude)
+    lon1 = float(pair[0].longitude)
+    lat2 = float(pair[1].latitude)
+    lon2 = float(pair[1].longitude)
 
     if lat1 == lat2 and lon1 == lon2:
         return 0.0

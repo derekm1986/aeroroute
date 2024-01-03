@@ -6,6 +6,7 @@
 from objects import Airway
 from objects import PointInSpace
 from objects import AmbiguousAirway
+from objects import Coordinates
 
 
 def airway_lat_long_maker(input_string) -> str:
@@ -88,12 +89,12 @@ def airway_dict_maker():
                 # this is asking if an object is already in the list.  comparing an object to an object is bad news.
 
                 if firstwaypoint not in simpleairwaylist:
-                    airwaylist.append(PointInSpace(firstwaypoint[0], (firstwaypoint[1], firstwaypoint[2]),
+                    airwaylist.append(PointInSpace(firstwaypoint[0], Coordinates(firstwaypoint[1], firstwaypoint[2]),
                                                    'airwaywaypoint'))
                     simpleairwaylist.append(firstwaypoint)
 
                 if secondwaypoint not in simpleairwaylist:
-                    airwaylist.append(PointInSpace(secondwaypoint[0], (secondwaypoint[1], secondwaypoint[2]),
+                    airwaylist.append(PointInSpace(secondwaypoint[0], Coordinates(secondwaypoint[1], secondwaypoint[2]),
                                                    'airwaywaypoint'))
                     simpleairwaylist.append(secondwaypoint)
 

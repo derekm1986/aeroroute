@@ -266,13 +266,19 @@ class Coordinates:
     # store coordinates here - validation checker may have to exist outside of this class - how could an instance return itself as none?
     # would assertions be most appropriate here?
     def __init__(self, latitude: str, longitude: str):
-        self._latitude: str
-        self._longitude: str
-        
-    # some logic to make sure it's valid?
-    
-    def lat_checker(latitude: str) -> str | None:
-        return None
+        self._latitude = latitude
+        self._longitude = longitude
 
-    def long_checker(longitude: str) -> str | None:
-        return None
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @property
+    def longitude(self):
+        return self._longitude
+
+    def __eq__(self, other):
+        return self.latitude == other.latitude and self.longitude == other.longitude
+
+    def __repr__(self):
+        return self._latitude + ", " + self._longitude

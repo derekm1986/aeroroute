@@ -4,6 +4,8 @@
 from objects import PointInSpace
 from objects import AmbiguousPoint
 
+from objects import Coordinates
+
 
 def waypoint_dict_maker():
 
@@ -45,7 +47,12 @@ def waypoint_dict_maker():
         if waypointlongisnegative is True:
             waypointlongwithdecimal = "-" + waypointlongwithdecimal
 
-        waypointobj = PointInSpace(waypointid, (waypointlatwithdecimal, waypointlongwithdecimal), 'waypoint')
+        # new way
+        waypointcoordinates = Coordinates(waypointlatwithdecimal, waypointlongwithdecimal)
+
+        waypointobj = PointInSpace(waypointid, waypointcoordinates, 'waypoint')
+
+        #waypointobj = PointInSpace(waypointid, (waypointlatwithdecimal, waypointlongwithdecimal), 'waypoint')
 
         if waypointid in waypoint_dict:
             if type(waypoint_dict[waypointid]) is AmbiguousPoint:

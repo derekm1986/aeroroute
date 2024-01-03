@@ -5,6 +5,8 @@
 
 from objects import Airport
 
+from objects import Coordinates
+
 
 def airport_dict_maker():
 
@@ -48,7 +50,12 @@ def airport_dict_maker():
             if airportlongisnegative is True:
                 airportlongwithdecimal = "-" + airportlongwithdecimal
 
-            airportobj = Airport(airportid, (airportlatwithdecimal, airportlongwithdecimal), airportname)
+            # new way
+            airportcoordinates = Coordinates(airportlatwithdecimal, airportlongwithdecimal)
+
+            airportobj = Airport(airportid, airportcoordinates, airportname)
+
+            #airportobj = Airport(airportid, (airportlatwithdecimal, airportlongwithdecimal), airportname)
 
             airport_dict[airportid] = airportobj
 

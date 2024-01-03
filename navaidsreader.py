@@ -4,6 +4,7 @@
 from objects import PointInSpace
 from objects import AmbiguousPoint
 
+from objects import Coordinates
 
 def navaid_dict_maker():
 
@@ -46,7 +47,12 @@ def navaid_dict_maker():
         if navaidlongisnegative is True:
             navaidlongwithdecimal = "-" + navaidlongwithdecimal
 
-        navaidobj = PointInSpace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
+        # new way
+        navaidcoordinates = Coordinates(navaidlatwithdecimal, navaidlongwithdecimal)
+
+        navaidobj = PointInSpace(navaidid, navaidcoordinates, 'NAVAID', navaidname)
+
+        #navaidobj = PointInSpace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
 
         if navaidid in navaid_dict:
             if type(navaid_dict[navaidid]) is AmbiguousPoint:
