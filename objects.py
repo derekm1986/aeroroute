@@ -110,11 +110,11 @@ class AmbiguousPoint:
         return self.possibilities
 
     def __str__(self):
-        return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities: ' + \
+        return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
                 str(self.possibilities)
 
     def __repr__(self):
-        return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities: ' + \
+        return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
                 str(self.possibilities)
 
 class TBWrapper:
