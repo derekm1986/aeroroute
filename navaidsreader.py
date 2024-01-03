@@ -47,12 +47,9 @@ def navaid_dict_maker():
         if navaidlongisnegative is True:
             navaidlongwithdecimal = "-" + navaidlongwithdecimal
 
-        # new way
         navaidcoordinates = Coordinates(navaidlatwithdecimal, navaidlongwithdecimal)
 
         navaidobj = PointInSpace(navaidid, navaidcoordinates, 'NAVAID', navaidname)
-
-        #navaidobj = PointInSpace(navaidid, (navaidlatwithdecimal, navaidlongwithdecimal), 'NAVAID', navaidname)
 
         if navaidid in navaid_dict:
             if type(navaid_dict[navaidid]) is AmbiguousPoint:

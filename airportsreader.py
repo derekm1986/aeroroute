@@ -50,12 +50,9 @@ def airport_dict_maker():
             if airportlongisnegative is True:
                 airportlongwithdecimal = "-" + airportlongwithdecimal
 
-            # new way
             airportcoordinates = Coordinates(airportlatwithdecimal, airportlongwithdecimal)
 
             airportobj = Airport(airportid, airportcoordinates, airportname)
-
-            #airportobj = Airport(airportid, (airportlatwithdecimal, airportlongwithdecimal), airportname)
 
             airport_dict[airportid] = airportobj
 
