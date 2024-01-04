@@ -34,31 +34,29 @@ class PointInSpace:
         self._available_airways.append(airway)
 
     def __str__(self):
-        return_string = self._identifier
-        return_string += ' *** '
-        return_string += self._type_element
+        return_string = f"{self._identifier} *** {self._type_element}"
+
         if self._element_name is not None:
-            return_string += ' * '
-            return_string += self._element_name
-        return_string += ' * coordinates: '
-        return_string += str(self._coordinates)
-        if len(self._available_airways) > 0:
-            return_string += ' * available airways: '
-            return_string += str(self._available_airways)
+            return_string += f" * {self._element_name}"
+
+        return_string += f" * coordinates: {self._coordinates}"
+
+        if self._available_airways:
+            return_string += f" * available airways: {self._available_airways}"
+
         return return_string
 
     def __repr__(self):
-        return_string = self._identifier
-        return_string += ' *** '
-        return_string += self._type_element
+        return_string = f"{self._identifier} *** {self._type_element}"
+
         if self._element_name is not None:
-            return_string += ' * '
-            return_string += self._element_name
-        return_string += ' * coordinates: '
-        return_string += str(self._coordinates)
-        if len(self._available_airways) > 0:
-            return_string += ' * available airways: '
-            return_string += str(self._available_airways)
+            return_string += f" * {self._element_name}"
+
+        return_string += f" * coordinates: {self._coordinates}"
+
+        if self._available_airways:
+            return_string += f" * available airways: {self._available_airways}"
+
         return return_string
 
 
@@ -86,10 +84,10 @@ class Airport:
             pass
 
     def __str__(self):
-        return self.identifier + ' *** airport * ' + self.element_name + ' * coordinates: ' + str(self.coordinates)
+        return f"{self.identifier} *** airport * {self.element_name} * coordinates: {self.coordinates}"
 
     def __repr__(self):
-        return self.identifier + ' *** airport * ' + self.element_name + ' * coordinates: ' + str(self.coordinates)
+        return f"{self.identifier} *** airport * {self.element_name} * coordinates: {self.coordinates}"
 
 
 class AmbiguousPoint:
@@ -245,12 +243,10 @@ class Airway:
         return self.waypoints[element]
 
     def __str__(self):
-        return self.airway_name + ' airway with ' + str(len(self.waypoints)) + ' points:\n' + \
-                str(self.waypoints)
+        return f"{self.airway_name} airway with {len(self.waypoints)} points:\n{self.waypoints}"
 
     def __repr__(self):
-        return self.airway_name + ' airway with ' + str(len(self.waypoints)) + ' points:\n' + \
-                str(self.waypoints)
+        return f"{self.airway_name} airway with {len(self.waypoints)} points:\n{self.waypoints}"
 
 
 class AmbiguousAirway:
