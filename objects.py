@@ -63,31 +63,31 @@ class PointInSpace:
 class Airport:
 
     def __init__(self, identifier, coordinates, element_name=None):
-        self.identifier = identifier
-        self.coordinates = coordinates
-        self.type_element = 'airport'
-        self.element_name = element_name
+        self._identifier = identifier
+        self._coordinates = coordinates
+        self._type_element = 'airport'
+        self._element_name = element_name
 
     def get_identifier(self):
-        return self.identifier
+        return self._identifier
 
     def get_coordinates(self):
-        return self.coordinates
+        return self._coordinates
 
     def get_type_element(self):
-        return self.type_element
+        return self._type_element
 
     def get_element_name(self) -> str | None:
-        if self.element_name is not None:
-            return self.element_name
+        if self._element_name is not None:
+            return self._element_name
         else:
             pass
 
     def __str__(self):
-        return f"{self.identifier} *** airport * {self.element_name} * coordinates: {self.coordinates}"
+        return f"{self._identifier} *** airport * {self._element_name} * coordinates: {self._coordinates}"
 
     def __repr__(self):
-        return f"{self.identifier} *** airport * {self.element_name} * coordinates: {self.coordinates}"
+        return f"{self._identifier} *** airport * {self._element_name} * coordinates: {self._coordinates}"
 
 
 class AmbiguousPoint:
