@@ -34,20 +34,32 @@ class PointInSpace:
         self._available_airways.append(airway)
 
     def __str__(self):
+        return_string = self._identifier
+        return_string += ' *** '
+        return_string += self._type_element
         if self._element_name is not None:
-            return (self._identifier + ' point-in-space ' + self._type_element + ' ' + self._element_name +
-                    ' coordinates: ' + str(self._coordinates) + ' available airways ' + str(self._available_airways))
-        else:
-            return (self._identifier + ' point-in-space ' + self._type_element + ' coordinates: ' +
-                    str(self._coordinates) + ' available airways ' + str(self._available_airways))
+            return_string += ' * '
+            return_string += self._element_name
+        return_string += ' * coordinates: '
+        return_string += str(self._coordinates)
+        if len(self._available_airways) > 0:
+            return_string += ' * available airways: '
+            return_string += str(self._available_airways)
+        return return_string
 
     def __repr__(self):
+        return_string = self._identifier
+        return_string += ' *** '
+        return_string += self._type_element
         if self._element_name is not None:
-            return (self._identifier + ' point-in-space ' + self._type_element + ' ' + self._element_name +
-                    ' coordinates: ' + str(self._coordinates) + ' available airways ' + str(self._available_airways))
-        else:
-            return (self._identifier + ' point-in-space ' + self._type_element + ' coordinates: ' +
-                    str(self._coordinates) + ' available airways ' + str(self._available_airways))
+            return_string += ' * '
+            return_string += self._element_name
+        return_string += ' * coordinates: '
+        return_string += str(self._coordinates)
+        if len(self._available_airways) > 0:
+            return_string += ' * available airways: '
+            return_string += str(self._available_airways)
+        return return_string
 
 
 class Airport:
@@ -74,10 +86,10 @@ class Airport:
             pass
 
     def __str__(self):
-        return self.identifier + ' airport ' + self.element_name + ' coordinates: ' + str(self.coordinates)
+        return self.identifier + ' *** airport * ' + self.element_name + ' * coordinates: ' + str(self.coordinates)
 
     def __repr__(self):
-        return self.identifier + ' airport ' + self.element_name + ' coordinates: ' + str(self.coordinates)
+        return self.identifier + ' *** airport * ' + self.element_name + ' * coordinates: ' + str(self.coordinates)
 
 
 class AmbiguousPoint:
@@ -110,12 +122,13 @@ class AmbiguousPoint:
         return self.possibilities
 
     def __str__(self):
-        return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
+        return self.identifier + ' ambiguous point with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
                 str(self.possibilities)
 
     def __repr__(self):
-        return self.identifier + ' ambiguous element with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
+        return self.identifier + ' ambiguous point with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
                 str(self.possibilities)
+
 
 class TBWrapper:
 
@@ -231,6 +244,14 @@ class Airway:
     def get_element(self, element):
         return self.waypoints[element]
 
+    def __str__(self):
+        return self.airway_name + ' airway with ' + str(len(self.waypoints)) + ' points:\n' + \
+                str(self.waypoints)
+
+    def __repr__(self):
+        return self.airway_name + ' airway with ' + str(len(self.waypoints)) + ' points:\n' + \
+                str(self.waypoints)
+
 
 class AmbiguousAirway:
     def __init__(self, identifier: str, initial_possibility):
@@ -261,7 +282,12 @@ class AmbiguousAirway:
         return self.possibilities
 
     def __str__(self):
-        return self.identifier + ' ambiguous airway with ' + str(len(self.possibilities)) + ' possibilities'
+        return self.identifier + ' ambiguous airway with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
+                str(self.possibilities)
+
+    def __repr__(self):
+        return self.identifier + ' ambiguous airway with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
+                str(self.possibilities)
 
 
 class Coordinates:
