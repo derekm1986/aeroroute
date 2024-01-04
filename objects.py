@@ -302,7 +302,7 @@ class Coordinates:
         return self._longitude
 
     def __eq__(self, other):
-        return self.latitude == other.latitude and self.longitude == other.longitude
+        return self._latitude == other.latitude and self._longitude == other.longitude
 
     def __repr__(self):
         return self._latitude + ", " + self._longitude
