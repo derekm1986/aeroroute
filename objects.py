@@ -223,30 +223,30 @@ class Route:
 class Airway:
 
     def __init__(self, airway_name: str):
-        self.airway_name = airway_name
-        self.uniqueid = 'testuniqueid'
-        self.waypoints = []
+        self._airway_name = airway_name
+        self._uniqueid = 'testuniqueid'
+        self._waypoints = []
 
     def add_element(self, element) -> None:
-        self.waypoints.append(element)
+        self._waypoints.append(element)
 
     def set_waypoints(self, waypoints) -> None:
-        self.waypoints = waypoints
+        self._waypoints = waypoints
 
     def get_airway_name(self) -> str:
-        return self.airway_name
+        return self._airway_name
 
     def get_waypoints(self):
-        return self.waypoints
+        return self._waypoints
 
     def get_element(self, element):
-        return self.waypoints[element]
+        return self._waypoints[element]
 
     def __str__(self):
-        return f"{self.airway_name} airway with {len(self.waypoints)} points:\n{self.waypoints}"
+        return f"{self._airway_name} airway with {len(self._waypoints)} points:\n{self._waypoints}"
 
     def __repr__(self):
-        return f"{self.airway_name} airway with {len(self.waypoints)} points:\n{self.waypoints}"
+        return f"{self._airway_name} airway with {len(self._waypoints)} points:\n{self._waypoints}"
 
 
 class AmbiguousAirway:
