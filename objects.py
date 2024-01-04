@@ -306,3 +306,9 @@ class Coordinates:
 
     def __repr__(self):
         return self._latitude + ", " + self._longitude
+
+
+class AirwaySegment:
+    # this is to store a segment of an airway while it's in a route
+    pass
+
