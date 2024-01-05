@@ -314,5 +314,17 @@ class Coordinates:
 
 class AirwaySegment:
     # this is to store a segment of an airway while it's in a route
-    pass
+    def __init__(self, identifier, segment):
+        self._identifier = identifier
+        self._segment = segment
+
+    @property
+    def identifier(self):
+        return self._identifier
+
+    @property
+    def segment(self):
+        return self._segment
+
+    
 
