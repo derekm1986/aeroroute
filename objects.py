@@ -242,7 +242,7 @@ class Airway:
     def get_element(self, element):
         return self._waypoints[element]
 
-    def get_segment(self, beginning, end)
+    def get_segment(self, beginning, end):
         # to get a segment of the airway so it can be used in a Route, not finished yet!
         return None
 
