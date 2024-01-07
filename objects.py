@@ -210,8 +210,12 @@ class Route:
         # must be AmbiguousPoint at position
         self.elements[position] = self.elements[position].get_possibility(possibility_number)
 
-    def get_waypoints(self):
+    def get_elements(self):
         return self.elements
+
+    def __iter__(self):
+        for element in self.elements:
+            yield element
 
     def __str__(self):  # this doesn't work
         return str(self.elements)

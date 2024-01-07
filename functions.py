@@ -6,7 +6,7 @@ def pair_maker(input_waypoints):
 
     # below is so that the function will accept a list of elements as well
     if type(input_waypoints) is objects.Route:
-        route = input_waypoints.get_waypoints()
+        route = input_waypoints.get_elements()
     else:
         route = input_waypoints
 
@@ -64,7 +64,7 @@ def multiple_finder(input_waypoints: objects.Route):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
-    found_multiples = [i for i, x in enumerate(input_waypoints.get_waypoints()) if type(x) is objects.AmbiguousPoint]
+    found_multiples = [i for i, x in enumerate(input_waypoints.get_elements()) if type(x) is objects.AmbiguousPoint]
 
     multiples_matrix = []
 
@@ -161,7 +161,7 @@ def vincenty_indirect(pair, heading=False):
         return distanceinNM
 
 
-def deambiguator_brute(inputwaypoints, multiplesmatrix):
+def deambiguator_brute(input_route, multiplesmatrix):
 
     for multipleset in multiplesmatrix:
 
@@ -172,7 +172,7 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
         possibilitieslist = []
         multiplesetelements = []
         
-        if len(multipleset) == inputwaypoints.how_many_elements():
+        if len(multipleset) == input_route.how_many_elements():
             allareambiguous = True
             firstisambiguous = True
             lastisambiguous = True
@@ -180,21 +180,21 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
         elif 0 in multipleset:
             firstisambiguous = True
 
-        elif inputwaypoints.how_many_elements() - 1 in multipleset:
+        elif input_route.how_many_elements() - 1 in multipleset:
             lastisambiguous = True
 
         for listposition in multipleset:
-            multiplesetelements.append(objects.TBWrapper(inputwaypoints.get_element(listposition),
+            multiplesetelements.append(objects.TBWrapper(input_route.get_element(listposition),
                                                          listposition, True))
                 
         if allareambiguous is False and firstisambiguous is False:
             # add previous waypoint to beginning of multiplesetelements
-            multiplesetelements.insert(0, objects.TBWrapper(inputwaypoints.get_element(multipleset[0] - 1),
+            multiplesetelements.insert(0, objects.TBWrapper(input_route.get_element(multipleset[0] - 1),
                                                             multipleset[0] - 1))
             
         if allareambiguous is False and lastisambiguous is False:
             # add following waypoint to end of multiplesetelements 
-            multiplesetelements.append(objects.TBWrapper(inputwaypoints.get_element(multipleset[-1] + 1),
+            multiplesetelements.append(objects.TBWrapper(input_route.get_element(multipleset[-1] + 1),
                                                          multipleset[-1] + 1))
             
         elementposition = 0
@@ -247,12 +247,20 @@ def deambiguator_brute(inputwaypoints, multiplesmatrix):
 
         for point in shortestcompetitor[1]:  # deambiguate using shortestcompetitor
             if point.get_was_ambiguous() is True:
-                inputwaypoints.deambiguate(point.get_original_position(), point.get_ambiguous_id())
+                input_route.deambiguate(point.get_original_position(), point.get_ambiguous_id())
 
-    return inputwaypoints
+    return input_route
 
 
-def deambiguator_airway(input_waypoints):
+def deambiguator_adjacent_airway(input_route):
     # use adjacent airways to solve ambiguous elements
 
-    return input_waypoints
+    for item in input_route.get_elements():
+        if isinstance(item, objects.AmbiguousPoint):
+            print(item, " is ambiguous")
+            if input_route.get_elements().index(item) == 0:  # starts with AmbiguousPoint
+                if isinstance(input_route.get_elements[1], objects.Airway) or \
+                              isinstance(input_route.getelements[1], objects.AmbiguousAirway):
+                    pass  # put for loop here to loop through points inside the AmbiguousPoint
+
+    return input_route

@@ -83,13 +83,17 @@ def main() -> None:
 
             # if there is an airway in input_waypoints_obj, call a function that incorporates the airway into the route
 
-        if input_waypoints_obj.get_contains_ambiguous_point():  # do we contain an AmbiguousElement?
+        if input_waypoints_obj.get_contains_ambiguous_point():  # try solving with adjacent airways
+
+            input_waypoints_obj = functions.deambiguator_adjacent_airway(input_waypoints_obj)
+
+        if input_waypoints_obj.get_contains_ambiguous_point():  # adjacent airways didn't find everything, brute is needed
 
             multiples_matrix = functions.multiple_finder(input_waypoints_obj)
 
             input_waypoints_obj = functions.deambiguator_brute(input_waypoints_obj, multiples_matrix)
 
-        for item in input_waypoints_obj.get_waypoints():
+        for item in input_waypoints_obj.get_elements():
             print(item)
 
         sum_distance = functions.distance_summer(input_waypoints_obj)
