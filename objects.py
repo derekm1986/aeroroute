@@ -330,5 +330,9 @@ class AirwaySegment:
     def segment(self):
         return self._segment
 
+class AirwayInRoute:
+    #this is to store the part of an airway that is contained in a route (may be 1 to n segments)
+    pass
+
     
 
