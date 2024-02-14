@@ -129,7 +129,7 @@ class AmbiguousPoint:
 
 
 class TBWrapper:
-
+    # Tie Breaker wrapper, needed for deambiguatorbrute function
     def __init__(self, waypoint, original_position, was_ambiguous=False, ambiguous_id=None):
         self.waypoint = waypoint
         self.original_position = original_position
