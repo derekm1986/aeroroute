@@ -228,7 +228,6 @@ class Airway:
 
     def __init__(self, airway_name: str):
         self._airway_name = airway_name
-        self._uniqueid = 'testuniqueid'
         self._waypoints = []
 
     def add_element(self, element) -> None:
