@@ -82,7 +82,9 @@ def main() -> None:
             # can any ambiguous elements be solved by matching with an adjacent airway?
 
             # go through each airway to detect an ambiguous airway and solve it
-        
+            while inputwaypoints_obj.get_contains_airway():
+                # this could be infinite if no changes are made
+                print("going through each airway")
             # call a function that incorporates an airwayinroute into the route
 
         if input_waypoints_obj.get_contains_ambiguous_point():  # try solving with adjacent airways
