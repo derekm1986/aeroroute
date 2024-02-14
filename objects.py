@@ -316,23 +316,16 @@ class Coordinates:
         return self._latitude + ", " + self._longitude
 
 
-class AirwaySegment:
+class AirwayInRoute:
     # this is to store a segment of an airway while it's in a route
-    def __init__(self, identifier, segment):
+    def __init__(self, identifier, elements=[]):
         self._identifier = identifier
-        self._segment = segment
+        self._elements = elements
 
     @property
     def identifier(self):
         return self._identifier
 
     @property
-    def segment(self):
-        return self._segment
-
-class AirwayInRoute:
-    #this is to store the part of an airway that is contained in a route (may be 1 to n segments)
-    pass
-
-    
-
+    def elements(self):
+        return self._elements
