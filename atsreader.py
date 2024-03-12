@@ -30,6 +30,9 @@ def airway_lat_long_maker(input_string) -> str:
         # put the negative sign back if needed
         input_with_decimal = '-' + input_with_decimal
 
+    if input_with_decimal == '.':
+        input_with_decimal = '0.0'
+
     output = input_with_decimal  # for testing only
     # print(output)
     return output
@@ -85,6 +88,19 @@ def airway_dict_maker():
 
                 firstwaypoint = [firstid, firstlat, firstlong]
                 secondwaypoint = [secondid, secondlat, secondlong]
+
+                #for debug, has to do with crossing equator/prime meridian
+                if firstlat == '.':
+                    print("bogus value for waypoint", firstwaypoint)
+
+                if firstlong == '.':
+                    print("bogus value for waypoint", firstwaypoint)
+
+                if secondlat == '.':
+                    print("bogus value for waypoint", secondwaypoint)
+
+                if secondlong == '.':
+                    print("bogus value for waypoint", secondwaypoint)
 
                 # this is asking if an object is already in the list.  comparing an object to an object is bad news.
 

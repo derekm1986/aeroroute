@@ -329,11 +329,15 @@ class Coordinates:
     # store coordinates here - validation checker may have to exist outside of this class - how could an instance return itself as none?
     def __init__(self, latitude: str, longitude: str):
         #force latitude between these two numbers
-        if latitude < -90.0 or latitude > 90.0:
-            raise TypeError
+        try:
+            test = float(latitude)
+        except:
+            print("bogus value", latitude)
+        #if float(latitude) < -90.0 or float(latitude) > 90.0:
+        #    raise TypeError
         #force longitude between these two numbers
-        if longitude < -180.0 or longitude > 180.0:
-            raise TypeError
+        #if float(longitude) < -180.0 or float(longitude) > 180.0:
+        #    raise TypeError
         self._latitude = latitude
         self._longitude = longitude
 
