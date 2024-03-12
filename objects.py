@@ -327,8 +327,9 @@ class AmbiguousAirway:
 
 class Coordinates:
     # store coordinates here - validation checker may have to exist outside of this class - how could an instance return itself as none?
-    # would assertions be most appropriate here?
     def __init__(self, latitude: str, longitude: str):
+        #assert latitude between these two numbers
+        #assert longitude between these two numbers
         self._latitude = latitude
         self._longitude = longitude
 
