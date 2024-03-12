@@ -87,11 +87,23 @@ class Airport:
     def get_identifier(self):
         return self._identifier
 
+    #@property
+    #def identifier(self):
+    #    return self._identifier
+    
     def get_coordinates(self):
         return self._coordinates
 
+    #@property
+    #def coordinates(self):
+    #    return self._coordinates
+
     def get_type_element(self):
         return self._type_element
+
+    #@property
+    #def type_element(self):
+    #    return self._type_element
 
     def get_element_name(self) -> str | None:
         if self._element_name is not None:
@@ -99,6 +111,10 @@ class Airport:
         else:
             pass
 
+    #property
+    #def element_name(self):
+    #    return self._element_name
+    
     def __str__(self):
         return f"{self._identifier} *** airport * {self._element_name} * coordinates: {self._coordinates}"
 
