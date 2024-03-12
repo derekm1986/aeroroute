@@ -18,8 +18,16 @@ class PointInSpace:
     def get_coordinates(self):
         return self._coordinates
 
+    #@property
+    #def coordinates(self):
+    #    return self._coordinates
+    
     def get_type_element(self):
         return self._type_element
+
+    #@property
+    #def type_element(self):
+    #    return self._type_element
 
     def get_element_name(self):
         if self._element_name is not None:
@@ -27,9 +35,17 @@ class PointInSpace:
         else:
             pass
 
+    #@property
+    #def element_name(self):
+    #    return self._element_name
+    
     def get_available_airways(self):
         return self._available_airways
 
+    #@property
+    #def available_airways(self):
+    #    return self._available_airways
+    
     def add_available_airway(self, airway) -> None:
         self._available_airways.append(airway)
 
