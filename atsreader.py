@@ -19,7 +19,11 @@ def airway_lat_long_maker(input_string) -> str:
     # remove the negative, if necessary
     if input_was_negative:
         input_string = input_string[1:]
-
+    
+    ###########
+    #if 0 at positions -7? through -9?, then remove the 0??????
+    ###########
+    
     # remove leading zeros
     input_string = input_string.lstrip('0')
 
