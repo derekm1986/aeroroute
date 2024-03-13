@@ -23,7 +23,6 @@ def airway_lat_long_maker(input_string) -> str:
     # remove leading zeros
     input_string = input_string.lstrip('0')
 
-    # last two digits are decimal
     input_with_decimal = input_string[:-6] + '.' + input_string[-6:]  # 6 decimal places
 
     if input_was_negative:
