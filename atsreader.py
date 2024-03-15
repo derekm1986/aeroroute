@@ -1,8 +1,6 @@
 # This file parses the vasFMC format ATS.txt file
 # ATS.txt file must be in AIRAC directory
 
-# need to finish
-
 from objects import Airway
 from objects import PointInSpace
 from objects import AmbiguousAirway
@@ -19,25 +17,25 @@ def airway_lat_long_maker(input_string) -> str:
     # remove the negative, if necessary
     if input_was_negative:
         input_string = input_string[1:]
-    
-    ###########
-    #if 0 at positions -7? through -9?, then remove the 0??????
-    ###########
-    
-    # remove leading zeros
-    input_string = input_string.lstrip('0')
 
-    input_with_decimal = input_string[:-6] + '.' + input_string[-6:]  # 6 decimal places
+    degrees = input_string[:-6]
+
+    # remove leading zeroes
+    degrees = degrees.lstrip('0')
+
+    if degrees == "":
+        degrees = "0"
+
+    decimal = input_string[-6:]  # 6 decimal places
+
+    input_with_decimal = degrees + '.' + decimal
 
     if input_was_negative:
         # put the negative sign back if needed
         input_with_decimal = '-' + input_with_decimal
 
-    if input_with_decimal == '.':
-        input_with_decimal = '0.0'
+    output = input_with_decimal
 
-    output = input_with_decimal  # for testing only
-    # print(output)
     return output
 
 
