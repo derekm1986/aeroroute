@@ -102,7 +102,8 @@ class AmbiguousPoint:
     def how_many_possibilities(self) -> int:
         return len(self.possibilities)
 
-    def get_identifier(self) -> str:
+    @property
+    def identifier(self) -> str:
         return self.identifier
     
     def get_possibility(self, possibility_number: int):
@@ -267,7 +268,8 @@ class AmbiguousAirway:
     def how_many_possibilities(self) -> int:
         return len(self.possibilities)
 
-    def get_identifier(self) -> str:
+    @property
+    def identifier(self) -> str:
         return self.identifier
 
     def get_possibility(self, possibility_number: int):
