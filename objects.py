@@ -83,88 +83,12 @@ class PointInSpace(Location):
         return return_string
 
 
-# class PointInSpace:
-
-#     def __init__(self, identifier, coordinates, type_element, element_name=None):
-#         self._identifier = identifier
-#         self._coordinates = coordinates
-#         self._type_element = type_element
-#         self._element_name = element_name
-#         self._available_airways = []
-#         self._on_airway = None
-
-#     def get_identifier(self):
-#         return self._identifier
-
-#     #@property
-#     #def identifier(self):
-#     #    return self._identifier
-
-#     def get_coordinates(self):
-#         return self._coordinates
-
-#     #@property
-#     #def coordinates(self):
-#     #    return self._coordinates
-    
-#     def get_type_element(self):
-#         return self._type_element
-
-#     #@property
-#     #def type_element(self):
-#     #    return self._type_element
-
-#     def get_element_name(self):
-#         if self._element_name is not None:
-#             return self._element_name
-#         else:
-#             pass
-
-#     #@property
-#     #def element_name(self):
-#     #    return self._element_name
-    
-#     def get_available_airways(self):
-#         return self._available_airways
-
-#     #@property
-#     #def available_airways(self):
-#     #    return self._available_airways
-    
-#     def add_available_airway(self, airway) -> None:
-#         self._available_airways.append(airway)
-
-#     def __str__(self):
-#         return_string = f"{self._identifier} *** {self._type_element}"
-
-#         if self._element_name is not None:
-#             return_string += f" * {self._element_name}"
-
-#         return_string += f" * coordinates: {self._coordinates}"
-
-#         if self._available_airways:
-#             return_string += f" * available airways: {self._available_airways}"
-
-#         return return_string
-
-#     def __repr__(self):
-#         return_string = f"{self._identifier} *** {self._type_element}"
-
-#         if self._element_name is not None:
-#             return_string += f" * {self._element_name}"
-
-#         return_string += f" * coordinates: {self._coordinates}"
-
-#         if self._available_airways:
-#             return_string += f" * available airways: {self._available_airways}"
-
-#         return return_string
-
 class Airport(Location):
 
     def __init__(self, identifier, coordinates, element_name=None):
         super().__init__(identifier, coordinates, 'airport')
         self._element_name = element_name
+
 
     def get_element_name(self) -> str | None:
         if self._element_name is not None:
@@ -181,51 +105,6 @@ class Airport(Location):
 
     def __repr__(self):
         return f"{self._identifier} *** airport * {self._element_name} * coordinates: {self._coordinates}"
-
-# class Airport:
-
-#     def __init__(self, identifier, coordinates, element_name=None):
-#         self._identifier = identifier
-#         self._coordinates = coordinates
-#         self._type_element = 'airport'
-#         self._element_name = element_name
-
-#     def get_identifier(self):
-#         return self._identifier
-
-#     #@property
-#     #def identifier(self):
-#     #    return self._identifier
-    
-#     def get_coordinates(self):
-#         return self._coordinates
-
-#     #@property
-#     #def coordinates(self):
-#     #    return self._coordinates
-
-#     def get_type_element(self):
-#         return self._type_element
-
-#     #@property
-#     #def type_element(self):
-#     #    return self._type_element
-
-#     def get_element_name(self) -> str | None:
-#         if self._element_name is not None:
-#             return self._element_name
-#         else:
-#             pass
-
-#     #property
-#     #def element_name(self):
-#     #    return self._element_name
-    
-#     def __str__(self):
-#         return f"{self._identifier} *** airport * {self._element_name} * coordinates: {self._coordinates}"
-
-#     def __repr__(self):
-#         return f"{self._identifier} *** airport * {self._element_name} * coordinates: {self._coordinates}"
 
 
 class AmbiguousPoint:
