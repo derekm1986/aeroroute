@@ -6,12 +6,9 @@ class Location:
         self._coordinates = coordinates
         self._type_element = type_element
 
-    def get_identifier(self):
+    @property
+    def identifier(self):
         return self._identifier
-
-    #@property
-    #def identifier(self):
-    #    return self._identifier
 
     @property
     def coordinates(self):
