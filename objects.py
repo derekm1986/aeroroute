@@ -85,41 +85,41 @@ class Airport(Location):
 class AmbiguousPoint:
 
     def __init__(self, identifier, initial_possibility):
-        self.identifier = identifier
-        self.possibilities = [initial_possibility]
+        self._identifier = identifier
+        self._possibilities = [initial_possibility]
 
     def __iter__(self):
-        for possibility in self.possibilities:
+        for possibility in self._possibilities:
             yield possibility
 
     def add_possibility(self, possibility) -> None:
         if type(possibility) is list:
-            self.possibilities.extend(possibility)
+            self._possibilities.extend(possibility)
         else:
-            self.possibilities.append(possibility)
+            self._possibilities.append(possibility)
         # should this be .extend instead of append in case I get passed a list?
         
     @property
     def num_possibilities(self) -> int:
-        return len(self.possibilities)
+        return len(self._possibilities)
 
     @property
     def identifier(self) -> str:
-        return self.identifier
+        return self._identifier
     
     def get_possibility(self, possibility_number: int):
-        return self.possibilities[possibility_number]
+        return self._possibilities[possibility_number]
 
     def get_possibilities(self):
-        return self.possibilities
+        return self._possibilities
 
     def __str__(self):
-        return self.identifier + ' ambiguous point with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
-                str(self.possibilities)
+        return self._identifier + ' ambiguous point with ' + str(len(self._possibilities)) + ' possibilities:\n' + \
+                str(self._possibilities)
 
     def __repr__(self):
-        return self.identifier + ' ambiguous point with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
-                str(self.possibilities)
+        return self._identifier + ' ambiguous point with ' + str(len(self._possibilities)) + ' possibilities:\n' + \
+                str(self._possibilities)
 
 
 class TBWrapper:
@@ -252,41 +252,41 @@ class Airway:
 
 class AmbiguousAirway:
     def __init__(self, identifier: str, initial_possibility):
-        self.identifier = identifier
-        self.possibilities = [initial_possibility]
+        self._identifier = identifier
+        self._possibilities = [initial_possibility]
 
     def __iter__(self):
-        for possibility in self.possibilities:
+        for possibility in self._possibilities:
             yield possibility
 
     def add_possibility(self, possibility) -> None:
         if type(possibility) is list:
-            self.possibilities.extend(possibility)
+            self._possibilities.extend(possibility)
         else:
-            self.possibilities.append(possibility)
+            self._possibilities.append(possibility)
         # should this be .extend instead of append in case I get passed a list?
 
     @property
     def num_possibilities(self) -> int:
-        return len(self.possibilities)
+        return len(self._possibilities)
 
     @property
     def identifier(self) -> str:
-        return self.identifier
+        return self._identifier
 
     def get_possibility(self, possibility_number: int):
-        return self.possibilities[possibility_number]
+        return self._possibilities[possibility_number]
 
     def get_possibilities(self):
-        return self.possibilities
+        return self._possibilities
 
     def __str__(self):
-        return self.identifier + ' ambiguous airway with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
-                str(self.possibilities)
+        return self.identifier + ' ambiguous airway with ' + str(len(self._possibilities)) + ' possibilities:\n' + \
+                str(self._possibilities)
 
     def __repr__(self):
-        return self.identifier + ' ambiguous airway with ' + str(len(self.possibilities)) + ' possibilities:\n' + \
-                str(self.possibilities)
+        return self.identifier + ' ambiguous airway with ' + str(len(self._possibilities)) + ' possibilities:\n' + \
+                str(self._possibilities)
 
 
 class Coordinates:
