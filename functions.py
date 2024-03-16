@@ -13,7 +13,7 @@ def pair_maker(input_waypoints):
     i = 0
 
     while i <= (len(route) - 2):  # make pairs of each waypoint and the waypoint after it
-        pair = [route[i].get_coordinates(), route[i + 1].get_coordinates()]
+        pair = [route[i].coordinates, route[i + 1].coordinates]
         i += 1
         yield pair
 

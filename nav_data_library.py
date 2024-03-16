@@ -79,13 +79,13 @@ class NavDataLibrary(object):
                             if isinstance(self.points_in_space_dict[waypoint.get_identifier()], objects.AmbiguousPoint):
                                 # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
                                 for point in self.points_in_space_dict[waypoint.get_identifier()].get_possibilities():
-                                    if point.get_coordinates() == waypoint.get_coordinates():
+                                    if point.coordinates == waypoint.coordinates:
                                         if airway.get_airway_name() not in point.get_available_airways():
                                             point.add_available_airway(airway.get_airway_name())
                             else:
                                 # trying to match with a single item
-                                if self.points_in_space_dict[waypoint.get_identifier()].get_coordinates() == \
-                                        waypoint.get_coordinates():
+                                if self.points_in_space_dict[waypoint.get_identifier()].coordinates == \
+                                        waypoint.coordinates:
                                     # need to check if it's there first!
                                     if airway.get_airway_name() not in \
                                             self.points_in_space_dict[waypoint.get_identifier()].get_available_airways():
@@ -97,13 +97,13 @@ class NavDataLibrary(object):
                         if isinstance(self.points_in_space_dict[waypoint.get_identifier()], objects.AmbiguousPoint):
                             # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
                             for point in self.points_in_space_dict[waypoint.get_identifier()].get_possibilities():
-                                if point.get_coordinates() == waypoint.get_coordinates():
+                                if point.coordinates == waypoint.coordinates:
                                     if airway_names.get_airway_name() not in point.get_available_airways():
                                         point.add_available_airway(airway_names.get_airway_name())
                         else:
                             # trying to match with a single item
-                            if self.points_in_space_dict[waypoint.get_identifier()].get_coordinates() == \
-                                    waypoint.get_coordinates():
+                            if self.points_in_space_dict[waypoint.get_identifier()].coordinates == \
+                                    waypoint.coordinates:
                                 # need to check if it's there first!
                                 if airway_names.get_airway_name() not in \
                                         self.points_in_space_dict[waypoint.get_identifier()].get_available_airways():

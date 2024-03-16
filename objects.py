@@ -13,12 +13,9 @@ class Location:
     #def identifier(self):
     #    return self._identifier
 
-    def get_coordinates(self):
+    @property
+    def coordinates(self):
         return self._coordinates
-
-    #@property
-    #def coordinates(self):
-    #    return self._coordinates
     
     def get_type_element(self):
         return self._type_element
@@ -169,8 +166,9 @@ class TBWrapper:
     def get_waypoint(self):
         return self.waypoint
 
-    def get_coordinates(self):
-        return self.waypoint.get_coordinates()
+    @property
+    def coordinates(self):
+        return self.waypoint.coordinates
 
     def __str__(self):
         return ('TBWrapper original position: ' + str(self.original_position) + ', ' + 'Wrapper ambiguous ID: ' +
