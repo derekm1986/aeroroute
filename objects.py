@@ -34,10 +34,6 @@ class PointInSpace(Location):
     @property
     def available_airways(self):
         return self._available_airways
-
-    #@property
-    #def available_airways(self):
-    #    return self._available_airways
     
     def add_available_airway(self, airway) -> None:
         self._available_airways.append(airway)
