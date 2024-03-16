@@ -27,17 +27,12 @@ class PointInSpace(Location):
         self._available_airways = []
         self._on_airway = None
 
-    def get_element_name(self):
-        if self._element_name is not None:
-            return self._element_name
-        else:
-            pass
-
-    #@property
-    #def element_name(self):
-    #    return self._element_name
+    @property
+    def element_name(self):
+        return self._element_name
     
-    def get_available_airways(self):
+    @property
+    def available_airways(self):
         return self._available_airways
 
     #@property
@@ -80,16 +75,9 @@ class Airport(Location):
         super().__init__(identifier, coordinates, 'airport')
         self._element_name = element_name
 
-
-    def get_element_name(self) -> str | None:
-        if self._element_name is not None:
-            return self._element_name
-        else:
-            pass
-
-    #property
-    #def element_name(self):
-    #    return self._element_name
+    @property
+    def element_name(self) -> str | None:
+        return self._element_name
     
     def __str__(self):
         return f"{self._identifier} *** airport * {self._element_name} * coordinates: {self._coordinates}"

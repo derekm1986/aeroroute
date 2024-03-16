@@ -80,7 +80,7 @@ class NavDataLibrary(object):
                                 # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
                                 for point in self.points_in_space_dict[waypoint.identifier].get_possibilities():
                                     if point.coordinates == waypoint.coordinates:
-                                        if airway.get_airway_name() not in point.get_available_airways():
+                                        if airway.get_airway_name() not in point.available_airways:
                                             point.add_available_airway(airway.get_airway_name())
                             else:
                                 # trying to match with a single item
@@ -88,7 +88,7 @@ class NavDataLibrary(object):
                                         waypoint.coordinates:
                                     # need to check if it's there first!
                                     if airway.get_airway_name() not in \
-                                            self.points_in_space_dict[waypoint.identifier].get_available_airways():
+                                            self.points_in_space_dict[waypoint.identifier].available_airways:
                                         self.points_in_space_dict[waypoint.identifier].add_available_airway(
                                             airway.get_airway_name())
             else:  # we have encountered an Airway by itself
@@ -98,7 +98,7 @@ class NavDataLibrary(object):
                             # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
                             for point in self.points_in_space_dict[waypoint.identifier].get_possibilities():
                                 if point.coordinates == waypoint.coordinates:
-                                    if airway_names.get_airway_name() not in point.get_available_airways():
+                                    if airway_names.get_airway_name() not in point.available_airways:
                                         point.add_available_airway(airway_names.get_airway_name())
                         else:
                             # trying to match with a single item
@@ -106,7 +106,7 @@ class NavDataLibrary(object):
                                     waypoint.coordinates:
                                 # need to check if it's there first!
                                 if airway_names.get_airway_name() not in \
-                                        self.points_in_space_dict[waypoint.identifier].get_available_airways():
+                                        self.points_in_space_dict[waypoint.identifier].available_airways:
                                     self.points_in_space_dict[waypoint.identifier].add_available_airway(
                                         airway_names.get_airway_name())
 
