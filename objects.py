@@ -14,12 +14,9 @@ class Location:
     def coordinates(self):
         return self._coordinates
     
-    def get_type_element(self):
+    @property
+    def type_element(self):
         return self._type_element
-
-    #@property
-    #def type_element(self):
-    #    return self._type_element
 
 
 class PointInSpace(Location):
