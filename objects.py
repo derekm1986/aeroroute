@@ -170,7 +170,6 @@ class TBWrapper:
         return self.waypoint
 
     def get_coordinates(self):
-        assert type(self.waypoint) is not AmbiguousPoint
         return self.waypoint.get_coordinates()
 
     def __str__(self):
