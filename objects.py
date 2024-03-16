@@ -99,7 +99,8 @@ class AmbiguousPoint:
             self.possibilities.append(possibility)
         # should this be .extend instead of append in case I get passed a list?
         
-    def how_many_possibilities(self) -> int:
+    @property
+    def num_possibilities(self) -> int:
         return len(self.possibilities)
 
     @property
@@ -265,7 +266,8 @@ class AmbiguousAirway:
             self.possibilities.append(possibility)
         # should this be .extend instead of append in case I get passed a list?
 
-    def how_many_possibilities(self) -> int:
+    @property
+    def num_possibilities(self) -> int:
         return len(self.possibilities)
 
     @property
