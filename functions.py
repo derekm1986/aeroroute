@@ -249,7 +249,7 @@ def deambiguator_brute(input_route, multiplesmatrix):
 
         for point in shortestcompetitor[1]:  # deambiguate using shortestcompetitor
             if point.was_ambiguous is True:
-                input_route.deambiguate(point.original_position, point.get_ambiguous_id())
+                input_route.deambiguate(point.original_position, point.ambiguous_id)
 
     return input_route
 

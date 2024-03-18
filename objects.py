@@ -143,7 +143,8 @@ class TBWrapper:
     def original_position(self) -> int:
         return self._original_position
 
-    def get_ambiguous_id(self) -> int:
+    @property
+    def ambiguous_id(self) -> int:
         return self._ambiguous_id
 
     @property
