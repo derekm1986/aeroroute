@@ -1,5 +1,6 @@
 import math
 import objects
+import logging
 
 
 def pair_maker(input_waypoints):
@@ -134,6 +135,7 @@ def vincenty_indirect(pair, heading=False):
         iterLimit -= 1
 
         if iterLimit == 0:
+            logging.warning("Vincenty formula failed to converge")
             print('formula failed to converge')
             return float("NaN")
 
@@ -231,7 +233,7 @@ def deambiguator_brute(input_route, multiplesmatrix):
 
             elementposition += 1
 
-        print('There are', len(possibilitieslist), 'possibilities to compute')
+        logging.info("There are " + str(len(possibilitieslist)) + " possibilities to compute.")
 
         leaderboard = []
 
@@ -252,15 +254,14 @@ def deambiguator_brute(input_route, multiplesmatrix):
     return input_route
 
 
-def deambiguator_adjacent_airway(input_route):
+def deambiguate_points_using_airways(input_route):
     # use adjacent airways to solve ambiguous elements
-
     for item in input_route.get_elements():
         if isinstance(item, objects.AmbiguousPoint):
             print(item, " is ambiguous")
             if input_route.get_elements().index(item) == 0:  # starts with AmbiguousPoint
-                if isinstance(input_route.get_elements[1], objects.Airway) or \
-                              isinstance(input_route.getelements[1], objects.AmbiguousAirway):
+                if isinstance(input_route.get_elements()[1], objects.Airway) or \
+                              isinstance(input_route.get_elements()[1], objects.AmbiguousAirway):
                     pass  # put for loop here to loop through points inside the AmbiguousPoint
 
     return input_route
