@@ -46,7 +46,7 @@ class NavDataLibrary(object):
                     # points_in_space_dict already has AmbiguousPoint
                     if type(val) is objects.AmbiguousPoint:
                         # must add AmbiguousPoint to AmbiguousPoint
-                        points_in_space_dict[key].add_possibility(self.waypoint_dict[key].get_possibilities())
+                        points_in_space_dict[key].add_possibility(self.waypoint_dict[key].possibilities)
                     else:
                         # must add PointInSpace to AmbiguousPoint
                         points_in_space_dict[key].add_possibility(self.waypoint_dict[key])
@@ -72,13 +72,13 @@ class NavDataLibrary(object):
             # print(airway_names)
             # print(type(airway_names))
             if isinstance(airway_names, objects.AmbiguousAirway):  # we have encountered an AmbiguousAirway
-                for airway in airway_names.get_possibilities():
+                for airway in airway_names.possibilities:
                     # print(airway)
                     for waypoint in airway.waypoints:
                         if waypoint.identifier in self.points_in_space_dict:
                             if isinstance(self.points_in_space_dict[waypoint.identifier], objects.AmbiguousPoint):
                                 # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
-                                for point in self.points_in_space_dict[waypoint.identifier].get_possibilities():
+                                for point in self.points_in_space_dict[waypoint.identifier].possibilities:
                                     if point.coordinates == waypoint.coordinates:
                                         if airway.identifier not in point.available_airways:
                                             point.add_available_airway(airway.identifier)
@@ -96,7 +96,7 @@ class NavDataLibrary(object):
                     if waypoint.identifier in self.points_in_space_dict:
                         if isinstance(self.points_in_space_dict[waypoint.identifier], objects.AmbiguousPoint):
                             # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
-                            for point in self.points_in_space_dict[waypoint.identifier].get_possibilities():
+                            for point in self.points_in_space_dict[waypoint.identifier].possibilities:
                                 if point.coordinates == waypoint.coordinates:
                                     if airway_names.identifier not in point.available_airways:
                                         point.add_available_airway(airway_names.identifier)

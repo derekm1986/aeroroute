@@ -207,8 +207,8 @@ def deambiguator_brute(input_route, multiplesmatrix):
                     possibilitieslist.append([element])
                 else:  # the element is ambiguous
                     ambiguousid = 0
-                    for possibility in element.waypoint.get_possibilities():
-                        possibilitieslist.append([objects.TBWrapper(possibility, element.get_original_position(), True,
+                    for possibility in element.waypoint.possibilities:
+                        possibilitieslist.append([objects.TBWrapper(possibility, element.original_position, True,
                                                                     ambiguousid)])
                         ambiguousid += 1
 
@@ -223,9 +223,9 @@ def deambiguator_brute(input_route, multiplesmatrix):
 
                     for possibilityfromlist in possibilitieslist:
                         ambiguousid = 0
-                        for possibilityfromelement in element.waypoint.get_possibilities():
+                        for possibilityfromelement in element.waypoint.possibilities:
                             returnedlist.append(possibilityfromlist + [objects.TBWrapper(possibilityfromelement,
-                                                                                         element.get_original_position()
+                                                                                         element.original_position
                                                                                          , True, ambiguousid)])
                             ambiguousid += 1
 
@@ -248,8 +248,8 @@ def deambiguator_brute(input_route, multiplesmatrix):
                 shortestcompetitor = competitor
 
         for point in shortestcompetitor[1]:  # deambiguate using shortestcompetitor
-            if point.get_was_ambiguous() is True:
-                input_route.deambiguate(point.get_original_position(), point.get_ambiguous_id())
+            if point.was_ambiguous is True:
+                input_route.deambiguate(point.original_position, point.get_ambiguous_id())
 
     return input_route
 

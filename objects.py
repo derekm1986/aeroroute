@@ -110,7 +110,8 @@ class AmbiguousPoint:
     def get_possibility(self, possibility_number: int):
         return self._possibilities[possibility_number]
 
-    def get_possibilities(self):
+    @property
+    def possibilities(self):
         return self._possibilities
 
     def __str__(self):
@@ -125,34 +126,37 @@ class AmbiguousPoint:
 class TBWrapper:
     # Tie Breaker wrapper, needed for deambiguatorbrute function
     def __init__(self, waypoint, original_position, was_ambiguous=False, ambiguous_id=None):
-        self.waypoint = waypoint
-        self.original_position = original_position
-        self.was_ambiguous = was_ambiguous
-        self.ambiguous_id = ambiguous_id
+        self._waypoint = waypoint
+        self._original_position = original_position
+        self._was_ambiguous = was_ambiguous
+        self._ambiguous_id = ambiguous_id
 
     def set_ambiguous_id(self, ambiguous_id: int) -> None:
-        assert self.was_ambiguous is True
-        self.ambiguous_id = ambiguous_id
+        assert self._was_ambiguous is True  # do I still need this assertion?
+        self._ambiguous_id = ambiguous_id
 
-    def get_was_ambiguous(self) -> bool:
-        return self.was_ambiguous
+    @property
+    def was_ambiguous(self) -> bool:
+        return self._was_ambiguous
 
-    def get_original_position(self) -> int:
-        return self.original_position
+    @property
+    def original_position(self) -> int:
+        return self._original_position
 
     def get_ambiguous_id(self) -> int:
-        return self.ambiguous_id
+        return self._ambiguous_id
 
-    def get_waypoint(self):
-        return self.waypoint
+    @property
+    def waypoint(self):
+        return self._waypoint
 
     @property
     def coordinates(self):
-        return self.waypoint.coordinates
+        return self._waypoint.coordinates
 
     def __str__(self):
-        return ('TBWrapper original position: ' + str(self.original_position) + ', ' + 'Wrapper ambiguous ID: ' +
-                str(self.ambiguous_id) + ', Wrapper contains: ' + str(self.waypoint))
+        return ('TBWrapper original position: ' + str(self._original_position) + ', ' + 'Wrapper ambiguous ID: ' +
+                str(self._ambiguous_id) + ', Wrapper contains: ' + str(self._waypoint))
 
 
 class Route:
@@ -201,9 +205,9 @@ class Route:
         # must be AmbiguousPoint at position
         return self._elements[position].get_possibility(possibility_number)
 
-    def get_possibilities(self, position: int):
-        # must be AmbiguousPoint at position
-        return self._elements[position].get_possibilities()
+    #def get_possibilities(self, position: int): # not sure if I need this
+    #    # must be AmbiguousPoint at position
+    #    return self._elements[position].get_possibilities()
 
     def deambiguate(self, position: int, possibility_number: int) -> None:
         # must be AmbiguousPoint at position
@@ -285,7 +289,8 @@ class AmbiguousAirway:
     def get_possibility(self, possibility_number: int):
         return self._possibilities[possibility_number]
 
-    def get_possibilities(self):
+    @property
+    def possibilities(self):
         return self._possibilities
 
     def __str__(self):
