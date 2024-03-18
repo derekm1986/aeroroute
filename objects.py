@@ -249,7 +249,7 @@ class Airway:
     def waypoints(self):
         return self._waypoints
 
-    def get_waypoint(self, waypoint):
+    def get_waypoint(self, waypoint: int):
         return self._waypoints[waypoint]
 
     def get_segment(self, beginning, end):
