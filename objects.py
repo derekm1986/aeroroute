@@ -158,70 +158,71 @@ class TBWrapper:
 class Route:
 
     def __init__(self):
-        self.elements = []
+        self._elements = []
 
     def add_element(self, element) -> None:
         # put smarts here to protect from:
         # starting/ending with an airway
         # airway next to another airway
-        self.elements.append(element)
+        self._elements.append(element)
 
     def get_element(self, element: int):
-        return self.elements[element]
+        return self._elements[element]
     
     def how_many_elements(self) -> int:
-        return len(self.elements)
+        return len(self._elements)
 
     def get_first_element(self):
         # return first element
-        return self.elements[0]
+        return self._elements[0]
 
     def get_last_element(self):
         # return last element
-        return self.elements[-1]
+        return self._elements[-1]
 
     def get_contains_airway(self) -> bool:
-        for element in self.elements:
+        for element in self._elements:
             if type(element) is Airway or type(element) is AmbiguousAirway:
                 return True
         return False
 
     def get_contains_ambiguous_point(self) -> bool:
-        for element in self.elements:
+        for element in self._elements:
             if type(element) is AmbiguousPoint:
                 return True
         return False
     
     def get_possibility(self, position: int, possibility_number: int) -> PointInSpace:
         # must be AmbiguousPoint at position
-        return self.elements[position].get_possibility(possibility_number)
+        return self._elements[position].get_possibility(possibility_number)
 
     def get_possibilities(self, position: int):
         # must be AmbiguousPoint at position
-        return self.elements[position].get_possibilities()
+        return self._elements[position].get_possibilities()
 
     def deambiguate(self, position: int, possibility_number: int) -> None:
         # must be AmbiguousPoint at position
-        self.elements[position] = self.elements[position].get_possibility(possibility_number)
+        self._elements[position] = self._elements[position].get_possibility(possibility_number)
 
-    def get_elements(self):
-        return self.elements
+    @property
+    def elements(self):
+        return self._elements
 
     def __iter__(self):
-        for element in self.elements:
+        for element in self._elements:
             yield element
 
     def __str__(self):  # this doesn't work
-        return str(self.elements)
+        return str(self._elements)
 
     def __repr__(self):  # this doesn't work
-        return str(self.elements)
+        return str(self._elements)
 
 
 class Airway:
 
-    def __init__(self, airway_name: str):
-        self._airway_name = airway_name
+    def __init__(self, identifier: str):
+        self._identifier = identifier
         self._waypoints = []
 
     def add_element(self, element) -> None:
@@ -230,10 +231,12 @@ class Airway:
     def set_waypoints(self, waypoints) -> None:
         self._waypoints = waypoints
 
-    def get_airway_name(self) -> str:
-        return self._airway_name
+    @property
+    def identifier(self) -> str:
+        return self._identifier
 
-    def get_waypoints(self):
+    @property
+    def waypoints(self):
         return self._waypoints
 
     def get_element(self, element):
@@ -244,10 +247,10 @@ class Airway:
         return None
 
     def __str__(self):
-        return f"{self._airway_name} airway with {len(self._waypoints)} points:\n{self._waypoints}"
+        return f"{self._identifier} airway with {len(self._waypoints)} points:\n{self._waypoints}"
 
     def __repr__(self):
-        return f"{self._airway_name} airway with {len(self._waypoints)} points:\n{self._waypoints}"
+        return f"{self._identifier} airway with {len(self._waypoints)} points:\n{self._waypoints}"
 
 
 class AmbiguousAirway:

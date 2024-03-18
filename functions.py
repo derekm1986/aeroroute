@@ -7,7 +7,7 @@ def pair_maker(input_waypoints):
 
     # below is so that the function will accept a list of elements as well
     if type(input_waypoints) is objects.Route:
-        route = input_waypoints.get_elements()
+        route = input_waypoints.elements
     else:
         route = input_waypoints
 
@@ -65,7 +65,7 @@ def multiple_finder(input_waypoints: objects.Route):
 
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
-    found_multiples = [i for i, x in enumerate(input_waypoints.get_elements()) if type(x) is objects.AmbiguousPoint]
+    found_multiples = [i for i, x in enumerate(input_waypoints.elements) if type(x) is objects.AmbiguousPoint]
 
     multiples_matrix = []
 
@@ -257,20 +257,20 @@ def deambiguator_brute(input_route, multiplesmatrix):
 def deambiguate_points_using_airways(input_route):
     # work in progress
     # use adjacent airways to solve ambiguous elements
-    for item in input_route.get_elements():
+    for item in input_route.elements:
         if isinstance(item, objects.AmbiguousPoint):
-            if input_route.get_elements().index(item) == 0:  # starts with AmbiguousPoint
-                if isinstance(input_route.get_elements()[1], (objects.Airway, objects.AmbiguousAirway)):
+            if input_route.elements.index(item) == 0:  # starts with AmbiguousPoint
+                if isinstance(input_route.elements[1], (objects.Airway, objects.AmbiguousAirway)):
                     print("first element was ambiguous and was followed by an airway!")
-            elif input_route.get_elements().index(item) == (len(input_route.get_elements())-1):
-                if isinstance(input_route.get_elements()[-2], (objects.Airway, objects.AmbiguousAirway)):
+            elif input_route.elements.index(item) == (len(input_route.elements)-1):
+                if isinstance(input_route.elements[-2], (objects.Airway, objects.AmbiguousAirway)):
                     print("last element was ambiguous and was preceded by an airway!")
                   # put for loop here to loop through points inside the AmbiguousPoint
             else:
                 print("ambiguous point is in the middle of the route!")
-                current_index = input_route.get_elements().index(item)
-                previous_index = input_route.get_elements().index(item) - 1
-                next_index = input_route.get_elements().index(item) + 1
+                current_index = input_route.elements.index(item)
+                previous_index = input_route.elements.index(item) - 1
+                next_index = input_route.elements.index(item) + 1
 
 
     return input_route

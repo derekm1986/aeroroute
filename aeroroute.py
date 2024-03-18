@@ -107,7 +107,7 @@ def main() -> None:
             multiples_matrix = functions.multiple_finder(input_route_obj)
             input_route_obj = functions.deambiguator_brute(input_route_obj, multiples_matrix)
 
-        for item in input_route_obj.get_elements():
+        for item in input_route_obj.elements:
             print(item)
 
         sum_distance = functions.distance_summer(input_route_obj)
