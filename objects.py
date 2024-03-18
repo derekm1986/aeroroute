@@ -173,21 +173,25 @@ class Route:
     def num_elements(self) -> int:
         return len(self._elements)
 
-    def get_first_element(self):
+    @property
+    def first_element(self):
         # return first element
         return self._elements[0]
 
-    def get_last_element(self):
+    @property
+    def last_element(self):
         # return last element
         return self._elements[-1]
 
-    def get_contains_airway(self) -> bool:
+    @property
+    def contains_airway(self) -> bool:
         for element in self._elements:
             if type(element) is Airway or type(element) is AmbiguousAirway:
                 return True
         return False
 
-    def get_contains_ambiguous_point(self) -> bool:
+    @property
+    def contains_ambiguous_point(self) -> bool:
         for element in self._elements:
             if type(element) is AmbiguousPoint:
                 return True

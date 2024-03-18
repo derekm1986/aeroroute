@@ -72,15 +72,15 @@ def main() -> None:
             logging.warning("string_parser returned None, back to beginning of loop")
             continue
 
-        if input_route_obj.get_contains_airway():  # is there an airway in the route?
+        if input_route_obj.contains_airway:  # is there an airway in the route?
             # is airway at beginning of route? - not OK
-            if isinstance(input_route_obj.get_first_element(), (objects.Airway, objects.AmbiguousAirway)):
+            if isinstance(input_route_obj.first_element, (objects.Airway, objects.AmbiguousAirway)):
                 logging.warning("Route started with an airway, back to beginning of loop")
                 print("Route cannot start with an airway")
                 continue
 
             # is airway at end of route? - not OK
-            if isinstance(input_route_obj.get_last_element(), (objects.Airway, objects.AmbiguousAirway)):
+            if isinstance(input_route_obj.last_element, (objects.Airway, objects.AmbiguousAirway)):
                 logging.warning("Route ended with an airway, back to beginning of loop")
                 print("Route cannot end with an airway")
                 continue
@@ -91,17 +91,17 @@ def main() -> None:
                 continue
 
             # go through each airway to detect an ambiguous airway and solve it
-            #while input_route_obj.get_contains_airway():
+            #while input_route_obj.contains_airway:
                 # this could be infinite if no changes are made
             #    print("going through each airway")
             # call a function that incorporates an airwayinroute into the route
 
-        if input_route_obj.get_contains_ambiguous_point():  # try solving with adjacent airways
+        if input_route_obj.contains_ambiguous_point:  # try solving with adjacent airways
 
             logging.info("Ambiguous point(s) detected. Trying to solve using adjacent airways.")
             input_route_obj = functions.deambiguate_points_using_airways(input_route_obj)
 
-        if input_route_obj.get_contains_ambiguous_point():  # adjacent airways didn't find everything, brute is needed
+        if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
 
             logging.info("Ambiguous point(s) still detected. Using brute deambiguator.")
             multiples_matrix = functions.multiple_finder(input_route_obj)
