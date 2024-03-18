@@ -255,13 +255,24 @@ def deambiguator_brute(input_route, multiplesmatrix):
 
 
 def deambiguate_points_using_airways(input_route):
+    # work in progress
     # use adjacent airways to solve ambiguous elements
     for item in input_route.get_elements():
         if isinstance(item, objects.AmbiguousPoint):
-            print(item, " is ambiguous")
             if input_route.get_elements().index(item) == 0:  # starts with AmbiguousPoint
                 if isinstance(input_route.get_elements()[1], objects.Airway) or \
                               isinstance(input_route.get_elements()[1], objects.AmbiguousAirway):
-                    pass  # put for loop here to loop through points inside the AmbiguousPoint
+                    print("first element was ambiguous and was followed by an airway!")
+            if input_route.get_elements().index(item) == (len(input_route.get_elements())-1):
+                if isinstance(input_route.get_elements()[-2], objects.Airway) or \
+                    isinstance(input_route.get_elements()[-2], objects.AmbiguousAirway):
+                    print("last element was ambiguous and was preceded by an airway!")
+                  # put for loop here to loop through points inside the AmbiguousPoint
+            else:
+                print("ambiguous point is in the middle of the route!")
+                current_index = input_route.get_elements().index(item)
+                previous_index = input_route.get_elements().index(item) - 1
+                next_index = input_route.get_elements().index(item) + 1
+                
 
     return input_route
