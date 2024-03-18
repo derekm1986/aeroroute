@@ -169,7 +169,8 @@ class Route:
     def get_element(self, element: int):
         return self._elements[element]
     
-    def how_many_elements(self) -> int:
+    @property
+    def num_elements(self) -> int:
         return len(self._elements)
 
     def get_first_element(self):
@@ -225,8 +226,8 @@ class Airway:
         self._identifier = identifier
         self._waypoints = []
 
-    def add_element(self, element) -> None:
-        self._waypoints.append(element)
+    def add_waypoint(self, waypoint) -> None:
+        self._waypoints.append(waypoint)
 
     def set_waypoints(self, waypoints) -> None:
         self._waypoints = waypoints
@@ -239,8 +240,8 @@ class Airway:
     def waypoints(self):
         return self._waypoints
 
-    def get_element(self, element):
-        return self._waypoints[element]
+    def get_waypoint(self, waypoint):
+        return self._waypoints[waypoint]
 
     def get_segment(self, beginning, end):
         # to get a segment of the airway so it can be used in a Route, not finished yet!
@@ -321,14 +322,14 @@ class Coordinates:
 
 class AirwayInRoute:
     # this is to store a segment of an airway while it's in a route
-    def __init__(self, identifier, elements=[]):
+    def __init__(self, identifier, waypoints=[]):
         self._identifier = identifier
-        self._elements = elements
+        self._waypoints = waypoints
 
     @property
     def identifier(self):
         return self._identifier
 
     @property
-    def elements(self):
-        return self._elements
+    def waypoints(self):
+        return self._waypoints

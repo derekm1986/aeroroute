@@ -174,7 +174,7 @@ def deambiguator_brute(input_route, multiplesmatrix):
         possibilitieslist = []
         multiplesetelements = []
         
-        if len(multipleset) == input_route.how_many_elements():
+        if len(multipleset) == input_route.num_elements:
             allareambiguous = True
             firstisambiguous = True
             lastisambiguous = True
@@ -182,7 +182,7 @@ def deambiguator_brute(input_route, multiplesmatrix):
         elif 0 in multipleset:
             firstisambiguous = True
 
-        elif input_route.how_many_elements() - 1 in multipleset:
+        elif input_route.num_elements - 1 in multipleset:
             lastisambiguous = True
 
         for listposition in multipleset:

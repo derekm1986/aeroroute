@@ -134,7 +134,7 @@ def adjacent_airway_detector(input_route_obj) -> bool:
     :param input_route_obj: input Route object containing route elements
     :return: True if detected, False if not detected 
     """
-    for i in range(input_route_obj.how_many_elements() - 1):
+    for i in range(input_route_obj.num_elements - 1):
         if isinstance(input_route_obj.get_element(i), (objects.Airway, objects.AmbiguousAirway)) and \
             isinstance(input_route_obj.get_element(i+1), (objects.Airway, objects.AmbiguousAirway)):
             logging.warning("Adjacent airways were found: " + str(input_route_obj.get_element(i)) + " " +
