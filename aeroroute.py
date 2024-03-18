@@ -74,15 +74,13 @@ def main() -> None:
 
         if input_route_obj.get_contains_airway():  # is there an airway in the route?
             # is airway at beginning of route? - not OK
-            if isinstance(input_route_obj.get_first_element(), objects.Airway) or \
-                    isinstance(input_route_obj.get_first_element(), objects.AmbiguousAirway):
+            if isinstance(input_route_obj.get_first_element(), (objects.Airway, objects.AmbiguousAirway)):
                 logging.warning("Route started with an airway, back to beginning of loop")
                 print("Route cannot start with an airway")
                 continue
 
             # is airway at end of route? - not OK
-            if isinstance(input_route_obj.get_last_element(), objects.Airway) or \
-                    isinstance(input_route_obj.get_last_element(), objects.AmbiguousAirway):
+            if isinstance(input_route_obj.get_last_element(), (objects.Airway, objects.AmbiguousAirway)):
                 logging.warning("Route ended with an airway, back to beginning of loop")
                 print("Route cannot end with an airway")
                 continue
@@ -136,15 +134,12 @@ def adjacent_airway_detector(input_route_obj) -> bool:
     :param input_route_obj: input Route object containing route elements
     :return: True if detected, False if not detected 
     """
-    print(input_route_obj.get_elements())
     for i in range(input_route_obj.how_many_elements() - 1):
-        if ((isinstance(input_route_obj.get_element(i), objects.Airway) or \
-            isinstance(input_route_obj.get_element(i), objects.AmbiguousAirway)) and \
-            (isinstance(input_route_obj.get_element(i+1), objects.Airway) or \
-            isinstance(input_route_obj.get_element(i+1), objects.AmbiguousAirway))):
+        if isinstance(input_route_obj.get_element(i), (objects.Airway, objects.AmbiguousAirway)) and \
+            isinstance(input_route_obj.get_element(i+1), (objects.Airway, objects.AmbiguousAirway)):
             logging.warning("Adjacent airways were found: " + str(input_route_obj.get_element(i)) + " " +
                             str(input_route_obj.get_element(i+1)))
-            print(("Adjaent airways found.  Unable to compute."))
+            print(("Adjacent airways found.  Unable to compute."))
             return True
     return False
 
