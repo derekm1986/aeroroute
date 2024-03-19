@@ -71,19 +71,19 @@ def multiple_point_finder(input_waypoints: objects.Route):
 
     found_multiples = [i for i, x in enumerate(input_waypoints.elements) if type(x) is objects.AmbiguousPoint]
 
-    multiples_matrix = []
+    multiples_map = []
 
     last_waypoint = -9  # have to fill it with something
 
     # this groups ambiguous elements together if they are sequential
     for waypoint in found_multiples:  # detect if elements are next to each other
         if waypoint == last_waypoint + 1:  # waypoint is sequential to waypoint before it
-            multiples_matrix[len(multiples_matrix) - 1].append(waypoint)  # group with previous waypoint
+            multiples_map[len(multiples_map) - 1].append(waypoint)  # group with previous waypoint
         else:  # waypoint stands alone
-            multiples_matrix.append([waypoint])
+            multiples_map.append([waypoint])
         last_waypoint = waypoint
 
-    return multiples_matrix
+    return multiples_map
 
 
 def vincenty_indirect(pair, heading=False):
