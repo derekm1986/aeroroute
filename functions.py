@@ -291,7 +291,6 @@ def deambiguator_brute(input_route, multiplesmatrix):
 
 
 def deambiguate_points_using_airways(input_route):
-    # work in progress
     # use adjacent airways to solve ambiguous elements
     for item in input_route.elements:
         if isinstance(item, objects.AmbiguousPoint):
@@ -314,6 +313,16 @@ def deambiguate_points_using_airways(input_route):
                 current_index = input_route.elements.index(item)
                 previous_index = input_route.elements.index(item) - 1
                 next_index = input_route.elements.index(item) + 1
-
-
+                if isinstance(input_route.elements[previous_index], (objects.Airway, objects.AmbiguousAirway)):
+                    # previous element was ambiguous and was followed by an airway
+                    for waypoint in item.possibilities:
+                        for airway in waypoint.available_airways:
+                            if airway == input_route.elements[previous_index].identifier:
+                                input_route.deambiguate(current_index, item.possibilities.index(waypoint))
+                elif isinstance(input_route.elements[next_index], (objects.Airway, objects.AmbiguousAirway)):
+                    # next element was ambiguous and was preceded by an airway
+                    for waypoint in item.possibilities:
+                        for airway in waypoint.available_airways:
+                            if airway == input_route.elements[next_index].identifier:
+                                input_route.deambiguate(current_index, item.possibilities.index(waypoint))
     return input_route
