@@ -258,6 +258,9 @@ class Airway:
     def get_segment(self, beginning, end):
         # to get a segment of the airway so it can be used in a Route, not finished yet!
         return None
+    
+    def reverse_waypoints(self) -> None:
+        self._waypoints.reverse()
 
     def __str__(self):
         return f"{self._identifier} airway with {len(self._waypoints)} points:\n{self._waypoints}"

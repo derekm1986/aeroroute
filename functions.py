@@ -380,7 +380,24 @@ def slice_airways(input_route):
             next_index = input_route.elements.index(item) + 1
             previous_item = input_route.elements[previous_index]
             next_item = input_route.elements[next_index]
-            
 
+            # are we in the right order or do we need to reverse?
+
+            full_airway_waypoints = []
+
+            for waypoint in item.waypoints:
+                full_airway_waypoints.append(waypoint.identifier)
+
+            if full_airway_waypoints.index(previous_item.identifier) > full_airway_waypoints.index(next_item.identifier):
+                # we need to reverse the airway waypoints
+                item.reverse_waypoints()
+                # need to update variables
+                current_index = input_route.elements.index(item)
+                previous_index = input_route.elements.index(item) - 1
+                next_index = input_route.elements.index(item) + 1
+                previous_item = input_route.elements[previous_index]
+                next_item = input_route.elements[next_index]
+
+            print(item.waypoints)
 
     return input_route
