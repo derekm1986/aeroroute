@@ -62,7 +62,7 @@ def main() -> None:
                 print(found_item)
             continue
 
-        if multiple_adjacent_detector(input_list):  # if true, there were multiple identical adjacent items
+        if multiple_adjacent_string_detector(input_list):  # if true, there were multiple identical adjacent items
             continue
 
         # no multiple adjacent inputs, pass on to list_parser
@@ -115,7 +115,7 @@ def main() -> None:
         print('Distance in nm:', sum_distance)
 
 
-def multiple_adjacent_detector(input_list: list[str]) -> bool:
+def multiple_adjacent_string_detector(input_list: list[str]) -> bool:
     """
     detects if there are multiple adjacent identical strings
     :param input_list: list of strings
