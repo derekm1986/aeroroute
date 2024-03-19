@@ -104,8 +104,8 @@ def main() -> None:
         if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
 
             logging.info("Ambiguous point(s) still detected. Using brute deambiguator.")
-            multiples_matrix = functions.multiple_point_finder(input_route_obj)
-            input_route_obj = functions.deambiguator_brute(input_route_obj, multiples_matrix)
+            multiples_map = functions.multiple_point_finder(input_route_obj)
+            input_route_obj = functions.deambiguator_brute(input_route_obj, multiples_map)
 
         for item in input_route_obj.elements:
             print(item)

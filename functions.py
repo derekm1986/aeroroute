@@ -62,7 +62,11 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
 
 
 def multiple_point_finder(input_waypoints: objects.Route):
-
+    """
+    helper function for deambiguator_brute
+    :param input_waypoints: Route object
+    :return: list of lists of integers representing positions of multiple points in the route   
+    """
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
     found_multiples = [i for i, x in enumerate(input_waypoints.elements) if type(x) is objects.AmbiguousPoint]
