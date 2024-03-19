@@ -136,7 +136,7 @@ def adjacent_airway_detector(input_route_obj) -> bool:
     """
     for i in range(input_route_obj.num_elements - 1):
         if isinstance(input_route_obj.get_element(i), (objects.Airway, objects.AmbiguousAirway)) and \
-            isinstance(input_route_obj.get_element(i+1), (objects.Airway, objects.AmbiguousAirway)):
+                      isinstance(input_route_obj.get_element(i+1), (objects.Airway, objects.AmbiguousAirway)):
             logging.warning("Adjacent airways were found: " + str(input_route_obj.get_element(i)) + " " +
                             str(input_route_obj.get_element(i+1)))
             print(("Adjacent airways found.  Unable to compute."))
