@@ -138,7 +138,6 @@ class NavDataLibrary(object):
             found_item = self.points_in_space_dict[item]
 
         elif item in self.airway_dict:  # not finished
-            print(item + ' was found in airway_dict, functionality not finished')
             found_item = self.airway_dict[item]
 
         # elif put something here to read SIDs/STARs

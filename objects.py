@@ -198,6 +198,13 @@ class Route:
                 return True
         return False
     
+    @property
+    def contains_ambiguous_airway(self) -> bool:
+        for element in self._elements:
+            if type(element) is AmbiguousAirway:
+                return True
+        return False
+    
     def get_possibility(self, position: int, possibility_number: int) -> PointInSpace:
         # must be AmbiguousPoint at position
         return self._elements[position].get_possibility(possibility_number)

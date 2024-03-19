@@ -102,6 +102,11 @@ def main() -> None:
             input_route_obj = functions.deambiguate_points_using_airways(input_route_obj)
             # print(input_route_obj)
 
+        if input_route_obj.contains_ambiguous_airway:  # try solving ambiguousairways with adjacent waypoints
+            logging.info("Ambiguous airway(s) detected. Trying to solve using adjacent waypoints.")
+            input_route_obj = functions.deambiguate_airways_using_points(input_route_obj)
+            # print("route after deambiguating airways using points", input_route_obj)
+
         if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
 
             logging.info("Ambiguous point(s) still detected. Using brute deambiguator.")

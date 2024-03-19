@@ -330,3 +330,40 @@ def deambiguate_points_using_airways(input_route):
                             if airway == input_route.elements[next_index].identifier:
                                 input_route.deambiguate(current_index, item.possibilities.index(waypoint))
     return input_route
+
+def deambiguate_airways_using_points(input_route):
+    """
+    use adjacent waypoints to solve ambiguous airways
+    :param input_route: Route object
+    :return: Route object with airways deambiguated using waypoints
+    """
+    for item in input_route.elements:
+        # written by AI, check the work
+        if isinstance(item, objects.AmbiguousAirway):
+            
+            current_index = input_route.elements.index(item)
+            previous_index = input_route.elements.index(item) - 1
+            next_index = input_route.elements.index(item) + 1
+            previous_item = input_route.elements[previous_index]
+            next_item = input_route.elements[next_index]
+            
+            for airway in item.possibilities:
+                match_flag = False
+                # print("possibilities are", item.possibilities)
+                for waypoint in airway.waypoints:
+                    # print("waypoint is", waypoint.identifier)
+                    if waypoint.identifier == previous_item.identifier:
+                        # print("waypoint is", waypoint.identifier, "previous item is", previous_item.identifier)
+                        for second_waypoint in airway.waypoints:
+                            # print("second waypoint is", second_waypoint.identifier, "next item is", next_item.identifier)
+                            if second_waypoint.identifier == next_item.identifier:
+                                # print(current_index, item.possibilities.index(airway))
+                                input_route.deambiguate(current_index, item.possibilities.index(airway))
+                                match_flag = True
+                            if match_flag == True:
+                                break
+                    if match_flag == True:
+                        break
+                if match_flag == True:
+                    break
+    return input_route
