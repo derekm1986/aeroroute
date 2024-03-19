@@ -291,7 +291,11 @@ def deambiguator_brute(input_route, multiplesmatrix):
 
 
 def deambiguate_points_using_airways(input_route):
-    # use adjacent airways to solve ambiguous elements
+    """
+    use adjacent airways to solve ambiguous points
+    :param input_route: Route object
+    :return: Route object with points deambiguated using airways
+    """
     for item in input_route.elements:
         if isinstance(item, objects.AmbiguousPoint):
             if input_route.elements.index(item) == 0:  # starts with AmbiguousPoint
