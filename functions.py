@@ -373,6 +373,7 @@ def slice_airways(input_route):
     :param input_route: Route object
     :return: Route object with airways sliced
     """
+    
     for item in input_route.elements:
         if isinstance(item, (objects.Airway)):
             previous_index = input_route.elements.index(item) - 1
@@ -391,9 +392,14 @@ def slice_airways(input_route):
                 # we need to reverse the airway waypoints
                 item.reverse_waypoints()
 
-            # we have established the waypoints are in the correct order
+            # waypoints should now be in the correct order
             print(item.waypoints)
 
+            previous_item.identifier = None
+            previous_item.coordinates = None
+            
+            next_item.identifier = None
+            next_item.coordinates = None
             
 
 
