@@ -40,6 +40,7 @@ class NavDataLibrary(object):
     def points_in_space_dict_combiner(self):
         """
         combines waypoint_dict and navaid_dict into one dictionary
+        :return: points_in_space_dict
         """
 
         points_in_space_dict = self.navaid_dict.copy()
@@ -72,7 +73,11 @@ class NavDataLibrary(object):
 
         return points_in_space_dict
 
-    def airway_matcher(self):
+    def airway_matcher(self) -> None:
+        """
+        adds airway references into the points_in_space_dict
+        :return: None
+        """
         for airway_names in self.airway_dict.values():
             # print(airway_names)
             # print(type(airway_names))
@@ -118,6 +123,8 @@ class NavDataLibrary(object):
     def nav_data_searcher(self, item):
         """
         looks for item inside this Nav Data library
+        :param item: string to search for
+        :return: found object or none
         """
         found_item = None
 
@@ -145,6 +152,8 @@ class NavDataLibrary(object):
     def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
         """
         turns user-inputted lat/long into usable manual waypoint
+        :param input_string: user input lat/long coordinates
+        :return: manual waypoint object or None
         """
         # also need to allow for 234234N/234234W format
         if "." in input_string:  # decimal format entered
