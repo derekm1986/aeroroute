@@ -4,6 +4,11 @@ import logging
 
 
 def pair_maker(input_waypoints):
+    """
+    generator function that makes pairs of waypoints
+    :param input_waypoints: list of Coordinates objects
+    :return: tuple of two Coordinates objects
+    """
 
     # below is so that the function will accept a list of elements as well
     if type(input_waypoints) is objects.Route:
@@ -20,6 +25,11 @@ def pair_maker(input_waypoints):
 
 
 def distance_summer(input_coordinates) -> float:
+    """
+    calculates the sum of distances between a list of coordinates
+    :param input_coordinates: list of Coordinates objects
+    :return: sum of distances in nautical miles
+    """
   
     sum_distance = 0.00  # establish sum_distance and put zero in it
   
@@ -31,6 +41,12 @@ def distance_summer(input_coordinates) -> float:
 
 
 def list_parser(input_list, nav_library) -> objects.Route | None:
+    """
+    parses a list of strings into a Route object
+    :param input_list: list of strings
+    :param nav_library: NavDataLibrary object
+    :return: Route object
+    """
 
     output = objects.Route()
 
@@ -87,7 +103,12 @@ def multiple_point_finder(input_waypoints: objects.Route):
 
 
 def vincenty_indirect(pair, heading=False):
-
+    """
+    calculates distance between two coordinates using Vincenty's indirect formula
+    :param pair: tuple of two Coordinates objects
+    :param heading: boolean, if True, returns distance and headings
+    :return: distance in nautical miles
+    """
     #  Requires a tuple of two Coordinates objects
     #  tuple of type (-lat.00, lon.00)
 
@@ -168,7 +189,12 @@ def vincenty_indirect(pair, heading=False):
 
 
 def deambiguator_brute(input_route, multiplesmatrix):
-
+    """
+    deambiguates points in a route using a brute force method
+    :param input_route: Route object
+    :param multiplesmatrix: list of lists of integers representing positions of multiple points in the route
+    :return: Route object with points deambiguated
+    """
     for multipleset in multiplesmatrix:
 
         allareambiguous = False

@@ -7,7 +7,9 @@ import objects
 
 
 class NavDataLibrary(object):
-    # trying to keep all the nav data in an object
+    """
+    Holds functionality for Nav Data, along with some functionality
+    """
     def __init__(self):
         logging.info("Loading airports into memory")
         self.airport_dict = airportsreader.airport_dict_maker()
@@ -36,6 +38,9 @@ class NavDataLibrary(object):
         logging.info("NAV data loading complete")
 
     def points_in_space_dict_combiner(self):
+        """
+        combines waypoint_dict and navaid_dict into one dictionary
+        """
 
         points_in_space_dict = self.navaid_dict.copy()
 
@@ -111,7 +116,9 @@ class NavDataLibrary(object):
                                         airway_names.identifier)
 
     def nav_data_searcher(self, item):
-
+        """
+        looks for item inside this Nav Data library
+        """
         found_item = None
 
         if "/" in item:  # manual input detected
@@ -136,6 +143,9 @@ class NavDataLibrary(object):
 
     @staticmethod
     def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
+        """
+        turns user-inputted lat/long into usable manual waypoint
+        """
         # also need to allow for 234234N/234234W format
         if "." in input_string:  # decimal format entered
             coordinates = tuple(input_string.split('/'))
