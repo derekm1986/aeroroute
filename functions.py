@@ -313,7 +313,6 @@ def deambiguate_points_using_airways(input_route):
                             if airway == input_route.elements[-2].identifier:
                                 input_route.deambiguate(input_route.num_elements-1, item.possibilities.index(waypoint))
             else:
-                print("ambiguous point is in the middle of the route!")
                 current_index = input_route.elements.index(item)
                 previous_index = input_route.elements.index(item) - 1
                 next_index = input_route.elements.index(item) + 1
@@ -366,4 +365,22 @@ def deambiguate_airways_using_points(input_route):
                         break
                 if match_flag == True:
                     break
+    return input_route
+
+def slice_airways(input_route):
+    """
+    slices airways into only the waypoints you want
+    :param input_route: Route object
+    :return: Route object with airways sliced
+    """
+    for item in input_route.elements:
+        if isinstance(item, (objects.Airway)):
+            current_index = input_route.elements.index(item)
+            previous_index = input_route.elements.index(item) - 1
+            next_index = input_route.elements.index(item) + 1
+            previous_item = input_route.elements[previous_index]
+            next_item = input_route.elements[next_index]
+            
+
+
     return input_route

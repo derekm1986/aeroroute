@@ -97,21 +97,30 @@ def main() -> None:
             # call a function that incorporates an airwayinroute into the route
 
         if input_route_obj.contains_ambiguous_point:  # try solving with adjacent airways
-
             logging.info("Ambiguous point(s) detected. Trying to solve using adjacent airways.")
             input_route_obj = functions.deambiguate_points_using_airways(input_route_obj)
-            # print(input_route_obj)
 
         if input_route_obj.contains_ambiguous_airway:  # try solving ambiguousairways with adjacent waypoints
             logging.info("Ambiguous airway(s) detected. Trying to solve using adjacent waypoints.")
             input_route_obj = functions.deambiguate_airways_using_points(input_route_obj)
-            # print("route after deambiguating airways using points", input_route_obj)
+
+        if input_route_obj.contains_ambiguous_airway:  # deambiguating was not sucessful.  unable to compute
+            print("Unable to deambiguate airway(s).  Cannot continue.")
+            continue
+
+        if input_route_obj.contains_airway:  # we need to unpack the airway into only the waypoints we want
+            print("There is an airway in the route.")
+            input_route_obj = functions.unpack_airways(input_route_obj)
 
         if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
 
             logging.info("Ambiguous point(s) still detected. Using brute deambiguator.")
             multiples_map = functions.multiple_point_finder(input_route_obj)
             input_route_obj = functions.deambiguator_brute(input_route_obj, multiples_map)
+
+        if input_route_obj.contains_ambiguous_point:  # brute deambiguator was not successful.  unable to compute
+            print("Unable to deambiguate point(s).  Cannot continue.")
+            continue
 
         for item in input_route_obj.elements:
             print(item)
