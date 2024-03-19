@@ -131,10 +131,6 @@ class TBWrapper:
         self._was_ambiguous = was_ambiguous
         self._ambiguous_id = ambiguous_id
 
-    def set_ambiguous_id(self, ambiguous_id: int) -> None:
-        assert self._was_ambiguous is True  # do I still need this assertion?
-        self._ambiguous_id = ambiguous_id
-
     @property
     def was_ambiguous(self) -> bool:
         return self._was_ambiguous
