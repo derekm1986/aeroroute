@@ -291,11 +291,19 @@ def deambiguate_points_using_airways(input_route):
         if isinstance(item, objects.AmbiguousPoint):
             if input_route.elements.index(item) == 0:  # starts with AmbiguousPoint
                 if isinstance(input_route.elements[1], (objects.Airway, objects.AmbiguousAirway)):
-                    print("first element was ambiguous and was followed by an airway!")
+                    # first element was ambiguous and was followed by an airway
+                    for waypoint in item.possibilities:
+                        for airway in waypoint.available_airways:
+                            if airway == input_route.elements[1].identifier:
+                                input_route.deambiguate(0, item.possibilities.index(waypoint))
             elif input_route.elements.index(item) == (len(input_route.elements)-1):
                 if isinstance(input_route.elements[-2], (objects.Airway, objects.AmbiguousAirway)):
-                    print("last element was ambiguous and was preceded by an airway!")
-                  # put for loop here to loop through points inside the AmbiguousPoint
+                    # last element was ambiguous and was preceded by an airway!
+                    for waypoint in item.possibilities:
+                        for airway in waypoint.available_airways:
+                            if airway == input_route.elements[-2].identifier:
+                                input_route.deambiguate(input_route.num_elements-1, item.possibilities.index(waypoint))
+                    
             else:
                 print("ambiguous point is in the middle of the route!")
                 current_index = input_route.elements.index(item)
