@@ -151,7 +151,7 @@ class TBWrapper:
     def coordinates(self):
         return self._waypoint.coordinates
 
-    def __str__(self):
+    def __repr__(self):
         return ('TBWrapper original position: ' + str(self._original_position) + ', ' + 'Wrapper ambiguous ID: ' +
                 str(self._ambiguous_id) + ', Wrapper contains: ' + str(self._waypoint))
 

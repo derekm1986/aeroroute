@@ -5,16 +5,20 @@ import logging
 
 def pair_maker(input_waypoints):
     """
-    generator function that makes pairs of waypoints
-    :param input_waypoints: list of Coordinates objects
+    generator function that makes pairs of Coordinates
+    :param input_waypoints: Route or a list of elements
     :return: tuple of two Coordinates objects
     """
-
     # below is so that the function will accept a list of elements as well
     if type(input_waypoints) is objects.Route:
         route = input_waypoints.elements
     else:
         route = input_waypoints
+
+    for item in route:
+        if isinstance(item, (objects.Airway, objects.AmbiguousAirway)):
+            print("an airway got too far, we will crash!")
+            return
 
     i = 0
 
@@ -190,7 +194,7 @@ def vincenty_indirect(pair, heading=False):
 
 def deambiguator_brute(input_route, multiplesmatrix):
     """
-    deambiguates points in a route using a brute force method
+    deambiguates points in a route using a brute force method, if an airway in a route, will not work correctly
     :param input_route: Route object
     :param multiplesmatrix: list of lists of integers representing positions of multiple points in the route
     :return: Route object with points deambiguated
@@ -230,6 +234,8 @@ def deambiguator_brute(input_route, multiplesmatrix):
                                                          multipleset[-1] + 1))
             
         elementposition = 0
+
+        print(multiplesetelements) # for testing
 
         for element in multiplesetelements:
             if elementposition == 0:  # first in the list, no copying needed here
@@ -303,7 +309,6 @@ def deambiguate_points_using_airways(input_route):
                         for airway in waypoint.available_airways:
                             if airway == input_route.elements[-2].identifier:
                                 input_route.deambiguate(input_route.num_elements-1, item.possibilities.index(waypoint))
-                    
             else:
                 print("ambiguous point is in the middle of the route!")
                 current_index = input_route.elements.index(item)
