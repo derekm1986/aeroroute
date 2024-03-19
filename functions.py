@@ -395,11 +395,11 @@ def slice_airways(input_route):
             # waypoints should now be in the correct order
             print(item.waypoints)
 
-            previous_item.identifier = None
-            previous_item.coordinates = None
+            #previous_item.identifier =
+            #previous_item.coordinates =
             
-            next_item.identifier = None
-            next_item.coordinates = None
+            #next_item.identifier =
+            #next_item.coordinates =
             
 
 
