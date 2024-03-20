@@ -11,5 +11,9 @@ def index():
     # Return the result as a response
     return str(result)
 
+
+print(index())
+
 if __name__ == '__main__':
+    print("Got here!")
     app.run()

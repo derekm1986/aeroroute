@@ -14,6 +14,8 @@ def main() -> None:
     :return: nothing
     """
 
+    #return "Hello, World!"
+
     logging.basicConfig(
         level=logging.DEBUG,
         format="%(asctime)s (%(levelname)s): %(message)s (Line: %(lineno)d [%(filename)s])",
