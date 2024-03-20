@@ -14,7 +14,7 @@ def main() -> None:
     :return: nothing
     """
 
-    #return "Hello, World!"
+    return "Hello, World!"
 
     logging.basicConfig(
         level=logging.DEBUG,

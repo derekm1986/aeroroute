@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from aeroroute import main
 
 app = Flask(__name__)
@@ -9,8 +9,10 @@ def index():
     result = main()
 
     # Return the result as a response
-    return str(result)
-
+    #return str(result)
+    
+    # Render the index.html template and pass the result to it
+    return render_template('index.html', result=result)
 
 print(index())
 
