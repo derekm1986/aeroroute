@@ -357,3 +357,7 @@ class AirwayInRoute:
 
     def __repr__(self):
         return f"{self._identifier} airway-in-route with {len(self._waypoints)} points:\n{self._waypoints}"
+
+class TerminalProcedure:
+    def __init__(self, identifier, type_element, associated_airport):
+        pass

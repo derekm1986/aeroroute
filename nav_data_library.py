@@ -128,6 +128,7 @@ class NavDataLibrary(object):
         """
         found_item = None
 
+        # should this stay here or move outside the class?
         if "/" in item:  # manual input detected
             found_item = self.manual_waypoint_maker(item)
 
@@ -140,10 +141,12 @@ class NavDataLibrary(object):
         elif item in self.airway_dict:  # not finished
             found_item = self.airway_dict[item]
 
-        # elif put something here to read SIDs/STARs
-        # is it adjacent to an airport? if no, reject
-        # combination of letters and numbers? HYLND6 or CSTL4 or SHB4 or UNOKO3A
-        # flag as possible SID/STAR?
+        # do we put these here or somewhere outside the class?
+        #elif item right after an airport and has 3-5 letters, a number, and maybe another letter:
+        #    we are a SID!
+
+        #elif item right before an airport and has 3-5 letters, a number, and maybe another letter:
+        #    we are a STAR!
 
         return found_item
 

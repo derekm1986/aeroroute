@@ -23,6 +23,8 @@ def pair_maker(input_waypoints):
         if isinstance(item, objects.AirwayInRoute):
             for waypoint in item.waypoints:
                 route.append(waypoint)
+        elif isinstance(item, objects.TerminalProcedure):
+            pass
         else:
             route.append(item)
 
@@ -67,7 +69,11 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
 
     for item in input_list:
 
-        found_item = nav_library.nav_data_searcher(item)
+        if "/" in item:  # manual input detected
+            found_item = manual_waypoint_maker(item)
+        
+        else:
+            found_item = nav_library.nav_data_searcher(item)
 
         if found_item is None:  # nothing found by nav_data_searcher!
             print(item, "not found")
@@ -75,6 +81,9 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
             return None
 
         output.add_element(found_item)
+
+    
+    # how/where do I search for SIDs/STARs?
 
     return output
 
@@ -404,3 +413,22 @@ def slice_airways(input_route):
             input_route.replace_element(current_index, item.get_segment(start_position + 1, end_position))
 
     return input_route
+
+    
+def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
+    """
+    turns user-inputted lat/long into usable manual waypoint
+    :param input_string: user input lat/long coordinates
+    :return: manual waypoint object or None
+    """
+    # also need to allow for 234234N/234234W format
+    if "." in input_string:  # decimal format entered
+        coordinates = tuple(input_string.split('/'))
+    elif "N" or "S" or "E" or "W" in input_string:  # N/S/E/W degrees/minutes format entered
+        coordinates = tuple(input_string.split('/'))  # not done - need to finish!
+    else:  # bad coordinates entered
+        return None
+    # assert that it's valid?  maybe that's handled in new coordinates object?
+    manual_waypoint = objects.PointInSpace(input_string, coordinates, 'manual waypoint')
+
+    return manual_waypoint
