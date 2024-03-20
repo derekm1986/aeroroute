@@ -1,12 +1,12 @@
 from flask import Flask, render_template
-from aeroroute import main
+from aeroroute import flask_test
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     # Call the main function from aeroroute.py
-    result = main()
+    result = flask_test()
 
     # Return the result as a response
     #return str(result)
