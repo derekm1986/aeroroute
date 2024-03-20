@@ -14,6 +14,7 @@ def main() -> None:
     :return: nothing
     """
 
+    # just for testing with Flask
     return "Hello, World!"
 
     logging.basicConfig(
