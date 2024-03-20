@@ -231,8 +231,6 @@ def deambiguator_brute(input_route, multiplesmatrix):
     :return: Route object with points deambiguated
     """
     
-    print(input_route, multiplesmatrix)
-    
     for multipleset in multiplesmatrix:
 
         allareambiguous = False
