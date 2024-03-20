@@ -128,11 +128,7 @@ class NavDataLibrary(object):
         """
         found_item = None
 
-        # should this stay here or move outside the class?
-        if "/" in item:  # manual input detected
-            found_item = self.manual_waypoint_maker(item)
-
-        elif item in self.airport_dict:
+        if item in self.airport_dict:
             found_item = self.airport_dict[item]
 
         elif item in self.points_in_space_dict:
@@ -149,25 +145,4 @@ class NavDataLibrary(object):
         #    we are a STAR!
 
         return found_item
-
-    @staticmethod
-    def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
-        """
-        turns user-inputted lat/long into usable manual waypoint
-        :param input_string: user input lat/long coordinates
-        :return: manual waypoint object or None
-        """
-        # also need to allow for 234234N/234234W format
-        if "." in input_string:  # decimal format entered
-            coordinates = tuple(input_string.split('/'))
-        elif "N" or "S" or "E" or "W" in input_string:  # N/S/E/W degrees/minutes format entered
-            coordinates = tuple(input_string.split('/'))  # not done - need to finish!
-        else:  # bad coordinates entered
-            return None
-        # assert that it's valid?  maybe that's handled in new coordinates object?
-        manual_waypoint = objects.PointInSpace(input_string, coordinates, 'manual waypoint')
-
-        return manual_waypoint
-
-
-
+    
