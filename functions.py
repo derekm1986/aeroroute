@@ -1,6 +1,7 @@
 import math
 import objects
 import logging
+import re
 
 
 def pair_maker(input_waypoints):
@@ -9,11 +10,14 @@ def pair_maker(input_waypoints):
     :param input_waypoints: Route or a list of elements
     :return: tuple of two Coordinates objects
     """
+    
     # below is so that the function will accept a list of elements as well
     if type(input_waypoints) is objects.Route:
         route_before_airways = input_waypoints.elements
     else:
         route_before_airways = input_waypoints
+
+    print("Route before airways is ", route_before_airways)
 
     # get points out of any AirwayInRoute
     
@@ -76,14 +80,36 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
             found_item = nav_library.nav_data_searcher(item)
 
         if found_item is None:  # nothing found by nav_data_searcher!
-            print(item, "not found")
-            # return from here - then wouldn't see if anything else was not found
-            return None
+            found_item = item
 
         output.add_element(found_item)
 
+    # is there a None in the route?  Could this be a SID or STAR?
+    for item in output.elements:
+         if isinstance(item, str):
+            previous_item = output.elements[output.elements.index(item) - 1]
+            next_item = output.elements[output.elements.index(item) + 1]
+
+            if isinstance(previous_item, objects.Airport):
+                if terminal_procedure_recognizer(item):
+                    output.replace_element(output.elements.index(item), 
+                                           objects.TerminalProcedure(item, "SID", previous_item.identifier))
     
-    # how/where do I search for SIDs/STARs?
+            elif isinstance(next_item, objects.Airport):
+                if terminal_procedure_recognizer(item):
+                    output.replace_element(output.elements.index(item), 
+                                           objects.TerminalProcedure(item, "STAR", next_item.identifier))
+
+    # still a string in the route? then return None
+    failure_flag = False
+
+    for item in output.elements:
+        if isinstance(item, str):
+            print(item, "not found")
+            failure_flag = True
+
+    if failure_flag:
+        return None
 
     return output
 
@@ -432,3 +458,15 @@ def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
     manual_waypoint = objects.PointInSpace(input_string, coordinates, 'manual waypoint')
 
     return manual_waypoint
+
+def terminal_procedure_recognizer(input_string: str) -> bool:
+    """
+    checks if input string is a terminal procedure using regular expressions
+    :param input_string: user input string
+    :return: True if input string is a terminal procedure, False if not
+    """
+    #do we start with 3-5 letters, have one number, and may end with a letter?
+
+    pattern = r"^[a-zA-Z]{3,5}\d[a-zA-Z]?$"
+
+    return bool(re.match(pattern, input_string))

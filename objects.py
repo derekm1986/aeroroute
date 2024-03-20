@@ -360,4 +360,15 @@ class AirwayInRoute:
 
 class TerminalProcedure:
     def __init__(self, identifier, type_element, associated_airport):
-        pass
+        self._identifier = identifier
+        self._type_element = type_element
+        self._associated_airport = associated_airport
+
+    
+    def __str__(self):
+        return f"{self._identifier} *** terminal procedure * {self._type_element}"
+
+    def __repr__(self):
+        return f"{self._identifier} *** terminal procedure * {self._type_element}"
+    
+    
