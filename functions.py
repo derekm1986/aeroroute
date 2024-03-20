@@ -26,8 +26,6 @@ def pair_maker(input_waypoints):
         else:
             route.append(item)
 
-    print("Route is", route)
-
     for item in route:
         if isinstance(item, (objects.Airway, objects.AmbiguousAirway, objects.AirwayInRoute)):
             print("an airway got too far, we will crash!")
@@ -77,19 +75,6 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
             return None
 
         output.add_element(found_item)
-
-    # if not_found_flag is True:  # maybe need to keep this flag to work with SIDs + STARs?
-    #     output = 'invalidinput'
-
-    # check for airway at beginning/end of route
-    # if output.howmanyelements() > 1:
-    #    if isinstance(output.getelement(0)[0], objects.Airway):  # we started with an airway, not OK!
-    #        print("Route cannot begin with an airway - unable to compute.")
-    #        output = 'invalidoutput'
-    #    if isinstance(output.getelement(output.howmanyelements() - 1)[0], objects.Airway):
-    #    we ended with an airway, not OK!
-    #        print("Route cannot end with an airway - unable to compute.")
-    #        output = 'invalidoutput'
 
     return output
 
@@ -248,8 +233,6 @@ def deambiguator_brute(input_route, multiplesmatrix):
             
         elementposition = 0
 
-        print(multiplesetelements) # for testing
-
         for element in multiplesetelements:
             if elementposition == 0:  # first in the list, no copying needed here
                 if element.was_ambiguous is False: # single element present
@@ -350,7 +333,6 @@ def deambiguate_airways_using_points(input_route):
     :return: Route object with airways deambiguated using waypoints
     """
     for item in input_route.elements:
-        # written by AI, check the work
         if isinstance(item, objects.AmbiguousAirway):
             
             current_index = input_route.elements.index(item)

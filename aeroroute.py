@@ -109,7 +109,6 @@ def main() -> None:
             continue
 
         if input_route_obj.contains_airway:  # we need to unpack the airway into only the waypoints we want
-            print("There is an airway in the route.")
             input_route_obj = functions.slice_airways(input_route_obj)
 
         if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
