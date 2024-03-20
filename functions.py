@@ -368,6 +368,7 @@ def deambiguate_points_using_airways(input_route):
                                 input_route.deambiguate(current_index, item.possibilities.index(waypoint))
     return input_route
 
+
 def deambiguate_airways_using_points(input_route):
     """
     use adjacent waypoints to solve ambiguous airways
@@ -403,6 +404,7 @@ def deambiguate_airways_using_points(input_route):
                 if match_flag == True:
                     break
     return input_route
+
 
 def slice_airways(input_route):
     """
@@ -447,7 +449,7 @@ def slice_airways(input_route):
 
     return input_route
 
-    
+
 def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
     """
     turns user-inputted lat/long into usable manual waypoint
@@ -465,6 +467,7 @@ def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
     manual_waypoint = objects.PointInSpace(input_string, coordinates, 'manual waypoint')
 
     return manual_waypoint
+
 
 def terminal_procedure_recognizer(input_string: str) -> bool:
     """
