@@ -208,6 +208,9 @@ class Route:
     def get_possibility(self, position: int, possibility_number: int) -> PointInSpace:
         # must be AmbiguousPoint at position
         return self._elements[position].get_possibility(possibility_number)
+    
+    def replace_element(self, position: int, new_element) -> None:
+        self._elements[position] = new_element
 
     #def get_possibilities(self, position: int): # not sure if I need this
     #    # must be AmbiguousPoint at position
@@ -256,8 +259,7 @@ class Airway:
         return self._waypoints[waypoint]
 
     def get_segment(self, beginning, end):
-        # to get a segment of the airway so it can be used in a Route, not finished yet!
-        return None
+        return AirwayInRoute(self._identifier, self._waypoints[beginning:end])
     
     def reverse_waypoints(self) -> None:
         self._waypoints.reverse()
@@ -349,3 +351,9 @@ class AirwayInRoute:
     @property
     def waypoints(self):
         return self._waypoints
+    
+    def __str__(self):
+        return f"{self._identifier} airway-in-route with {len(self._waypoints)} points:\n{self._waypoints}"
+
+    def __repr__(self):
+        return f"{self._identifier} airway-in-route with {len(self._waypoints)} points:\n{self._waypoints}"

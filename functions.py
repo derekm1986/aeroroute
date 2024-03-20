@@ -11,12 +11,25 @@ def pair_maker(input_waypoints):
     """
     # below is so that the function will accept a list of elements as well
     if type(input_waypoints) is objects.Route:
-        route = input_waypoints.elements
+        route_before_airways = input_waypoints.elements
     else:
-        route = input_waypoints
+        route_before_airways = input_waypoints
+
+    # get points out of any AirwayInRoute
+    
+    route = []
+    
+    for item in route_before_airways:
+        if isinstance(item, objects.AirwayInRoute):
+            for waypoint in item.waypoints:
+                route.append(waypoint)
+        else:
+            route.append(item)
+
+    print("Route is", route)
 
     for item in route:
-        if isinstance(item, (objects.Airway, objects.AmbiguousAirway)):
+        if isinstance(item, (objects.Airway, objects.AmbiguousAirway, objects.AirwayInRoute)):
             print("an airway got too far, we will crash!")
             return
 
@@ -376,6 +389,7 @@ def slice_airways(input_route):
     
     for item in input_route.elements:
         if isinstance(item, (objects.Airway)):
+            current_index = input_route.elements.index(item)
             previous_index = input_route.elements.index(item) - 1
             next_index = input_route.elements.index(item) + 1
             previous_item = input_route.elements[previous_index]
@@ -392,9 +406,6 @@ def slice_airways(input_route):
                 # we need to reverse the airway waypoints
                 item.reverse_waypoints()
 
-            # waypoints should now be in the correct order
-            print(item.waypoints)
-
             start_position = None  # where is previous position in item.waypoints?
             end_position = None  # where is next position in item.waypoints?
 
@@ -408,6 +419,6 @@ def slice_airways(input_route):
                 print("Unable to connect airway.  Cannot continue.")
                 return
             
-            
+            input_route.replace_element(current_index, item.get_segment(start_position + 1, end_position))
 
     return input_route
