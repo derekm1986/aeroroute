@@ -256,17 +256,25 @@ def deambiguator_brute(input_route, multiplesmatrix):
         for listposition in multipleset:
             multiplesetelements.append(objects.TBWrapper(input_route.get_element(listposition),
                                                          listposition, True))
-                
+
         if allareambiguous is False and firstisambiguous is False:
             # add previous waypoint to beginning of multiplesetelements
-            multiplesetelements.insert(0, objects.TBWrapper(input_route.get_element(multipleset[0] - 1),
-                                                            multipleset[0] - 1))
-            
+            previous_element = input_route.get_element(multipleset[0] - 1)
+            # need to check that it is not an airway or procedure!!!!
+            if not isinstance(previous_element, (objects.Airway, objects.AmbiguousAirway, 
+                                                 objects.AirwayInRoute, objects.TerminalProcedure)):
+
+                multiplesetelements.insert(0, objects.TBWrapper(previous_element, multipleset[0] - 1))      
+        
         if allareambiguous is False and lastisambiguous is False:
-            # add following waypoint to end of multiplesetelements 
-            multiplesetelements.append(objects.TBWrapper(input_route.get_element(multipleset[-1] + 1),
-                                                         multipleset[-1] + 1))
-            
+            # add next waypoint to end of multiplesetelements 
+            next_element = input_route.get_element(multipleset[-1] + 1)
+            # need to check that it is not an airway or procedure!!!!
+            if not isinstance(next_element, (objects.Airway, objects.AmbiguousAirway, 
+                                             objects.AirwayInRoute, objects.TerminalProcedure)):
+
+                multiplesetelements.append(objects.TBWrapper(next_element, multipleset[-1] + 1))
+        
         elementposition = 0
 
         for element in multiplesetelements:
