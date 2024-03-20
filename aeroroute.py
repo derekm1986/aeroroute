@@ -90,12 +90,6 @@ def main() -> None:
                 # airways touch other airways - not OK
                 continue
 
-            # go through each airway to detect an ambiguous airway and solve it
-            #while input_route_obj.contains_airway:
-                # this could be infinite if no changes are made
-            #    print("going through each airway")
-            # call a function that incorporates an airwayinroute into the route
-
         if input_route_obj.contains_ambiguous_point:  # try solving with adjacent airways
             logging.info("Ambiguous point(s) detected. Trying to solve using adjacent airways.")
             input_route_obj = functions.deambiguate_points_using_airways(input_route_obj)

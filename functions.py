@@ -17,8 +17,6 @@ def pair_maker(input_waypoints):
     else:
         route_before_airways = input_waypoints
 
-    print("Route before airways is ", route_before_airways)
-
     # get points out of any AirwayInRoute
     
     route = []
@@ -232,6 +230,9 @@ def deambiguator_brute(input_route, multiplesmatrix):
     :param multiplesmatrix: list of lists of integers representing positions of multiple points in the route
     :return: Route object with points deambiguated
     """
+    
+    print(input_route, multiplesmatrix)
+    
     for multipleset in multiplesmatrix:
 
         allareambiguous = False
