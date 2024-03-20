@@ -79,11 +79,8 @@ class NavDataLibrary(object):
         :return: None
         """
         for airway_names in self.airway_dict.values():
-            # print(airway_names)
-            # print(type(airway_names))
             if isinstance(airway_names, objects.AmbiguousAirway):  # we have encountered an AmbiguousAirway
                 for airway in airway_names.possibilities:
-                    # print(airway)
                     for waypoint in airway.waypoints:
                         if waypoint.identifier in self.points_in_space_dict:
                             if isinstance(self.points_in_space_dict[waypoint.identifier], objects.AmbiguousPoint):
@@ -134,15 +131,8 @@ class NavDataLibrary(object):
         elif item in self.points_in_space_dict:
             found_item = self.points_in_space_dict[item]
 
-        elif item in self.airway_dict:  # not finished
+        elif item in self.airway_dict:
             found_item = self.airway_dict[item]
-
-        # do we put these here or somewhere outside the class?
-        #elif item right after an airport and has 3-5 letters, a number, and maybe another letter:
-        #    we are a SID!
-
-        #elif item right before an airport and has 3-5 letters, a number, and maybe another letter:
-        #    we are a STAR!
 
         return found_item
     
