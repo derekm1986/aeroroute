@@ -395,12 +395,19 @@ def slice_airways(input_route):
             # waypoints should now be in the correct order
             print(item.waypoints)
 
-            #previous_item.identifier =
-            #previous_item.coordinates =
-            
-            #next_item.identifier =
-            #next_item.coordinates =
-            
+            start_position = None  # where is previous position in item.waypoints?
+            end_position = None  # where is next position in item.waypoints?
 
+            for waypoint in item.waypoints:
+                if waypoint.identifier == previous_item.identifier and waypoint.coordinates == previous_item.coordinates:
+                    start_position = item.waypoints.index(waypoint)
+                if waypoint.identifier == next_item.identifier and waypoint.coordinates == next_item.coordinates:
+                    end_position = item.waypoints.index(waypoint)
+
+            if start_position is None or end_position is None:
+                print("Unable to connect airway.  Cannot continue.")
+                return
+            
+            
 
     return input_route
