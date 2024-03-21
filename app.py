@@ -20,14 +20,31 @@ app = Flask(__name__)
     
 #     #return f"Result from aeroroute.py: {result}"
 
+# @app.route('/', methods=['GET', 'POST'])
+# def index():
+#     if request.method == 'POST':
+#         route = request.form.get('route').upper()
+#         query = (route.split())
+#         result = aeroroute_input(query)
+#         return render_template('result.html', route=route, result=result)
+#     return render_template('form.html')
+
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
+from flask import Flask, render_template, request
+from aeroroute import aeroroute_input
+
+app = Flask(__name__)
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    route = result = None
     if request.method == 'POST':
         route = request.form.get('route').upper()
-        query = (route.split())
+        query = route.split()
         result = aeroroute_input(query)
-        return render_template('result.html', route=route, result=result)
-    return render_template('form.html')
+    return render_template('form.html', route=route, result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html>
+<head>
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column;
+}
+</style>
+</head>
+
 <body>
 
 <h2>Aeroroute Input</h2>
 
-<form action="/" method="post">
-  Route:<br>
-  <input type="text" name="route">
-  <br><br>
-  <input type="submit" value="Submit">
-</form> 
+<form action="/" method="post" style="display: flex; flex-direction: column; align-items: center;">
+    Route:<br><br>
+    <textarea name="route" style="width: 400px; height: 50px;">{{ route }}</textarea>
+    <br><br>
+    <input type="submit" value="Submit">
+  </form> 
+
+{% if result %}
+<h2>Result</h2>
+<p>{{ result }}</p>
+{% endif %}
 
 </body>
 </html>
