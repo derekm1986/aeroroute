@@ -7,4 +7,5 @@ AIRAC/
 *.pyc
 .idea/
 __pycache__/
+routes/
 aeroroute.log
