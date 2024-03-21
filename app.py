@@ -12,7 +12,10 @@ def index():
     #return str(result)
     
     # Render the index.html template and pass the result to it
-    return f"Result from aeroroute.py: {result}"
+    return render_template('index.html', result=result)
+    
+    
+    #return f"Result from aeroroute.py: {result}"
 
 if __name__ == '__main__':
     app.run(debug=True)
