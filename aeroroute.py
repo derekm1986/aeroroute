@@ -49,78 +49,80 @@ def main() -> None:
         if "QUIT" in input_list:
             print('***Program exiting***')
             break
+
+        print(aeroroute_input(input_list, nav_data))
         
-        if len(input_list) == 1:  # single item, what happens if item doesn't exist?
-            print('Single item detected, looking up item.')
-            logging.info("Looking up single item: " + input_list[0])
-            found_item = nav_data.nav_data_searcher(input_list[0])
-            if found_item is None:
-                logging.info("Single item " + input_list[0] + " not found.")
-                print(input_list[0] + " not found.")
-            else:
-                logging.info("Single item " + input_list[0] + " is " + str(found_item))
-                print(found_item)
-            continue
 
-        if multiple_adjacent_string_detector(input_list):  # if true, there were multiple identical adjacent items
-            continue
+def aeroroute_input(input_list, nav_data=nav_data_library.NavDataLibrary()):
+    """
 
-        # no multiple adjacent inputs, pass on to list_parser
-        input_route_obj = functions.list_parser(input_list, nav_data)
+    """
+    if len(input_list) == 1:  # single item, what happens if item doesn't exist?
+        print('Single item detected, looking up item.')
+        logging.info("Looking up single item: " + input_list[0])
+        found_item = nav_data.nav_data_searcher(input_list[0])
+        if found_item is None:
+            logging.info("Single item " + input_list[0] + " not found.")
+            return (input_list[0] + " not found.")
+        else:
+            logging.info("Single item " + input_list[0] + " is " + str(found_item))
+            return(found_item)
 
-        if input_route_obj is None:  # something bad came back from string_parser
-            logging.warning("string_parser returned None, back to beginning of loop")
-            continue
+    if multiple_adjacent_string_detector(input_list):  # if true, there were multiple identical adjacent items
+        return
 
-        if input_route_obj.contains_airway:  # is there an airway in the route?
-            # is airway at beginning of route? - not OK
-            if isinstance(input_route_obj.first_element, (objects.Airway, objects.AmbiguousAirway)):
-                logging.warning("Route started with an airway, back to beginning of loop")
-                print("Route cannot start with an airway")
-                continue
+    # no multiple adjacent inputs, pass on to list_parser
+    input_route_obj = functions.list_parser(input_list, nav_data)
 
-            # is airway at end of route? - not OK
-            if isinstance(input_route_obj.last_element, (objects.Airway, objects.AmbiguousAirway)):
-                logging.warning("Route ended with an airway, back to beginning of loop")
-                print("Route cannot end with an airway")
-                continue
+    if input_route_obj is None:  # something bad came back from string_parser
+        logging.warning("string_parser returned None, back to beginning of loop")
+        return
 
-            # no airways should touch another airway
-            if adjacent_airway_detector(input_route_obj):
-                # airways touch other airways - not OK
-                continue
+    if input_route_obj.contains_airway:  # is there an airway in the route?
+        # is airway at beginning of route? - not OK
+        if isinstance(input_route_obj.first_element, (objects.Airway, objects.AmbiguousAirway)):
+            logging.warning("Route started with an airway, back to beginning of loop")
+            return("Route cannot start with an airway")
 
-        if input_route_obj.contains_ambiguous_point:  # try solving with adjacent airways
-            logging.info("Ambiguous point(s) detected. Trying to solve using adjacent airways.")
-            input_route_obj = functions.deambiguate_points_using_airways(input_route_obj)
+        # is airway at end of route? - not OK
+        if isinstance(input_route_obj.last_element, (objects.Airway, objects.AmbiguousAirway)):
+            logging.warning("Route ended with an airway, back to beginning of loop")
+            return("Route cannot end with an airway")
 
-        if input_route_obj.contains_ambiguous_airway:  # try solving ambiguousairways with adjacent waypoints
-            logging.info("Ambiguous airway(s) detected. Trying to solve using adjacent waypoints.")
-            input_route_obj = functions.deambiguate_airways_using_points(input_route_obj)
+        # no airways should touch another airway
+        if adjacent_airway_detector(input_route_obj):
+            # airways touch other airways - not OK
+            return
 
-        if input_route_obj.contains_ambiguous_airway:  # deambiguating was not sucessful.  unable to compute
-            print("Unable to deambiguate airway(s).  Cannot continue.")
-            continue
+    if input_route_obj.contains_ambiguous_point:  # try solving with adjacent airways
+        logging.info("Ambiguous point(s) detected. Trying to solve using adjacent airways.")
+        input_route_obj = functions.deambiguate_points_using_airways(input_route_obj)
 
-        if input_route_obj.contains_airway:  # we need to unpack the airway into only the waypoints we want
-            input_route_obj = functions.slice_airways(input_route_obj)
+    if input_route_obj.contains_ambiguous_airway:  # try solving ambiguousairways with adjacent waypoints
+        logging.info("Ambiguous airway(s) detected. Trying to solve using adjacent waypoints.")
+        input_route_obj = functions.deambiguate_airways_using_points(input_route_obj)
 
-        if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
+    if input_route_obj.contains_ambiguous_airway:  # deambiguating was not sucessful.  unable to compute
+        return("Unable to deambiguate airway(s).  Cannot continue.")
 
-            logging.info("Ambiguous point(s) still detected. Using brute deambiguator.")
-            multiples_map = functions.multiple_point_finder(input_route_obj)
-            input_route_obj = functions.deambiguator_brute(input_route_obj, multiples_map)
+    if input_route_obj.contains_airway:  # we need to unpack the airway into only the waypoints we want
+        input_route_obj = functions.slice_airways(input_route_obj)
 
-        if input_route_obj.contains_ambiguous_point:  # brute deambiguator was not successful.  unable to compute
-            print("Unable to deambiguate point(s).  Cannot continue.")
-            continue
+    if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
 
-        for item in input_route_obj.elements:
-            print(item)
+        logging.info("Ambiguous point(s) still detected. Using brute deambiguator.")
+        multiples_map = functions.multiple_point_finder(input_route_obj)
+        input_route_obj = functions.deambiguator_brute(input_route_obj, multiples_map)
 
-        sum_distance = functions.distance_summer(input_route_obj)
+    if input_route_obj.contains_ambiguous_point:  # brute deambiguator was not successful.  unable to compute
+        return("Unable to deambiguate point(s).  Cannot continue.")
 
-        print('Distance in nm:', sum_distance)
+    for item in input_route_obj.elements:
+        print(item)
+
+    sum_distance = functions.distance_summer(input_route_obj)
+
+    return('Distance in nm:', sum_distance)
 
 
 def multiple_adjacent_string_detector(input_list: list[str]) -> bool:
@@ -150,6 +152,20 @@ def adjacent_airway_detector(input_route_obj) -> bool:
             print(("Adjacent airways found.  Unable to compute."))
             return True
     return False
+
+def flask_test() -> str:
+    """
+    A test function for use with Flask
+    :return: a string
+    """
+    return "Hello, Flask!"
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     main()
