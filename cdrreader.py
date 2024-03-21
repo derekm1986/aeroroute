@@ -2,6 +2,10 @@
 # codedswap_db.csv file must be in routes directory
 
 class CDR:
+    """
+    Stores a coded departure route (CDR) and its associated information
+    """
+    
     def __init__(self, cdr_id, dep_airport, arr_airport, route):
         self._cdr_id = cdr_id
         self._dep_airport = dep_airport
