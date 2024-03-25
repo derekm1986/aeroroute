@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from aeroroute import aeroroute_input
+from cdrgetter import cdr_finder_dep_arr
 
 app = Flask(__name__)
 
@@ -23,9 +24,12 @@ def cdr():
     arrival = str()
 
     if request.method == 'POST':
-        departure = request.form.get('departure')
-        arrival = request.form.get('arrival')
-        result = ("place holder", departure, arrival)
+        result = None
+        departure = request.form.get('departure').upper()
+        arrival = request.form.get('arrival').upper()
+        #result = ("place holder", departure, arrival)
+        #result = cdr_finder_dep_arr("KBOS", "KSFO")
+        result = cdr_finder_dep_arr(departure, arrival)
     
     return render_template('cdr.html', departure=departure, arrival=arrival, result=result)
 

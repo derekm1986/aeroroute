@@ -30,7 +30,7 @@ class CDR:
         return self._route
     
     def __repr__(self):
-        return f"CDR {self._cdr_id}, {self._dep_airport}, {self._arr_airport}, {self._route})"
+        return f"CDR {self._cdr_id}, {self._dep_airport}, {self._arr_airport}, {self._route}"
 
 
 def cdr_dict_maker():
@@ -54,6 +54,3 @@ def cdr_dict_maker():
     cdr_file.close()
 
     return cdr_dict
-
-
-print(cdr_dict_maker())
