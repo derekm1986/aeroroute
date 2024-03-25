@@ -37,18 +37,18 @@ def main() -> None:
         input_string = input("Enter input string: ")
         print("")
         input_string = input_string.upper()
-
+        
         logging.info("Input string was: " + input_string)  # log inputted string
+
+        if input_string == "QUIT":
+            print('***Program exiting***')
+            break
 
         input_list = input_string.split()
 
         if len(input_list) == 0:
             print("No input detected")
             continue
-
-        if len(input_list) == 1 and input_list[0] == "QUIT":
-            print('***Program exiting***')
-            break
 
         print(aeroroute_input(input_list, nav_data))
         
@@ -159,12 +159,6 @@ def flask_test() -> str:
     :return: a string
     """
     return "Hello, Flask!"
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
