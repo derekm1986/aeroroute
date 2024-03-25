@@ -83,18 +83,25 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
         output.add_element(found_item)
 
     # is there a None in the route?  Could this be a SID or STAR?
-    # this breaks stuff if a string is the first or last element in the route!!!!!!!!!!!!!!!!!!!!!!!!
     for item in output.elements:
          if isinstance(item, str):
-            previous_item = output.elements[output.elements.index(item) - 1]
-            next_item = output.elements[output.elements.index(item) + 1]
+            try:
+                previous_item = output.elements[output.elements.index(item) - 1]
+            except:
+                previous_item = None
+            try:
+                next_item = output.elements[output.elements.index(item) + 1]
+            except:
+                next_item = None
 
-            if isinstance(previous_item, objects.Airport):
+            if isinstance(previous_item, objects.Airport) and isinstance(next_item, (objects.PointInSpace, 
+                                                                                     objects.AmbiguousPoint)):
                 if terminal_procedure_recognizer(item):
                     output.replace_element(output.elements.index(item), 
                                            objects.TerminalProcedure(item, "SID", previous_item.identifier))
     
-            elif isinstance(next_item, objects.Airport):
+            elif isinstance(next_item, objects.Airport) and isinstance(previous_item, (objects.PointInSpace, 
+                                                                                       objects.AmbiguousPoint)):
                 if terminal_procedure_recognizer(item):
                     output.replace_element(output.elements.index(item), 
                                            objects.TerminalProcedure(item, "STAR", next_item.identifier))
