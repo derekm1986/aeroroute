@@ -46,7 +46,7 @@ def main() -> None:
             print("No input detected")
             continue
 
-        if "QUIT" in input_list:
+        if len(input_list) == 1 and input_list[0] == "QUIT":
             print('***Program exiting***')
             break
 

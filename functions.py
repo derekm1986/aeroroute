@@ -83,6 +83,7 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
         output.add_element(found_item)
 
     # is there a None in the route?  Could this be a SID or STAR?
+    # this breaks stuff if a string is the first or last element in the route
     for item in output.elements:
          if isinstance(item, str):
             previous_item = output.elements[output.elements.index(item) - 1]
