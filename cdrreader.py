@@ -11,6 +11,7 @@ class CDR:
         self._dep_airport = dep_airport
         self._arr_airport = arr_airport
         self._route = route
+        self._distance = None
 
     @property
     def cdr_id(self):
