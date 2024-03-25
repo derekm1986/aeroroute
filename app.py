@@ -25,7 +25,6 @@ def cdr():
     if request.method == 'POST':
         departure = request.form.get('departure')
         arrival = request.form.get('arrival')
-        print(departure, arrival)
         result = ("place holder", departure, arrival)
     
     return render_template('cdr.html', departure=departure, arrival=arrival, result=result)

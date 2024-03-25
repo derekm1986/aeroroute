@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Aeroroute</title>
@@ -9,5 +9,21 @@
     <p>{{ query }}</p>
     <p>Result was</p>
     <p>{{ result }}</p>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Distance</title>
+</head>
+<body>
+    <form method="POST">
+        <label for="route">Route:</label>
+        <input type="text" id="route" name="route">
+        <input type="submit" value="Submit">
+    </form>
+    <p>Route: {{ route }}</p>
+    <p>Result: {{ result }}</p>
 </body>
 </html>

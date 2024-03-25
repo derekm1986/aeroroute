@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -31,5 +31,24 @@ body {
 <p>{{ result }}</p>
 {% endif %}
 
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CDR</title>
+</head>
+<body>
+    <form method="POST">
+        <label for="departure">Departure:</label>
+        <input type="text" id="departure" name="departure">
+        <label for="arrival">Arrival:</label>
+        <input type="text" id="arrival" name="arrival">
+        <input type="submit" value="Submit">
+    </form>
+    <p>Departure: {{ departure }}</p>
+    <p>Arrival: {{ arrival }}</p>
+    <p>Result: {{ result }}</p>
 </body>
 </html>
