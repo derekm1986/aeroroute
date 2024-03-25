@@ -13,7 +13,7 @@ def distancefinder():
         query = route.split()
         result = aeroroute_input(query)
     
-    return render_template('form.html', route=route, result=result)
+    return render_template('distance.html', route=route, result=result)
 
 @app.route('/cdr', methods=['GET', 'POST'])
 def cdr():
