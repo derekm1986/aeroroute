@@ -42,8 +42,9 @@
         <input type="text" id="arrival" name="arrival">
         <input type="submit" value="Submit">
     </form>
-    <p>Departure: {{ departure }}</p>
-    <p>Arrival: {{ arrival }}</p>
-    <p>Result: {{ result }}</p>
+    {% if result %}
+    <h2>Result</h2>
+    <p>{{ result }}</p>
+    {% endif %}
 </body>
 </html>
