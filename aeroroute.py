@@ -48,7 +48,7 @@ def main() -> None:
             print("No input detected")
             continue
 
-        print(aeroroute_input(input_string, nav_data))
+        print('Distance in nm:', aeroroute_input(input_string, nav_data))
         
 
 def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
@@ -122,7 +122,7 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
 
     sum_distance = functions.distance_summer(input_route_obj)
 
-    return('Distance in nm:', sum_distance)
+    return(sum_distance)
 
 
 def multiple_adjacent_string_detector(input_list: list[str]) -> bool:
