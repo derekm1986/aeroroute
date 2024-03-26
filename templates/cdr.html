@@ -27,19 +27,25 @@
     </style>
 </head>
 <body>
+    <h1>CDR Tool</h1>
     <form method="POST">
+      <div>  
         <label for="departure">Departure:</label>
         <input type="text" id="departure" name="departure">
+      </div>
+      <br>
+      <div>
         <label for="arrival">Arrival:</label>
         <input type="text" id="arrival" name="arrival">
-        <input type="submit" value="Submit">
-    </form>
+      </div>
+      <br>
+      <input type="submit" value="Submit">
+      </form>
     {% if result %}
-    <h2>Result</h2>
-    {% for item in result %}
-    <p>{{ item }}</p>
-    {% endfor %}
-    <!-- <p>{{ result }}</p> -->
+      <h2>Result</h2>
+      {% for item in result %}
+        <p>{{ item }}</p>
+      {% endfor %}
     {% endif %}
 </body>
 </html>
