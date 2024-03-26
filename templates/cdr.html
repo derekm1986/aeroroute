@@ -24,15 +24,7 @@
 <head>
     <title>CDR</title>
     <style>
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        flex-direction: column;
-      }
-      </style>
+    </style>
 </head>
 <body>
     <form method="POST">
@@ -44,7 +36,10 @@
     </form>
     {% if result %}
     <h2>Result</h2>
-    <p>{{ result }}</p>
+    {% for item in result %}
+    <p>{{ item }}</p>
+    {% endfor %}
+    <!-- <p>{{ result }}</p> -->
     {% endif %}
 </body>
 </html>
