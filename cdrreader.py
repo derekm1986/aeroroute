@@ -10,7 +10,7 @@ class CDR:
         self._cdr_id = cdr_id
         self._dep_airport = dep_airport
         self._arr_airport = arr_airport
-        self._route = route
+        self._route_string = route
         self._distance = None
 
     @property
@@ -26,11 +26,11 @@ class CDR:
         return self._arr_airport
     
     @property
-    def route(self):
-        return self._route
+    def route_string(self):
+        return self._route_string
     
     def __repr__(self):
-        return f"CDR {self._cdr_id}, {self._dep_airport}, {self._arr_airport}, {self._route}"
+        return f"CDR {self._cdr_id}, {self._dep_airport}, {self._arr_airport}, {self._route_string}"
 
 
 def cdr_dict_maker():

@@ -49,7 +49,7 @@ def distance_summer(input_coordinates) -> float:
     :param input_coordinates: list of Coordinates objects
     :return: sum of distances in nautical miles
     """
-  
+
     sum_distance = 0.00  # establish sum_distance and put zero in it
   
     for pair in pair_maker(input_coordinates):
@@ -180,39 +180,42 @@ def vincenty_indirect(pair, heading=False):
     iterLimit = 100
     lmbdaP = 0.0  # jury-rig filling lmbdaP with something first
 
-    while abs(lmbda - lmbdaP) > 1e-12 and iterLimit > 0:
-
+    while True:
+        
         sinlmbda = math.sin(lmbda)
         coslmbda = math.cos(lmbda)
-        sinSigma = math.sqrt(((cosU2 * sinlmbda) ** 2) + (((cosU1 * sinU2) - (sinU1 * cosU2 * coslmbda)) ** 2))
+        sinSigma = math.sqrt(((cosU2 * sinlmbda) ** 2.0) + (((cosU1 * sinU2) - (sinU1 * cosU2 * coslmbda)) ** 2.0))
         cosSigma = (sinU1 * sinU2) + (cosU1 * cosU2 * coslmbda)
         sigma = math.atan2(sinSigma, cosSigma)
         sinAlpha = (cosU1 * cosU2 * sinlmbda) / sinSigma
-        cosSqAlpha = 1 - (sinAlpha ** 2)  # this will equal zero if two points are along the equator
-
-        if cosSqAlpha == 0:
-            cos2SigmaM = 0  # to protect from division error due to cosSqAlpha=0, also C will equal zero below
+        cosSqAlpha = 1.0 - (sinAlpha ** 2.0)  # this will equal zero if two points are along the equator
+        
+        if cosSqAlpha == 0.0:
+            cos2SigmaM = 0.0  # to protect from division error due to cosSqAlpha=0, also C will equal zero below
         else:
-            cos2SigmaM = cosSigma - ((2 * sinU1 * sinU2) / cosSqAlpha)
+            cos2SigmaM = cosSigma - ((2.0 * sinU1 * sinU2) / cosSqAlpha)
 
-        C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha))
+        C = f / 16.0 * cosSqAlpha * (4.0 + f * (4.0 - 3.0 * cosSqAlpha))
         lmbdaP = lmbda
-        lmbda = L + (1 - C) * f * sinAlpha * (
-                    sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)))
+        lmbda = L + (1.0 - C) * f * sinAlpha * (
+                    sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1.0 + 2.0 * cos2SigmaM * cos2SigmaM)))
 
         iterLimit -= 1
+        
+        if abs(lmbda - lmbdaP) < 1e-12:  # we have a winner
+            break
 
         if iterLimit == 0:
             logging.warning("Vincenty formula failed to converge")
             print('formula failed to converge')
             return float("NaN")
 
-    uSq = cosSqAlpha * (a ** 2 - b ** 2) / (b ** 2)
-    A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)))
-    B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)))
+    uSq = cosSqAlpha * (a ** 2.0 - b ** 2.0) / (b ** 2.0)
+    A = 1.0 + uSq / 16384.0 * (4096.0 + uSq * (-768.0 + uSq * (320.0 - 175.0 * uSq)))
+    B = uSq / 1024.0 * (256.0 + uSq * (-128.0 + uSq * (74.0 - 47.0 * uSq)))
     deltaSigma = B * sinSigma * (
-                cos2SigmaM + B / 4 * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B / 6 * cos2SigmaM *
-                                      (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)))
+                cos2SigmaM + B / 4.0 * (cosSigma * (-1.0 + 2.0 * cos2SigmaM * cos2SigmaM) - B / 6.0 * cos2SigmaM *
+                                      (-3.0 + 4.0 * sinSigma * sinSigma) * (-3.0 + 4.0 * cos2SigmaM * cos2SigmaM)))
     s = b * A * (sigma - deltaSigma)
 
     # to return initial/final azimuths in addition to distance

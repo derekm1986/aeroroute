@@ -44,19 +44,19 @@ def main() -> None:
             print('***Program exiting***')
             break
 
-        input_list = input_string.split()
-
-        if len(input_list) == 0:
+        if len(input_string) == 0:
             print("No input detected")
             continue
 
-        print(aeroroute_input(input_list, nav_data))
+        print(aeroroute_input(input_string, nav_data))
         
 
-def aeroroute_input(input_list, nav_data=nav_data_library.NavDataLibrary()):
+def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
     """
 
     """
+    input_list = input_string.split()
+    
     if len(input_list) == 1:  # single item, what happens if item doesn't exist?
         print('Single item detected, looking up item.')
         logging.info("Looking up single item: " + input_list[0])
