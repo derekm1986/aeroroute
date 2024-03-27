@@ -122,7 +122,7 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
 
     sum_distance = functions.distance_summer(input_route_obj)
 
-    sum_distance = round(sum_distance, 2)
+    sum_distance = round(sum_distance, 2)  # round to hundredths of a nm
 
     return(sum_distance)
 
