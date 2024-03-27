@@ -117,10 +117,12 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
     if input_route_obj.contains_ambiguous_point:  # brute deambiguator was not successful.  unable to compute
         return("Unable to deambiguate point(s).  Cannot continue.")
 
-    for item in input_route_obj.elements:
-        print(item)
+    #for item in input_route_obj.elements:
+    #    print(item)
 
     sum_distance = functions.distance_summer(input_route_obj)
+
+    sum_distance = round(sum_distance, 2)
 
     return(sum_distance)
 
