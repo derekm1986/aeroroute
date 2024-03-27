@@ -46,8 +46,8 @@ class PointInSpace(Location):
 
         return_string += f" * coordinates: {self._coordinates}"
 
-        if self._available_airways:
-            return_string += f" * available airways: {self._available_airways}"
+        # if self._available_airways:
+        #     return_string += f" * available airways: {self._available_airways}"
 
         return return_string
 
@@ -59,8 +59,8 @@ class PointInSpace(Location):
 
         return_string += f" * coordinates: {self._coordinates}"
 
-        if self._available_airways:
-            return_string += f" * available airways: {self._available_airways}"
+        # if self._available_airways:
+        #     return_string += f" * available airways: {self._available_airways}"
 
         return return_string
 

@@ -11,7 +11,7 @@ def distancefinder():
     
     if request.method == 'POST':
         route = request.form.get('route').upper()
-        query = route.split()
+        query = route
         result = aeroroute_input(query)
     
     return render_template('distance.html', route=route, result=result)
@@ -27,8 +27,6 @@ def cdr():
         result = None
         departure = request.form.get('departure').upper()
         arrival = request.form.get('arrival').upper()
-        #result = ("place holder", departure, arrival)
-        #result = cdr_finder_dep_arr("KBOS", "KSFO")
         result = cdr_finder_dep_arr(departure, arrival)
     
     return render_template('cdr.html', departure=departure, arrival=arrival, result=result)

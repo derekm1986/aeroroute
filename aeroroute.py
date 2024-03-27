@@ -28,7 +28,7 @@ def main() -> None:
     logging.info("Program starting")
 
     # create nav_data_library object
-    nav_data = nav_data_library.NavDataLibrary()
+    # nav_data = nav_data_library.NavDataLibrary()
 
     while True:
 
@@ -48,12 +48,12 @@ def main() -> None:
             print("No input detected")
             continue
 
-        print('Distance in nm:', aeroroute_input(input_string, nav_data))
+        print('Distance in nm:', aeroroute_input(input_string))
         
 
 def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
     """
-
+    The main logic for Aeroroute
     """
     input_list = input_string.split()
     
