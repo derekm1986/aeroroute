@@ -11,8 +11,7 @@ def distancefinder():
     
     if request.method == 'POST':
         route = request.form.get('route').upper()
-        query = route
-        result = aeroroute_input(query)
+        result = aeroroute_input(route)
     
     return render_template('distance.html', route=route, result=result)
 
