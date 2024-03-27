@@ -14,9 +14,12 @@
       </style>
 </head>
 <body>
+    <h1>Distance Tool</h1>
     <form method="POST">
         <label for="route">Route:</label>
+        <br><br>
         <textarea name="route" style="width: 400px; height: 50px;">{{ route }}</textarea>
+        <br><br>
         <input type="submit" value="Submit">
     </form>
     <p>Result in nm: {{ result }}</p>
