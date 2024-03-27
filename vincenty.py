@@ -9,7 +9,6 @@ def vincenty_indirect(pair, heading=False):
     :return: distance in nautical miles
     """
     #  Requires a tuple of two Coordinates objects
-    #  tuple of type (-lat.00, lon.00)
 
     lat1 = float(pair[0].latitude)
     lon1 = float(pair[0].longitude)
