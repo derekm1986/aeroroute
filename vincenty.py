@@ -1,4 +1,5 @@
 import math
+import logging
 
 def vincenty_indirect(pair, heading=False):
     """
