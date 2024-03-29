@@ -7,25 +7,24 @@ import functions
 import objects
 import logging
 
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s (%(levelname)s): %(message)s (Line: %(lineno)d [%(filename)s])",
+    datefmt='%Y-%m-%d %I:%M:%S %p',
+    filename='aeroroute.log',
+    encoding='utf-8',
+    filemode='w'
+)
+
+logging.info("Program starting")
 
 def main() -> None:
     """
     The main method of the program
     :return: nothing
     """
-
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="%(asctime)s (%(levelname)s): %(message)s (Line: %(lineno)d [%(filename)s])",
-        datefmt='%Y-%m-%d %I:%M:%S %p',
-        filename='aeroroute.log',
-        encoding='utf-8',
-        filemode='w'
-    )
     
     print('\n***Aeroroute loading***')
-
-    logging.info("Program starting")
 
     # create nav_data_library object
     # nav_data = nav_data_library.NavDataLibrary()
@@ -103,6 +102,7 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
         input_route_obj = functions.deambiguate_airways_using_points(input_route_obj)
 
     if input_route_obj.contains_ambiguous_airway:  # deambiguating was not sucessful.  unable to compute
+        logging.error("Unable to deambiguate airway(s).  Cannot continue." + str(input_route_obj.elements))
         return("Unable to deambiguate airway(s).  Cannot continue.")
 
     if input_route_obj.contains_airway:  # we need to unpack the airway into only the waypoints we want
@@ -115,6 +115,7 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
         input_route_obj = functions.deambiguator_brute(input_route_obj, multiples_map)
 
     if input_route_obj.contains_ambiguous_point:  # brute deambiguator was not successful.  unable to compute
+        logging.error("Unable to deambiguate point(s).  Cannot continue." + str(input_route_obj.elements))
         return("Unable to deambiguate point(s).  Cannot continue.")
 
     #for item in input_route_obj.elements:

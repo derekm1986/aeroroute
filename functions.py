@@ -298,6 +298,9 @@ def deambiguate_airways_using_points(input_route):
     :param input_route: Route object
     :return: Route object with airways deambiguated using waypoints
     """
+    
+    #  print(input_route)  # for debug
+    
     for item in input_route.elements:
         if isinstance(item, objects.AmbiguousAirway):
             
@@ -326,6 +329,7 @@ def deambiguate_airways_using_points(input_route):
                         break
                 if match_flag == True:
                     break
+    #  print(input_route)  # for debug
     return input_route
 
 
