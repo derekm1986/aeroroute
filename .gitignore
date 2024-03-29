@@ -9,3 +9,5 @@ AIRAC/
 __pycache__/
 routes/
 aeroroute.log
+*.DS_Store
+*.log
