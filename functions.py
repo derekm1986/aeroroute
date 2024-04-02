@@ -401,8 +401,8 @@ def terminal_procedure_recognizer(input_string: str) -> bool:
     :param input_string: user input string
     :return: True if input string is a terminal procedure, False if not
     """
+    
     # do we start with 3-5 letters, have one number, and may end with a letter?
-
     pattern = r"^[a-zA-Z]{3,5}\d[a-zA-Z]?$"
 
     return bool(re.match(pattern, input_string))
