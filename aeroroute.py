@@ -138,6 +138,7 @@ def multiple_adjacent_string_detector(input_list: list[str]) -> bool:
             return True
     return False
 
+
 def adjacent_airway_detector(input_route_obj) -> bool:
     """
     detects if two Airways or AmbiguousAirways are touching
@@ -152,13 +153,6 @@ def adjacent_airway_detector(input_route_obj) -> bool:
             print(("Adjacent airways found.  Unable to compute."))
             return True
     return False
-
-def flask_test() -> str:
-    """
-    A test function for use with Flask
-    :return: a string
-    """
-    return "Hello, Flask!"
 
 
 if __name__ == "__main__":
