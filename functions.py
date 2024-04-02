@@ -382,6 +382,7 @@ def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
     :param input_string: user input lat/long coordinates
     :return: manual waypoint object or None
     """
+    
     # also need to allow for 234234N/234234W format
     if "." in input_string:  # decimal format entered
         coordinates = tuple(input_string.split('/'))
