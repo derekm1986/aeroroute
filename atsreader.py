@@ -90,21 +90,6 @@ def airway_dict_maker():
                 firstwaypoint = [firstid, firstlat, firstlong]
                 secondwaypoint = [secondid, secondlat, secondlong]
 
-                #for debug, has to do with crossing equator/prime meridian
-                if firstlat == '.':
-                    print("bogus value for waypoint", firstwaypoint)
-
-                if firstlong == '.':
-                    print("bogus value for waypoint", firstwaypoint)
-
-                if secondlat == '.':
-                    print("bogus value for waypoint", secondwaypoint)
-
-                if secondlong == '.':
-                    print("bogus value for waypoint", secondwaypoint)
-
-                # this is asking if an object is already in the list.  comparing an object to an object is bad news.
-
                 if firstwaypoint not in simpleairwaylist:
                     airwaylist.append(PointInSpace(firstwaypoint[0], Coordinates(firstwaypoint[1], firstwaypoint[2]),
                                                    'airwaywaypoint'))

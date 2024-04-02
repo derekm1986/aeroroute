@@ -310,9 +310,11 @@ def deambiguate_airways_using_points(input_route):
             for airway in item.possibilities:
                 match_flag = False
                 for waypoint in airway.waypoints:
-                    if waypoint.identifier == previous_item.identifier:
+                    if all([waypoint.identifier == previous_item.identifier,
+                           waypoint.coordinates == previous_item.coordinates]):
                         for second_waypoint in airway.waypoints:
-                            if second_waypoint.identifier == next_item.identifier:
+                            if all([second_waypoint.identifier == next_item.identifier, 
+                                   second_waypoint.coordinates == next_item.coordinates]):
                                 input_route.deambiguate(current_index, item.possibilities.index(airway))
                                 match_flag = True
                             if match_flag == True:
