@@ -298,8 +298,6 @@ def deambiguate_airways_using_points(input_route):
     :return: Route object with airways deambiguated using waypoints
     """
     
-    #  print(input_route)  # for debug
-    
     for item in input_route.elements:
         if isinstance(item, objects.AmbiguousAirway):
             
@@ -311,15 +309,10 @@ def deambiguate_airways_using_points(input_route):
             
             for airway in item.possibilities:
                 match_flag = False
-                # print("possibilities are", item.possibilities)
                 for waypoint in airway.waypoints:
-                    # print("waypoint is", waypoint.identifier)
                     if waypoint.identifier == previous_item.identifier:
-                        # print("waypoint is", waypoint.identifier, "previous item is", previous_item.identifier)
                         for second_waypoint in airway.waypoints:
-                            # print("second waypoint is", second_waypoint.identifier, "next item is", next_item.identifier)
                             if second_waypoint.identifier == next_item.identifier:
-                                # print(current_index, item.possibilities.index(airway))
                                 input_route.deambiguate(current_index, item.possibilities.index(airway))
                                 match_flag = True
                             if match_flag == True:
@@ -328,7 +321,6 @@ def deambiguate_airways_using_points(input_route):
                         break
                 if match_flag == True:
                     break
-    #  print(input_route)  # for debug
     return input_route
 
 
@@ -382,7 +374,7 @@ def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
     :param input_string: user input lat/long coordinates
     :return: manual waypoint object or None
     """
-    
+
     # also need to allow for 234234N/234234W format
     if "." in input_string:  # decimal format entered
         coordinates = tuple(input_string.split('/'))
