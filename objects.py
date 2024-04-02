@@ -212,10 +212,6 @@ class Route:
     def replace_element(self, position: int, new_element) -> None:
         self._elements[position] = new_element
 
-    #def get_possibilities(self, position: int): # not sure if I need this
-    #    # must be AmbiguousPoint at position
-    #    return self._elements[position].get_possibilities()
-
     def deambiguate(self, position: int, possibility_number: int) -> None:
         # must be AmbiguousPoint at position
         self._elements[position] = self._elements[position].get_possibility(possibility_number)
@@ -370,5 +366,3 @@ class TerminalProcedure:
 
     def __repr__(self):
         return f"{self._identifier} *** terminal procedure * {self._type_element}"
-    
-    

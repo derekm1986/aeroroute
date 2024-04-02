@@ -3,7 +3,6 @@
 
 from objects import PointInSpace
 from objects import AmbiguousPoint
-
 from objects import Coordinates
 
 def navaid_dict_maker():

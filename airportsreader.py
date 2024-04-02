@@ -4,7 +4,6 @@
 # This file does not attempt to read runway data
 
 from objects import Airport
-
 from objects import Coordinates
 
 

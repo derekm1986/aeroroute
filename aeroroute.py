@@ -118,9 +118,6 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
         logging.error("Unable to deambiguate point(s).  Cannot continue." + str(input_route_obj.elements))
         return("Unable to deambiguate point(s).  Cannot continue.")
 
-    #for item in input_route_obj.elements:
-    #    print(item)
-
     sum_distance = functions.distance_summer(input_route_obj)
 
     sum_distance = round(sum_distance, 2)  # round to hundredths of a nm
