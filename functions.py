@@ -17,10 +17,9 @@ def pair_maker(input_waypoints):
     else:
         route_before_airways = input_waypoints
 
-    # get points out of any AirwayInRoute
-    
     route = []
     
+    # looking for airways
     for item in route_before_airways:
         if isinstance(item, objects.AirwayInRoute):
             for waypoint in item.waypoints:
@@ -29,11 +28,6 @@ def pair_maker(input_waypoints):
             pass
         else:
             route.append(item)
-
-    for item in route:
-        if isinstance(item, (objects.Airway, objects.AmbiguousAirway, objects.AirwayInRoute)):
-            print("an airway got too far, we will crash!")
-            return
 
     i = 0
 
