@@ -103,6 +103,7 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
     # still a string in the route? then return None
     failure_flag = False
 
+    # re-write to look for valid objects instead
     for item in output.elements:
         if isinstance(item, str):
             print(item, "not found")
