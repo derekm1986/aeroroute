@@ -245,7 +245,7 @@ def deambiguator_brute(input_route, multiplesmatrix) -> objects.Route:
     return input_route
 
 
-def deambiguate_points_using_airways(input_route):
+def deambiguate_points_using_airways(input_route) -> objects.Route:
     """
     use adjacent airways to solve ambiguous points
     :param input_route: Route object
@@ -286,7 +286,7 @@ def deambiguate_points_using_airways(input_route):
     return input_route
 
 
-def deambiguate_airways_using_points(input_route):
+def deambiguate_airways_using_points(input_route) -> objects.Route:
     """
     use adjacent waypoints to solve ambiguous airways
     :param input_route: Route object
@@ -321,7 +321,7 @@ def deambiguate_airways_using_points(input_route):
     return input_route
 
 
-def slice_airways(input_route):
+def slice_airways(input_route) -> objects.Route:
     """
     slices airways into only the waypoints you want
     :param input_route: Route object
