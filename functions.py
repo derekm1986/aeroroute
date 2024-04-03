@@ -145,9 +145,9 @@ def multiple_point_finder(input_waypoints: objects.Route):
     return multiples_map
 
 
-def deambiguator_brute(input_route, multiplesmatrix):
+def deambiguator_brute(input_route, multiplesmatrix) -> objects.Route:
     """
-    deambiguates points in a route using a brute force method, if an airway in a route, will not work correctly
+    deambiguates points in a route using a brute force method
     :param input_route: Route object
     :param multiplesmatrix: list of lists of integers representing positions of multiple points in the route
     :return: Route object with points deambiguated
