@@ -393,6 +393,6 @@ def terminal_procedure_recognizer(input_string: str) -> bool:
     """
     
     # do we start with 3-5 letters, have one number, and may end with a letter?
-    pattern = r"^[a-zA-Z]{3,5}\d[a-zA-Z]?$"
+    pattern = r"^[A-Z]{3,5}\d[A-Z]?$"
 
     return bool(re.match(pattern, input_string))
