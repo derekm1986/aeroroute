@@ -29,12 +29,16 @@ def pair_maker(input_waypoints):
         else:
             route.append(item)
 
+    pairs = []
+    
     i = 0
 
     while i <= (len(route) - 2):  # make pairs of each waypoint and the waypoint after it
         pair = [route[i].coordinates, route[i + 1].coordinates]
         i += 1
-        yield pair
+        pairs.append(pair)
+    
+    return pairs
 
 
 def distance_summer(input_coordinates) -> float:
