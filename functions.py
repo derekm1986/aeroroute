@@ -322,6 +322,8 @@ def deambiguate_airways_using_points(input_route) -> objects.Route:
                         break
                 if match_flag == True:
                     break
+        if match_flag == False:
+            print("Unable to deambiguate airway(s).  Cannot continue.")
     return input_route
 
 
@@ -361,7 +363,7 @@ def slice_airways(input_route) -> objects.Route:
                     end_position = item.waypoints.index(waypoint)
 
             if start_position is None or end_position is None:
-                print("Unable to connect airway.  Cannot continue.")
+                print("Unable to connect airway(s).  Cannot continue.")
                 return
             
             input_route.replace_element(current_index, item.get_segment(start_position + 1, end_position))
