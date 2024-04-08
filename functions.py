@@ -290,7 +290,7 @@ def deambiguate_points_using_airways(input_route) -> objects.Route:
     return input_route
 
 
-def deambiguate_airways_using_points(input_route) -> objects.Route:
+def deambiguate_and_connect_airways_using_points(input_route) -> objects.Route:
     """
     use adjacent waypoints to solve ambiguous airways
     :param input_route: Route object
