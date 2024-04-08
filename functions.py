@@ -290,7 +290,7 @@ def deambiguate_points_using_airways(input_route) -> objects.Route:
     return input_route
 
 
-def deambiguate_airways_using_points(input_route) -> objects.Route:
+def deambiguate_airways_using_points(input_route: objects.Route) -> objects.Route:
     """
     use adjacent waypoints to solve ambiguous airways
     :param input_route: Route object
@@ -298,6 +298,9 @@ def deambiguate_airways_using_points(input_route) -> objects.Route:
     """
     
     for item in input_route.elements:
+        
+        match_flag = False
+
         if isinstance(item, objects.AmbiguousAirway):
             
             current_index = input_route.elements.index(item)
@@ -316,14 +319,15 @@ def deambiguate_airways_using_points(input_route) -> objects.Route:
                                    second_waypoint.coordinates == next_item.coordinates]):
                                 input_route.deambiguate(current_index, item.possibilities.index(airway))
                                 match_flag = True
-                            if match_flag == True:
+                            if match_flag:
                                 break
-                    if match_flag == True:
+                    if match_flag:
                         break
-                if match_flag == True:
+                if match_flag:
                     break
-        if match_flag == False:
-            print("Unable to deambiguate airway(s).  Cannot continue.")
+    if input_route.contains_ambiguous_airway:
+        print("Unable to deambiguate airway(s).  Cannot continue.")
+    
     return input_route
 
 
