@@ -99,7 +99,7 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
 
     if input_route_obj.contains_ambiguous_airway:  # try solving ambiguousairways with adjacent waypoints
         logging.info("Ambiguous airway(s) detected. Trying to solve using adjacent waypoints.")
-        input_route_obj = functions.select_airways_using_points(input_route_obj)
+        input_route_obj = functions.deambiguate_airways_using_points(input_route_obj)
 
     if input_route_obj.contains_ambiguous_airway:  # deambiguating was not sucessful.  unable to compute
         logging.error("Unable to deambiguate airway(s).  Cannot continue." + str(input_route_obj.elements))
