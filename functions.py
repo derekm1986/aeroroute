@@ -292,6 +292,9 @@ def deambiguate_points_using_airways(input_route) -> objects.Route:
 
 def deambiguate_airways_using_points(input_route: objects.Route) -> objects.Route:
     """
+
+    how can I make this fail in a better way?
+
     use adjacent waypoints to solve ambiguous airways
     :param input_route: Route object
     :return: Route object with airways deambiguated using waypoints
