@@ -11,7 +11,7 @@ from aeroroute.objects import Coordinates
 
 def navaid_dict_maker():
 
-    navaid_file = open("AIRAC/Navaids.txt")
+    navaid_file = open("data/AIRAC/Navaids.txt")
 
     navaid_dict = {}
 
