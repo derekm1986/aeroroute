@@ -1,4 +1,6 @@
-from cdrreader import cdr_dict_maker
+#from cdrreader import cdr_dict_maker
+from aeroroute.cdrreader import cdr_dict_maker
+
 
 def cdr_finder_dep_arr(dep_airport, arr_airport):
     cdr_dict = cdr_dict_maker()
