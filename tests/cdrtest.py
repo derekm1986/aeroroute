@@ -1,5 +1,4 @@
 import sys
-import unittest
 
 # Add the aeroroute directory to the system path
 sys.path.append('../aeroroute')
