@@ -1,7 +1,10 @@
-import objects
+#import objects
 import logging
 import re
-from vincenty import vincenty_indirect
+#from vincenty import vincenty_indirect
+
+from aeroroute import objects
+from aeroroute.vincenty import vincenty_indirect
 
 
 def pair_maker(input_waypoints):

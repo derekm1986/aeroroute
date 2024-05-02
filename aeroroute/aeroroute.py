@@ -2,9 +2,14 @@
 A program I use to get the length of routes typed in human-readable
 format.  Requires AIRAC files in vasFMC format in a /AIRAC/ folder.
 """
-import nav_data_library
-import functions
-import objects
+#import nav_data_library
+#import functions
+#import objects
+
+from aeroroute import nav_data_library
+from aeroroute import functions
+from aeroroute import objects
+
 import logging
 
 logging.basicConfig(

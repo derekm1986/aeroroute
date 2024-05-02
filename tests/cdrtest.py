@@ -1,5 +1,10 @@
-import aeroroute
-import cdrreader
+import sys
+import unittest
+
+# Add the aeroroute directory to the system path
+sys.path.append('../aeroroute')
+
+from aeroroute import cdrreader
 
 # test aeroroute using all cdrs
 

@@ -3,8 +3,11 @@
 
 # This file does not attempt to read runway data
 
-from objects import Airport
-from objects import Coordinates
+#from objects import Airport
+#from objects import Coordinates
+
+from aeroroute.objects import Airport
+from aeroroute.objects import Coordinates
 
 
 def airport_dict_maker():
