@@ -3,7 +3,7 @@ import navaidsreader
 import waypointsreader
 import atsreader
 import logging
-#import objects
+import objects
 
 #from aeroroute import airportsreader
 #from aeroroute import navaidsreader
