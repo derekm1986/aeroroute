@@ -3,7 +3,13 @@ import sys
 # Add the aeroroute directory to the system path
 sys.path.append('../aeroroutesrc')
 
+<<<<<<< Updated upstream
 from aeroroute import cdrreader
+=======
+print(sys.path)
+
+import cdrreader
+>>>>>>> Stashed changes
 
 # test aeroroute using all cdrs
 
