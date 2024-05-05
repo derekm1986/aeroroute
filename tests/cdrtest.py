@@ -1,7 +1,7 @@
 import sys
 
 # Add the aeroroute directory to the system path
-sys.path.append('../aeroroute')
+sys.path.append('../aeroroutesrc')
 
 from aeroroute import cdrreader
 
