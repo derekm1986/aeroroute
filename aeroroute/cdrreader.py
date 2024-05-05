@@ -1,5 +1,5 @@
 #from aeroroute import aeroroute_input
-from aeroroute import aeroroute
+import aeroroute
 
 # This file parses the FAA's coded departure routes
 # codedswap_db.csv file must be in routes directory
@@ -64,3 +64,6 @@ def cdr_dict_maker():
     cdr_file.close()
 
     return cdr_dict
+
+cdr_dict = cdr_dict_maker()  # for testing
+print(cdr_dict)  # for testing
