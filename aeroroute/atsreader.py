@@ -1,15 +1,15 @@
 # This file parses the vasFMC format ATS.txt file
 # ATS.txt file must be in AIRAC directory
 
-#from objects import Airway
-#from objects import PointInSpace
-#from objects import AmbiguousAirway
-#from objects import Coordinates
+from objects import Airway
+from objects import PointInSpace
+from objects import AmbiguousAirway
+from objects import Coordinates
 
-from aeroroute.objects import Airway
-from aeroroute.objects import PointInSpace
-from aeroroute.objects import AmbiguousAirway
-from aeroroute.objects import Coordinates
+#from aeroroute.objects import Airway
+#from aeroroute.objects import PointInSpace
+#from aeroroute.objects import AmbiguousAirway
+#from aeroroute.objects import Coordinates
 
 
 def airway_lat_long_maker(input_string) -> str:

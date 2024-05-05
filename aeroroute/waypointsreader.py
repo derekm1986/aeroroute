@@ -1,13 +1,13 @@
 # This file parses the vasFMC format Waypoints.txt file
 # Waypoints.txt file must be in AIRAC directory
 
-#from objects import PointInSpace
-#from objects import AmbiguousPoint
-#from objects import Coordinates
+from objects import PointInSpace
+from objects import AmbiguousPoint
+from objects import Coordinates
 
-from aeroroute.objects import PointInSpace
-from aeroroute.objects import AmbiguousPoint
-from aeroroute.objects import Coordinates
+#from aeroroute.objects import PointInSpace
+#from aeroroute.objects import AmbiguousPoint
+#from aeroroute.objects import Coordinates
 
 
 def waypoint_dict_maker():

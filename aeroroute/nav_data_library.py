@@ -1,15 +1,15 @@
-#import airportsreader
-#import navaidsreader
-#import waypointsreader
-#import atsreader
+import airportsreader
+import navaidsreader
+import waypointsreader
+import atsreader
 import logging
 #import objects
 
-from aeroroute import airportsreader
-from aeroroute import navaidsreader
-from aeroroute import waypointsreader
-from aeroroute import atsreader
-from aeroroute import objects
+#from aeroroute import airportsreader
+#from aeroroute import navaidsreader
+#from aeroroute import waypointsreader
+#from aeroroute import atsreader
+#from aeroroute import objects
 
 
 class NavDataLibrary(object):
