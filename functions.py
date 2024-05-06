@@ -338,9 +338,8 @@ def deambiguate_airways_using_points(input_route: objects.Route) -> objects.Rout
                         break
                 if match_flag:
                     break
-            if not match_flag:
-                print("Unable to deambiguate airway", item.identifier)
-                # raise ValueError("Unable to deambiguate airway(s). Cannot continue. RAISED ERROR")
+    if input_route.contains_ambiguous_airway:
+        print("Unable to deambiguate airway(s).  Cannot continue.")
     
     return input_route
 
