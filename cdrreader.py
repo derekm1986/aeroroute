@@ -44,7 +44,7 @@ class CDR:
 
 def cdr_dict_maker():
 
-    cdr_file = open("routes/codedswap_db.csv")
+    cdr_file = open("data/routes/codedswap_db.csv")
 
     cdr_dict = {}
 

@@ -9,7 +9,7 @@ from objects import Coordinates
 
 def airport_dict_maker():
 
-    airport_file = open("AIRAC/Airports.txt")
+    airport_file = open("data/AIRAC/Airports.txt")
 
     airport_dict = {}
 

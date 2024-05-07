@@ -8,7 +8,7 @@ from objects import Coordinates
 
 def waypoint_dict_maker():
 
-    waypoint_file = open("AIRAC/Waypoints.txt")
+    waypoint_file = open("data/AIRAC/Waypoints.txt")
 
     waypoint_dict = {}
 

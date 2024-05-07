@@ -41,7 +41,7 @@ def airway_lat_long_maker(input_string) -> str:
 
 def airway_dict_maker():
 
-    ats_file = open("AIRAC/ATS.txt")
+    ats_file = open("data/AIRAC/ATS.txt")
 
     airway_dict = {}
 
