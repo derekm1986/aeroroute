@@ -1,11 +1,7 @@
 import objects
 import logging
 import re
-#from vincenty import vincenty_indirect
-
-#from aeroroute import objects
-#from aeroroute.vincenty import vincenty_indirect
-import vincenty
+from vincenty import vincenty_indirect
 
 
 def pair_maker(input_waypoints):
@@ -55,7 +51,7 @@ def distance_summer(input_coordinates) -> float:
     sum_distance = 0.00  # establish sum_distance and put zero in it
   
     for pair in pair_maker(input_coordinates):
-        pair_distance = vincenty.vincenty_indirect(pair)
+        pair_distance = vincenty_indirect(pair)
         sum_distance += pair_distance
 
     return sum_distance
@@ -332,8 +328,9 @@ def deambiguate_airways_using_points(input_route: objects.Route) -> objects.Rout
                         break
                 if match_flag:
                     break
-    if input_route.contains_ambiguous_airway:
-        print("Unable to deambiguate airway(s).  Cannot continue.")
+            if not match_flag:
+                print("Unable to deambiguate airway", item.identifier)
+                # raise ValueError("Unable to deambiguate airway(s). Cannot continue. RAISED ERROR")
     
     return input_route
 

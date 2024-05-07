@@ -1,5 +1,4 @@
-#from aeroroute import aeroroute_input
-import aeroroute
+from aeroroute import aeroroute_input
 
 # This file parses the FAA's coded departure routes
 # codedswap_db.csv file must be in routes directory
@@ -36,7 +35,7 @@ class CDR:
     @property
     def distance(self):
         if not self._distance:
-            self._distance = aeroroute.aeroroute_input(self._route_string)
+            self._distance = aeroroute_input(self._route_string)
         return self._distance
     
     def __repr__(self):
@@ -45,7 +44,7 @@ class CDR:
 
 def cdr_dict_maker():
 
-    cdr_file = open("data/routes/codedswap_db.csv")
+    cdr_file = open("routes/codedswap_db.csv")
 
     cdr_dict = {}
 
@@ -64,6 +63,3 @@ def cdr_dict_maker():
     cdr_file.close()
 
     return cdr_dict
-
-cdr_dict = cdr_dict_maker()  # for testing
-print(cdr_dict)  # for testing

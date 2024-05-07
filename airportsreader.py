@@ -6,13 +6,10 @@
 from objects import Airport
 from objects import Coordinates
 
-#from aeroroute.objects import Airport
-#from aeroroute.objects import Coordinates
-
 
 def airport_dict_maker():
 
-    airport_file = open("data/AIRAC/Airports.txt")
+    airport_file = open("AIRAC/Airports.txt")
 
     airport_dict = {}
 

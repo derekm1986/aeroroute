@@ -5,14 +5,10 @@ from objects import PointInSpace
 from objects import AmbiguousPoint
 from objects import Coordinates
 
-#from aeroroute.objects import PointInSpace
-#from aeroroute.objects import AmbiguousPoint
-#from aeroroute.objects import Coordinates
-
 
 def waypoint_dict_maker():
 
-    waypoint_file = open("data/AIRAC/Waypoints.txt")
+    waypoint_file = open("AIRAC/Waypoints.txt")
 
     waypoint_dict = {}
 

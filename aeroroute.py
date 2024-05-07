@@ -2,10 +2,9 @@
 A program I use to get the length of routes typed in human-readable
 format.  Requires AIRAC files in vasFMC format in a /AIRAC/ folder.
 """
-from nav_data_library import NavDataLibrary
+import nav_data_library
 import functions
 import objects
-
 import logging
 
 logging.basicConfig(
@@ -51,7 +50,7 @@ def main() -> None:
         print('Distance in nm:', aeroroute_input(input_string))
         
 
-def aeroroute_input(input_string, nav_data=NavDataLibrary()):
+def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
     """
     The main logic for Aeroroute
     """

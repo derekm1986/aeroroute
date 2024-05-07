@@ -5,13 +5,9 @@ from objects import PointInSpace
 from objects import AmbiguousPoint
 from objects import Coordinates
 
-#from aeroroute.objects import PointInSpace
-#from aeroroute.objects import AmbiguousPoint
-#from aeroroute.objects import Coordinates
-
 def navaid_dict_maker():
 
-    navaid_file = open("data/AIRAC/Navaids.txt")
+    navaid_file = open("AIRAC/Navaids.txt")
 
     navaid_dict = {}
 
