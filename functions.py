@@ -1,17 +1,11 @@
 import objects
 import logging
 import re
-<<<<<<< Updated upstream
 #from vincenty import vincenty_indirect
 
 #from aeroroute import objects
 #from aeroroute.vincenty import vincenty_indirect
 import vincenty
-=======
-
-
-from vincenty import vincenty_indirect
->>>>>>> Stashed changes
 
 
 def pair_maker(input_waypoints):
