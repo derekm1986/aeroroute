@@ -122,6 +122,8 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
 
     sum_distance = round(sum_distance, 2)  # round to hundredths of a nm
 
+    print(input_route_obj.elements) # for debug, BOSLAST7 doesn't work because J4 is an airway and a point!
+
     return(sum_distance)
 
 
