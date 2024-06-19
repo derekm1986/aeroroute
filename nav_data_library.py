@@ -136,3 +136,23 @@ class NavDataLibrary(object):
 
         return found_item
     
+    @property
+    def airports(self):
+        return self.airport_dict
+    
+    @property
+    def navaids(self):
+        return self.navaid_dict
+    
+    @property
+    def waypoints(self):
+        return self.waypoint_dict
+    
+    @property
+    def airways(self):
+        return self.airway_dict
+    
+    @property
+    def points_in_space(self):
+        return self.points_in_space_dict
+    
