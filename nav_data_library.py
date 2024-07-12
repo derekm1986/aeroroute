@@ -9,6 +9,9 @@ import objects
 class NavDataLibrary(object):
     """
     Holds functionality for Nav Data, along with some functionality
+
+    Can I change this to return a dictionary value regardless of type?  This could help when
+    there are multiple types of possiblities?
     """
     def __init__(self):
         logging.info("Loading airports into memory")
