@@ -125,6 +125,8 @@ class NavDataLibrary(object):
         looks for item inside this Nav Data library
         :param item: string to search for
         :return: found object or none
+
+        Maybe this should just return a dictionary value regardless of type?
         """
         found_item = None
 
