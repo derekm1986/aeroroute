@@ -12,6 +12,8 @@ class NavDataLibrary(object):
 
     Can I change this to return a dictionary value regardless of type?  This could help when
     there are multiple types of possiblities?
+
+    Also change to make variables more private?
     """
     def __init__(self):
         logging.info("Loading airports into memory")
