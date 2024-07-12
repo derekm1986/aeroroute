@@ -24,7 +24,7 @@ class PointInSpace(Location):
     def __init__(self, identifier, coordinates, type_element, element_name=None):
         super().__init__(identifier, coordinates, type_element)
         self._element_name = element_name
-        self._available_airways = []
+        self._available_airways = []  # should I make this a set instead?
         self._on_airway = None
 
     @property
