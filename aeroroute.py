@@ -23,7 +23,6 @@ def main() -> None:
     The main method of the program
     :return: nothing
     """
-    
     print('\n***Aeroroute loading***')
 
     # create nav_data_library object
