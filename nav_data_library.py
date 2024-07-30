@@ -17,23 +17,23 @@ class NavDataLibrary(object):
     """
     def __init__(self):
         logging.info("Loading airports into memory")
-        self.airport_dict = airportsreader.airport_dict_maker()
+        self._airport_dict = airportsreader.airport_dict_maker()
         logging.info("Airports loaded into memory")  # loading airports was successful
 
         logging.info("Loading NAVAIDs into memory")
-        self.navaid_dict = navaidsreader.navaid_dict_maker()
+        self._navaid_dict = navaidsreader.navaid_dict_maker()
         logging.info("NAVAIDs loaded into memory")  # loading NAVAIDs was successful
 
         logging.info("Loading waypoints into memory")
-        self.waypoint_dict = waypointsreader.waypoint_dict_maker()
+        self._waypoint_dict = waypointsreader.waypoint_dict_maker()
         logging.info("Waypoints loaded into memory")  # loading elements was successful
 
         logging.info("Loading airways into memory")
-        self.airway_dict = atsreader.airway_dict_maker()
+        self._airway_dict = atsreader.airway_dict_maker()
         logging.info("Airways loaded into memory")  # loading airways was successful
 
         logging.info("Combining NAVAID and waypoint dictionaries")
-        self.points_in_space_dict = self.points_in_space_dict_combiner()
+        self._points_in_space_dict = self.points_in_space_dict_combiner()
         logging.info("NAVAID and waypoint dictionaries combined")  # dictionary combination was successful
         
         logging.info("Adding airway references to combined dictionary")
@@ -48,19 +48,19 @@ class NavDataLibrary(object):
         :return: points_in_space_dict
         """
 
-        points_in_space_dict = self.navaid_dict.copy()
+        points_in_space_dict = self._navaid_dict.copy()
 
-        for key, val in self.waypoint_dict.items():
+        for key, val in self._waypoint_dict.items():
             if key in points_in_space_dict:
                 # the entry is already in points_in_space_dict
                 if type(points_in_space_dict[key]) is objects.AmbiguousPoint:
                     # points_in_space_dict already has AmbiguousPoint
                     if type(val) is objects.AmbiguousPoint:
                         # must add AmbiguousPoint to AmbiguousPoint
-                        points_in_space_dict[key].add_possibility(self.waypoint_dict[key].possibilities)
+                        points_in_space_dict[key].add_possibility(self._waypoint_dict[key].possibilities)
                     else:
                         # must add PointInSpace to AmbiguousPoint
-                        points_in_space_dict[key].add_possibility(self.waypoint_dict[key])
+                        points_in_space_dict[key].add_possibility(self._waypoint_dict[key])
                 else:
                     # points_in_space_dict contains a PointInSpace
                     if type(val) is objects.AmbiguousPoint:
@@ -83,43 +83,43 @@ class NavDataLibrary(object):
         adds airway references into the points_in_space_dict
         :return: None
         """
-        for airway_names in self.airway_dict.values():
+        for airway_names in self._airway_dict.values():
             if isinstance(airway_names, objects.AmbiguousAirway):  # we have encountered an AmbiguousAirway
                 for airway in airway_names.possibilities:
                     for waypoint in airway.waypoints:
-                        if waypoint.identifier in self.points_in_space_dict:
-                            if isinstance(self.points_in_space_dict[waypoint.identifier], objects.AmbiguousPoint):
+                        if waypoint.identifier in self._points_in_space_dict:
+                            if isinstance(self._points_in_space_dict[waypoint.identifier], objects.AmbiguousPoint):
                                 # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
-                                for point in self.points_in_space_dict[waypoint.identifier].possibilities:
+                                for point in self._points_in_space_dict[waypoint.identifier].possibilities:
                                     if point.coordinates == waypoint.coordinates:
                                         if airway.identifier not in point.available_airways:
                                             point.add_available_airway(airway.identifier)
                             else:
                                 # trying to match with a single item
-                                if self.points_in_space_dict[waypoint.identifier].coordinates == \
+                                if self._points_in_space_dict[waypoint.identifier].coordinates == \
                                         waypoint.coordinates:
                                     # need to check if it's there first!
                                     if airway.identifier not in \
-                                            self.points_in_space_dict[waypoint.identifier].available_airways:
-                                        self.points_in_space_dict[waypoint.identifier].add_available_airway(
+                                            self._points_in_space_dict[waypoint.identifier].available_airways:
+                                        self._points_in_space_dict[waypoint.identifier].add_available_airway(
                                             airway.identifier)
             else:  # we have encountered an Airway by itself
                 for waypoint in airway_names.waypoints:
-                    if waypoint.identifier in self.points_in_space_dict:
-                        if isinstance(self.points_in_space_dict[waypoint.identifier], objects.AmbiguousPoint):
+                    if waypoint.identifier in self._points_in_space_dict:
+                        if isinstance(self._points_in_space_dict[waypoint.identifier], objects.AmbiguousPoint):
                             # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
-                            for point in self.points_in_space_dict[waypoint.identifier].possibilities:
+                            for point in self._points_in_space_dict[waypoint.identifier].possibilities:
                                 if point.coordinates == waypoint.coordinates:
                                     if airway_names.identifier not in point.available_airways:
                                         point.add_available_airway(airway_names.identifier)
                         else:
                             # trying to match with a single item
-                            if self.points_in_space_dict[waypoint.identifier].coordinates == \
+                            if self._points_in_space_dict[waypoint.identifier].coordinates == \
                                     waypoint.coordinates:
                                 # need to check if it's there first!
                                 if airway_names.identifier not in \
-                                        self.points_in_space_dict[waypoint.identifier].available_airways:
-                                    self.points_in_space_dict[waypoint.identifier].add_available_airway(
+                                        self._points_in_space_dict[waypoint.identifier].available_airways:
+                                    self._points_in_space_dict[waypoint.identifier].add_available_airway(
                                         airway_names.identifier)
 
     def nav_data_searcher(self, item):
@@ -132,34 +132,34 @@ class NavDataLibrary(object):
         """
         found_item = None
 
-        if item in self.airport_dict:
-            found_item = self.airport_dict[item]
+        if item in self._airport_dict:
+            found_item = self._airport_dict[item]
 
-        elif item in self.points_in_space_dict:
-            found_item = self.points_in_space_dict[item]
+        elif item in self._points_in_space_dict:
+            found_item = self._points_in_space_dict[item]
 
-        elif item in self.airway_dict:
-            found_item = self.airway_dict[item]
+        elif item in self._airway_dict:
+            found_item = self._airway_dict[item]
 
         return found_item
     
     @property
     def airports(self):
-        return self.airport_dict
+        return self._airport_dict
     
     @property
     def navaids(self):
-        return self.navaid_dict
+        return self._navaid_dict
     
     @property
     def waypoints(self):
-        return self.waypoint_dict
+        return self._waypoint_dict
     
     @property
     def airways(self):
-        return self.airway_dict
+        return self._airway_dict
     
     @property
     def points_in_space(self):
-        return self.points_in_space_dict
+        return self._points_in_space_dict
     

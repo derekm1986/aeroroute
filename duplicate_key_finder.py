@@ -2,9 +2,9 @@ import nav_data_library
 
 nav_library = nav_data_library.NavDataLibrary()
 
-airport_dict = nav_library.airport_dict
-points_in_space_dict = nav_library.points_in_space_dict
-airway_dict = nav_library.airway_dict
+airport_dict = nav_library.airports
+points_in_space_dict = nav_library.points_in_space
+airway_dict = nav_library.airways
 
 def duplicate_key_finder():
     """
