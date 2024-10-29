@@ -273,5 +273,5 @@ class NavDataLibrary_combined(object):
         """
         all dictionaries will be combined into one here, work in progress
         """
-        pass
+        combined_dictionary = {}
     
