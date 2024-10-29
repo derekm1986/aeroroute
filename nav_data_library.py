@@ -139,8 +139,8 @@ class NavDataLibrary(object):
 
 class NavDataLibrary_combined(object):
     """
+    *********In development*********
     Holds functionality for Nav Data, along with some functionality
-    In development
     Want this to instead provide a new combined dictionary whose values contain possibilities from all types of entries
     """
     def __init__(self):
