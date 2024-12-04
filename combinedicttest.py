@@ -1,6 +1,6 @@
 import nav_data_library as ndl
 
-new_ndl = ndl.NavDataLibrary_combined()
+new_ndl = ndl.NavDataLibrary()
 
 testitem1 = new_ndl.combined_dict['J4']
 
@@ -22,7 +22,7 @@ print(type(testitem2[0]))
 
 print(len(testitem2))
 
-testitem3 = new_ndl.combined_dict['SYR']
+testitem3 = new_ndl.combined_dict['Q822']
 
 print(type(testitem3))
 
