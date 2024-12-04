@@ -118,7 +118,6 @@ def list_parser_old(input_list, nav_library) -> objects.Route | None:
 
     return output
 
-
 def list_parser(input_list, nav_library) -> objects.Route | None:
     """
     this will work with the new combined dictionary and contains logic to handle dictionary entries
@@ -142,23 +141,17 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
 
         output.add_element(found_item)
 
-    ########################################################
-    # work in progress
-
-    #for item in output.elements:
-    #    print(item)
+    multiple_types = False
 
     for item in output.elements:
         if isinstance(item, list):
             if len(item) == 1:
                 output.replace_element(output.elements.index(item), item[0])
-            else:  
-                # multiple items found in list, need more logic here!
-                print("Multiple items found in list, need more logic here!")
-                print(item)
-                output.replace_element(output.elements.index(item), item[0])  # remove this once logic is in place
+            else:  # multiple types found
+                multiple_types = True
 
-    ########################################################
+    if multiple_types:
+        output = multiple_types_resolver(output)
 
     # is there a None in the route?  Could this be a SID or STAR?
     for item in output.elements:
@@ -197,6 +190,29 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
         return None
 
     return output
+
+##################################################################################################
+def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
+    """
+    logic for multiple types lives here, work in progress
+    """
+    print("multiple_types_resolver was called")
+    
+    # also favor airports in first or last positions
+
+    # am I touching an airway?  must be a point in space!
+
+    if input_route.num_elements > 2:
+        # check to see if airways can connect
+        print("airways are possible!")
+    
+    for item in input_route.elements:
+        if isinstance(item, list):
+            print("Multiple items found in following entry: ", item)
+            input_route.replace_element(input_route.elements.index(item), item[0])  # remove this once logic is in place
+
+    return input_route
+##################################################################################################
 
 def multiple_point_finder(input_waypoints: objects.Route):
     """
