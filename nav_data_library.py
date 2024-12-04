@@ -198,6 +198,9 @@ class NavDataLibrary_combined(object):
         self.airway_matcher()
         logging.info("Airway references added to combined dictionary")  # reference matching was successful
 
+        logging.info("Combining everything into one single dictionary")
+        self._combined_dict = self.combined_dict_creator()  # needs to be changed
+
         logging.info("NAV data loading complete")
 
     def points_in_space_dict_combiner(self):
@@ -301,6 +304,14 @@ class NavDataLibrary_combined(object):
 
         return found_item
     
+    def combined_dict_creator(self):
+        """
+        this function will combine all dictionaries into one and return that dictionary
+        work in progresss
+        """
+        combined_dict = {}
+        return combined_dict
+
     @property
     def airports(self):
         return self._airport_dict
@@ -320,3 +331,7 @@ class NavDataLibrary_combined(object):
     @property
     def points_in_space(self):
         return self._points_in_space_dict
+    
+    @property
+    def combined_dict(self):
+        return self._combined_dict
