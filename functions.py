@@ -145,8 +145,8 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
     ########################################################
     # work in progress
 
-    for item in output.elements:
-        print(item)
+    #for item in output.elements:
+    #    print(item)
 
     for item in output.elements:
         if isinstance(item, list):
