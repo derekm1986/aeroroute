@@ -150,11 +150,11 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
 
     for item in output.elements:
         if isinstance(item, list):
-                if len(item) == 1:
-                    output.replace_element(output.elements.index(item), item[0])
-                else:  # multiple items found in list, need more logic here!
-                    print("Multiple items found in list, need more logic here!")
-                    output.replace_element(output.elements.index(item), item[0])  # remove this once logic is in place
+            if len(item) == 1:
+                output.replace_element(output.elements.index(item), item[0])
+            else:  # multiple items found in list, need more logic here!
+                print("Multiple items found in list, need more logic here!")
+                output.replace_element(output.elements.index(item), item[0])  # remove this once logic is in place
 
     ########################################################
 
