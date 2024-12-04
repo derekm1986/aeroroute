@@ -303,27 +303,26 @@ class NavDataLibrary_combined(object):
             found_item = self._airway_dict[item]
 
         return found_item
-    
+
     def combined_dict_creator(self):
         """
         This function will combine all dictionaries into one and return that dictionary.
-        Entries with identical keys are combined.
+        Entries with identical keys are combined, and all values are lists.
         """
         combined_dict = {}
 
         for d in [self._points_in_space_dict, self._airport_dict, self._airway_dict]:
             for key, value in d.items():
                 if key in combined_dict:
-                    # If the existing value is not a list, convert it to a list
-                    if not isinstance(combined_dict[key], list):
-                        combined_dict[key] = [combined_dict[key]]
-                    # If the new value is not a list, add it to the list
-                    if not isinstance(value, list):
-                        combined_dict[key].append(value)
-                    else:
+                    if isinstance(value, list):
                         combined_dict[key].extend(value)
+                    else:
+                        combined_dict[key].append(value)
                 else:
-                    combined_dict[key] = value
+                    if isinstance(value, list):
+                        combined_dict[key] = value
+                    else:
+                        combined_dict[key] = [value]
 
         return combined_dict
 
