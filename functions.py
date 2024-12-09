@@ -198,6 +198,8 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
     """
     print("multiple_types_resolver was called")
     
+    # no airways in first or last positions
+
     # also favor airports in first or last positions
 
     # am I touching an airway?  must be a point in space!
