@@ -392,6 +392,9 @@ def deambiguate_airways_using_points(input_route: objects.Route) -> objects.Rout
 
     how can I make this fail in a better way?
 
+    need some protection if deambiguate_points_using_airways doesn't work
+    will try to get coordinates from an ambiguous element and fail
+
     use adjacent waypoints to solve ambiguous airways
     :param input_route: Route object
     :return: Route object with airways deambiguated using waypoints
