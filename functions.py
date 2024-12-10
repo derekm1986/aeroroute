@@ -202,11 +202,11 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
 
     # favor airports in first or last positions
 
-    # am I touching an airway?  must be a point in space!
-
     if input_route.num_elements > 2:
         # check to see if airways can connect
         print("airways are possible!")
+
+        # am I touching an airway?  must be a point in space!
     
     for item in input_route.elements:
         if isinstance(item, list):
