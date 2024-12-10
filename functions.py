@@ -410,12 +410,13 @@ def deambiguate_airways_using_points(input_route: objects.Route) -> objects.Rout
             previous_index = input_route.elements.index(item) - 1
             next_index = input_route.elements.index(item) + 1
             
-            # try to fail if previous or next is ambiguous point
+            # try to fail if previous is ambiguous point
             if isinstance(input_route.elements[previous_index], objects.AmbiguousPoint):
                 print("Previous element is ambiguous point. Cannot continue.")
                 return input_route
             previous_item = input_route.elements[previous_index]
             
+            # try to fail if next is ambiguous point
             if isinstance(input_route.elements[next_index], objects.AmbiguousPoint):
                 print("Next element is ambiguous point. Cannot continue.")
                 return input_route
