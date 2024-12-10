@@ -96,7 +96,7 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
         logging.info("Ambiguous point(s) detected. Trying to solve using adjacent airways.")
         input_route_obj = functions.deambiguate_points_using_airways(input_route_obj)
 
-    if input_route_obj.contains_ambiguous_airway:  # try solving ambiguousairways with adjacent waypoints
+    if input_route_obj.contains_ambiguous_airway:  # try solving ambiguousairways with adjacent waypoints, this breaks if bogus airway used
         logging.info("Ambiguous airway(s) detected. Trying to solve using adjacent waypoints.")
         input_route_obj = functions.deambiguate_airways_using_points(input_route_obj)
 
@@ -106,6 +106,10 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
 
     if input_route_obj.contains_airway:  # we need to unpack the airway into only the waypoints we want
         input_route_obj = functions.slice_airways(input_route_obj)
+
+    if input_route_obj.contains_airway:  # did not connect airways to points
+        logging.error("Unable to connect airway(s).  Cannot continue." + str(input_route_obj.elements))
+        return("Unable to connect airway(s).  Cannot continue.")
 
     if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
 
