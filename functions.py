@@ -198,8 +198,8 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
     """
     print("multiple_types_resolver was called")
     
-    # no airways in first or last positions
-
+    # no airways in first or last positions, if airway present, remove item from list
+    
     # favor airports in first or last positions
 
     if input_route.num_elements > 2:
