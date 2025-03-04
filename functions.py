@@ -145,7 +145,7 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
 
     for item in output.elements:
         if isinstance(item, list):
-            if len(item) == 1:
+            if len(item) == 1:  # only one item in list, deambiguate to that item
                 output.replace_element(output.elements.index(item), item[0])
             else:  # multiple types found
                 multiple_types = True
@@ -200,6 +200,21 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
     
     # no airways in first or last positions, if airway present, remove item from list
     
+    # if input_route.first_element contains an airway, remove it!
+
+    if type(input_route.first_element) == list:
+        for item in input_route.first_element:
+            if type(item) == objects.Airway or type(item) == objects.AmbiguousAirway:
+                print("airway detected at beginning")
+                print(item)  # we still need to pop this out of the list
+
+    # if input_route.last_element contains an airway, remove it!
+    if type(input_route.last_element) == list:
+        for item in input_route.last_element:
+            if type(item) == objects.Airway or type(item) == objects.AmbiguousAirway:
+                print("airway detected at end")
+                print(item)  #  we still need to pop this out of the list
+
     # favor airports in first or last positions
 
     if input_route.num_elements > 2:
