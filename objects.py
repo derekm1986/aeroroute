@@ -216,6 +216,15 @@ class Route:
         # must be AmbiguousPoint at position
         self._elements[position] = self._elements[position].get_possibility(possibility_number)
 
+    def delete_element_from_list(self, position: int, index: int) -> None:
+        """
+        Deletes an item from a list at the specified position in self._elements.
+        :param position: Position of the list in self._elements.
+        :param index: Index of the item to delete from the list.
+        :return: None
+        """
+        del self._elements[position][index]
+
     @property
     def elements(self):
         return self._elements

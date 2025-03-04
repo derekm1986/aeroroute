@@ -206,14 +206,16 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
         for item in input_route.first_element:
             if type(item) == objects.Airway or type(item) == objects.AmbiguousAirway:
                 print("airway detected at beginning")
-                print(item)  # we still need to pop this out of the list
+                print(item)  # we still need to remove this out of the list, use delete_element_from_list
+
 
     # if input_route.last_element contains an airway, remove it!
     if type(input_route.last_element) == list:
         for item in input_route.last_element:
             if type(item) == objects.Airway or type(item) == objects.AmbiguousAirway:
                 print("airway detected at end")
-                print(item)  #  we still need to pop this out of the list
+                print(item)  #  we still need to remove this out of the list, use delete_element_from_list
+
 
     # favor airports in first or last positions
 
