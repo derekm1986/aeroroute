@@ -201,17 +201,16 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
     # no airways in first or last positions, if airway present, remove item from list
     
     # if input_route.first_element contains an airway, remove it!
-
-    if type(input_route.first_element) == list:
+    if isinstance(input_route.first_element, list):
         for item in input_route.first_element:
-            if type(item) == objects.Airway or type(item) == objects.AmbiguousAirway:
+            if isinstance(item, (objects.Airway, objects.AmbiguousAirway)):
                 print("airway detected at beginning")
                 input_route.delete_element_from_list(0, input_route.first_element.index(item))
 
     # if input_route.last_element contains an airway, remove it!
-    if type(input_route.last_element) == list:
+    if isinstance(input_route.last_element, list):
         for item in input_route.last_element:
-            if type(item) == objects.Airway or type(item) == objects.AmbiguousAirway:
+            if isinstance(item, (objects.Airway, objects.AmbiguousAirway)):
                 print("airway detected at end")
                 input_route.delete_element_from_list(-1, input_route.last_element.index(item))
 
