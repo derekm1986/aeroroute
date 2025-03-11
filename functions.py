@@ -214,6 +214,8 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
                 print("airway detected at end")
                 input_route.delete_element_from_list(-1, input_route.last_element.index(item))
 
+    # no airway to airway
+
     # favor airports in first or last positions
 
     if input_route.num_elements > 2:
