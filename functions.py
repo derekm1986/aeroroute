@@ -132,7 +132,7 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
         
         else:
             if item in nav_library.combined_dict:
-                found_item = nav_library.combined_dict[item]
+                found_item = nav_library.combined_dict[item].copy()  # copy is necessary so I won't modify original
             else:
                 found_item = None
 
