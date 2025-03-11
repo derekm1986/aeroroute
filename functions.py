@@ -199,8 +199,9 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
     print("multiple_types_resolver was called")
     
     # no airways in first or last positions, if airway present, remove item from list
-    
-    input_route = multiple_types_beginning_end(input_route)
+    if isinstance(input_route.first_element, list) or isinstance(input_route.last_element, list):
+        input_route = multiple_types_beginning_end_airway(input_route)
+        input_route = multiples_cleanup(input_route)
 
     # no airway to airway
 
@@ -220,7 +221,30 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
     return input_route
 ##################################################################################################
 
-def multiple_types_beginning_end(input_route: objects.Route):
+def multiple_type_checker(input_route: objects.Route):
+    """
+    checks for multiple types in a Route object
+    :param input_route: Route object
+    :return: True if multiple types found, False if not
+    """
+    for item in input_route.elements:
+        if isinstance(item, list):
+            return True
+    return False
+
+def multiples_cleanup(input_route: objects.Route):
+    """
+    cleans up multiple types in a Route object
+    :param input_route: Route object
+    :return: Route object with multiple types cleaned up
+    """
+    for item in input_route.elements:
+        if isinstance(item, list):
+            if len(item) == 1:  # only one item in list, deambiguate to that item
+                input_route.replace_element(input_route.elements.index(item), item[0])
+    return input_route
+
+def multiple_types_beginning_end_airway(input_route: objects.Route):
         # if input_route.first_element contains an airway, remove it!
     if isinstance(input_route.first_element, list):
         for item in input_route.first_element:
