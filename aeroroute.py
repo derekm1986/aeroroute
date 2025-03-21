@@ -55,7 +55,7 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
     """
     input_list = input_string.split()
     
-    if len(input_list) == 1:  # single item, what happens if item doesn't exist?
+    if len(input_list) == 1:  # single item, what happens if item doesn't exist? uses old nav_data_library method
         print('Single item detected, looking up item.')
         logging.info("Looking up single item: " + input_list[0])
         found_item = nav_data.nav_data_searcher(input_list[0])

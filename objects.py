@@ -160,6 +160,7 @@ class Route:
 
     def __init__(self):
         self._elements = []
+        self._resolved = False
 
     def add_element(self, element) -> None:
         # put smarts here to protect from:
@@ -363,6 +364,7 @@ class AirwayInRoute:
     def __repr__(self):
         return f"{self._identifier} airway-in-route with {len(self._waypoints)} points:\n{self._waypoints}"
 
+
 class TerminalProcedure:
     def __init__(self, identifier, type_element, associated_airport):
         self._identifier = identifier
@@ -375,3 +377,19 @@ class TerminalProcedure:
 
     def __repr__(self):
         return f"{self._identifier} *** terminal procedure * {self._type_element}"
+
+
+class NavDictEntry:
+    """
+    This class is used to store a single entry in the nav_data_library dictionary.
+    May include elements of multiple types.
+    """
+    def __init__(self, identifier):
+        self._identifier = identifier
+        self._airports = None
+        self._points_in_space = None
+        self._airways = None
+
+    @property
+    def single_entry(self):
+        return False
