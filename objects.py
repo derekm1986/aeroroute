@@ -393,3 +393,12 @@ class NavDictEntry:
     @property
     def single_entry(self):
         return False
+    
+    def add_airport(self, airport) -> None:
+        self._airports = airport
+
+    def add_point_in_space(self, point_in_space) -> None:
+        self._points_in_space = point_in_space
+
+    def add_airway(self, airway) -> None:
+        self._airways = airway
