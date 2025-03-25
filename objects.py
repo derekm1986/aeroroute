@@ -392,7 +392,10 @@ class NavDictEntry:
 
     @property
     def single_entry(self):
-        return False
+        # Count the number of non-None attributes
+        non_none_count = sum(attr is not None for attr in [self._airports, self._points_in_space, self._airways])
+        # Return True if exactly one entry is present
+        return non_none_count == 1
     
     def add_airport(self, airport) -> None:
         self._airports = airport
