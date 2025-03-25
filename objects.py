@@ -403,6 +403,15 @@ class NavDictEntry:
     def add_airway(self, airway) -> None:
         self._airways = airway
 
+    def remove_airport(self) -> None:
+        self._airports = None
+
+    def remove_point_in_space(self) -> None:
+        self._points_in_space = None
+
+    def remove_airway(self) -> None:
+        self._airways = None
+
     def __repr__(self):
         return self._identifier + ' ' + str(self._airports) + ' ' + str(self._points_in_space) + ' ' + str(self._airways)
     
