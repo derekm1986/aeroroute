@@ -3,7 +3,7 @@ A program I use to get the length of routes typed in human-readable
 format.  Requires AIRAC files in vasFMC format in a /AIRAC/ folder.
 """
 import nav_data_library
-import functions
+import utils
 import objects
 import logging
 
@@ -70,7 +70,7 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
         return
 
     # no multiple adjacent inputs, pass on to list_parser
-    input_route_obj = functions.list_parser(input_list, nav_data)
+    input_route_obj = utils.list_parser(input_list, nav_data)
 
     if input_route_obj is None:  # something bad came back from string_parser
         logging.warning("string_parser returned None, back to beginning of loop")
@@ -94,18 +94,18 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
 
     if input_route_obj.contains_ambiguous_point:  # try solving with adjacent airways
         logging.info("Ambiguous point(s) detected. Trying to solve using adjacent airways.")
-        input_route_obj = functions.deambiguate_points_using_airways(input_route_obj)
+        input_route_obj = utils.deambiguate_points_using_airways(input_route_obj)
 
     if input_route_obj.contains_ambiguous_airway:  # try solving ambiguousairways with adjacent waypoints, this breaks if bogus airway used
         logging.info("Ambiguous airway(s) detected. Trying to solve using adjacent waypoints.")
-        input_route_obj = functions.deambiguate_airways_using_points(input_route_obj)
+        input_route_obj = utils.deambiguate_airways_using_points(input_route_obj)
 
     if input_route_obj.contains_ambiguous_airway:  # deambiguating was not sucessful.  unable to compute
         logging.error("Unable to deambiguate airway(s).  Cannot continue." + str(input_route_obj.elements))
         return("Unable to deambiguate airway(s).  Cannot continue.")
 
     if input_route_obj.contains_airway:  # we need to unpack the airway into only the waypoints we want
-        input_route_obj = functions.slice_airways(input_route_obj)
+        input_route_obj = utils.slice_airways(input_route_obj)
 
     if input_route_obj.contains_airway:  # did not connect airways to points
         logging.error("Unable to connect airway(s).  Cannot continue." + str(input_route_obj.elements))
@@ -114,14 +114,14 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
     if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
 
         logging.info("Ambiguous point(s) still detected. Using brute deambiguator.")
-        multiples_map = functions.multiple_point_finder(input_route_obj)
-        input_route_obj = functions.deambiguator_brute(input_route_obj, multiples_map)
+        multiples_map = utils.multiple_point_finder(input_route_obj)
+        input_route_obj = utils.deambiguator_brute(input_route_obj, multiples_map)
 
     if input_route_obj.contains_ambiguous_point:  # brute deambiguator was not successful.  unable to compute
         logging.error("Unable to deambiguate point(s).  Cannot continue." + str(input_route_obj.elements))
         return("Unable to deambiguate point(s).  Cannot continue.")
 
-    sum_distance = functions.distance_summer(input_route_obj)
+    sum_distance = utils.distance_summer(input_route_obj)
 
     sum_distance = round(sum_distance, 2)  # round to hundredths of a nm
 
