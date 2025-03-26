@@ -1,7 +1,7 @@
-import airportsreader
-import navaidsreader
-import waypointsreader
-import atsreader
+from parsers import airportsreader
+from parsers import navaidsreader
+from parsers import waypointsreader
+from parsers import atsreader
 import logging
 import objects
 
