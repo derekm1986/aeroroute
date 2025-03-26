@@ -1,4 +1,4 @@
-import objects
+import nav_objects
 import logging
 import re
 from vincenty import vincenty_indirect
@@ -12,7 +12,7 @@ def pair_maker(input_waypoints):
     """
     
     # below is so that the function will accept a list of elements as well
-    if type(input_waypoints) is objects.Route:
+    if type(input_waypoints) is nav_objects.Route:
         route_before_airways = input_waypoints.elements
     else:
         route_before_airways = input_waypoints
@@ -21,10 +21,10 @@ def pair_maker(input_waypoints):
     
     # looking for airways
     for item in route_before_airways:
-        if isinstance(item, objects.AirwayInRoute):
+        if isinstance(item, nav_objects.AirwayInRoute):
             for waypoint in item.waypoints:
                 route.append(waypoint)
-        elif isinstance(item, objects.TerminalProcedure):
+        elif isinstance(item, nav_objects.TerminalProcedure):
             pass
         else:
             route.append(item)
@@ -57,12 +57,12 @@ def distance_summer(input_coordinates) -> float:
     return sum_distance
 
 
-def list_parser(input_list, nav_library) -> objects.Route | None:
+def list_parser(input_list, nav_library) -> nav_objects.Route | None:
     """
     this will work with the new combined dictionary and contains logic to handle dictionary entries
     that contain different types of nav data objects
     """
-    output = objects.Route()
+    output = nav_objects.Route()
 
     for item in input_list:
 
@@ -104,17 +104,17 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
             except:
                 next_item = None
 
-            if isinstance(previous_item, objects.Airport) and isinstance(next_item, (objects.PointInSpace, 
-                                                                                     objects.AmbiguousPoint)):
+            if isinstance(previous_item, nav_objects.Airport) and isinstance(next_item, (nav_objects.PointInSpace, 
+                                                                                     nav_objects.AmbiguousPoint)):
                 if terminal_procedure_recognizer(item):
                     output.replace_element(output.elements.index(item), 
-                                           objects.TerminalProcedure(item, "SID", previous_item.identifier))
+                                           nav_objects.TerminalProcedure(item, "SID", previous_item.identifier))
     
-            elif isinstance(next_item, objects.Airport) and isinstance(previous_item, (objects.PointInSpace, 
-                                                                                       objects.AmbiguousPoint)):
+            elif isinstance(next_item, nav_objects.Airport) and isinstance(previous_item, (nav_objects.PointInSpace, 
+                                                                                       nav_objects.AmbiguousPoint)):
                 if terminal_procedure_recognizer(item):
                     output.replace_element(output.elements.index(item), 
-                                           objects.TerminalProcedure(item, "STAR", next_item.identifier))
+                                           nav_objects.TerminalProcedure(item, "STAR", next_item.identifier))
 
     # still a string in the route? then return None
     failure_flag = False
@@ -131,7 +131,7 @@ def list_parser(input_list, nav_library) -> objects.Route | None:
     return output
 
 ##################################################################################################
-def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
+def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route:
     """
     logic for multiple types lives here, work in progress
     """
@@ -160,7 +160,7 @@ def multiple_types_resolver(input_route: objects.Route) -> objects.Route:
     return input_route
 ##################################################################################################
 
-def multiple_type_checker(input_route: objects.Route):
+def multiple_type_checker(input_route: nav_objects.Route):
     """
     checks for multiple types in a Route object
     :param input_route: Route object
@@ -171,7 +171,7 @@ def multiple_type_checker(input_route: objects.Route):
             return True
     return False
 
-def multiples_cleanup(input_route: objects.Route):
+def multiples_cleanup(input_route: nav_objects.Route):
     """
     cleans up multiple types in a Route object
     :param input_route: Route object
@@ -183,24 +183,24 @@ def multiples_cleanup(input_route: objects.Route):
                 input_route.replace_element(input_route.elements.index(item), item[0])
     return input_route
 
-def multiple_types_beginning_end_airway(input_route: objects.Route):
+def multiple_types_beginning_end_airway(input_route: nav_objects.Route):
         # if input_route.first_element contains an airway, remove it!
     if isinstance(input_route.first_element, list):
         for item in input_route.first_element:
-            if isinstance(item, (objects.Airway, objects.AmbiguousAirway)):
+            if isinstance(item, (nav_objects.Airway, nav_objects.AmbiguousAirway)):
                 print("airway detected at beginning")
                 input_route.delete_element_from_list(0, input_route.first_element.index(item))
 
     # if input_route.last_element contains an airway, remove it!
     if isinstance(input_route.last_element, list):
         for item in input_route.last_element:
-            if isinstance(item, (objects.Airway, objects.AmbiguousAirway)):
+            if isinstance(item, (nav_objects.Airway, nav_objects.AmbiguousAirway)):
                 print("airway detected at end")
                 input_route.delete_element_from_list(-1, input_route.last_element.index(item))
     
     return input_route
 
-def multiple_point_finder(input_waypoints: objects.Route):
+def multiple_point_finder(input_waypoints: nav_objects.Route):
     """
     helper function for deambiguator_brute
     :param input_waypoints: Route object
@@ -208,7 +208,7 @@ def multiple_point_finder(input_waypoints: objects.Route):
     """
     # finding ambiguous waypoint positions and grouping them together into a "matrix"
 
-    found_multiples = [i for i, x in enumerate(input_waypoints.elements) if type(x) is objects.AmbiguousPoint]
+    found_multiples = [i for i, x in enumerate(input_waypoints.elements) if type(x) is nav_objects.AmbiguousPoint]
 
     multiples_map = []
 
@@ -225,7 +225,7 @@ def multiple_point_finder(input_waypoints: objects.Route):
     return multiples_map
 
 
-def deambiguator_brute(input_route, multiplesmatrix) -> objects.Route:
+def deambiguator_brute(input_route, multiplesmatrix) -> nav_objects.Route:
     """
     deambiguates points in a route using a brute force method
     :param input_route: Route object
@@ -254,26 +254,26 @@ def deambiguator_brute(input_route, multiplesmatrix) -> objects.Route:
             lastisambiguous = True
 
         for listposition in multipleset:
-            multiplesetelements.append(objects.TBWrapper(input_route.get_element(listposition),
+            multiplesetelements.append(nav_objects.TBWrapper(input_route.get_element(listposition),
                                                          listposition, True))
 
         if allareambiguous is False and firstisambiguous is False:
             # add previous waypoint to beginning of multiplesetelements
             previous_element = input_route.get_element(multipleset[0] - 1)
             # need to check that it is not an airway or procedure!!!!
-            if not isinstance(previous_element, (objects.Airway, objects.AmbiguousAirway, 
-                                                 objects.AirwayInRoute, objects.TerminalProcedure)):
+            if not isinstance(previous_element, (nav_objects.Airway, nav_objects.AmbiguousAirway, 
+                                                 nav_objects.AirwayInRoute, nav_objects.TerminalProcedure)):
 
-                multiplesetelements.insert(0, objects.TBWrapper(previous_element, multipleset[0] - 1))      
+                multiplesetelements.insert(0, nav_objects.TBWrapper(previous_element, multipleset[0] - 1))      
         
         if allareambiguous is False and lastisambiguous is False:
             # add next waypoint to end of multiplesetelements 
             next_element = input_route.get_element(multipleset[-1] + 1)
             # need to check that it is not an airway or procedure!!!!
-            if not isinstance(next_element, (objects.Airway, objects.AmbiguousAirway, 
-                                             objects.AirwayInRoute, objects.TerminalProcedure)):
+            if not isinstance(next_element, (nav_objects.Airway, nav_objects.AmbiguousAirway, 
+                                             nav_objects.AirwayInRoute, nav_objects.TerminalProcedure)):
 
-                multiplesetelements.append(objects.TBWrapper(next_element, multipleset[-1] + 1))
+                multiplesetelements.append(nav_objects.TBWrapper(next_element, multipleset[-1] + 1))
         
         elementposition = 0
 
@@ -284,7 +284,7 @@ def deambiguator_brute(input_route, multiplesmatrix) -> objects.Route:
                 else:  # the element is ambiguous
                     ambiguousid = 0
                     for possibility in element.waypoint.possibilities:
-                        possibilitieslist.append([objects.TBWrapper(possibility, element.original_position, True,
+                        possibilitieslist.append([nav_objects.TBWrapper(possibility, element.original_position, True,
                                                                     ambiguousid)])
                         ambiguousid += 1
 
@@ -300,7 +300,7 @@ def deambiguator_brute(input_route, multiplesmatrix) -> objects.Route:
                     for possibilityfromlist in possibilitieslist:
                         ambiguousid = 0
                         for possibilityfromelement in element.waypoint.possibilities:
-                            returnedlist.append(possibilityfromlist + [objects.TBWrapper(possibilityfromelement,
+                            returnedlist.append(possibilityfromlist + [nav_objects.TBWrapper(possibilityfromelement,
                                                                                          element.original_position
                                                                                          , True, ambiguousid)])
                             ambiguousid += 1
@@ -330,23 +330,23 @@ def deambiguator_brute(input_route, multiplesmatrix) -> objects.Route:
     return input_route
 
 
-def deambiguate_points_using_airways(input_route) -> objects.Route:
+def deambiguate_points_using_airways(input_route) -> nav_objects.Route:
     """
     use adjacent airways to solve ambiguous points
     :param input_route: Route object
     :return: Route object with points deambiguated using airways
     """
     for item in input_route.elements:
-        if isinstance(item, objects.AmbiguousPoint):
+        if isinstance(item, nav_objects.AmbiguousPoint):
             if input_route.elements.index(item) == 0:  # starts with AmbiguousPoint
-                if isinstance(input_route.elements[1], (objects.Airway, objects.AmbiguousAirway)):
+                if isinstance(input_route.elements[1], (nav_objects.Airway, nav_objects.AmbiguousAirway)):
                     # first element was ambiguous and was followed by an airway
                     for waypoint in item.possibilities:
                         for airway in waypoint.available_airways:
                             if airway == input_route.elements[1].identifier:
                                 input_route.deambiguate(0, item.possibilities.index(waypoint))
             elif input_route.elements.index(item) == (len(input_route.elements)-1):
-                if isinstance(input_route.elements[-2], (objects.Airway, objects.AmbiguousAirway)):
+                if isinstance(input_route.elements[-2], (nav_objects.Airway, nav_objects.AmbiguousAirway)):
                     # last element was ambiguous and was preceded by an airway!
                     for waypoint in item.possibilities:
                         for airway in waypoint.available_airways:
@@ -356,13 +356,13 @@ def deambiguate_points_using_airways(input_route) -> objects.Route:
                 current_index = input_route.elements.index(item)
                 previous_index = input_route.elements.index(item) - 1
                 next_index = input_route.elements.index(item) + 1
-                if isinstance(input_route.elements[previous_index], (objects.Airway, objects.AmbiguousAirway)):
+                if isinstance(input_route.elements[previous_index], (nav_objects.Airway, nav_objects.AmbiguousAirway)):
                     # previous element was ambiguous and was followed by an airway
                     for waypoint in item.possibilities:
                         for airway in waypoint.available_airways:
                             if airway == input_route.elements[previous_index].identifier:
                                 input_route.deambiguate(current_index, item.possibilities.index(waypoint))
-                elif isinstance(input_route.elements[next_index], (objects.Airway, objects.AmbiguousAirway)):
+                elif isinstance(input_route.elements[next_index], (nav_objects.Airway, nav_objects.AmbiguousAirway)):
                     # next element was ambiguous and was preceded by an airway
                     for waypoint in item.possibilities:
                         for airway in waypoint.available_airways:
@@ -371,7 +371,7 @@ def deambiguate_points_using_airways(input_route) -> objects.Route:
     return input_route
 
 
-def deambiguate_airways_using_points(input_route: objects.Route) -> objects.Route:
+def deambiguate_airways_using_points(input_route: nav_objects.Route) -> nav_objects.Route:
     """
 
     how can I make this fail in a better way?
@@ -388,20 +388,20 @@ def deambiguate_airways_using_points(input_route: objects.Route) -> objects.Rout
         
         match_flag = False
 
-        if isinstance(item, objects.AmbiguousAirway):
+        if isinstance(item, nav_objects.AmbiguousAirway):
             
             current_index = input_route.elements.index(item)
             previous_index = input_route.elements.index(item) - 1
             next_index = input_route.elements.index(item) + 1
             
             # try to fail if previous is ambiguous point
-            if isinstance(input_route.elements[previous_index], objects.AmbiguousPoint):
+            if isinstance(input_route.elements[previous_index], nav_objects.AmbiguousPoint):
                 print("Previous element is ambiguous point. Cannot continue.")
                 return input_route
             previous_item = input_route.elements[previous_index]
             
             # try to fail if next is ambiguous point
-            if isinstance(input_route.elements[next_index], objects.AmbiguousPoint):
+            if isinstance(input_route.elements[next_index], nav_objects.AmbiguousPoint):
                 print("Next element is ambiguous point. Cannot continue.")
                 return input_route
             next_item = input_route.elements[next_index]
@@ -429,7 +429,7 @@ def deambiguate_airways_using_points(input_route: objects.Route) -> objects.Rout
     return input_route
 
 
-def slice_airways(input_route) -> objects.Route:
+def slice_airways(input_route) -> nav_objects.Route:
     """
     slices airways into only the waypoints you want
     :param input_route: Route object
@@ -437,7 +437,7 @@ def slice_airways(input_route) -> objects.Route:
     """
     
     for item in input_route.elements:
-        if isinstance(item, (objects.Airway)):
+        if isinstance(item, (nav_objects.Airway)):
             current_index = input_route.elements.index(item)
             previous_index = input_route.elements.index(item) - 1
             next_index = input_route.elements.index(item) + 1
@@ -473,7 +473,7 @@ def slice_airways(input_route) -> objects.Route:
     return input_route
 
 
-def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
+def manual_waypoint_maker(input_string: str) -> nav_objects.PointInSpace | None:
     """
     turns user-inputted lat/long into usable manual waypoint
     :param input_string: user input lat/long coordinates
@@ -488,7 +488,7 @@ def manual_waypoint_maker(input_string: str) -> objects.PointInSpace | None:
     else:  # bad coordinates entered
         return None
     # assert that it's valid?  maybe that's handled in new coordinates object?
-    manual_waypoint = objects.PointInSpace(input_string, coordinates, 'manual waypoint')
+    manual_waypoint = nav_objects.PointInSpace(input_string, coordinates, 'manual waypoint')
 
     return manual_waypoint
 

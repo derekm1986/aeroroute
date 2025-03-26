@@ -4,7 +4,7 @@ format.  Requires AIRAC files in vasFMC format in a /AIRAC/ folder.
 """
 import nav_data_library
 import utils
-import objects
+import nav_objects
 import logging
 
 logging.basicConfig(
@@ -78,12 +78,12 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
 
     if input_route_obj.contains_airway:  # is there an airway in the route?
         # is airway at beginning of route? - not OK
-        if isinstance(input_route_obj.first_element, (objects.Airway, objects.AmbiguousAirway)):
+        if isinstance(input_route_obj.first_element, (nav_objects.Airway, nav_objects.AmbiguousAirway)):
             logging.warning("Route started with an airway, back to beginning of loop")
             return("Route cannot start with an airway")
 
         # is airway at end of route? - not OK
-        if isinstance(input_route_obj.last_element, (objects.Airway, objects.AmbiguousAirway)):
+        if isinstance(input_route_obj.last_element, (nav_objects.Airway, nav_objects.AmbiguousAirway)):
             logging.warning("Route ended with an airway, back to beginning of loop")
             return("Route cannot end with an airway")
 
@@ -151,8 +151,8 @@ def adjacent_airway_detector(input_route_obj) -> bool:
     :return: True if detected, False if not detected 
     """
     for i in range(input_route_obj.num_elements - 1):
-        if isinstance(input_route_obj.get_element(i), (objects.Airway, objects.AmbiguousAirway)) and \
-                      isinstance(input_route_obj.get_element(i+1), (objects.Airway, objects.AmbiguousAirway)):
+        if isinstance(input_route_obj.get_element(i), (nav_objects.Airway, nav_objects.AmbiguousAirway)) and \
+                      isinstance(input_route_obj.get_element(i+1), (nav_objects.Airway, nav_objects.AmbiguousAirway)):
             logging.warning("Adjacent airways were found: " + str(input_route_obj.get_element(i)) + " " +
                             str(input_route_obj.get_element(i+1)))
             print(("Adjacent airways found.  Unable to compute."))

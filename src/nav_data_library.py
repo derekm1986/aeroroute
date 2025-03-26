@@ -3,7 +3,7 @@ from parsers import navaids_parser
 from parsers import waypoints_parser
 from parsers import ats_parser
 import logging
-import objects
+import nav_objects
 
 
 class NavDataLibrary(object):
@@ -56,9 +56,9 @@ class NavDataLibrary(object):
         for key, val in self._waypoint_dict.items():
             if key in points_in_space_dict:
                 # the entry is already in points_in_space_dict
-                if type(points_in_space_dict[key]) is objects.AmbiguousPoint:
+                if type(points_in_space_dict[key]) is nav_objects.AmbiguousPoint:
                     # points_in_space_dict already has AmbiguousPoint
-                    if type(val) is objects.AmbiguousPoint:
+                    if type(val) is nav_objects.AmbiguousPoint:
                         # must add AmbiguousPoint to AmbiguousPoint
                         points_in_space_dict[key].add_possibility(self._waypoint_dict[key].possibilities)
                     else:
@@ -66,14 +66,14 @@ class NavDataLibrary(object):
                         points_in_space_dict[key].add_possibility(self._waypoint_dict[key])
                 else:
                     # points_in_space_dict contains a PointInSpace
-                    if type(val) is objects.AmbiguousPoint:
+                    if type(val) is nav_objects.AmbiguousPoint:
                         # Adding AmbiguousPoint to a PointInSpace, make a new AmbiguousPoint
                         original_point_in_space = points_in_space_dict[key]
                         points_in_space_dict[key] = val
                         points_in_space_dict[key].add_possibility(original_point_in_space)
                     else:
                         # Adding PointInSpace to a PointInSpace
-                        points_in_space_dict[key] = objects.AmbiguousPoint(key, points_in_space_dict[key])
+                        points_in_space_dict[key] = nav_objects.AmbiguousPoint(key, points_in_space_dict[key])
                         points_in_space_dict[key].add_possibility(val)
             else:
                 # the entry is not yet in points_in_space_dict, so just add it
@@ -87,11 +87,11 @@ class NavDataLibrary(object):
         :return: None
         """
         for airway_names in self._airway_dict.values():
-            if isinstance(airway_names, objects.AmbiguousAirway):  # we have encountered an AmbiguousAirway
+            if isinstance(airway_names, nav_objects.AmbiguousAirway):  # we have encountered an AmbiguousAirway
                 for airway in airway_names.possibilities:
                     for waypoint in airway.waypoints:
                         if waypoint.identifier in self._points_in_space_dict:
-                            if isinstance(self._points_in_space_dict[waypoint.identifier], objects.AmbiguousPoint):
+                            if isinstance(self._points_in_space_dict[waypoint.identifier], nav_objects.AmbiguousPoint):
                                 # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
                                 for point in self._points_in_space_dict[waypoint.identifier].possibilities:
                                     if point.coordinates == waypoint.coordinates:
@@ -109,7 +109,7 @@ class NavDataLibrary(object):
             else:  # we have encountered an Airway by itself
                 for waypoint in airway_names.waypoints:
                     if waypoint.identifier in self._points_in_space_dict:
-                        if isinstance(self._points_in_space_dict[waypoint.identifier], objects.AmbiguousPoint):
+                        if isinstance(self._points_in_space_dict[waypoint.identifier], nav_objects.AmbiguousPoint):
                             # trying to match with an AmbiguousElement in the points_in_space_dict, need a loop
                             for point in self._points_in_space_dict[waypoint.identifier].possibilities:
                                 if point.coordinates == waypoint.coordinates:
