@@ -1,7 +1,7 @@
-from parsers import airportsreader
-from parsers import navaidsreader
-from parsers import waypointsreader
-from parsers import atsreader
+from parsers import airports_parser
+from parsers import navaids_parser
+from parsers import waypoints_parser
+from parsers import ats_parser
 import logging
 import objects
 
@@ -17,19 +17,19 @@ class NavDataLibrary(object):
     """
     def __init__(self):
         logging.info("Loading airports into memory")
-        self._airport_dict = airportsreader.airport_dict_maker()
+        self._airport_dict = airports_parser.airport_dict_maker()
         logging.info("Airports loaded into memory")  # loading airports was successful
 
         logging.info("Loading NAVAIDs into memory")
-        self._navaid_dict = navaidsreader.navaid_dict_maker()
+        self._navaid_dict = navaids_parser.navaid_dict_maker()
         logging.info("NAVAIDs loaded into memory")  # loading NAVAIDs was successful
 
         logging.info("Loading waypoints into memory")
-        self._waypoint_dict = waypointsreader.waypoint_dict_maker()
+        self._waypoint_dict = waypoints_parser.waypoint_dict_maker()
         logging.info("Waypoints loaded into memory")  # loading elements was successful
 
         logging.info("Loading airways into memory")
-        self._airway_dict = atsreader.airway_dict_maker()
+        self._airway_dict = ats_parser.airway_dict_maker()
         logging.info("Airways loaded into memory")  # loading airways was successful
 
         logging.info("Combining NAVAID and waypoint dictionaries")

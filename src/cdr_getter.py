@@ -1,4 +1,4 @@
-from parsers.cdrreader import cdr_dict_maker
+from parsers.cdr_parser import cdr_dict_maker
 
 def cdr_finder_dep_arr(dep_airport, arr_airport):
     cdr_dict = cdr_dict_maker()

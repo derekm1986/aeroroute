@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from aeroroute import aeroroute_input
-from cdrgetter import cdr_finder_dep_arr
+from cdr_getter import cdr_finder_dep_arr
 
 app = Flask(__name__)
 
