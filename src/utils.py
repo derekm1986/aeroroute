@@ -1,6 +1,6 @@
-import nav_objects
 import logging
 import re
+import nav_objects
 from vincenty import vincenty_indirect
 
 
