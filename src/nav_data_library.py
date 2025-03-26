@@ -41,7 +41,10 @@ class NavDataLibrary(object):
         logging.info("Airway references added to combined dictionary")  # reference matching was successful
 
         logging.info("Combining everything into one single dictionary")
-        self._combined_dict = self.combined_dict_creator()  # new functionality
+        self._combined_dict = self.combined_dict_creator()
+
+        logging.info("NEW Combining everything into new dictionary with dictionary entry objects")
+        self._combined_dict_entries = self.combined_dict_creator_entries_new()
 
         logging.info("NAV data loading complete")
 
@@ -166,7 +169,14 @@ class NavDataLibrary(object):
                     else:
                         combined_dict[key] = [value]
 
-        return combined_dict    
+        return combined_dict
+
+    def combined_dict_creator_entries_new(self):
+        """
+        new function to create a dictionary with dictionary entry objects
+        WORK IN PROGRESS
+        """
+        return {}    
 
     @property
     def airports(self):
@@ -191,3 +201,7 @@ class NavDataLibrary(object):
     @property
     def combined_dict(self):
         return self._combined_dict
+    
+    @property
+    def combined_dict_entries(self):
+        return self._combined_dict_entries
