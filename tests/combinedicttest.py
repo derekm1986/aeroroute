@@ -1,4 +1,10 @@
-import nav_data_library as ndl
+import sys
+import os
+
+# Add the src directory to sys.path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
+import nav_data_library as ndl # type: ignore
 
 new_ndl = ndl.NavDataLibrary()
 
