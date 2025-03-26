@@ -3,11 +3,11 @@
 *.iml
 *.xml___jb_tmp___
 venv/
-AIRAC/
+data/
 *.pyc
-.idea/
 __pycache__/
 routes/
 aeroroute.log
 *.DS_Store
 *.log
+.vscode/
