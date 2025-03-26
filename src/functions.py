@@ -57,67 +57,6 @@ def distance_summer(input_coordinates) -> float:
     return sum_distance
 
 
-def list_parser_old(input_list, nav_library) -> objects.Route | None:
-    """
-    parses a list of strings into a Route object
-    :param input_list: list of strings
-    :param nav_library: NavDataLibrary object
-    :return: Route object
-    """
-
-    output = objects.Route()
-
-    for item in input_list:
-
-        if "/" in item:  # manual input detected
-            found_item = manual_waypoint_maker(item)
-        
-        else:
-            found_item = nav_library.nav_data_searcher(item)
-
-        if found_item is None:  # nothing found by nav_data_searcher!
-            found_item = item
-
-        output.add_element(found_item)
-
-    # is there a None in the route?  Could this be a SID or STAR?
-    for item in output.elements:
-         if isinstance(item, str):
-            try:
-                previous_item = output.elements[output.elements.index(item) - 1]
-            except:
-                previous_item = None
-            try:
-                next_item = output.elements[output.elements.index(item) + 1]
-            except:
-                next_item = None
-
-            if isinstance(previous_item, objects.Airport) and isinstance(next_item, (objects.PointInSpace, 
-                                                                                     objects.AmbiguousPoint)):
-                if terminal_procedure_recognizer(item):
-                    output.replace_element(output.elements.index(item), 
-                                           objects.TerminalProcedure(item, "SID", previous_item.identifier))
-    
-            elif isinstance(next_item, objects.Airport) and isinstance(previous_item, (objects.PointInSpace, 
-                                                                                       objects.AmbiguousPoint)):
-                if terminal_procedure_recognizer(item):
-                    output.replace_element(output.elements.index(item), 
-                                           objects.TerminalProcedure(item, "STAR", next_item.identifier))
-
-    # still a string in the route? then return None
-    failure_flag = False
-
-    # re-write to look for valid objects instead
-    for item in output.elements:
-        if isinstance(item, str):
-            print(item, "not found")
-            failure_flag = True
-
-    if failure_flag:
-        return None
-
-    return output
-
 def list_parser(input_list, nav_library) -> objects.Route | None:
     """
     this will work with the new combined dictionary and contains logic to handle dictionary entries
