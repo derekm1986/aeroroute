@@ -419,7 +419,8 @@ class NavDictEntry:
     def get_single(self):
         """
         Returns a single entry from the NavDictEntry.
-        Coded to return an airway first partially to fix the J4 issue.  This may not be the best implementation for the long term.
+        Coded to return an airway first partially to fix the J4 issue.
+        This may not be the best implementation for the long term.
         """
         if self._airways is not None:
             return self._airways
