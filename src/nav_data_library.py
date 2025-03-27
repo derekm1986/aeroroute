@@ -176,7 +176,8 @@ class NavDataLibrary(object):
         new function to create a dictionary with dictionary entry objects
         WORK IN PROGRESS
         """
-        return {}    
+        combined_dict_new = {}
+        return combined_dict_new
 
     @property
     def airports(self):
