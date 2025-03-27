@@ -1,6 +1,7 @@
 import logging
 import re
 import nav_objects
+import copy
 from vincenty import vincenty_indirect
 
 
@@ -130,6 +131,78 @@ def list_parser(input_list, nav_library) -> nav_objects.Route | None:
 
     return output
 
+def new_list_parser(input_list, nav_library) -> nav_objects.Route | None:
+    """
+    this will work with the new combined dictionary and contains logic to handle dictionary entries
+    that contain different types of nav data objects
+    """
+    output = nav_objects.Route()
+
+    for item in input_list:
+
+        if "/" in item:  # manual input detected
+            found_item = manual_waypoint_maker(item)
+        
+        else:
+            if item in nav_library.combined_dict_entries:
+                found_item = copy.deepcopy(nav_library.combined_dict_entries[item])  # deepcopy is necessary so I won't modify original
+            else:
+                found_item = None
+
+        if found_item is None:  # nothing found in combined_dict!
+            found_item = item
+
+        output.add_element(found_item)
+
+    multiple_types = False
+
+    for item in output.elements:
+        if item.single_entry:
+            output.replace_element(output.elements.index(item), item.get_single)  # fix this
+        else:  # multiple types found
+            multiple_types = True
+
+    if multiple_types:
+        output = multiple_types_resolver(output)
+
+    # is there a None in the route?  Could this be a SID or STAR?
+    for item in output.elements:
+         if isinstance(item, str):
+            try:
+                previous_item = output.elements[output.elements.index(item) - 1]
+            except:
+                previous_item = None
+            try:
+                next_item = output.elements[output.elements.index(item) + 1]
+            except:
+                next_item = None
+
+            if isinstance(previous_item, nav_objects.Airport) and isinstance(next_item, (nav_objects.PointInSpace, 
+                                                                                     nav_objects.AmbiguousPoint)):
+                if terminal_procedure_recognizer(item):
+                    output.replace_element(output.elements.index(item), 
+                                           nav_objects.TerminalProcedure(item, "SID", previous_item.identifier))
+    
+            elif isinstance(next_item, nav_objects.Airport) and isinstance(previous_item, (nav_objects.PointInSpace, 
+                                                                                       nav_objects.AmbiguousPoint)):
+                if terminal_procedure_recognizer(item):
+                    output.replace_element(output.elements.index(item), 
+                                           nav_objects.TerminalProcedure(item, "STAR", next_item.identifier))
+
+    # still a string in the route? then return None
+    failure_flag = False
+
+    # re-write to look for valid objects instead
+    for item in output.elements:
+        if isinstance(item, str):
+            print(item, "not found")
+            failure_flag = True
+
+    if failure_flag:
+        return None
+
+    return output
+
 ##################################################################################################
 def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route:
     """
@@ -138,8 +211,11 @@ def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route
     print("multiple_types_resolver was called")
     
     # no airways in first or last positions, if airway present, remove item from list
-    if isinstance(input_route.first_element, list) or isinstance(input_route.last_element, list):
+    if isinstance(input_route.first_element, nav_objects.NavDictEntry) or isinstance(input_route.last_element, 
+                                                                                     nav_objects.NavDictEntry):
+        print("input route 1", input_route)
         input_route = multiple_types_beginning_end_airway(input_route)
+        print("input route now", input_route)
         input_route = multiples_cleanup(input_route)
 
     # no airway to airway
@@ -153,9 +229,9 @@ def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route
         # am I touching an airway?  must be a point in space!
     
     for item in input_route.elements:
-        if isinstance(item, list):
+        if isinstance(item, nav_objects.NavDictEntry):
             print("Multiple items found in following entry: ", item)
-            input_route.replace_element(input_route.elements.index(item), item[0])  # remove this once logic is in place
+            input_route.replace_element(input_route.elements.index(item), item.get_single)  # remove this once logic is in place
 
     return input_route
 ##################################################################################################
@@ -167,7 +243,7 @@ def multiple_type_checker(input_route: nav_objects.Route):
     :return: True if multiple types found, False if not
     """
     for item in input_route.elements:
-        if isinstance(item, list):
+        if not item.single_entry:
             return True
     return False
 
@@ -178,26 +254,29 @@ def multiples_cleanup(input_route: nav_objects.Route):
     :return: Route object with multiple types cleaned up
     """
     for item in input_route.elements:
-        if isinstance(item, list):
-            if len(item) == 1:  # only one item in list, deambiguate to that item
-                input_route.replace_element(input_route.elements.index(item), item[0])
+        if isinstance(item, nav_objects.NavDictEntry):
+            if item.single_entry:  # only one item in list, deambiguate to that item
+                input_route.replace_element(input_route.elements.index(item), item.get_single)
     return input_route
 
 def multiple_types_beginning_end_airway(input_route: nav_objects.Route):
-        # if input_route.first_element contains an airway, remove it!
-    if isinstance(input_route.first_element, list):
-        for item in input_route.first_element:
-            if isinstance(item, (nav_objects.Airway, nav_objects.AmbiguousAirway)):
-                print("airway detected at beginning")
-                input_route.delete_element_from_list(0, input_route.first_element.index(item))
-
-    # if input_route.last_element contains an airway, remove it!
-    if isinstance(input_route.last_element, list):
-        for item in input_route.last_element:
-            if isinstance(item, (nav_objects.Airway, nav_objects.AmbiguousAirway)):
-                print("airway detected at end")
-                input_route.delete_element_from_list(-1, input_route.last_element.index(item))
     
+    # doesn't work right
+
+    if isinstance(input_route.first_element, nav_objects.NavDictEntry):
+        new_item = input_route.get_element(0)
+        new_item.remove_airways()
+        print("new item is", new_item)
+        input_route.replace_element(0, new_item)
+
+    if isinstance(input_route.last_element, nav_objects.NavDictEntry):
+        new_item = input_route.get_element(-1)
+        new_item.remove_airways()
+        print("new item is", new_item)
+        input_route.replace_element(-1, new_item)
+    
+    print("input route 3", input_route)
+
     return input_route
 
 def multiple_point_finder(input_waypoints: nav_objects.Route):

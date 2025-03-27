@@ -415,6 +415,15 @@ class NavDictEntry:
     def remove_airways(self) -> None:
         self._airways = None
 
+    @property
+    def get_single(self):
+        if self._airports is not None:
+            return self._airports
+        elif self._points_in_space is not None:
+            return self._points_in_space
+        elif self._airways is not None: 
+            return self._airways
+
     def __repr__(self):
         return self._identifier + ' ' + str(self._airports) + ' ' + str(self._points_in_space) + ' ' + str(self._airways)
     

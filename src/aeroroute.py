@@ -58,8 +58,8 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
     if len(input_list) == 1:  # single item, what happens if item doesn't exist? uses old nav_data_library method
         print('Single item detected, looking up item.')
         logging.info("Looking up single item: " + input_list[0])
-        found_item = nav_data.nav_data_searcher(input_list[0])
-        if found_item is None:
+        found_item = nav_data.combined_dict_entries[input_list[0]]
+        if found_item in nav_data.combined_dict_entries:
             logging.info("Single item " + input_list[0] + " not found.")
             return (input_list[0] + " not found.")
         else:
@@ -70,7 +70,9 @@ def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
         return
 
     # no multiple adjacent inputs, pass on to list_parser
-    input_route_obj = utils.list_parser(input_list, nav_data)
+    input_route_obj = utils.new_list_parser(input_list, nav_data)  # changed for testing new NavDictEntry dictionary
+
+    print(input_route_obj)  # for debug
 
     if input_route_obj is None:  # something bad came back from string_parser
         logging.warning("string_parser returned None, back to beginning of loop")
