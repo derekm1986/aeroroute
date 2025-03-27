@@ -12,6 +12,8 @@ testitem1 = new_ndl.combined_dict_entries['HYLND']
 
 print("test 1", testitem1)
 
+print("test 2", type(testitem1))
+
 
 
 testitem2 = new_ndl.combined_dict_entries['J4']
