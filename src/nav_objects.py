@@ -417,12 +417,16 @@ class NavDictEntry:
 
     @property
     def get_single(self):
-        if self._airports is not None:
+        """
+        Returns a single entry from the NavDictEntry.
+        Coded to return an airway first partially to fix the J4 issue.  This may not be the best implementation for the long term.
+        """
+        if self._airways is not None:
+            return self._airways
+        elif self ._airports is not None:
             return self._airports
         elif self._points_in_space is not None:
             return self._points_in_space
-        elif self._airways is not None: 
-            return self._airways
 
     def __repr__(self):
         return self._identifier + ' ' + str(self._airports) + ' ' + str(self._points_in_space) + ' ' + str(self._airways)
