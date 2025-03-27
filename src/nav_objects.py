@@ -384,11 +384,11 @@ class NavDictEntry:
     This class is used to store a single entry in the nav_data_library dictionary.
     May include elements of multiple types.
     """
-    def __init__(self, identifier):
+    def __init__(self, identifier, airports=None, points_in_space=None, airways=None):
         self._identifier = identifier
-        self._airports = None
-        self._points_in_space = None
-        self._airways = None
+        self._airports = airports
+        self._points_in_space = points_in_space
+        self._airways = airways
 
     @property
     def single_entry(self) -> bool:
@@ -397,22 +397,22 @@ class NavDictEntry:
         # Return True if exactly one entry is present
         return non_none_count == 1
     
-    def add_airport(self, airport) -> None:
+    def add_airports(self, airport) -> None:
         self._airports = airport
 
-    def add_point_in_space(self, point_in_space) -> None:
+    def add_points_in_space(self, point_in_space) -> None:
         self._points_in_space = point_in_space
 
-    def add_airway(self, airway) -> None:
+    def add_airways(self, airway) -> None:
         self._airways = airway
 
-    def remove_airport(self) -> None:
+    def remove_airports(self) -> None:
         self._airports = None
 
-    def remove_point_in_space(self) -> None:
+    def remove_points_in_space(self) -> None:
         self._points_in_space = None
 
-    def remove_airway(self) -> None:
+    def remove_airways(self) -> None:
         self._airways = None
 
     def __repr__(self):

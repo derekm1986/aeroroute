@@ -177,6 +177,23 @@ class NavDataLibrary(object):
         WORK IN PROGRESS
         """
         combined_dict_new = {}
+
+        for key, val in self._airport_dict.items():
+            combined_dict_new[key] = nav_objects.NavDictEntry(key, airports=val)
+        
+        for key, val in self._points_in_space_dict.items():
+            if key in combined_dict_new:
+                combined_dict_new[key].add_points_in_space(val)
+            else:
+                combined_dict_new[key] = nav_objects.NavDictEntry(key, points_in_space=val)
+                
+        for key, val in self._airway_dict.items():
+            if key in combined_dict_new:
+                combined_dict_new[key].add_airways(val)
+            else:
+                combined_dict_new[key] = nav_objects.NavDictEntry(key, airways=val)
+        
+        
         return combined_dict_new
 
     @property
