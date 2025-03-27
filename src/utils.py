@@ -157,10 +157,11 @@ def new_list_parser(input_list, nav_library) -> nav_objects.Route | None:
     multiple_types = False
 
     for item in output.elements:
-        if item.single_entry:
-            output.replace_element(output.elements.index(item), item.get_single)  # fix this
-        else:  # multiple types found
-            multiple_types = True
+        if isinstance(item, nav_objects.NavDictEntry):
+            if item.single_entry:
+                output.replace_element(output.elements.index(item), item.get_single)
+            else:  # multiple types found
+                multiple_types = True
 
     if multiple_types:
         output = multiple_types_resolver(output)
