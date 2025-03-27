@@ -225,6 +225,8 @@ def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route
         print("airways are possible!")
 
         # am I touching an airway?  must be a point in space!
+
+        # am I touching an airport?  must be a point in space!
     
     for item in input_route.elements:
         if isinstance(item, nav_objects.NavDictEntry):
