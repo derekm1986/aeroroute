@@ -213,9 +213,7 @@ def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route
     # no airways in first or last positions, if airway present, remove item from list
     if isinstance(input_route.first_element, nav_objects.NavDictEntry) or isinstance(input_route.last_element, 
                                                                                      nav_objects.NavDictEntry):
-        print("input route 1", input_route)
         input_route = multiple_types_beginning_end_airway(input_route)
-        print("input route now", input_route)
         input_route = multiples_cleanup(input_route)
 
     # no airway to airway
@@ -260,22 +258,16 @@ def multiples_cleanup(input_route: nav_objects.Route):
     return input_route
 
 def multiple_types_beginning_end_airway(input_route: nav_objects.Route):
-    
-    # doesn't work right
 
     if isinstance(input_route.first_element, nav_objects.NavDictEntry):
         new_item = input_route.get_element(0)
         new_item.remove_airways()
-        print("new item is", new_item)
         input_route.replace_element(0, new_item)
 
     if isinstance(input_route.last_element, nav_objects.NavDictEntry):
         new_item = input_route.get_element(-1)
         new_item.remove_airways()
-        print("new item is", new_item)
         input_route.replace_element(-1, new_item)
-    
-    print("input route 3", input_route)
 
     return input_route
 
