@@ -57,7 +57,7 @@ def distance_summer(input_coordinates) -> float:
 
     return sum_distance
 
-def new_list_parser(input_list, nav_library) -> nav_objects.Route | None:
+def list_parser(input_list, nav_library) -> nav_objects.Route | None:
     """
     this will work with the new combined dictionary and contains logic to handle dictionary entries
     that contain different types of nav data objects

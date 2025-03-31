@@ -70,7 +70,7 @@ def aeroroute_input(input_string: str, nav_data=nav_data_library.NavDataLibrary(
         return
 
     # no multiple adjacent inputs, pass on to list_parser
-    input_route_obj = utils.new_list_parser(input_list, nav_data)  # changed for testing new NavDictEntry dictionary
+    input_route_obj = utils.list_parser(input_list, nav_data)  # changed for testing new NavDictEntry dictionary
 
     if input_route_obj is None:  # something bad came back from string_parser
         logging.warning("string_parser returned None, back to beginning of loop")
