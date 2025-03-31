@@ -1,7 +1,9 @@
 import math
+from typing import Tuple
+from nav_objects import Coordinates
 import logging
 
-def vincenty_indirect(pair, heading=False):
+def vincenty_indirect(pair: Tuple[Coordinates, Coordinates], heading: bool=False) -> float | tuple[float, float, float]:
     """
     calculates distance between two coordinates using Vincenty's indirect formula
     :param pair: tuple of two Coordinates objects
@@ -62,7 +64,6 @@ def vincenty_indirect(pair, heading=False):
 
         if iterLimit == 0:
             logging.warning("Vincenty formula failed to converge")
-            print('formula failed to converge')
             return float("NaN")
 
     uSq = cosSqAlpha * (a ** 2.0 - b ** 2.0) / (b ** 2.0)
