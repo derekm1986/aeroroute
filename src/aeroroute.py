@@ -49,7 +49,7 @@ def main() -> None:
         print('Distance in nm:', aeroroute_input(input_string))
         
 
-def aeroroute_input(input_string, nav_data=nav_data_library.NavDataLibrary()):
+def aeroroute_input(input_string: str, nav_data=nav_data_library.NavDataLibrary()):
     """
     The main logic for Aeroroute
     """
@@ -144,7 +144,7 @@ def multiple_adjacent_string_detector(input_list: list[str]) -> bool:
     return False
 
 
-def adjacent_airway_detector(input_route_obj) -> bool:
+def adjacent_airway_detector(input_route_obj: nav_objects.Route) -> bool:
     """
     detects if two Airways or AmbiguousAirways are touching
     :param input_route_obj: input Route object containing route elements
