@@ -3,7 +3,7 @@ from typing import Tuple
 from nav_objects import Coordinates
 import logging
 
-def vincenty_indirect(pair: Tuple[Coordinates, Coordinates], heading: bool=False) -> float | tuple[float, float, float]:
+def vincenty_indirect(pair: Tuple[Coordinates, Coordinates], heading: bool=False) -> float | Tuple[float, float, float]:
     """
     calculates distance between two coordinates using Vincenty's indirect formula
     :param pair: tuple of two Coordinates objects
