@@ -43,9 +43,6 @@ class NavDataLibrary(object):
         logging.info("Combining everything into one single dictionary")
         self._combined_dict = self.combined_dict_creator()
 
-        logging.info("NEW Combining everything into new dictionary with dictionary entry objects")
-        self._combined_dict_entries = self.combined_dict_creator_entries_new()
-
         logging.info("NAV data loading complete")
 
     def points_in_space_dict_combiner(self):
@@ -128,53 +125,9 @@ class NavDataLibrary(object):
                                     self._points_in_space_dict[waypoint.identifier].add_available_airway(
                                         airway_names.identifier)
 
-    def nav_data_searcher(self, item):
-        """
-        looks for item inside this Nav Data library
-        :param item: string to search for
-        :return: found object or none
-
-        Maybe this should just return a dictionary value regardless of type?
-        """
-        found_item = None
-
-        if item in self._airport_dict:
-            found_item = self._airport_dict[item]
-
-        elif item in self._points_in_space_dict:
-            found_item = self._points_in_space_dict[item]
-
-        elif item in self._airway_dict:
-            found_item = self._airway_dict[item]
-
-        return found_item
-
     def combined_dict_creator(self):
         """
-        This function will combine all dictionaries into one and return that dictionary.
-        Entries with identical keys are combined, and all values are lists.
-        """
-        combined_dict = {}
-
-        for d in [self._points_in_space_dict, self._airport_dict, self._airway_dict]:
-            for key, value in d.items():
-                if key in combined_dict:
-                    if isinstance(value, list):
-                        combined_dict[key].extend(value)
-                    else:
-                        combined_dict[key].append(value)
-                else:
-                    if isinstance(value, list):
-                        combined_dict[key] = value
-                    else:
-                        combined_dict[key] = [value]
-
-        return combined_dict
-
-    def combined_dict_creator_entries_new(self):
-        """
         new function to create a dictionary with dictionary entry objects
-        WORK IN PROGRESS
         """
         combined_dict_new = {}
 
@@ -192,8 +145,6 @@ class NavDataLibrary(object):
                 combined_dict_new[key].add_airways(val)
             else:
                 combined_dict_new[key] = nav_objects.NavDictEntry(key, airways=val)
-        
-        
         return combined_dict_new
 
     @property
@@ -217,9 +168,5 @@ class NavDataLibrary(object):
         return self._points_in_space_dict
     
     @property
-    def combined_dict(self):
-        return self._combined_dict
-    
-    @property
     def combined_dict_entries(self):
-        return self._combined_dict_entries
+        return self._combined_dict
