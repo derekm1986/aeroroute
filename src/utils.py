@@ -130,7 +130,7 @@ def new_list_parser(input_list, nav_library) -> nav_objects.Route | None:
 
     return output
 
-##################################################################################################
+
 def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route:
     """
     logic for multiple types lives here, work in progress
@@ -161,9 +161,9 @@ def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route
             input_route.replace_element(input_route.elements.index(item), item.get_single)  # remove this once logic is in place
 
     return input_route
-##################################################################################################
 
-def multiple_type_checker(input_route: nav_objects.Route):
+
+def multiple_type_checker(input_route: nav_objects.Route) -> nav_objects.Route:
     """
     checks for multiple types in a Route object
     :param input_route: Route object
@@ -174,7 +174,7 @@ def multiple_type_checker(input_route: nav_objects.Route):
             return True
     return False
 
-def multiples_cleanup(input_route: nav_objects.Route):
+def multiples_cleanup(input_route: nav_objects.Route) -> nav_objects.Route:
     """
     cleans up multiple types in a Route object
     :param input_route: Route object
@@ -186,7 +186,7 @@ def multiples_cleanup(input_route: nav_objects.Route):
                 input_route.replace_element(input_route.elements.index(item), item.get_single)
     return input_route
 
-def multiple_types_beginning_end_airway(input_route: nav_objects.Route):
+def multiple_types_beginning_end_airway(input_route: nav_objects.Route) -> nav_objects.Route:
 
     if isinstance(input_route.first_element, nav_objects.NavDictEntry):
         new_item = input_route.get_element(0)
@@ -200,7 +200,7 @@ def multiple_types_beginning_end_airway(input_route: nav_objects.Route):
 
     return input_route
 
-def multiple_point_finder(input_waypoints: nav_objects.Route):
+def multiple_point_finder(input_waypoints: nav_objects.Route) -> list[list[int]]:
     """
     helper function for deambiguator_brute
     :param input_waypoints: Route object
@@ -225,7 +225,7 @@ def multiple_point_finder(input_waypoints: nav_objects.Route):
     return multiples_map
 
 
-def deambiguator_brute(input_route, multiplesmatrix) -> nav_objects.Route:
+def deambiguator_brute(input_route: nav_objects.Route, multiplesmatrix) -> nav_objects.Route:
     """
     deambiguates points in a route using a brute force method
     :param input_route: Route object
@@ -330,7 +330,7 @@ def deambiguator_brute(input_route, multiplesmatrix) -> nav_objects.Route:
     return input_route
 
 
-def deambiguate_points_using_airways(input_route) -> nav_objects.Route:
+def deambiguate_points_using_airways(input_route: nav_objects.Route) -> nav_objects.Route:
     """
     use adjacent airways to solve ambiguous points
     :param input_route: Route object
@@ -429,7 +429,7 @@ def deambiguate_airways_using_points(input_route: nav_objects.Route) -> nav_obje
     return input_route
 
 
-def slice_airways(input_route) -> nav_objects.Route:
+def slice_airways(input_route: nav_objects.Route) -> nav_objects.Route:
     """
     slices airways into only the waypoints you want
     :param input_route: Route object
