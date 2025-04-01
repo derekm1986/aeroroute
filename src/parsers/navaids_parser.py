@@ -7,11 +7,14 @@ from nav_objects import Coordinates
 
 def navaid_dict_maker():
 
-    navaid_file = open("data/AIRAC/Navaids.txt")
-
     navaid_dict = {}
 
-    for line in navaid_file:
+    # navaid_file = open("data/AIRAC/Navaids.txt")
+    
+    with open ("data/AIRAC/Navaids.txt", "r") as navaid_file:
+        lines = navaid_file.readlines()
+
+    for line in lines:
         currentline = line.rstrip().split("|")
         navaidid = currentline[0]
         navaidname = currentline[1]
@@ -23,12 +26,12 @@ def navaid_dict_maker():
         if navaidlat.startswith("-"):
             navaidlatisnegative = True
             navaidlat = navaidlat[1:]
-          
+        
         if len(navaidlat) < 7:
             navaidlat = "0" * (7 - len(navaidlat)) + navaidlat
-           
+        
         navaidlatwithdecimal = navaidlat[:-6] + "." + navaidlat[-6:]  # 6 decimal places
-           
+        
         if navaidlatisnegative is True:
             navaidlatwithdecimal = "-" + navaidlatwithdecimal
             
@@ -59,6 +62,6 @@ def navaid_dict_maker():
         else:
             navaid_dict[navaidid] = navaidobj
 
-    navaid_file.close()
+    # navaid_file.close()
 
     return navaid_dict
