@@ -60,6 +60,4 @@ def navaid_dict_maker():
         else:
             navaid_dict[navaidid] = navaidobj
 
-    # navaid_file.close()
-
     return navaid_dict
