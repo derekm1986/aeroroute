@@ -9,11 +9,12 @@ from nav_objects import Coordinates
 
 def airport_dict_maker():
 
-    airport_file = open("data/AIRAC/Airports.txt")
+    with open ("data/AIRAC/Airports.txt", "r") as airport_file:
+        lines = airport_file.readlines()
 
     airport_dict = {}
 
-    for line in airport_file:
+    for line in lines:
         if line.startswith("A"):
             currentline = line.rstrip().split("|")
             airportid = currentline[1]
@@ -54,7 +55,5 @@ def airport_dict_maker():
             airportobj = Airport(airportid, airportcoordinates, airportname)
 
             airport_dict[airportid] = airportobj
-
-    airport_file.close()
 
     return airport_dict

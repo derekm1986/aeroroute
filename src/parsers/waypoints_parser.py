@@ -8,11 +8,12 @@ from nav_objects import Coordinates
 
 def waypoint_dict_maker():
 
-    waypoint_file = open("data/AIRAC/Waypoints.txt")
+    with open ("data/AIRAC/Waypoints.txt", "r") as waypoint_file:
+        lines = waypoint_file.readlines()
 
     waypoint_dict = {}
 
-    for line in waypoint_file:
+    for line in lines:
         currentline = line.rstrip().split("|")
         waypointid = currentline[0]
         waypointlat = currentline[1]
@@ -58,7 +59,5 @@ def waypoint_dict_maker():
                 waypoint_dict[waypointid].add_possibility(waypointobj)
         else:
             waypoint_dict[waypointid] = waypointobj
-
-    waypoint_file.close()
 
     return waypoint_dict
