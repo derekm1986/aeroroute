@@ -41,11 +41,10 @@ def airway_lat_long_maker(input_string) -> str:
 
 def airway_dict_maker():
 
-    ats_file = open("data/AIRAC/ATS.txt")
+    with open("data/AIRAC/ATS.txt", "r") as ats_file:
+        contents = ats_file.read()
 
     airway_dict = {}
-
-    contents = ats_file.read()
 
     paragraphs = contents.split("\n\n")  # each paragraph should be an airway
 
@@ -110,7 +109,5 @@ def airway_dict_maker():
                 airway_dict[route_id].add_possibility(currentairway)
         else:
             airway_dict[route_id] = currentairway
-
-    ats_file.close()
 
     return airway_dict
