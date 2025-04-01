@@ -6,13 +6,11 @@ from nav_objects import AmbiguousPoint
 from nav_objects import Coordinates
 
 def navaid_dict_maker():
-
-    navaid_dict = {}
-
-    # navaid_file = open("data/AIRAC/Navaids.txt")
     
     with open ("data/AIRAC/Navaids.txt", "r") as navaid_file:
         lines = navaid_file.readlines()
+
+    navaid_dict = {}
 
     for line in lines:
         currentline = line.rstrip().split("|")
