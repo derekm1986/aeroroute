@@ -8,7 +8,7 @@
     <form method="POST">
         <label for="route">Route:</label>
         <br><br>
-        <textarea name="route" style="width: 400px; height: 50px;" spellcheck="false">{{ route }}</textarea>
+        <textarea name="route" style="width: 400px; height: 50px;" spellcheck="false">{{ route if route else '' }}</textarea>
         <br><br>
         <input type="submit" value="Submit">
     </form>
