@@ -73,18 +73,18 @@ def aeroroute_input(input_string: str, nav_data=nav_data_library.NavDataLibrary(
     input_route_obj = utils.list_parser(input_list, nav_data)  # changed for testing new NavDictEntry dictionary
 
     if input_route_obj is None:  # something bad came back from string_parser
-        logging.warning("string_parser returned None, back to beginning of loop")
+        logging.warning("string_parser returned None, back to beginning of loop" + str(input_list))
         return
 
     if input_route_obj.contains_airway:  # is there an airway in the route?
         # is airway at beginning of route? - not OK
         if isinstance(input_route_obj.first_element, (nav_objects.Airway, nav_objects.AmbiguousAirway)):
-            logging.warning("Route started with an airway, back to beginning of loop")
+            logging.warning("Route started with an airway, back to beginning of loop" + str(input_list) + str(input_route_obj.elements))
             return("Route cannot start with an airway")
 
         # is airway at end of route? - not OK
         if isinstance(input_route_obj.last_element, (nav_objects.Airway, nav_objects.AmbiguousAirway)):
-            logging.warning("Route ended with an airway, back to beginning of loop")
+            logging.warning("Route ended with an airway, back to beginning of loop" + str(input_list) + str(input_route_obj.elements))
             return("Route cannot end with an airway")
 
         # no airways should touch another airway
@@ -101,14 +101,14 @@ def aeroroute_input(input_string: str, nav_data=nav_data_library.NavDataLibrary(
         input_route_obj = utils.deambiguate_airways_using_points(input_route_obj)
 
     if input_route_obj.contains_ambiguous_airway:  # deambiguating was not sucessful.  unable to compute
-        logging.error("Unable to deambiguate airway(s).  Cannot continue." + str(input_route_obj.elements))
+        logging.warning("Unable to deambiguate airway(s).  Cannot continue." + str(input_list) + str(input_route_obj.elements))
         return("Unable to deambiguate airway(s).  Cannot continue.")
 
     if input_route_obj.contains_airway:  # we need to unpack the airway into only the waypoints we want
         input_route_obj = utils.slice_airways(input_route_obj)
 
     if input_route_obj.contains_airway:  # did not connect airways to points
-        logging.error("Unable to connect airway(s).  Cannot continue." + str(input_route_obj.elements))
+        logging.warning("Unable to connect airway(s).  Cannot continue." + str(input_list) + str(input_route_obj.elements))
         return("Unable to connect airway(s).  Cannot continue.")
 
     if input_route_obj.contains_ambiguous_point:  # adjacent airways didn't find everything, brute is needed
@@ -118,14 +118,14 @@ def aeroroute_input(input_string: str, nav_data=nav_data_library.NavDataLibrary(
         input_route_obj = utils.deambiguator_brute(input_route_obj, multiples_map)
 
     if input_route_obj.contains_ambiguous_point:  # brute deambiguator was not successful.  unable to compute
-        logging.error("Unable to deambiguate point(s).  Cannot continue." + str(input_route_obj.elements))
+        logging.warning("Unable to deambiguate point(s).  Cannot continue." + str(input_list) + str(input_route_obj.elements))
         return("Unable to deambiguate point(s).  Cannot continue.")
 
     sum_distance = utils.distance_summer(input_route_obj)
 
     sum_distance = round(sum_distance, 2)  # round to hundredths of a nm
 
-    print(input_route_obj.elements) # for debug, BOSLAST7 doesn't work because J4 is an airway and a point!
+    # print(input_route_obj.elements) # for debug
 
     return(sum_distance)
 
@@ -162,3 +162,4 @@ def adjacent_airway_detector(input_route_obj: nav_objects.Route) -> bool:
 
 if __name__ == "__main__":
     main()
+    
