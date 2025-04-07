@@ -135,7 +135,7 @@ def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route
     """
     logic for multiple types lives here, work in progress
     """
-    print("multiple_types_resolver was called")
+    #  print("multiple_types_resolver was called")
     
     # no airways in first or last positions, if airway present, remove item from list
     if isinstance(input_route.first_element, nav_objects.NavDictEntry) or isinstance(input_route.last_element, 
@@ -157,7 +157,7 @@ def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route
     
     for item in input_route.elements:
         if isinstance(item, nav_objects.NavDictEntry):
-            print("Multiple items found in following entry: ", item)
+            #  print("Multiple items found in following entry: ", item)
             input_route.replace_element(input_route.elements.index(item), item.get_single)  # remove this once logic is in place
 
     return input_route
