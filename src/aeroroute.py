@@ -36,7 +36,7 @@ def main() -> None:
         print("")
         input_string = input_string.upper()
         
-        logging.info("Input string was: " + input_string)  # log inputted string
+        logging.debug("Input string was: " + input_string)  # log inputted string
 
         if input_string == "QUIT":
             print('***Program exiting***')
@@ -56,8 +56,8 @@ def aeroroute_input(input_string: str, nav_data=nav_data_library.NavDataLibrary(
     input_list = input_string.split()
     
     if len(input_list) == 1:  # single item, what happens if item doesn't exist? uses old nav_data_library method
-        print('Single item detected, looking up item.')
-        logging.info("Looking up single item: " + input_list[0])
+        #  print('Single item detected, looking up item.')
+        logging.debug("Looking up single item: " + input_list[0])
         found_item = nav_data.combined_dict_entries[input_list[0]]
         if found_item in nav_data.combined_dict_entries:
             logging.info("Single item " + input_list[0] + " not found.")
