@@ -46,9 +46,6 @@ class PointInSpace(Location):
 
         return_string += f" * coordinates: {self._coordinates}"
 
-        # if self._available_airways:
-        #     return_string += f" * available airways: {self._available_airways}"
-
         return return_string
 
     def __repr__(self):
@@ -58,9 +55,6 @@ class PointInSpace(Location):
             return_string += f" * {self._element_name}"
 
         return_string += f" * coordinates: {self._coordinates}"
-
-        # if self._available_airways:
-        #     return_string += f" * available airways: {self._available_airways}"
 
         return return_string
 
@@ -97,7 +91,6 @@ class AmbiguousPoint:
             self._possibilities.extend(possibility)
         else:
             self._possibilities.append(possibility)
-        # should this be .extend instead of append in case I get passed a list?
         
     @property
     def num_possibilities(self) -> int:
