@@ -66,7 +66,7 @@ def aeroroute_input(input_string: str, nav_data=nav_data_library.NavDataLibrary(
             logging.info("Single item " + input_list[0] + " is " + str(found_item))
             return(found_item)
 
-    if multiple_adjacent_string_detector(input_list):  # if true, there were multiple identical adjacent items
+    if identical_adjacent_string_detector(input_list):  # if true, there were multiple identical adjacent items
         return
 
     # no multiple adjacent inputs, pass on to list_parser
@@ -130,7 +130,7 @@ def aeroroute_input(input_string: str, nav_data=nav_data_library.NavDataLibrary(
     return(sum_distance)
 
 
-def multiple_adjacent_string_detector(input_list: list[str]) -> bool:
+def identical_adjacent_string_detector(input_list: list[str]) -> bool:
     """
     detects if there are multiple adjacent identical strings
     :param input_list: list of strings
