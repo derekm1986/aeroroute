@@ -76,7 +76,7 @@ class Airport(Location):
         return f"{self._identifier} *** airport * {self._element_name} * coordinates: {self._coordinates}"
 
 
-class AmbiguousPoint:
+class AmbiguousPoint:  # rename to PointDictEntry?
 
     def __init__(self, identifier, initial_possibility):
         self._identifier = identifier
