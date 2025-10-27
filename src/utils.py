@@ -5,58 +5,6 @@ import copy
 from vincenty import vincenty_indirect
 
 
-def pair_maker(input_waypoints):
-    """
-    generator function that makes pairs of Coordinates
-    :param input_waypoints: Route or a list of elements
-    :return: tuple of two Coordinates objects
-    """
-    
-    # below is so that the function will accept a list of elements as well
-    if type(input_waypoints) is nav_objects.Route:
-        route_before_airways = input_waypoints.elements
-    else:
-        route_before_airways = input_waypoints
-
-    route = []
-    
-    # looking for airways
-    for item in route_before_airways:
-        if isinstance(item, nav_objects.AirwayInRoute):
-            for waypoint in item.waypoints:
-                route.append(waypoint)
-        elif isinstance(item, nav_objects.TerminalProcedure):
-            pass
-        else:
-            route.append(item)
-
-    pairs = []
-    
-    i = 0
-
-    while i <= (len(route) - 2):  # make pairs of each waypoint and the waypoint after it
-        pair = [route[i].coordinates, route[i + 1].coordinates]
-        i += 1
-        pairs.append(pair)
-    
-    return pairs
-
-
-def distance_summer(input_coordinates) -> float:
-    """
-    calculates the sum of distances between a list of coordinates
-    :param input_coordinates: list of Coordinates objects
-    :return: sum of distances in nautical miles
-    """
-
-    sum_distance = 0.00  # establish sum_distance and put zero in it
-  
-    for pair in pair_maker(input_coordinates):
-        pair_distance = vincenty_indirect(pair)
-        sum_distance += pair_distance
-
-    return sum_distance
-
 def list_parser(input_list, nav_library) -> nav_objects.Route | None:
     """
     this will work with the new combined dictionary and contains logic to handle dictionary entries
@@ -129,7 +77,58 @@ def list_parser(input_list, nav_library) -> nav_objects.Route | None:
         return None
 
     return output
+    
+def pair_maker(input_waypoints):
+    """
+    generator function that makes pairs of Coordinates
+    :param input_waypoints: Route or a list of elements
+    :return: tuple of two Coordinates objects
+    """
+    
+    # below is so that the function will accept a list of elements as well
+    if type(input_waypoints) is nav_objects.Route:
+        route_before_airways = input_waypoints.elements
+    else:
+        route_before_airways = input_waypoints
 
+    route = []
+    
+    # looking for airways
+    for item in route_before_airways:
+        if isinstance(item, nav_objects.AirwayInRoute):
+            for waypoint in item.waypoints:
+                route.append(waypoint)
+        elif isinstance(item, nav_objects.TerminalProcedure):
+            pass
+        else:
+            route.append(item)
+
+    pairs = []
+    
+    i = 0
+
+    while i <= (len(route) - 2):  # make pairs of each waypoint and the waypoint after it
+        pair = [route[i].coordinates, route[i + 1].coordinates]
+        i += 1
+        pairs.append(pair)
+    
+    return pairs
+
+
+def distance_summer(input_coordinates) -> float:
+    """
+    calculates the sum of distances between a list of coordinates
+    :param input_coordinates: list of Coordinates objects
+    :return: sum of distances in nautical miles
+    """
+
+    sum_distance = 0.00  # establish sum_distance and put zero in it
+  
+    for pair in pair_maker(input_coordinates):
+        pair_distance = vincenty_indirect(pair)
+        sum_distance += pair_distance
+
+    return sum_distance
 
 def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route:
     """
