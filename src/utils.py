@@ -248,7 +248,8 @@ def deambiguator_brute(input_route: nav_objects.Route, multiplesmatrix) -> nav_o
 
         elif 0 in multipleset:
             firstisambiguous = True
-
+        
+        # should below statement be an elif?
         elif input_route.num_elements - 1 in multipleset:
             lastisambiguous = True
 
