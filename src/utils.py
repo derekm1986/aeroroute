@@ -121,11 +121,16 @@ def distance_summer(input_coordinates) -> float:
     :param input_coordinates: list of Coordinates objects
     :return: sum of distances in nautical miles
     """
+    sum_distance = 0.0
 
-    sum_distance = 0.00  # establish sum_distance and put zero in it
-  
     for pair in pair_maker(input_coordinates):
-        pair_distance = vincenty_indirect(pair)
+        result = vincenty_indirect(pair)
+
+        if isinstance(result, tuple):
+            pair_distance = result[0]
+        else:
+            pair_distance = result
+
         sum_distance += pair_distance
 
     return sum_distance
