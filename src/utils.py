@@ -121,8 +121,9 @@ def distance_summer(input_coordinates) -> float:
     :param input_coordinates: list of Coordinates objects
     :return: sum of distances in nautical miles
     """
-    sum_distance = 0.0
 
+    sum_distance = 0.00  # establish sum_distance and put zero in it
+  
     for pair in pair_maker(input_coordinates):
         result = vincenty_indirect(pair)
 
@@ -167,7 +168,7 @@ def multiple_types_resolver(input_route: nav_objects.Route) -> nav_objects.Route
     return input_route
 
 
-def multiple_type_checker(input_route: nav_objects.Route) -> nav_objects.Route:
+def multiple_type_checker(input_route: nav_objects.Route) -> bool:
     """
     checks for multiple types in a Route object
     :param input_route: Route object
