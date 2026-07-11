@@ -435,7 +435,7 @@ def deambiguate_airways_using_points(input_route: nav_objects.Route) -> nav_obje
     return input_route
 
 
-def slice_airways(input_route: nav_objects.Route) -> nav_objects.Route:
+def slice_airways(input_route: nav_objects.Route) -> nav_objects.Route | None:
     """
     slices airways into only the waypoints you want
     :param input_route: Route object
